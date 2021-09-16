@@ -8173,14 +8173,15 @@
 					&\text{Hemicompact}\ar[d]&\text{Paracompact}\\
 					%%%%%%%%%%%%%%%
 					&\text{Limit Point Compact}&\sigma\text{-compact}
-					\ar[d,shift left]
-					\ar[from=d,dashed,shift left,"\text{TM}"]
+					\ar[d]
+					%\ar[d,shift left]
+					%\ar[from=d,dashed,shift left,"\text{TM}"]
 					&\text{Mesocompact}\ar[from=u]\ar[d] &[-4cm]T_4\ar[from=ul,dashed,"T_2"]\\
 					%%%%%%%%%%%%%%%
 					\text{Separable}&\textbf{Second-Countable}
 					\ar[r,shift right]\ar[from=r,shift right,dashed,"\text{M/TM}"']
 					\ar[l,shift left] \ar[from=l,dashed,shift left,"\text{M}"] 
-					&\text{Lindelöf}\ar[from=uu,leftrightarrow,bend left=50,dashed,"\text{LC}"]\ar[ruu,dashed,pos=0.7,"\text{Regular}"{sloped}]
+					&\text{Lindelöf}\ar[uu,bend right=50,dashed,pos=0.7,"\text{LC/TM}"']\ar[ruu,dashed,pos=0.75,"\text{Regular}"{sloped}]
 					\ar[uuu,leftrightarrow,bend left=50,dashed,"\text{CC}"]
 					&\text{Metacompact}\ar[d] \\
 					%%%%%%%%%%%%%%%
@@ -8633,13 +8634,153 @@
 		\[\set{(U_{\alpha },\varphi _{\alpha })|\alpha \in I}\]
 		of charts on $M$ which covers $M$ (that is, $\bigcup _{\alpha \in I}U_{\alpha }=M$).
 	\end{def*}
+
+	\begin{def*}[adequate atlas]
+		An atlas $\left(U_{i},\varphi _{i}\right)_{i\in I}$ on an $n$-dimensional manifold $M$ is called an \textbf{adequate atlas}
+		if \textit{all} the following conditions hold:
+		\begin{itemize}
+			\item the image of each chart is either the Euclidean space $\re ^{n}$ or the closed half space $ \re _{+}^{n}$,
+			\item $\left(U_{i}\right)_{i\in I}$ is a locally finite open cover of $M$,
+			\item $M=\bigcup _{i\in I}\varphi _{i}^{-1}\left(B_{1}\right)$, where $B_{1}$ is the unit open ball centered at the origin.
+		\end{itemize}
+	\end{def*}	
 	
-	\red{todo: adequate, maximal atlas}
+	\begin{thm}
+		Any cover $\mathcal{V}$ of a \textbf{second-countable} manifold admits an adequate atlas $(U_i,\varphi_i)_{i\in I}$
+		such that $\mathcal{U}=(U_i)_{i\in I}$ is a refinement of $\mathcal{V}$.
+	\end{thm}
+
+	\begin{proof}
+		J. Dugundji, Topology. Allyn and Bacon, Boston, 1966.
+		XI, P241, Theorem 7.2
+		
+		\includegraphics[scale=0.55]{sigma_compact}
+		
+		Kosinski, Antoni A. (1993). Differential manifolds. Academic Press, Inc. %Mineola, N.Y: Dover Publications.
+		I, P5, Definition 2.1
+		
+		\includegraphics[scale=0.65]{adequate_atlas_def}
+		
+		
+		I, P6, Theorem 2.2
+		
+		\includegraphics[scale=0.65]{adequate_atlas}
+		%\begin{figure}[H]
+		%	\centering
+		%	
+		%	\begin{subfigure}
+		%		\includegraphics[scale=0.2]{sigma_compact}
+		%	\end{subfigure}
+		%
+		%	%\begin{subfigure}
+		%	%	\includegraphics{adequate_atlas}
+		%	%\end{subfigure}
+		%
+		%	\caption{The proof for existence of adequate atlas.}
+		%	\label{fig:adequate_atlas}
+		%\end{figure}
+	\end{proof}
+	\begin{rem*}
+		Since $\sigma$-compactness is equivalent to second-countability in topological manifold,
+		the proof given here can not be applied to paracompact manifolds.
+	\end{rem*}
+
 	
-	\red{ Every second-countable manifold admits an adequate atlas.}
 	
 	
-	\red{every		Cr structure, r>0, contains a smooth structure}
+	\begin{def*}[transition map]
+		Suppose that $(U_{\alpha },\varphi _{\alpha })$ and $(U_{\beta },\varphi _{\beta })$ are two charts for a manifold $M$ such that
+		$U_{\alpha }\cap U_{\beta }$ is non-empty.
+		The \textbf{transition map} $ \tau _{\alpha ,\beta }\colon\varphi _{\alpha }(U_{\alpha }\cap U_{\beta })\to \varphi _{\beta }(U_{\alpha }\cap U_{\beta })$
+		is the map defined by
+		\[\tau _{\alpha ,\beta }=\varphi _{\beta }\circ \varphi _{\alpha }^{-1}.\]
+	\end{def*}
+	\begin{prop}
+		Transition map is homeomorphism between open subsets of Euclidean spaces.
+	\end{prop}
+	\begin{proof}
+		Since composition and inverse of homeomorphism is homeomorphism.
+	\end{proof}
+
+	\paragraph{Differential Manifold}
+	
+	\begin{def*}[differentiability class]
+		Given a function $f$, it is (from weaker to stronger condition)
+		\begin{enumerate}
+			\item of \textbf{(differentiability) class} $C^r$ if the derivatives $f', f'', ..., f^{(r)}$ exist and are continuous;
+			\item infinitely differentiable, \textbf{smooth}, or of class $C^{\infty}$, if it is $C^r$ for all natural numbers $r$;
+			\item of class $C^{\omega}$, or \textbf{analytic}, if $f$ is smooth and if its Taylor series expansion around any point in its domain converges to the function in some neighborhood of the point.
+		\end{enumerate}
+	\end{def*}
+	\begin{rem*}
+		$C^{\omega}\subsetneqq C^{\infty}\subsetneqq \dots C^1 \subsetneqq C^0$.
+	\end{rem*}
+
+	\begin{def*}[differential atlas]
+		An atlas is called $C^r$ if all transition maps in the atlas is $C^r$.
+	\end{def*}
+	\begin{cor}
+		All atlases are $C^0$.
+	\end{cor}
+
+	\begin{def*}[compatible atlases]
+		Two $C^r$ atlases are compatible iff the union is still a $C^r$ atlas.
+	\end{def*}
+	\begin{rem*}
+		See this for more information:
+		\href{https://math.stackexchange.com/questions/3093079/cant-understand-the-definition-of-equivalence-of-topological-atlas}{Can't understand the definition of equivalence of topological atlas.}
+	\end{rem*}
+
+	\begin{cor}
+		All $C^0$ atlases are compatible.
+	\end{cor}
+	\begin{thm}
+		Compatibility of atlases is a equivalence relation.
+	\end{thm}
+
+	\begin{def*}[maximal atlas]
+		The \textbf{maximal atlas} of an atlas is the equivalence class of the atlas,
+		\ie, the union of all atlases compatible to a given one.
+	\end{def*}
+	\begin{rem*}
+		Kosinski, Antoni A. (1993). Differential manifolds. Academic Press, Inc. %Mineola, N.Y: Dover Publications.
+		I, P2, Definition 1.1:		
+		
+		Two different
+		atlases may yield the same result. They certainly will if they are compatible,
+		in the sense that their union is an atlas. This relation of compatibility is an
+		equivalence relation; hence every atlas is contained in a maximal one: the
+		union of all atlases compatible with it.
+		
+		
+		\href{https://en.wikipedia.org/wiki/Manifold#Atlases}{Wikipedia says}
+		``Unlike an ordinary atlas, the maximal atlas of a given manifold is unique.''
+		
+		In general, this is not true. See this question:
+		\href{https://math.stackexchange.com/questions/2473974/is-the-maximal-atlas-for-a-topological-manifold-unique}
+		{Is the maximal atlas for a topological manifold unique?}
+		
+		However, the maximal atlas of a given manifold \textit{equipped with some differential atlas} should be unique.
+	\end{rem*}
+
+	\begin{def*}[differential manifold]
+		A maximal $C^r$ atlas on a manifold $M$ is called a \textbf{$C^r$ structure}.
+		A \textbf{differential manifold}
+		$M$ of class $C^r$ consists of a \textit{second countable} Hausdorff topological space $M$ and a
+		$C^r$ structure on it.
+	\end{def*}
+	\begin{cor}
+		A differential manifold is a second-countable topological manifold.
+	\end{cor}
+	
+	\begin{thm}
+		Every $C^r$ structure, if $r\ge 1$, contains a smooth structure.
+	\end{thm}
+	\begin{proof}
+		See H. Whitney, Differentiable manifolds. Ann. of Math. 37 (1936), 645-680.
+	\end{proof}
+	
+		
 	
 	\subsection{Lie groups: definitions}
 	
