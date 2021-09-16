@@ -1,0 +1,567 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{amsmath,amssymb,amsthm,amsopn,amscd}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{multirow}
+\usepackage[reftex]{theoremref}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{algorithm}      % pseudo-code
+\usepackage{algpseudocode}  %
+\usepackage{stmaryrd}       % double brackets
+\usepackage{amstext}    % \text macro
+\usepackage{array}      % \newcolumntype macro
+\usepackage{tikz}       % for flow chart
+\usetikzlibrary{cd}     % commutative diagram
+\usetikzlibrary{shapes.geometric} % pentagon
+\usepackage{graphics, tkz-berge} % icosahedron
+\usepackage{afterpage}
+\usepackage[export]{adjustbox}
+\usepackage{tensor}
+\usepackage{braket}
+\usepackage{etoolbox}
+\usepackage{xparse}
+%   \usepackage{commath}    % for abs and norm
+
+%\setcounter{secnumdepth}{-2} % remove section numbering
+\setcounter{section}{-1}
+
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{0.75ex plus 0.1ex}% space after heading
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\rp}{\mathbb{RP}}
+
+%   Sets
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\inte}{\mathbb{Z}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\renn}{\mathbb{R}_0^+}
+\newcommand{\co}{\mathbb{C}}
+\newcommand{\hil}{\mathbb{H}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\MM}{\mathrm{M}}
+\newcommand{\ob}{\mathrm{ob}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\class}{\mathrm{class}}
+\newcommand{\supp}{\mathrm{supp}}
+
+\newcommand{\ext}[1]{\bigwedge\!^{#1}}
+
+
+\newcommand{\id}{\indices}
+\newcommand{\idt}{\mathrm{id}}
+%   \newcommand{\cp}{\mathbb{CP}}
+%   \newcommand{\dS}{\mathbb{S}}
+%   \newcommand{\dP}{\mathbb{P}}
+%   \newcommand{\dE}{\mathbb{E}}
+%   \newcommand{\dZ}{\mathbb{Z}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfK}{\mathbf{K}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\idm}{\mathbf{I}}
+\newcommand{\bfA}{\mathbf{A}}
+\newcommand{\bfB}{\mathbf{B}}
+\newcommand{\bfC}{\mathbf{C}}
+\newcommand{\bfD}{\mathbf{D}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\bfL}{\mathbf{L}}
+\newcommand{\bfT}{\mathbf{T}}
+\newcommand{\bfS}{\mathbf{S}}
+%   \newcommand{\bm}{\boldsymbol{m}}
+%   \newcommand{\bmu}{\boldsymbol{\mu}}
+%   \newcommand{\bS}{\boldsymbol{\Sigma}}
+%   \newcommand{\uvec}[1]{\mathrm{\mathbf{\hat{e}}}_#1}
+%   \newcommand{\rmbf}[1]{\mathrm{\mathbf{#1}}}
+%   \newcommand{\javg}{J_{\mathrm{avg^2}}}
+%   \newcommand{\pgl}[1]{\mathbf{PGL}(#1,\mathbb{R})}
+%   \newcommand{\Sl}[1]{\mathbf{SL}(#1,\mathbb{R})}
+%   \newcommand{\gl}[1]{\mathbf{GL}(#1,\mathbb{R})}
+
+\makeatletter
+\newcommand\etc{etc\@ifnextchar.{}{.\@}}
+\newcommand\ie{i.e\@ifnextchar.{}{.\@}}
+\newcommand\eg{e.g\@ifnextchar.{}{.\@}}
+\newcommand\Eq{Eq.\ }
+\makeatother
+
+
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}		
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\domain}{\mathcal{D}}
+
+
+
+\newcommand{\na}{\nabla}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\define}{\coloneqq}
+\newcommand{\tp}[1]{{#1}^T}
+\newcommand{\hadj}[1]{{#1}^{\dagger}}
+\newcommand{\conj}{\overline}
+%
+%   \newcommand{\lst}[2]{\{#1_{1}, #1_{2}, \dots, #1_{#2}\}}
+%   \newcommand{\lstf}[2]{\{#1{1}, #1{2}, \dots, #1{#2}\}}
+%   % prt stands for parenthesis
+%   \newcommand{\prt}[2]{(#1_{1}, #1_{2}, \dots, #1_{#2})}
+%   \newcommand{\prtf}[2]{(#1{1}, #1{2}, \dots, #1{#2})}
+%   % general list formatted, #1: fxn, #2: first one, #3: last one, #4: delimiter, #5: left, #6: right
+%   \newcommand{\glstf}[6]{#5 #1{#2} #4 #1{\number\numexpr#2+1\relax} #4 \dots #4 #1{#3} #6}
+%
+% wc = wild card
+\newcommand*{\wcthin}{{\mkern 2mu\cdot\mkern 2mu}}
+\newcommand*{\wc}{{}\cdot{}}    %   This one is wider
+%
+% Operators
+% ec = equivalence class
+\newcommand{\ec}[1]{\left[{#1}\right]}
+% generating subgroup
+\newcommand{\gensub}[1]{\left\langle{#1}\right\rangle}
+%
+%   automatic math mode in tabular
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+\newenvironment{centabular}{\center\tabular}{\endtabular\endcenter}
+\newenvironment{centikzpic}{\center\tikzpicture}{\endtikzpicture\endcenter}
+\newenvironment{eqlong}{\equation\aligned}{\endaligned\endequation}
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem*{prop*}{Proposition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}[prop]{Lemma}
+\newtheorem{cor}[prop]{Corollary}
+\newtheorem{thm}[prop]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{conjec}[prop]{Conjecture}
+
+%https://tex.stackexchange.com/questions/280313/how-to-put-the-list-of-definitions-at-contents-page
+%https://tex.stackexchange.com/questions/51691/creating-list-of-for-newtheoremstyle
+%\usepackage{amsthm}
+%\newtheoremstyle{mystyle}
+%{\topsep}{\topsep}{}{}{\bfseries}{:}{\newline}
+%{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}%
+%	\ifstrempty{#3}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef}}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef~(#3)}}}
+%
+%\theoremstyle{mystyle}
+%\newtheorem*{def*}{Definition}
+\theoremstyle{definition}
+\newtheorem*{defaux}{Definition}
+
+%https://tex.stackexchange.com/questions/60872/ams-theorems-in-table-of-contents
+\NewDocumentEnvironment{def*}{o}
+{\IfNoValueTF{#1}
+	{\defaux\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition}}
+	{\defaux[#1]\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition (#1)}}%
+	\ignorespaces}
+{\label{#1}}
+{\enddefaux}
+
+%\makeatletter
+%\newcommand\definitionname{Definition}
+%\newcommand\listdefinitionname{List of Definitions}
+%\newcommand\listofdefinitions{%
+%	\section*{\listdefinitionname}\@starttoc{def}}
+%\makeatother
+
+\theoremstyle{remark}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{ack*}{Acknowledgements}
+
+\theoremstyle{definition}
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{exe*}[exe]{Exercise*}
+\newtheorem{exam}[exe]{Example in Book}
+\newtheorem{eq}[exe]{Equation in Book}
+\theoremstyle{plain}
+\newtheorem{pprop}[exe]{Proposition in Book}
+\newtheorem{ccor}[exe]{Corollary in Book}
+\newtheorem{llem}[exe]{Lemma in Book}
+\newtheorem{tthm}[exe]{Theorem in Book}
+\captionsetup{width=0.9\textwidth}
+
+
+%%  \usetikzlibrary{shadows}% for shadow
+%%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
+%   \tikzstyle{event} = [draw, circle]
+%   \tikzstyle{arrow} = [thick,->,>=stealth]
+%%  \usetikzlibrary{arrows}
+%%  \tikzstyle{arrow} = [draw, -latex', thick]
+%
+%   %only for this doc
+%   \newcommand{\llb}{\llbracket}
+%   \newcommand{\rrb}{\rrbracket}
+
+%opening
+\title{Reading Notes for \\ \large \textit{Quantum Theory, Groups and Representations:\\An Introduction}}
+\author{Zhi Wang}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	%	\listofdefinitions
+	
+	\section{Notes and Definitions}
+	\subsection{Notes}
+	\section{Introduction and Overview}
+	\section{The Group $U(1)$ and its Representations}
+	
+	\subsection*{2.2 The group $U(1)$ and its representations}
+	\paragraph{P19}
+	\subparagraph{$\pi_k\colon\co^*\to\co^*$}
+	\blue{$k$ must be integer, with the same reason as $U(1)$.}
+	If $g,h\in\co^*$ satisfies
+	\[g=\ee^{ia}, h=\ee^{ib},\]
+	where $a,b\in\re$ and $a+b=2\pi$,
+	then $gh=1$. Therefore
+	\[\pi_k(g)\pi_k(h)=\ee^{iak}\ee^{ibk}=\ee^{iak+ibk}=\ee^{ik(2\pi)}=\pi_k(1)=1^k=1,\]
+	indicating $k\in\inte$.
+	
+	\subsection*{2.4 Conservation of charge and $U(1)$ symmetry}
+	\paragraph{P22}
+	\subparagraph{$[U(t),Q]=0$}
+	The assumption here is \blue{``if $[H,Q]=0$''}.
+	
+	\section{Two-state Systems and $SU(2)$}
+	\section{Linear Algebra Review, Unitary and Orthogonal Groups}
+	\subsection*{4.4 Inner products}
+	\paragraph{P38}
+	\subparagraph{Definition of Inner Product}
+	\begin{def*}[nondegenerate bilinear form]
+		A \textbf{nondegenerate bilinear form} is a bilinear form $f\colon V\times V\to K$
+		on a vector space $V$ over a field $K$,
+		such that $v\mapsto (x\mapsto f(x,v))$ is an isomorphism from $V$ to $V^*$.
+	\end{def*}
+	\begin{rem*}
+		In finite dimensions, this is equivalent to
+		\[\forall y \in V [f(x,y)=0] \implies [x=0].\]
+	\end{rem*}
+	\begin{def*}[sesquilinear form]
+		Over a complex vector space $V$ a map $\varphi \colon V\times V\to \co$ is \textbf{sesquilinear} if
+		\[\begin{aligned}&\varphi (x+y,z+w)=\varphi (x,z)+\varphi (x,w)+\varphi (y,z)+\varphi (y,w),\\&\varphi (ax,by)={\conj {a}}b\,\varphi (x,y),\end{aligned}\]
+		for all $x,y,z,w\in V$ and all $a,b\in \co$. Here, $\conj {a}$ is the complex conjugate of a scalar $a$.
+	\end{def*}
+	\begin{def*}[Hermitian form]
+		A sesquilinear form is \textbf{Hermitian} if and only if $\langle x,x\rangle$ is real for all $x$.
+	\end{def*}
+	\subsection*{4.7 Eigenvalues and eigenvectors}
+	\subsubsection*{Polynomial and Algebraically Closed Field}
+	
+	\begin{def*}[polynomial ring]
+		The \textbf{polynomial ring}, $R[x]$, in $x$ over a commutative ring $R$
+		is the set of functions $f\colon R\to R$, called polynomials in $x$, of the form
+		\[f(x)=\sum_{i=0}^{n}a_ix^i,\]
+		where $a_0, a_1, \dots, a_n$, the \textbf{coefficients} of $f$, are elements of $R$.
+	\end{def*}
+	\begin{prop}
+		If a non-constant polynomial $f(x)\in R[x]$ has a root $\lambda\in R$,
+		then $f(x)=(x-\lambda)g(x)$ where $g(x)$ is a nonzero polynomial in $R[x]$.
+		The degree of $g(x)$ is one less than that of $f(x)$.
+	\end{prop}
+	\begin{proof}
+		Since $f$ is non-constant with root $\lambda\in R$ of order $n$, it can be expressed by
+		\[f(x)=\sum_{i=0}^{n}a_ix^i,\]
+		where $n>0$ and $a_n\ne0$.
+		Consider $g\colon R\to R$ expressed as (which is undefined if $n=0$)
+		\[g(x)=\sum_{i=0}^{n-1}b_ix^i, \]
+		where 
+		\begin{eqlong}\label{eqCoeffB}
+			b_{n-1}&=a_{n}\ne0,\\
+			b_k&=a_{k+1}+\lambda b_{k+1},\,\,\,\forall 0\le k<n-1,\\
+		\end{eqlong}
+		Coefficients $b$'s are in $R$ because all $a$'s and $\lambda$ are in $R$.
+		\textbf{Therefore $g(x)\in R[x]$. Its degree is $n-1$,
+		and its leading coefficient is nonzero.}
+		
+		From mathematical induction it can be derived that
+		\[b_k = \sum_{m=0}^{n-1-k} a_{k+1+m}\lambda^m. \]
+		
+		The following shows it satisfies $b_k=a_{k+1}+\lambda b_{k+1}$:
+		\[\begin{aligned}
+			a_{k+1}+\lambda b_{k+1} &= a_{k+1}+\sum_{m=0}^{n-2-k} a_{k+2+m}\lambda^{m+1}\\
+			&=a_{k+1}+\sum_{m'=1}^{n-1-k} a_{k+1+m'}\lambda^{m'}\\
+			&=\sum_{m'=0}^{n-1-k} a_{k+1+m'}\lambda^{m'}=b_k,\\
+		\end{aligned}\]
+		where $m'=m+1$.
+		
+		Therefore,
+		\[b_0\lambda =\sum_{m'=1}^{n}a_{m'}\lambda^{m'},\]
+		where $m'=m+1$. Since $\lambda$ is the root of $f(x)$,
+		we have
+		\begin{eqlong}\label{eqCoeffB0}
+			b_0\lambda = -a_0.\\
+		\end{eqlong}
+		
+		In conclusion (in case $n=1$, the last summation evaluates zero),
+		by plugging \eqref{eqCoeffB} and \eqref{eqCoeffB0}:
+		\[
+		\begin{aligned}
+			(x-\lambda)g(x)&=\sum_{i'=1}^{n}b_{i'-1}x^{i'}-\sum_{i=0}^{n-1}b_i\lambda x^i\\
+			&=b_{n-1}x^{n}-b_0\lambda+\sum_{i=1}^{n-1}(b_{i-1}-b_i\lambda)x^i\\
+			&=a_nx^{n}+a_0+\sum_{i=1}^{n-1}a_ix^i\\
+			&=f(x).
+		\end{aligned}
+		\]
+	\end{proof}
+	
+	\begin{def*}[algebraically closed field]
+		A field $F$ is \textbf{algebraically closed} if every non-constant polynomial in $F[x]$ has a root in $F$.
+	\end{def*}
+	\begin{prop}
+		Given an algebraically closed field $F$, every non-constant polynomial in $F[x]$ is a product of first degree polynomials.
+	\end{prop}
+	\begin{proof}
+		Every non-constant polynomial $f(x)\in F[x]$ has degree $n>0$. From the definition of algebraically closed field,
+		$f(x)$ has a root, denoted $\lambda$.
+		Therefore,
+		$f(x)=(x-\lambda)g(x),$
+		where $g(x)\in F[x]$.
+		
+		This process can be repeated until the remaining polynomial is a nonzero constant.
+		Note that roots of $g(x)$ are also roots of $f(x)$.
+		Since the order of $g$ is one less than that of $f$, this can be done exactly $n$ times,
+		giving
+		\[f(x)=k\prod_{i=1}^{n}(x-\lambda_i),\]
+		where $\lambda_i\in F$ are roots of $f(x)$ and $k\in F$ is the leading coefficient.
+	\end{proof}
+
+	\subsubsection*{Eigenvalues, Eigenvectors, Schur decomposition, and Jordan form}
+	
+	\begin{def*}[algebraic multiplicity]
+		The \textbf{algebraic multiplicity} of an eigenvalue is its multiplicity as a root of the characteristic polynomial.
+	\end{def*}
+	\begin{prop}
+		Given a matrix $A\in\MM_n(F)$, where $F$ is an algebraically closed field,
+		the sum of algebraic multiplicities is $n$.
+	\end{prop}
+	\begin{proof}
+		Definition of algebraically closed field.
+		\url{https://en.wikipedia.org/wiki/Algebraically_closed_field#Every_polynomial_is_a_product_of_first_degree_polynomials}
+	\end{proof}
+	
+	\begin{def*}[geometric multiplicity]
+		The dimension of the eigenspace associated with an eigenvalue is referred to as the eigenvalue's \textbf{geometric multiplicity}.
+	\end{def*}
+	\begin{thm}
+		Geometric multiplicity is at least 1, at most algebraic multiplicity.
+	\end{thm}
+	\begin{cor}
+		There is at least one eigenvalue-eigenvector pair for a square matrix over an algebraically closed field.
+	\end{cor}
+	\begin{proof}
+		Worst case scenario: 1 eigenvalue, algebraic multiplicity is the order of the square matrix, geometric multiplicity is 1.
+	\end{proof}
+	\begin{cor}
+		Any square matrix over an algebraically closed field is conjugate with an upper triangular matrix.
+	\end{cor}
+	\begin{proof}
+		\url{https://math.stackexchange.com/questions/281833/matrix-similarity-upper-triangular-matrix}
+	\end{proof}
+	\red{The direct sum of all eigenspaces is not necessarily the original vector space!}
+	
+	
+	\begin{prop}
+		Any square matrix over an algebraically closed field is conjugate with an upper triangular matrix,
+		with its eigenvalues in the main diagonal.
+	\end{prop}
+	\begin{proof}
+		In the previous proof, a square matrix $A$ of order $n$ is transformed to
+		\[
+		B^{-1}AB=\begin{pmatrix}
+			\lambda & C \\
+			0 & A'\\
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\lambda & * & \dots & *\\
+			0 & * & \dots & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & * & \dots & *\\
+		\end{pmatrix},
+		\]
+		where $A'$ is the $(n-1)\times(n-1)$ submatrix.
+		The characteristic polynomial for $A$ is
+		\[\det(t\idm-A)=\det(B^{-1}(t\idm-A)B)=(t-\lambda)\det(t\idm-A').\]
+		Therefore the eigenvalues of $A'$ are also those of $A$, with the same algebraic multiplicities,
+		except that of $\lambda$, which is decreased by 1.
+	\end{proof}
+	\begin{cor}
+		The trace of a square matrix is the sum of its eigenvalues.
+	\end{cor}
+	\begin{def*}[Schur decomposition]
+		Given $A\in\MM_n(K)$, where $K$ is an algebraically closed field,
+		the \textbf{Schur decomposition} (or Schur’s unitary triangularization) of $A$ is
+		\[A=QUQ^{-1},\]
+		where $Q$ is a unitary matrix,
+		and $U$ is an upper triangular matrix, called the \textbf{Schur form} of $A$.
+	\end{def*}
+	\begin{thm}
+		Any matrix $A\in\MM_n(K)$, where $K$ is an algebraically closed field,
+		has Schur decomposition.
+		
+		The Schur form has the same spectrum, and its eigenvalues are the diagonal entries.
+	\end{thm}
+	
+	\begin{def*}[Jordan block]
+		a \textbf{Jordan block} over a ring $R$ (whose identities are the zero 0 and one 1) is a matrix composed of zeroes everywhere except for the diagonal, which is filled with a fixed element $\lambda \in R$, and for the superdiagonal, which is composed of ones. 
+	\end{def*}
+	\begin{def*}[Jordan matrix]
+		Any block diagonal matrix whose blocks are Jordan blocks is called a \textbf{Jordan matrix}.
+	\end{def*}
+	\begin{thm}
+		Any $n \times n$ square matrix $A$ whose elements are in an algebraically closed field $K$ is similar to a Jordan matrix $J$,
+		whose main diagonal entries are eigenvalues of $A$.
+	\end{thm}
+	\begin{rem*}
+		Given an eigenvalue $\lambda_i$, its geometric multiplicity is the number of Jordan blocks corresponding to $\lambda_i$.
+		
+		The sum of the sizes of all Jordan blocks corresponding to an eigenvalue $\lambda_i$ is its algebraic multiplicity.
+	\end{rem*}
+	
+	\subsubsection*{Spectral Theorem}
+	\begin{prop}
+		Any self-adjoint complex matrix is conjugate with a real diagonal matrix
+		through similarity transformation by a unitary matrix.
+	\end{prop}
+	\begin{proof}
+		Perform the Schur decomposition for the self-adjoint matrix, denoted $H$:
+		\[ Q^{-1}HQ=U, \]
+		where $U$ is upper triangular and $Q$ is unitary.
+		Since $H$ is self-adjoint, we have
+		\[ \hadj{U} = \hadj{Q}\hadj{H}\hadj{(Q^{-1})}=Q^{-1}HQ=U.\]
+	\end{proof}
+	
+	\begin{lem}
+		Unitary triangular matrix is diagonal, with diagonal entries being roots of unity.
+	\end{lem}
+	\begin{proof}
+		If the unitary matrix is lower triangular, we take its conjugate transpose.
+		The new matrix should be a unitary upper triangular matrix.
+		
+		Denote the unitary upper triangular matrix as $T$, then:
+		
+		\[(\hadj{T}T)_{ij}=\sum_{k=1}^{n}\conj{T_{ki}}T_{kj}=\delta_{ij}. \]
+		
+		Since $T$ is upper triangular, $T_{kj}=0,\forall k>j$. Therefore,
+		\[\sum_{k=1}^{j}\conj{T_{ki}}T_{kj}=\delta_{ij}.\]
+		
+		Especially, for $i=1,j=1$,
+		\[\conj{T_{11}}T_{11}=1,\]
+		indicating $T_{11}=\ee^{i\theta_1}\ne0$ where $\theta_1\in\re$.
+		
+		For $i\ne1,j=1$,
+		\[\conj{T_{1i}}T_{11}=0, \]
+		implying $T_{1i}=0$ because $T_{11}\ne0$.
+		$T_{i1}=0$ for all $i>1$ because $T$ is upper triangular.
+		%		\[(\hadj{T}T)_{11}=\conj{T_{11}}T_{11}=1. \]
+		
+		We have proved that $T_{ij}=\ee^{i\theta_j}\delta_{ij}$ for $i<2$ or $j<2$.
+		If $T_{ij}=\ee^{i\theta_j}\delta_{ij}$ for all $i< q$ or $j<q$,
+		then (since $T_{kq}=0$ for all $k<q$)
+		\[\delta_{pq}=(\hadj{T}T)_{pq}=\sum_{k=1}^{q}\conj{T_{kp}}T_{kq}=\conj{T_{qp}}T_{qq}. \]
+		When $p=q$, this means $T_{qq}=\ee^{i\theta_q}\ne0$.
+		When $p>q$, since $T_{qq}\ne0$, we have
+		\[T_{qp}=\frac{\conj{\delta_{pq}}}{\conj{T_{qq}}}=0.\]
+		Simultaneously, $T_{pq}$ because $p>q$ and $T$ is upper triangular.
+		Therefore, $T_{ij}=\ee^{i\theta_j}\delta_{ij}$ for all $i= q$ or $j=q$.
+		
+		Mathematical induction concludes that $T$ is a diagonal matrix with roots of unity as diagonal entries.
+		Therefore its conjugate transpose (lower triangular matrix) has the same property.
+	\end{proof}
+	\begin{prop}
+		Any unitary matrix is conjugate with a diagonal matrix of roots of unity
+		through similarity transformation by another unitary matrix.
+	\end{prop}
+	\begin{proof}
+		Perform the Schur decomposition for the $n\times n$ unitary matrix denoted $U$:
+		\[ Q^{-1}UQ=T, \]
+		where \textbf{$T$ is upper triangular} and $Q$ is unitary.
+		Since $U$ is unitary, we have
+		\[ \hadj{T}T = \hadj{Q}\hadj{U}\hadj{(Q^{-1})}Q^{-1}UQ=Q^{-1}U^{-1}QQ^{-1}UQ=\idm.\]
+		$T$ is invertible because so are $Q$ and $U$.
+		Therefore \textbf{$T$ is unitary}.
+		
+		
+		%Let $U$ be the unitary matrix, we need to prove there exists unitary matrix $V$ of the same size and diagonal matrix $D$
+		%of the same size, such that
+		%\[V^{-1}UV=D, D=\diag(\ee^{i\theta_1},\ee^{i\theta_2},\dots), \]
+		%where $\theta_j\in\re$.
+		%
+		%We have proved that 
+		%\[S^{-1}US=T, \]
+		%where $S$ is an invertible matrix and $T$ is an upper triangular matrix whose main diagonal entries are eigenvalues of $U$.
+		%Since $U$ is unitary:
+		%\[ \hadj{T}T= \]
+	\end{proof}
+	
+	\subsubsection*{Main Text}
+
+	\paragraph{P45}
+	\subparagraph{Spectral theorem}
+	\blue{Note that a general (invertible) matrix cannot be diagonalized}, but it can be similarity-transformed to upper triangular form,
+	where the main diagonal entries are eigenvalues.
+	
+	Since similarity transformation does not change the trace of a matrix, the trace is still the sum of eigenvalues.
+	
+	\section{Lie Algebras and Lie Algebra Representations}
+	\subsection*{5.2 Lie algebras of the orthogonal and unitary groups}
+	\paragraph{P52}
+	
+	$U(n)$, different from $O(n)$, is connected because
+	\[\ee^{i\pi}=-1, \]
+	while this is impossible in $\re$.
+	
+	There are two components in $O(n)$, one of which containing identity is $SO(n)$.
+	
+	\paragraph{P53}
+	
+	\red{Prove: Skew-Hermitian matrices in $\mathfrak{u}(n)$ are diagonalizable.}
+	
+	$U(n)$ and $\mathfrak{u}(n)$ matrix are diagonalizable by unitary matrix, %$\therefore U(n)$ is connected,
+	so any element $\Omega$ in the Lie group $U(n)$
+	can be written as
+	\[\Omega=\ee^{tX}, \]
+	where $t\in\re$ and $X$ is in the corresponding Lie algebra.
+	
+	Similarly $SO(n)$ can be written as exponential, but $SL(n)$ is large to be expressed this way.
+	(maybe only Jordan form?)
+	
+	\subsection*{5.4 Lie algebra representations}
+	\paragraph{P54}
+	Lie algebra representation is algebra homomorphism because it is linear map + preserving Lie bracket.
+\end{document}

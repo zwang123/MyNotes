@@ -1,0 +1,556 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{amsmath,amssymb,amsthm,amsopn,amscd}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{multirow}
+\usepackage[reftex]{theoremref}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{algorithm}      % pseudo-code
+\usepackage{algpseudocode}  %
+\usepackage{stmaryrd}       % double brackets
+\usepackage{amstext}    % \text macro
+\usepackage{array}      % \newcolumntype macro
+\usepackage{tikz}       % for flow chart
+\usepackage{afterpage}
+\usepackage[export]{adjustbox}
+\usepackage{tensor}
+\usepackage{braket}
+%   \usepackage{commath}    % for abs and norm
+
+% \setcounter{secnumdepth}{-2} % remove section numbering
+
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{0.75ex plus 0.1ex}% space after heading
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\rp}{\mathbb{RP}}
+
+%   Sets
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\inte}{\mathbb{Z}}
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\renn}{\mathbb{R}_0^+}
+\newcommand{\co}{\mathbb{C}}
+\newcommand{\hil}{\mathbb{H}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\dd}{\mathrm{d}}
+
+\newcommand{\id}{\indices}
+%   \newcommand{\cp}{\mathbb{CP}}
+%   \newcommand{\dS}{\mathbb{S}}
+%   \newcommand{\dP}{\mathbb{P}}
+%   \newcommand{\dE}{\mathbb{E}}
+%   \newcommand{\dZ}{\mathbb{Z}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfK}{\mathbf{K}}
+\newcommand{\bfR}{\mathbf{R}}	
+%   \newcommand{\bm}{\boldsymbol{m}}
+%   \newcommand{\bmu}{\boldsymbol{\mu}}
+%   \newcommand{\bS}{\boldsymbol{\Sigma}}
+%   \newcommand{\uvec}[1]{\mathrm{\mathbf{\hat{e}}}_#1}
+%   \newcommand{\rmbf}[1]{\mathrm{\mathbf{#1}}}
+%   \newcommand{\javg}{J_{\mathrm{avg^2}}}
+%   \newcommand{\pgl}[1]{\mathbf{PGL}(#1,\mathbb{R})}
+%   \newcommand{\Sl}[1]{\mathbf{SL}(#1,\mathbb{R})}
+%   \newcommand{\gl}[1]{\mathbf{GL}(#1,\mathbb{R})}
+
+\makeatletter
+\newcommand\etc{etc\@ifnextchar.{}{.\@}}
+\newcommand\ie{i.e\@ifnextchar.{}{.\@}}
+\newcommand\Eq{Eq.\ }
+\makeatother
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}		
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\domain}{\mathcal{D}}
+
+
+
+\newcommand{\na}{\nabla}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\define}{\coloneqq}
+\newcommand{\tp}[1]{{#1}^T}
+\newcommand{\hadj}[1]{{#1}^{\dagger}}
+%
+%   \newcommand{\lst}[2]{\{#1_{1}, #1_{2}, \dots, #1_{#2}\}}
+%   \newcommand{\lstf}[2]{\{#1{1}, #1{2}, \dots, #1{#2}\}}
+%   % prt stands for parenthesis
+%   \newcommand{\prt}[2]{(#1_{1}, #1_{2}, \dots, #1_{#2})}
+%   \newcommand{\prtf}[2]{(#1{1}, #1{2}, \dots, #1{#2})}
+%   % general list formatted, #1: fxn, #2: first one, #3: last one, #4: delimiter, #5: left, #6: right
+%   \newcommand{\glstf}[6]{#5 #1{#2} #4 #1{\number\numexpr#2+1\relax} #4 \dots #4 #1{#3} #6}
+%
+% wc = wild card
+\newcommand*{\wcthin}{{\mkern 2mu\cdot\mkern 2mu}}
+\newcommand*{\wc}{{}\cdot{}}    %   This one is wider
+%
+% Operators
+% ec = equivalence class
+\newcommand{\ec}[1]{\left\langle {#1} \right\rangle}
+%
+%   automatic math mode in tabular
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+\newenvironment{centabular}{\center\tabular}{\endtabular\endcenter}
+\newenvironment{centikzpic}{\center\tikzpicture}{\endtikzpicture\endcenter}
+\newenvironment{eqlong}{\equation\aligned}{\endaligned\endequation}
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem*{prop*}{Proposition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}[prop]{Lemma}
+\newtheorem{cor}[prop]{Corollary}
+\newtheorem{thm}[prop]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{conj}[prop]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem*{def*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{ack*}{Acknowledgements}
+
+\captionsetup{width=0.9\textwidth}
+
+
+%%  \usetikzlibrary{shadows}% for shadow
+%%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
+%   \tikzstyle{event} = [draw, circle]
+%   \tikzstyle{arrow} = [thick,->,>=stealth]
+%%  \usetikzlibrary{arrows}
+%%  \tikzstyle{arrow} = [draw, -latex', thick]
+
+%only for this doc
+\newcommand{\EBS}{\mathrm{EBS}}
+%   \newcommand{\rrb}{\rrbracket}
+
+%opening
+\title{Effective Batch Size}
+\author{Zhi Wang}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Choosing all labeled items}
+	
+	Given a box with a $i$ labeled balls, you pick one of them and then put it back.
+	Do it for $j$ times.
+	How many ways are there such that \textit{all} of them are picked at least once?
+	
+	\begin{def*}
+		Denote the answer to the question as $F(i,j)$. This is only defined for positive integers $i, j$ such that $i>0,j \ge i$.
+	\end{def*}
+	
+	Let's start from $i=1$. Obviously,
+	\begin{equation}\label{eqF1j}
+		F(1,j)=1,
+	\end{equation}
+	for all $j \ge 1$.
+	
+	For $i>1$, it is the number of all possibilities $i^j$ minus the cases where exactly $l\in(0,i)$ balls are picked:
+	\begin{equation}\label{eqFijrecur}
+		F(i,j)=i^j-\sum_{l=1}^{i-1}\binom{i}{l}F(l,j),
+	\end{equation}
+	where $\binom{n}{k}$ is the binomial coefficients $\frac{n!}{k!(n-k)!}$, for any non-negative integers $n, k$.
+	This calculates how many ways to choose $k$ balls out of $n$.
+	
+	\begin{prop}
+		The number of ways choosing $i\in \inte^+$ labeled items $j \in \left[i,+\infty\right)\cap\inte^+$ times such that all of them are chosen at least once is given by
+		\begin{equation}\label{eqFij}
+			F(i,j)=\sum_{k=0}^{i-1}(-1)^k\binom{i}{k}\left(i-k\right)^j.
+		\end{equation}
+	\end{prop}
+
+	\begin{proof}
+		For $i=1$, \[\sum_{k=0}^{i-1}(-1)^k\binom{i}{k}\left(i-k\right)^j=(-1)^0\binom{1}{0}\left(1-0\right)^j=1,\]
+		satisfying \eqref{eqF1j}.
+		
+		If the property holds up to $i$, then for $i+1$, we get from \eqref{eqFijrecur}
+		\begin{eqlong}\label{eqFijleft}
+			F(i+1,j)&=(i+1)^j-\sum_{l=1}^{i}\binom{i+1}{l}F(l,j)\\
+			&=(i+1)^j-\sum_{l=1}^{i}\binom{i+1}{l}\sum_{k=0}^{l-1}(-1)^k\binom{l}{k}\left(l-k\right)^j\\
+			&=(i+1)^j-\sum_{p=1}^{i}\sum_{k=0}^{i-p}(-1)^k\binom{i+1}{p+k}\binom{p+k}{k}p^j,\\
+		\end{eqlong}
+		where $p=l-k$.
+		
+		Since $k\ge 0, l\le i$, $p=l-k \le i$.
+		$\because k\le l-1, \therefore p \ge 1$.
+		$\because l = p+k \le i,\therefore k\le i-p$.
+		Both summations have $\frac{i(i+1)}{2}$ terms.
+		
+		The ratio of the $(k+1)$-th term to the $k$-th term of
+		$\sum_{k=0}^{i-p}(-1)^k\binom{i+1}{p+k}\binom{p+k}{k}$
+		is
+		\[-\frac{i+1-p-k}{p+k+1}\frac{p+k+1}{k+1}=-\frac{i+1-p-k}{k+1}.\]
+		Therefore, the coefficient is calculated as
+		\begin{eqlong}\label{eqcoeff}
+			&\sum_{k=0}^{i-p}(-1)^k\binom{i+1}{p+k}\binom{p+k}{k}\\
+			&=\binom{i+1}{p}\left[1-\frac{i-p+1}{1}+\frac{(i-p+1)(i-p)}{1\cdot 2}\cdots\right]\\
+			&=\binom{i+1}{p}\sum_{m=0}^{i-p}(-1)^m \binom{i-p+1}{m}\\
+			&=\binom{i+1}{p}\left[\sum_{m=0}^{i-p+1}(-1)^m \binom{i-p+1}{m}-(-1)^{i-p+1} \binom{i-p+1}{i-p+1}\right]\\
+			&=\binom{i+1}{p}\left[\left(1+(-1)\right)^{i-p+1}-(-1)^{i-p+1} \right]\\
+			&=(-1)^{i-p}\binom{i+1}{p},\\			
+		\end{eqlong}
+		where binomial theorem is applied ($i-p+1 \ge k+1 \ge 1$).
+		Plug \eqref{eqcoeff} into \eqref{eqFijleft}, we get
+		\begin{eqlong}\label{eqFi1jleft}
+			F(i+1,j)&=(i+1)^j+\sum_{p=1}^{i}(-1)^{i-p+1}\binom{i+1}{p}p^j.
+		\end{eqlong}
+	
+		On the other hand, set $p = i+1-k$ in \eqref{eqFij}:
+		\begin{eqlong}\label{eqFi1jright}
+			F(i+1,j)&=(i+1)^j+\sum_{k=1}^{i}(-1)^k\binom{i+1}{k}\left(i+1-k\right)^j\\
+			&=(i+1)^j+\sum_{p=1}^{i}(-1)^{i+1-p}\binom{i+1}{i+1-p}p^j\\
+			&=(i+1)^j+\sum_{p=1}^{i}(-1)^{i-p+1}\binom{i+1}{p}p^j.\\
+		\end{eqlong}
+	
+		Comparing \eqref{eqFi1jleft} with \eqref{eqFi1jright}, we finish the proof.
+	\end{proof}
+
+	\begin{rem*}
+		This can also derived from the inclusion--exclusion principle.
+	\end{rem*}
+
+	\begin{rem*}
+		The equation \eqref{eqcoeff} can be derive alternatively
+		\begin{eqlong}
+			\binom{i+1}{p+k}\binom{p+k}{k}
+			&=\frac{(i+1)!}{(p+k)!(i+1-p-k)!}\frac{(p+k)!}{k!p!}\\
+			&=\frac{(i+1)!}{p!(i+1-p)!}\frac{(i+1-p)!}{k!(i+1-p-k)!}\\
+			&=\binom{i+1}{p}\binom{i-p+1}{k}.\\
+		\end{eqlong}
+	\end{rem*}
+
+	\section{The $F$ function}
+	\begin{def*}
+		Extending the previous question, we define a new function $F\colon \nat\times\nat \to \nat$ given by
+			\begin{equation}\label{eqFijNat}
+				F(i,j)\define\sum_{k=0}^{i}(-1)^k\binom{i}{k}\left(i-k\right)^j,
+			\end{equation}
+			assuming $0^0=1$.
+			% is a unique and well-defined number, denoted as it is.
+	\end{def*}
+	\begin{prop}
+		%\begin{equation}\label{eqF00}
+		%	F(0,0)=0^0.
+		%\end{equation}
+		\begin{equation}\label{eqF00}
+			F(0,0)=1.
+		\end{equation}
+	\end{prop}
+	\begin{proof}
+		\[F(0,0)=(-1)^0\frac{0!}{0!(0-0)!}(0-0)^0=0^0=1.\]
+	\end{proof}
+	\begin{prop}
+		If $i\ne0$,
+		\begin{equation}\label{eqFi0}
+			F(i,0)=0.
+		\end{equation}
+	\end{prop}
+	\begin{proof}
+		\[F(i,0)=\sum_{k=0}^i (-1)^k \binom{i}{k}=(1+(-1))^i=0.\]
+		The binomial theorem only holds for $i\ne0$.
+	\end{proof}
+	\begin{prop}
+		If $j\ne0$,
+		\begin{equation}\label{eqF0j}
+			F(0,j)=0.
+		\end{equation}
+	\end{prop}
+	\begin{proof}
+		Since $0$ to the $j$-th power is still 0 when $j\ne0$,
+		\[F(0,j)=(-1)^0\frac{0!}{0!(0-0)!}\left(0-0\right)^j=0.\]
+	\end{proof}
+	\begin{prop}
+		If $i\in\inte^+,j\in\inte^+$,
+		\begin{equation}\label{eqFijpos}
+			F(i,j)=\sum_{k=0}^{i-1}(-1)^k\binom{i}{k}\left(i-k\right)^j,
+		\end{equation}
+		therefore the definition of $F$ is consistent with previous section.
+	\end{prop}
+	\begin{proof}
+		When $k=i$, the term becomes $(-1)^i\frac{i!}{i!0!}\left(i-i\right)^j$, which is just zero if $j\ne0$.
+	\end{proof}
+
+	\begin{prop}
+		\begin{equation}\label{eqFijsmall}
+			F(i,j)=0, \forall j \in \left[0,i\right)\cap\nat.
+		\end{equation}
+	\end{prop}
+	\begin{proof}
+		From \eqref{eqFi0} we know this is true for all $i>j$ when $j=0$.
+		
+		If this is true for all $i>j$ when $j$ is a natural number smaller than a positive integer $k$,
+		we need to prove that this is also true for all $i>j$ when $j=k$.
+		
+		\eqref{eqFi1jright} should hold for all $i>0$ and $j>0$.
+		Therefore,
+		\begin{eqlong}\label{eqFi1jdiff}
+			F(i+1,j)-(i+1)^j
+			&=\sum_{p=1}^{i}(-1)^{i-p+1}\binom{i+1}{p}p^j.\\
+		\end{eqlong}
+		For $i=1$, we have
+		\begin{equation}
+			F(2,j)=2^j+(-1)^i(i+1)=2^j-2,
+		\end{equation}
+		which give zero if $j=1$.
+		For $i>1$, since $p$ is nonzero,
+		\begin{eqlong}\label{eq17}
+			&F(i+1,j)-(i+1)^j\\
+			&=\sum_{p=1}^{i}(-1)^{i+1-p}\frac{(i+1)!}{(p-1)!(i+1-p)!}p^{j-1}\\
+			&=(i+1)\left[(-1)^i+\sum_{p=2}^{i}(-1)^{i+1-p}\frac{i!}{(p-1)!(i+1-p)!}\sum_{l=0}^{j-1}\binom{j-1}{l}(p-1)^{l}\right]\\
+			&=(i+1)\left[(-1)^i+\sum_{l=0}^{j-1}\binom{j-1}{l}\sum_{p'=1}^{i'}(-1)^{i'-p'+1}\binom{i'+1}{p'}(p')^{l}\right]\\
+		\end{eqlong}
+		where $p'=p-1,i'=i-1$.
+		$\because i>1,\therefore i'>0$.
+		
+		When $j=0$, the right hand side of \eqref{eqFi1jdiff} evaluates into
+		\begin{eqlong}\label{eq18}
+			&\left[\sum_{p=0}^{i+1}(-1)^{i-p+1}(-1)^{2p}\binom{i+1}{p}\right]-(-1)^{i+1}-1\\
+			&=(-1)^{i+1}(1+(-1))^{i+1}-(-1)^{i+1}-1\\
+			&=(-1)^i-1.\\
+		\end{eqlong}
+	
+		If $j=1,i>1$,
+		by plugging \eqref{eq18} to \eqref{eq17}, it becomes
+		\begin{eqlong}\label{eq19}
+			&F(i+1,j)-(i+1)^1\\
+			&=(i+1)\left[(-1)^i+\left((-1)^{i'}-1\right)
+			\right]=-(i+1).\\
+		\end{eqlong}
+		Therefore $F(i+1,1)$ for all $i>1$.
+		
+		For $j>1$,plug \eqref{eqFi1jdiff} and \eqref{eq19}, \eqref{eq17} becomes
+		\begin{eqlong}
+			&F(i+1,j)-(i+1)^j\\
+			&=(i+1)\left[-1+
+			\sum_{l=1}^{j-1}\binom{j-1}{l}\left(F(i'+1,l)-(i'+1)^l\right)\right].\\
+		\end{eqlong}
+	
+		Consider the case where $i+1>j=k$.
+		From mathematical induction, we know $F(i'+1,l)=0$ because $l<j=k$ and $i'+1=i\ge j >l$.
+		Therefore,
+		\begin{eqlong}
+			&F(i+1,j)-(i+1)^j\\
+			&=(i+1)\left[-1-
+			\sum_{l=1}^{j-1}\binom{j-1}{l}i^l\right]\\
+			&=-(i+1)\left[
+			\sum_{l=0}^{j-1}\binom{j-1}{l}i^l\right]\\
+			&=-(i+1)(i+1)^{j-1}\\
+			&=-(i+1)^{j}.\\
+		\end{eqlong}
+		Therefore $F(i+1,j)=0$ for $i+1>j=k$.
+	\end{proof}
+	\begin{rem*}
+		The $F$ function can be written as $F(i,j)=\Gamma(i+1)S_j^{(i)}$, where $S$ is the \red{Stirling number of the second kind},
+		and $\Gamma$ is the gamma function.
+	\end{rem*}
+
+%	\begin{prop}
+%		The number of ways choosing $i\in \inte^+$ labeled items $j \in \nat$ times such that all of them are chosen at least once is given by
+%		\begin{equation}\label{eqFijInt}
+%			F(i,j)=\sum_{k=0}^{i-1}(-1)^k\binom{i}{k}\left(i-k\right)^j.
+%		\end{equation}
+%	\end{prop}
+%
+%	\begin{proof}
+%		$\because k\le i-1$, $\therefore i-k > 0$. Therefore,
+%		\begin{equation}
+%			F(i,0)=\sum_{k=0}^{i-1}(-1)^k\binom{i}{k}=(1+(-1))^{i}.
+%		\end{equation}
+%	
+%		\red{TODO}
+%		\begin{equation}\label{eqFijsmall}
+%			F(i,j)=0,\forall j \in \left[0,i\right)\cap\nat.
+%		\end{equation}
+%	\end{proof}
+%
+%	\begin{cor}
+%		The number of ways choosing $i\in \nat$ labeled items $j \in \nat$ times such that all of them are chosen at least once is given by
+%		\begin{equation}\label{eqFijNat}
+%			F(i,j)=\sum_{k=0}^{i}(-1)^k\binom{i}{k}\left(i-k\right)^j,
+%		\end{equation}
+%		if $0^0$ is set to be zero.
+%	\end{cor}
+%
+%	\begin{proof}
+%		If $i=0$, it becomes
+%		\begin{equation}\label{eqF0j}
+%			F(0,j)=(-1)^0\frac{0!}{0!0!}(0-0)^j=0.
+%		\end{equation}
+%		
+%		When $k=i$, the term becomes $(-1)^i\frac{i!}{i!0!}\left(i-i\right)^j$, which is just zero.
+%	\end{proof}
+
+	\section{Effective batch size}
+	
+	\begin{def*}
+		Choose a ball from a black box with $m$ labeled indistinguishable balls and put it back after each choose.
+		Repeat $n$ times. The expected value of the number of unique labels is given by	
+			$\EBS(m,n)$,
+		where $m, n$ are positive integers.
+	\end{def*}
+
+	\begin{lem}
+		\begin{eqlong}
+			\sum_{k=0}^{\min(m,n)}\binom{m}{k}F(k,n)=m^n,
+		\end{eqlong}
+		where $m\in\nat, n\in\nat$, following the convention that $0^0=1$.
+	\end{lem}
+
+	\begin{proof}
+		If $n=0$, we know from \eqref{eqF00} that left hand side is $\binom{m}{0}F(0,0)=1$.
+		This is consistent with the right hand side.
+		
+		When $n\ne0$, for the term $k=0$, by applying \eqref{eqF0j},
+		\begin{equation}\label{eqm0F0n}
+			\binom{m}{0}F(0,n)=0.
+		\end{equation}
+	
+		If $m=0$ but $n\ne0$, right hand side is $0^n=0$.
+		And left hand side is the sole term of $k=0$, which also gives 0 (see \eqref{eqm0F0n}).
+		
+		For $m>0,n>0$, since $F(k,n)=0$ for $k>n$ (see \eqref{eqFijsmall}) and the $k=0$ term is zero (see \eqref{eqm0F0n}),
+		by plugging \eqref{eqFijpos}, we get
+		\begin{eqlong}\label{eq15}
+			&\sum_{k=0}^{\min(m,n)}\binom{m}{k}F(k,n)\\
+			&=\sum_{k=1}^{m}\binom{m}{k}F(k,n)\\
+			&=\sum_{k=1}^{m}\binom{m}{k}\sum_{l=0}^{k-1}(-1)^l\binom{k}{l}(k-l)^n\\
+			&=\sum_{k=1}^{m}\sum_{l=0}^{k-1}(-1)^l\frac{m!}{(m-k)!(k-l)!l!}(k-l)^n.\\
+		\end{eqlong}
+		Given $0\le l \le k-1$ and $1 \le k \le m$, we denote $k-l$ as $p$.
+		Therefore $k=p+l$, $1 \le p \le m$, and $0 \le l \le m-p$. The original formula becomes
+		\begin{eqlong}\label{eq16}
+			&\sum_{k=0}^{\min(m,n)}\binom{m}{k}F(k,n)\\
+			&=\sum_{p=1}^{m}\sum_{l=0}^{m-p}(-1)^l\frac{m!}{(m-p-l)!p!l!}p^n\\
+			&=\sum_{p=1}^{m}p^n\frac{m!}{p!(m-p)!}\sum_{l=0}^{m-p}(-1)^l\frac{(m-p)!}{(m-p-l)!l!}\\
+			&=m^n+\sum_{p=1}^{m-1}p^n\frac{m!}{p!(m-p)!}\left(1+(-1)\right)^{m-p}\\
+			&=m^n.\\
+		\end{eqlong}
+		Note that when $p=m$, $m-p$ is zero. The binomial theorem will generate meaningless $0^0$.
+		Therefore the $p=m$ case must be treated specially.
+	\end{proof}
+
+	\begin{rem*}
+		This is to say, selecting one item out of $m$ freely for $n$ times
+		is the sum of getting $k$ unique items in the process
+		for $k$ running from $0$ to the maximum possible value $\min(m,n)$.
+	\end{rem*}
+
+%	\begin{lem}
+%		\begin{eqlong}
+%			\sum_{k=1}^{\min(m,n)}f(k)\binom{m}{k}F(k,n),
+%		\end{eqlong}
+%		where $m, n$ are positive integers.
+%	\end{lem}
+%	\begin{cor}
+%		\begin{eqlong}
+%			\sum_{k=1}^{\min(m,n)}\binom{m}{k}F(k,n)=m^n.
+%		\end{eqlong}
+%	\end{cor}
+
+	\begin{prop}
+		The EBS function is calculated by
+		\begin{eqlong}
+			\EBS(m,n)=m\left[1-\left(\frac{m-1}{m}\right)^n\right],
+		\end{eqlong}
+		where $m, n$ are positive integers.
+	\end{prop}
+	\begin{proof}
+		Picking exactly $k$ unique items for a chosen set of $k$ items is $F(k,n)$.
+		There are $\binom{m}{k}$ ways to determine such a set of size $k$.
+		Therefore, out of $m^{n}$ events, the probability of getting exactly $k$ unique items is
+		\[\binom{m}{k}F(k,n)m^{-n}.\]
+		
+		Therefore, following the procedure of \eqref{eq15} and \eqref{eq16},
+		\begin{eqlong}
+			&\EBS(m,n)\\
+			&=\sum_{k=1}^{\min(m,n)}k\binom{m}{k}F(k,n)m^{-n}\\
+			&=m^{-n}\sum_{p=1}^{m}p^n\frac{m!}{p!(m-p)!}\sum_{l=0}^{m-p}(-1)^l\frac{(m-p)!}{(m-p-l)!l!}(p+l)\\
+			&=m^{-n}\sum_{p=1}^{m}p^{n+1}\frac{m!}{p!(m-p)!}\sum_{l=0}^{m-p}(-1)^l\frac{(m-p)!}{(m-p-l)!l!}\\
+			&+ m^{-n}\left[0+\sum_{p=1}^{m-1}p^n\frac{m!}{p!(m-p)!}\sum_{l=1}^{m-p}(-1)^l\frac{(m-p)!}{(m-p-l)!(l-1)!}\right]\\
+			&=m^{-n}m^{n+1}+ m^{-n}\\
+			&\left[-m(m-1)^n-\sum_{p=1}^{m-2}p^n\frac{m!}{p!(m-p)!}
+			 (m-p)\sum_{l'=0}^{m-p-1}(-1)^{l'}\frac{(m-p-1)!}{(m-p-1-l')!(l')!}\right]\\
+			&=m-m\frac{(m-1)^n}{m^n} -\sum_{p=1}^{m-2}\frac{p^n}{m^n}\frac{m!}{p!(m-p-1)!}(1+(-1))^{m-p-1}\\
+			&=m\left[1-\left(\frac{m-1}{m}\right)^n\right],\\
+		\end{eqlong}
+		where $l'=l-1$. Note that $p\le m-2$, so $m-p-1 > 0$.
+	\end{proof}
+
+	\begin{rem*}
+		$\left[1-\left(\frac{m-1}{m}\right)^n\right]$ is the probability of picking a specific item at least once.
+		Therefore this value multiplied by the number of items is the expected number of unique item being picked.
+	\end{rem*}
+
+	\begin{cor}
+		The effective batch size is the number of draws when there are infinite number of items to choose from:
+		\begin{equation}
+			\lim\limits_{m\to\infty}\EBS(m,n)=n,
+		\end{equation}
+		where $n$ is a finite positive number.
+	\end{cor}
+
+	\begin{proof}
+		Let $x$ be $\frac{1}{m}$,
+		then
+		\begin{equation}
+			\lim\limits_{m\to\infty}\EBS(m,n)=\lim\limits_{x\to 0}\frac{1-(1-x)^n}{x}=\lim\limits_{x\to 0}\frac{n(1-x)^{n-1}}{1}=n.
+		\end{equation}
+	\end{proof}
+
+	\begin{cor}
+		With infinite draws, the whole set of items will be picked.
+		\begin{equation}
+			\lim\limits_{n\to+\infty}\EBS(m,n)=m,
+		\end{equation}
+		where $m$ is a finite positive number.
+	\end{cor}
+	\begin{proof}
+		This is obvious since $\abs{\frac{m-1}{m}}<1$ when $m>0$.
+	\end{proof}
+
+	\begin{cor}
+		When $m(m-1)\ne0$,
+		\begin{equation}
+			\lim\limits_{n\to0}\EBS(m,n)=0.
+		\end{equation}
+	\end{cor}
+
+	\begin{cor}
+		When $n(n-1)\ne0$,
+		\begin{equation}
+			\lim\limits_{m\to0}\EBS(m,n)\to\infty.
+		\end{equation}
+	\end{cor}
+\end{document}

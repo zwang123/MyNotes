@@ -1,0 +1,803 @@
+\documentclass[12pt, letterpaper]{article}
+	\usepackage{amsmath,amssymb,amsthm,amsopn,amscd}
+	\usepackage{mathtools}
+	\usepackage{latexsym}
+	\usepackage{graphicx,caption,subcaption}
+	\usepackage{multirow}
+	\usepackage[reftex]{theoremref}
+	\usepackage{hyperref}
+	\usepackage{verbatim}
+	\usepackage{color}
+	\usepackage{algorithm}      % pseudo-code
+	\usepackage{algpseudocode}  %
+	\usepackage{stmaryrd}       % double brackets
+	\usepackage{amstext}    % \text macro
+	\usepackage{array}      % \newcolumntype macro
+	\usepackage{tikz}       % for flow chart
+	\usepackage{afterpage}
+	\usepackage[export]{adjustbox}
+	\usepackage{tensor}
+	\usepackage{braket}
+	%   \usepackage{commath}    % for abs and norm
+	
+	\setcounter{secnumdepth}{-2} % remove section numbering
+
+	\makeatletter
+	\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+		{3.25ex \@plus1ex \@minus .2ex}%
+		{0.75ex plus 0.1ex}% space after heading
+		{\normalfont\normalsize\bfseries}}
+	\makeatother
+	
+	\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+	\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+	\newcommand{\rp}{\mathbb{RP}}
+	
+	%   Sets
+	\newcommand{\nat}{\mathbb{N}}
+	\newcommand{\inte}{\mathbb{Z}}
+	\newcommand{\re}{\mathbb{R}}
+	\newcommand{\renn}{\mathbb{R}_0^+}
+	\newcommand{\co}{\mathbb{C}}
+	\newcommand{\hil}{\mathbb{H}}
+	\newcommand{\ee}{\mathrm{e}}
+	\newcommand{\dd}{\mathrm{d}}
+
+	\newcommand{\id}{\indices}
+	%   \newcommand{\cp}{\mathbb{CP}}
+	%   \newcommand{\dS}{\mathbb{S}}
+	%   \newcommand{\dP}{\mathbb{P}}
+	%   \newcommand{\dE}{\mathbb{E}}
+	%   \newcommand{\dZ}{\mathbb{Z}}
+	\newcommand{\bfP}{\mathbf{P}}
+	\newcommand{\bfJ}{\mathbf{J}}
+	\newcommand{\bfK}{\mathbf{K}}
+	\newcommand{\bfR}{\mathbf{R}}	
+	%   \newcommand{\bm}{\boldsymbol{m}}
+	%   \newcommand{\bmu}{\boldsymbol{\mu}}
+	%   \newcommand{\bS}{\boldsymbol{\Sigma}}
+	%   \newcommand{\uvec}[1]{\mathrm{\mathbf{\hat{e}}}_#1}
+	%   \newcommand{\rmbf}[1]{\mathrm{\mathbf{#1}}}
+	%   \newcommand{\javg}{J_{\mathrm{avg^2}}}
+	%   \newcommand{\pgl}[1]{\mathbf{PGL}(#1,\mathbb{R})}
+	%   \newcommand{\Sl}[1]{\mathbf{SL}(#1,\mathbb{R})}
+	%   \newcommand{\gl}[1]{\mathbf{GL}(#1,\mathbb{R})}
+
+	\makeatletter
+	\newcommand\etc{etc\@ifnextchar.{}{.\@}}
+	\newcommand\ie{i.e\@ifnextchar.{}{.\@}}
+	\newcommand\Eq{Eq.\ }
+	\makeatother
+	
+	\newcommand{\red}[1]{{\color{red} #1}}
+	\newcommand{\blue}[1]{{\color{blue} #1}}		
+	
+	\newcommand{\power}{\mathcal{P}}
+	\newcommand{\domain}{\mathcal{D}}
+	
+
+	
+	\newcommand{\na}{\nabla}
+	\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+	\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+	\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+	\newcommand{\gaussian}{\mathcal{N}}
+	\newcommand{\define}{\coloneqq}
+	\newcommand{\tp}[1]{{#1}^T}
+	\newcommand{\hadj}[1]{{#1}^{\dagger}}
+	%
+	%   \newcommand{\lst}[2]{\{#1_{1}, #1_{2}, \dots, #1_{#2}\}}
+	%   \newcommand{\lstf}[2]{\{#1{1}, #1{2}, \dots, #1{#2}\}}
+	%   % prt stands for parenthesis
+	%   \newcommand{\prt}[2]{(#1_{1}, #1_{2}, \dots, #1_{#2})}
+	%   \newcommand{\prtf}[2]{(#1{1}, #1{2}, \dots, #1{#2})}
+	%   % general list formatted, #1: fxn, #2: first one, #3: last one, #4: delimiter, #5: left, #6: right
+	%   \newcommand{\glstf}[6]{#5 #1{#2} #4 #1{\number\numexpr#2+1\relax} #4 \dots #4 #1{#3} #6}
+	%
+	% wc = wild card
+	\newcommand*{\wcthin}{{\mkern 2mu\cdot\mkern 2mu}}
+	\newcommand*{\wc}{{}\cdot{}}    %   This one is wider
+	%
+	% Operators
+	% ec = equivalence class
+	\newcommand{\ec}[1]{\left[ {#1} \right]}
+	%\newcommand{\ec}[1]{\left\langle {#1} \right\rangle}
+	%
+	%   automatic math mode in tabular
+	\newcolumntype{L}{>{$}l<{$}}
+	\newcolumntype{C}{>{$}c<{$}}
+	\newcolumntype{R}{>{$}r<{$}}
+	
+	\newenvironment{centabular}{\center\tabular}{\endtabular\endcenter}
+	\newenvironment{centikzpic}{\center\tikzpicture}{\endtikzpicture\endcenter}
+	\newenvironment{eqlong}{\equation\aligned}{\endaligned\endequation}
+	
+	
+	\DeclareMathOperator*{\argmin}{arg\,min}
+	\DeclareMathOperator*{\argmax}{arg\,max}
+	\DeclareMathOperator{\Var}{Var}
+	\DeclareMathOperator{\Cov}{Cov}
+	\DeclareMathOperator{\rank}{rank}
+	\DeclareMathOperator{\spn}{span}
+	\DeclareMathOperator{\diag}{diag}
+	\DeclareMathOperator{\tr}{tr}
+	
+	\newtheorem*{prop*}{Proposition}
+	\newtheorem{prop}{Proposition}[section]
+	\newtheorem*{lem*}{Lemma}
+	\newtheorem{lem}[prop]{Lemma}
+	\newtheorem{cor}[prop]{Corollary}
+	\newtheorem{thm}[prop]{Theorem}
+	\newtheorem*{thm*}{Theorem}
+	\newtheorem{conj}[prop]{Conjecture}
+	
+	\theoremstyle{definition}
+	\newtheorem*{def*}{Definition}
+	
+	\theoremstyle{remark}
+	\newtheorem*{rem*}{Remark}
+	\newtheorem*{ack*}{Acknowledgements}
+	
+	\captionsetup{width=0.9\textwidth}
+	
+	
+	%%  \usetikzlibrary{shadows}% for shadow
+	%%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
+	%   \tikzstyle{event} = [draw, circle]
+	%   \tikzstyle{arrow} = [thick,->,>=stealth]
+	%%  \usetikzlibrary{arrows}
+	%%  \tikzstyle{arrow} = [draw, -latex', thick]
+	%
+	%   %only for this doc
+	%   \newcommand{\llb}{\llbracket}
+	%   \newcommand{\rrb}{\rrbracket}
+	
+%opening
+\title{Reading Notes for \\ \large \textit{The Quantum Theory of Fields}}
+\author{Zhi Wang}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Notes}	
+	
+	\red{Red} means question.	\blue{Blue} means important notes.
+	
+	\section{Volume 1}
+	\subsection{Chapter 2: Relativistic Quantum Mechanics}
+	\subsubsection{2.2 Symmetries}
+	\paragraph{P51 (69)}
+	\subparagraph{\Eq (2.2.8)}
+	
+	For \textit{unitary} and \textit{linear} operators,
+	plug \Eq(2.2.6) into \Eq(2.2.2),
+	\[\left(U\Phi,U\Psi\right) = \left(\Phi,\hadj{U} U\Psi\right) = \left(\Phi,\Psi\right),\,\, \forall\Phi,\Psi. \]
+	
+	For \textit{antiunitary} and \textit{antilinear} operators,
+	plug \Eq (2.2.7) into \Eq (2.2.4),
+	\[\left(U\Phi,U\Psi\right) = \left(\Phi,\hadj{U} U\Psi\right)^{*} = \left(\Phi,\Psi\right)^{*},\,\, \forall\Phi,\Psi. \]
+	
+	Therefore, $\hadj{U}U = 1$. As \red{symmetric transformation should be invertible}, $\hadj{U}=U^{-1}$.
+	
+	\paragraph{P54 (72)}
+	
+	\subparagraph{\Eq (2.2.17)}
+	\red{Why $t_{bc} = t_{cb}$? (commutativity of derivatives?)}
+	
+	\subparagraph{\Eq (2.2.21)}
+	
+	From \Eq (2.2.20)
+	\begin{eqlong}
+	&	1 + i\theta\id{^a}t\id{_a} + i\bar{\theta}\id{^a}t\id{_a}
+	 + \frac{1}{2}\theta\id{^b}\theta\id{^c}t\id{_{bc}}
+     + \frac{1}{2}\bar{\theta}\id{^b}\bar{\theta}\id{^c}t\id{_{bc}}
+     - \bar{\theta}\id{^{a'}}t\id{_{a'}}\theta\id{^{a''}}t\id{_{a''}} + \cdots \\
+     &= 1 + i\theta\id{^a}t\id{_a} + i\bar{\theta}\id{^a}t\id{_a}
+     +i f\id{^a_{bc}}\bar{\theta}\id{^b}\theta\id{^c}t\id{_{a}}\\
+     &
+     + \frac{1}{2}\theta\id{^b}\theta\id{^c}t\id{_{bc}}
+     + \frac{1}{2}\bar{\theta}\id{^b}\bar{\theta}\id{^c}t\id{_{bc}}
+     + \frac{1}{2}\bar{\theta}\id{^b}\theta\id{^c}t\id{_{bc}}
+     + \frac{1}{2}\theta\id{^b}\bar{\theta}\id{^c}t\id{_{bc}}
+     +\cdots.\\
+	\end{eqlong}
+
+	Replace $a'$ with $b$ and $a''$ with $c$, and exchange $b$ with $c$ for the last term on the right hand side.
+	We can then remove the first five terms on the left hand side and get
+	
+	\begin{eqlong}
+		- \bar{\theta}\id{^{b}} t\id{_{b}} \theta\id{^{c}} t\id{_{c}}
+		= i f\id{^a_{bc}}\bar{\theta}\id{^b}\theta\id{^c}t\id{_{a}}
+		+ \frac{1}{2}\bar{\theta}\id{^b}\theta\id{^c}t\id{_{bc}}
+		+ \frac{1}{2}\theta\id{^c}\bar{\theta}\id{^b}t\id{_{cb}}.
+	\end{eqlong}
+
+	Because $t\id{_{bc}} = t\id{_{cb}}$, and because \red{$t\id{_b}$ and $\theta\id{^c}$, $\bar{\theta}\id{^b}$ and $\theta\id{^c}$,
+		$\theta$ and $f\id{^a_{bc}}$ are commutative
+	(why? because $\theta$ are just real numbers?)},
+	we get the \Eq (2.2.21):
+	
+	\begin{eqlong}
+		t\id{_{bc}}=-t\id{_{b}}t\id{_{c}} -i f\id{^a_{bc}}t\id{_{a}}.
+	\end{eqlong}
+	
+	\subparagraph{\Eq (2.2.23)}
+	\red{Why is $C\id{^a_{bc}} \equiv -f\id{^a_{bc}} + f\id{^a_{cb}}$ a constant? Why is it nonzero but $t_{bc} = t_{cb}$?
+	Aren't derivatives commutative?}
+
+	\paragraph{P55 (73)}
+	
+	\subparagraph{\Eq (2.2.25)}
+	In general the Lie bracket of a connected Lie group is always 0 if and only if the Lie group is \textit{Abelian}.
+	(\url{https://en.wikipedia.org/wiki/Lie_group#The_Lie_algebra_associated_with_a_Lie_group})
+	
+	\subparagraph{\Eq (2.2.26)}
+	Plug \Eq(2.2.24) into \Eq(2.2.15) and apply it $N-1$ times ($\theta'=\bar{\theta'}=\frac{\theta}{N}$).
+	
+	\subsubsection{2.3 Quantum Lorentz Transformations}
+
+	\paragraph{P57 (75)}
+	\subparagraph{\Eq (2.3.10)}
+	\blue{\[\left(\Lambda^{-1}\right)\id{^{\rho}_{\nu}} = \Lambda\id{_{\nu}^{\rho}}.\]}
+	
+	\subparagraph{Definition of groups}
+	\blue{$U(\Lambda,a)$ forms the inhomogeneous Lorentz group, or the Poincaré group.
+	$U(\Lambda,0)$ forms the homogeneous Lorentz group.
+    If $\det \Lambda=1$, it is proper.
+    If $\Lambda\id{^0_0}\ge 1$, it is orthochronous.}
+	
+	\subsubsection{2.4 The Poincaré algebra}
+	\paragraph{P59 (77)}
+	\subparagraph{\Eq (2.4.2)}
+	\blue{
+		Indices lowered and raised:
+		
+		\begin{eqlong}
+			\omega\id{_{\sigma\rho}} &= \eta\id{_{\mu\sigma}}\omega\id{^{\mu}_{\rho}},\\
+			\omega\id{^{\mu}_{\rho}} &= \eta\id{^{\mu\sigma}}\omega\id{_{\sigma\rho}}.\\
+		\end{eqlong}
+	}
+
+	When $\omega$ is infinitesimal, the matrix $\Lambda$ is expressed as
+	\begin{equation}
+		\Lambda=
+		\begin{pmatrix}
+			1 & \omega\id{^0_1}& \omega\id{^0_2}&\omega\id{^0_3}\\
+			\omega\id{^0_1} & 1& \omega\id{^1_2}&-\omega\id{^3_1}\\
+			\omega\id{^0_2} & -\omega\id{^1_2}& 1&\omega\id{^2_3}\\
+			\omega\id{^0_3} & \omega\id{^3_1}& -\omega\id{^2_3}&1\\
+		\end{pmatrix}.
+	\end{equation}
+
+	\subparagraph{\Eq(2.4.5)}
+	\red{This is because $J$ is just the derivative of $U$ over $\omega$?}
+
+	\paragraph{P60 (78)}
+	\subparagraph{\Eq (2.4.8)}
+	
+	\begin{eqlong}
+		\left(\Lambda\omega\Lambda^{-1}\right)\id{_{\mu\nu}}
+		&= \eta\id{_{\kappa\mu}}\Lambda\id{^\kappa_\tau}
+		\left(\eta\id{^{\tau\rho}}
+		\eta\id{_{\tau\rho}}\right)
+		\omega\id{^\tau_\sigma}\left(\Lambda^{-1}\right)\id{^\sigma_{\nu}}\\
+		&=\left(\eta\id{_{\kappa\mu}}\Lambda\id{^\kappa_\tau}
+		\eta\id{^{\tau\rho}}\right)\left(
+		\eta\id{_{\tau\rho}}
+		\omega\id{^\tau_\sigma}\right) \left(\Lambda^{-1}\right)\id{^\sigma_{\nu}}\\
+		&=\Lambda\id{_\mu^\rho}
+		\omega\id{_\rho_\sigma}\Lambda\id{_\nu^{\sigma}},\\
+	\end{eqlong}
+
+	Using \Eq (2.4.2),
+	\begin{eqlong}
+		\left(\Lambda\omega\Lambda^{-1}a\right)\id{_{\mu}}P\id{^\mu}
+		&=\Lambda\id{_\mu^\rho}
+		\omega\id{_\rho_\sigma}\Lambda\id{_\nu^{\sigma}}a\id{^\nu}P\id{^\mu}\\
+		&=\Lambda\id{_\nu^\sigma}
+		\omega\id{_\sigma_\rho}\Lambda\id{_\mu^{\rho}}a\id{^\mu}P\id{^\nu}\\
+		&=-\Lambda\id{_\nu^\sigma}
+		\omega\id{_\rho_\sigma}\Lambda\id{_\mu^{\rho}}a\id{^\mu}P\id{^\nu}.\\
+	\end{eqlong}
+
+	
+	\subparagraph{\Eq(2.4.9)}
+	\[\left(\Lambda\epsilon\right)\id{_\mu}P\id{^\mu} = \Lambda\id{_\mu^\rho}\epsilon\id{_\rho}P\id{^\mu}. \]
+	
+	For pure 
+		translations (with $\Lambda\id{^\mu_\nu} = \delta\id{^\mu_\nu}$),
+		they tell us that $P\id{^\rho}$ is translation-invariant, 
+		..., the change of the space-space components 
+		of $J\id{^{\rho\sigma}}$ under a spatial translation is \red{just the usual change of the angular 
+		momentum under a change of the origm relative to which the angular 
+		momentum is calculated}.
+	
+	\subparagraph{\Eq(2.4.10)}
+	
+	\begin{eqlong}
+		\Lambda\id{_\mu^\nu} & = \delta\id{_\mu^\nu} + \omega\id{_\mu^\nu}, \\
+		U &= 1 + i \left(\frac{1}{2}\omega\id{_{\mu\nu}}J\id{^{\mu\nu}}-\epsilon\id{_\rho}P\id{^\rho}\right)+\cdots,\\
+		U^{-1} &= 1 - i \left(\frac{1}{2}\omega\id{_{\mu\nu}}J\id{^{\mu\nu}}-\epsilon\id{_\rho}P\id{^\rho}\right) + \cdots,\\
+		U J\id{^{\rho\sigma}} U^{-1} &= J\id{^{\rho\sigma}}\\
+		&+ i \left(\frac{1}{2}\omega\id{_{\mu\nu}}J\id{^{\mu\nu}}-\epsilon\id{_\rho}P\id{^\rho}\right)J\id{^{\rho\sigma}}
+		- i \left(\frac{1}{2}\omega\id{_{\mu\nu}}J\id{^{\mu\nu}}-\epsilon\id{_\rho}P\id{^\rho}\right) J\id{^{\rho\sigma}}\\
+		&+ \cdots,\\
+		\mathrm{rhs} &= \left(\delta\id{_\mu^\rho} + \omega\id{_\mu^\rho}\right)
+		\left(\delta\id{_\nu^\sigma} + \omega\id{_\nu^\sigma}\right)
+		\left(J\id{^{\mu\nu}}
+		-\epsilon\id{^\mu}P\id{^\nu}
+		+\epsilon\id{^\nu}P\id{^\mu}\right)\\
+		&= \delta\id{_\mu^\rho}\delta\id{_\nu^\sigma}J\id{^{\mu\nu}}
+		+\omega\id{_\mu^\rho}\delta\id{_\nu^\sigma}J\id{^{\mu\nu}}
+		+\delta\id{_\mu^\rho} \omega\id{_\nu^\sigma}J\id{^{\mu\nu}}\\
+		&-\delta\id{_\mu^\rho}\delta\id{_\nu^\sigma}\epsilon\id{^\mu}P\id{^\nu}
+		+\delta\id{_\mu^\rho}\delta\id{_\nu^\sigma}\epsilon\id{^\nu}P\id{^\mu}
+		+\cdots\\
+		&= J\id{^{\rho\sigma}}
+		+\omega\id{_\mu^\rho}J\id{^{\mu\sigma}}
+		+\omega\id{_\nu^\sigma}J\id{^{\rho\nu}}	
+		-\epsilon\id{^\rho}P\id{^\sigma}
+		+\epsilon\id{^\sigma}P\id{^\rho}
+		+\cdots.\\	
+	\end{eqlong}
+
+	\subparagraph{\Eq(2.4.12)}
+	Switching $\mu$ with $\nu$ and applying \Eq(2.4.2):
+	\[\omega\id{_\mu_\nu}\eta\id{^{\nu\rho}}J\id{^{\mu\sigma}}=\omega\id{_\nu_\mu}\eta\id{^{\mu\rho}}J\id{^{\nu\sigma}}=-\omega\id{_\mu_\nu}\eta\id{^{\mu\rho}}J\id{^{\nu\sigma}}\]
+	
+	\paragraph{P61 (79)}
+	\subparagraph{\Eq(2.4.16)}
+	\red{
+	Why is $P\id{^0}$ the Hamiltonian $H$?
+	Why do $\bfP, \bfJ$ have those physical meanings?
+	Why do they conserve?
+	Why is $\bfK$ not conserved?
+	Why do you use eigenvalues of conserved operator to label physical states?
+	}
+
+	\subparagraph{\Eq(2.4.18)}
+	
+	In coordinate representation,
+	
+	\begin{eqlong}
+		R_i & = x\id{^i},\\
+		P_i & = -i\hbar \frac{\partial}{\partial x\id{^i}}.\\
+	\end{eqlong}
+
+    Therefore for any $\psi \in \hil$,
+    
+    \begin{eqlong}
+    	\left[R_i, P_j\right]\psi=-x\id{^i}i\hbar \frac{\partial\psi}{\partial x\id{^j}}
+    	+i\hbar \frac{\partial\left(x\id{^i}\psi\right)}{\partial x\id{^j}}
+    	=\delta_{ij}i\hbar\psi.
+    \end{eqlong}
+
+    By the definition of the angular momentum,
+    
+    \begin{eqlong}
+    	J_i = \epsilon_{ijk} R_j P_k.
+    \end{eqlong}
+
+	From $\left[R_i,R_j\right]=\left[P_i,P_j\right]=0$, we have,
+	
+	\begin{eqlong}
+		\left[J_i,J_j\right]&=\epsilon_{iab} R_a P_b \epsilon_{jcd} R_c P_d-\epsilon_{jcd} R_c P_d \epsilon_{iab} R_a P_b\\
+		&=\epsilon_{iab}\epsilon_{jcd} \left(R_a\left(R_cP_b-\left[R_c,P_b\right]\right)P_d
+		                                    -R_c\left(R_aP_d-\left[R_a,P_d\right]\right)P_b\right)\\
+		&=i\hbar\epsilon_{iab}\epsilon_{jcd} \left(-R_a \delta_{bc}P_d
+				+R_c\delta_{da}P_b\right).\\
+	\end{eqlong}
+    
+    For the first term, $b=c$, so it must be different from $i, j$, let it be $k$.
+    Then replace $d$ with $b$.
+    
+    For the second term, $d=a$, so it must be different from $i, j$, let it be $k$.
+    Then replace $c$ with $a$.
+    
+    \[\left[J_i,J_j\right]=i\hbar\left(-\epsilon_{iak}\epsilon_{jkb}R_aP_b
+    +\epsilon_{ikb}\epsilon_{jak}R_aP_b\right).\]
+
+	The terms $i=j,a=b$ cancels out, so $i=b,j=a$ for the first term and $i=a,j=b$ for the second term.
+	
+	\begin{eqlong}
+		\left[J_i,J_j\right]&=i\hbar\left(-\epsilon_{ijk}\epsilon_{jki}R_jP_i
+		+\epsilon_{ikj}\epsilon_{jik}R_iP_j\right)\\
+		&=i\hbar\left(\epsilon_{ijk}\epsilon_{kji}R_jP_i
+		+\epsilon_{ijk}\epsilon_{kij}R_iP_j\right)\\
+		&=i\hbar\epsilon_{ijk}\epsilon_{kab}R_aP_b\\
+		&=i\hbar\epsilon_{ijk}J_k.\\
+	\end{eqlong}
+
+	\subparagraph{\Eq(2.4.21)}
+	
+	\begin{eqlong}
+		\left[J_i,P_j\right]&=\epsilon_{iak}R_aP_kP_j-P_j\epsilon_{iak}R_aP_k\\
+		&=\epsilon_{iak}R_aP_jP_k-\epsilon_{iak}P_jR_aP_k\\
+		&=\epsilon_{iak}\left[R_a,P_j\right]P_k\\
+		&=\epsilon_{iak}\delta_{aj}i\hbar P_k\\
+		&=i\hbar\epsilon_{ijk}P_k.\\
+	\end{eqlong}
+
+	\subparagraph{\Eq(2.4.27)}
+	
+	\begin{eqlong}
+		J_i&=\epsilon_{ijk} J\id{^{jk}},\\
+		\theta^i&=\frac{1}{2}\epsilon^{ijk}\omega\id{_{jk}},\\
+	\end{eqlong}
+
+    \ie, 
+    
+	\begin{eqlong}
+		\bfJ &= \left\{J\id{^{23}},J\id{^{31}},J\id{^{12}}\right\}, \\
+		\boldsymbol{\theta} &=
+		 \left\{ \omega\id{_{23}}, \omega\id{_{31}}, \omega\id{_{12}} \right\}.\\
+	\end{eqlong}
+
+	\red{Why is there a negative sign difference from the standard definition?}
+	\url{https://en.wikipedia.org/wiki/Rotation_operator_(quantum_mechanics)#Quantum_mechanical_rotations}
+
+	\paragraph{P62 (80)}
+	
+	\subparagraph{\Eq(2.4.29)}
+	
+	Given two Hermitian operators $A$ and $B$, and two real-valued parameters $x$ and $y$,
+	construct two unitary operators
+	\[U=\ee^{iAx}, V=\ee^{iBy}.\]
+	Then, up to second order:
+	\begin{eqlong}
+		U&=1+iAx-\frac{1}{2}A^2x^2+\cdots,\\
+		V&=1+iBy-\frac{1}{2}B^2y^2+\cdots,\\
+		\ee^{iAx+iBy}&=1+iAx+iBy-\frac{1}{2}A^2x^2-\frac{1}{2}B^2y^2-\frac{1}{2}AxBy-\frac{1}{2}ByAx+\cdots,\\
+		UV &= 1+iAx+iBy-\frac{1}{2}A^2x^2-\frac{1}{2}B^2y^2-AxBy+\cdots,\\
+	\end{eqlong}
+
+	Therefore
+	\begin{eqlong}
+		UV &= \left(1-\frac{1}{2}AxBy+\frac{1}{2}ByAx+\cdots\right)\ee^{iAx+iBy}\\
+		&= \ee^{-\frac{1}{2}\left[A,B\right]xy}\ee^{iAx+iBy}.\\
+	\end{eqlong}
+
+	In this equation, $A=K_i$, $B=-P_j$,
+	therefore $-\frac{1}{2}\left[A,B\right]=\frac{1}{2}\left[K_i,P_j\right]=iM\delta_{ij}/2$,
+	\[\ee^{i\bfK\cdot\mathbf{v}} \ee^{-i\bfP\cdot\mathbf{a}} = \ee^{iM\delta_{ij}v_i a_j/2 } \ee^{i\left(\bfK\cdot\mathbf{v}-\bfP\cdot\mathbf{a}\right)}
+	=\ee^{iM\mathbf{a}\cdot\mathbf{v}/2 } \ee^{i\left(\bfK\cdot\mathbf{v}-\bfP\cdot\mathbf{a}\right)}\]
+	
+	\subparagraph{Conserved quantities}
+
+	\blue{Translocation (space and time) does not change the momentum (and energy). Rotation does not shift the angular momentum.}
+	
+	For a pure translation $T(1,a)$ in the subgroup of the Poincaré group,
+	\begin{eqlong}
+		\braket{p|T(1,a)|\psi}&=
+		\braket{p|\ee^{-iP\id{^\mu}a\id{_\mu}}|\psi}=\ee^{-i\mathbf{p}\cdot\mathbf{a}}\braket{p|\psi},\\
+	\end{eqlong}
+	which demonstrates that the translation does not change the momentum (and energy) of a system.
+	
+	Similarly, rotation does not shift the angular momentum:
+	\[\braket{j|\ee^{i\bfJ\cdot\boldsymbol{\theta}}|\psi}=\ee^{i\bfJ\cdot\boldsymbol{\theta}}\braket{j|\psi}.\]
+	
+	\subsubsection{2.5 One-Particle States}
+	
+	\paragraph{P64 (82)}
+	\subparagraph{\Eq(2.5.4)}
+	
+	The invariant $p^2$ is equivalent to $-M^2$ in time-like domain, where $M$ is the rest mass.
+	
+	Consider the four dimensional vector space over $\re$ to which the four-vector momentum $p\id{^\mu}$ belongs.
+	The proper orthochronous Lorentz group divides the vector space into equivalent classes:
+	\[p\id{^\mu}=L\id{^\mu_\nu}\left(p\right)k\id{^\nu},\]
+	\ie, for \textit{each} $p\id{^\mu}$, there \textit{exists a unique} image $k\id{^\nu}$ in the quotient space. The mapping is \textit{represented uniquely} by $L\left(p\right)$.
+	For \textit{each} element $k\id{^\nu}$ in the quotient space, there \textit{exists a unique} equivalent class containing
+	four-vector momenta whose mapping towards the quotient space is $k\id{^\nu}$.
+	Momenta falling into (belonging to) different equivalent classes are unreachable (not connected) through proper orthochronous Lorentz transformation.
+	
+	The proper orthochronous Lorentz group divides the four-vector momentum space into three components:
+	the component where the invariant square is positive
+	($\left(p^0\right)^2 < \left(p^1\right)^2 + \left(p^2\right)^2 + \left(p^3\right)^2$, the space-like domain),
+	the time-like component of positive energy
+	($\left(p^0\right)^2 > \left(p^1\right)^2 + \left(p^2\right)^2 + \left(p^3\right)^2$ with $p^0>0$),
+	and
+	the time-like component of negative energy
+		($\left(p^0\right)^2 > \left(p^1\right)^2 + \left(p^2\right)^2 + \left(p^3\right)^2$ with $p^0<0$).
+	
+	\subparagraph{\Eq(2.5.5)}
+	This is to \textit{define} the $\sigma$ states in $\Psi_p$ space, with reference to $\Psi_{k,\sigma}$.
+	\blue{The assumption is that the $\sigma$ label is orthogonal to the momenta label,
+	and that the state space of $\Psi_k$ has the same size of that of $\Psi_p$},
+	\ie, there exists at least one bijection from state space $\{\Psi_{k,\sigma},\forall \sigma\}$ to state space $\{\Psi_{p,\sigma'}, \forall \sigma'\}$.
+	
+	This is to choose the way of labeling $\sigma$ such that the $C$ matrix in \Eq(2.5.3) is an identity matrix multiplied by a constant.
+	
+	\paragraph{P65 (83)}
+	\subparagraph{\Eq(2.5.12)}
+	\red{Why is it $\delta^3$ instead of $\delta^4$? How about the time (0-th) component of the $k$ vector?}
+	\subparagraph{\Eq(2.5.13)}
+	Since $U$ is symmetric operation (\Eq(2.2.2)), it does not change the inner product:
+	\[\braket{U\Psi_{k,\sigma'}|U\Psi_{k,\sigma}}=\braket{\Psi_{k,\sigma'}|\Psi_{k,\sigma}}=\delta_{\sigma'\sigma}.\]
+	
+	On the other hand, from \Eq(2.5.8),
+	\[U\Psi_{k,\sigma}=D_{\rho\sigma}\Psi_{k,\rho},U\Psi_{k,\sigma'}=D_{\rho'\sigma'}\Psi_{k,\rho'}.\]
+	
+	Therefore, from \Eq(2.1.2) and \Eq(2.1.3), and plug in \Eq(2.5.12),
+	\[\delta_{\sigma'\sigma}=D_{\rho'\sigma'}^{*}D_{\rho\sigma}\braket{\Psi_{k,\rho'}|\Psi_{k,\rho}}=D_{\rho'\sigma'}^{*}D_{\rho\sigma}\delta_{\rho'\rho}=D_{\rho\sigma'}^{*}D_{\rho\sigma},\]
+	where the right hand side is just
+	\[D_{\rho\sigma'}^{*}D_{\rho\sigma}=\left(\hadj{D}\right)_{\sigma'\rho}D_{\rho\sigma}=\left(\hadj{D}D\right)_{\sigma'\sigma}.\]
+	
+	Since symmetric operation is invertible, so is $D$.
+	Thus, it can be concluded that
+	\[\hadj{D}=D^{-1}.\]
+	
+	\paragraph{P66 (84)}
+	\subparagraph{Table 2.1}
+	
+	The energy $p^0$ is put last.
+	
+	If $\Lambda$ in \Eq(2.5.6) is in the (homogeneous) Lorentz group $O(3,1)$,
+	then the little group for $k\id{^\mu}=0$ should also be $O(3,1)$.
+	Maybe all ``S''s in the table should be discarded.
+	
+	If $\Lambda$ in \Eq(2.5.6) is in the proper orthochronous (homogeneous) Lorentz group $SO^+(3,1)$,
+	then the little group for $k\id{^\mu}=0$ should also be $SO^+(3,1)$.
+
+	(e): $SO^+(2,1)$.
+	
+	For (c) and (d), consider a infinitesimal $1+\dd\Lambda$ matrix:
+	\begin{equation}
+		1+\dd\Lambda=
+		\begin{pmatrix}
+			1 & \omega\id{^0_1}& \omega\id{^0_2}&\omega\id{^0_3}\\
+			\omega\id{^0_1} & 1& \omega\id{^1_2}&-\omega\id{^3_1}\\
+			\omega\id{^0_2} & -\omega\id{^1_2}& 1&\omega\id{^2_3}\\
+			\omega\id{^0_3} & \omega\id{^3_1}& -\omega\id{^2_3}&1\\
+		\end{pmatrix},
+	\end{equation}
+	acting on
+	\[\begin{pmatrix}
+		\kappa\\\kappa\\0\\0\\
+	\end{pmatrix},\]
+    then
+    \[\left(1+\omega\id{^0_1}\right)\kappa=\kappa,
+    \left(\omega\id{^0_2} - \omega\id{^1_2}\right)\kappa=0,
+    \left(\omega\id{^0_3} + \omega\id{^3_1}\right)\kappa=0.\]
+    
+    Therefore, $1+\dd\Lambda$ can be rewritten as
+    \begin{eqlong}\label{eqdLambda}
+    	1+\dd\Lambda=
+    	\begin{pmatrix}
+    		1 & 0& -a&-b\\
+			0 & 1& -a&-b\\
+    		-a & a& 1&-\theta\\
+    		-b & b& \theta&1\\
+    	\end{pmatrix},
+    \end{eqlong}
+	or
+	\begin{eqlong}
+		\Lambda&=\ee^{\dd\Lambda}\\
+		&=\sum_{i=0}^{+\infty}\frac{\left(\dd\Lambda\right)^i}{i!}\\
+		&=
+		\begin{pmatrix}
+			1+\left(a^2+b^2\right)f(\theta) & -\left(a^2+b^2\right)f(\theta)&  bg(\theta)+ah(\theta)&-ag(\theta)+bh(\theta)\\
+			\left(a^2+b^2\right)f(\theta) & 1-\left(a^2+b^2\right)f(\theta)&  bg(\theta)+ah(\theta)&-ag(\theta)+bh(\theta)\\
+			-bg(\theta)+ah(\theta) & bg(\theta)-ah(\theta)& \cos\theta&-\sin\theta\\
+			ag(\theta)+bh(\theta) & -ag(\theta)-bh(\theta)& \sin\theta&\cos\theta\\
+		\end{pmatrix},
+	\end{eqlong}
+	where
+	\begin{eqlong}
+		f(\theta) &= \sum_{n=0}^{+\infty}\frac{1}{\left(2n\right)!}\frac{(-1)^n}{(2n+1)(2n+2)}\theta^{2n}\\
+		&=\sum_{n=1}^{+\infty}\frac{(-1)^{n+1}}{\left(2n\right)!}\theta^{2n-2},\\
+		g(\theta) &= \sum_{n=1}^{+\infty}\frac{(-1)^n}{\left(2n\right)!}\theta^{2n-1},\\
+		h(\theta) &= \sum_{n=0}^{+\infty}\frac{(-1)^{n+1}}{\left(2n+1\right)!}\theta^{2n}.\\
+	\end{eqlong}
+	Since
+	\begin{eqlong}
+		\cos\theta&=\sum_{n=0}^{+\infty}\frac{(-1)^{n}}{\left(2n\right)!}\theta^{2n},\\
+		\sin\theta&=\sum_{n=0}^{+\infty}\frac{(-1)^{n}}{\left(2n+1\right)!}\theta^{2n+1},\\
+	\end{eqlong}
+    we have
+    \begin{eqlong}
+    	f(\theta)&=\frac{1-\cos\theta}{\theta^2},\\
+    	g(\theta)&=\frac{\cos\theta-1}{\theta},\\
+    	h(\theta)&=-\frac{\sin\theta}{\theta}.\\
+    \end{eqlong}
+
+	In conclusion,
+	\begin{eqlong}\label{eqLambda}
+		\Lambda&=
+		\begin{pmatrix}
+			1+\frac{\left(a^2+b^2\right)(1-\cos\theta)}{\theta^2} &
+			 -\frac{\left(a^2+b^2\right)(1-\cos\theta)}{\theta^2}&
+			 - \frac{a\sin\theta+b\left(1-\cos\theta\right)}{\theta}&
+			 -\frac{b\sin\theta-a\left(1-\cos\theta\right)}{\theta}\\
+			\frac{\left(a^2+b^2\right)(1-\cos\theta)}{\theta^2} &
+			1-\frac{\left(a^2+b^2\right)(1-\cos\theta)}{\theta^2}& 
+			- \frac{a\sin\theta+b\left(1-\cos\theta\right)}{\theta}&
+			-\frac{b\sin\theta-a\left(1-\cos\theta\right)}{\theta}\\
+			-\frac{a\sin\theta-b\left(1-\cos\theta\right)}{\theta} &
+			 \frac{a\sin\theta-b\left(1-\cos\theta\right)}{\theta}&
+			  \cos\theta&
+			  -\sin\theta\\
+			- \frac{b\sin\theta+a\left(1-\cos\theta\right)}{\theta} &
+			 \frac{b\sin\theta+a\left(1-\cos\theta\right)}{\theta}& 
+			 \sin\theta&
+			 \cos\theta\\
+		\end{pmatrix},
+	\end{eqlong}
+	which, when $\theta\to0$, becomes
+	\begin{eqlong}\label{eqSmunu}
+		\lim\limits_{\theta\to0}\Lambda=
+		\begin{pmatrix}
+			1+\frac{a^2+b^2}{2} &
+			-\frac{a^2+b^2}{2}&
+			-a&
+			-b\\
+			\frac{a^2+b^2}{2} &
+			1-\frac{a^2+b^2}{2}& 
+			-a&
+			-b\\
+			-a&
+			a&
+			1&
+			0\\
+			-b&
+			b&
+			0&
+			1\\
+		\end{pmatrix}.
+	\end{eqlong}
+
+	Easy to see
+	\[\Lambda(a,b,0)\Lambda(a',b',0)=\Lambda(a+a',b+b',0).\]
+	
+	$t-x$ and $y-z$ is conserved under $\Lambda(a,b,0)$.
+	
+	\subparagraph{\Eq(2.5.14)}
+	
+	\begin{eqlong}
+		\braket{\Psi_{p',\sigma'}|\Psi_{p,\sigma}}&=\braket{\Psi_{p',\sigma'}|N(p)U(L(p))\Psi_{k,\sigma}}&\,\,\text{\Eq (2.5.5)}\\
+		&=N(p)\braket{\Psi_{p',\sigma'}|U(L(p))\Psi_{k,\sigma}}&\,\,\text{\Eq (2.1.2)}\\
+		&=N(p)\braket{\hadj{U(L(p))}\Psi_{p',\sigma'}|\Psi_{k,\sigma}}&\,\,\text{\Eq (2.2.6)}\\
+		&=N(p)\braket{U^{-1}(L(p))\Psi_{p',\sigma'}|\Psi_{k,\sigma}},&\,\,\text{\Eq (2.2.8)}\\
+	\end{eqlong}
+	\begin{eqlong}
+		\braket{\Psi_{p',\sigma'}|\Psi_{p,\sigma}}
+		&=N(p)\braket{U(L^{-1}(p))\Psi_{p',\sigma'}|\Psi_{k,\sigma}}&\,\,\text{\Eq (2.3.12)}\\
+		&=N(p)\braket{\frac{N(p')}{N(k')}\sum_{\sigma''}D_{\sigma''\sigma'}(W(L^{-1}(p),p'))\Psi_{k',\sigma''}|\Psi_{k,\sigma}}&\,\,\text{\Eq (2.5.11)}\\
+		&=\frac{N(p)N^*(p')}{N^*(k')}\sum_{\sigma''}D^{*}_{\sigma''\sigma'}(W(L^{-1}(p),p'))\braket{\Psi_{k',\sigma''}|\Psi_{k,\sigma}}&\,\,\text{\Eq (2.1.3)}\\
+		&=\frac{N(p)N^*(p')}{N^*(k')}D^{*}_{\sigma\sigma'}(W(L^{-1}(p),p'))\delta^3(\mathbf{k'}-\mathbf{k}),&\,\,\text{\Eq (2.5.12)}\\
+	\end{eqlong}
+	where $N(k')=1$ due to the definition in \Eq(2.5.5).
+	
+	\paragraph{P68 (86)}
+	\subparagraph{\Eq(2.5.20)}
+	\red{How can you find all representations of SO(3)?}
+	\url{https://math.stackexchange.com/questions/263313/finding-all-irreducible-representations-of-so3}
+	
+	
+	\begin{thebibliography}{9}
+		\bibitem{Representation Theory}
+		Joe Harris, and William Fulton.
+		\textit{Representation Theory: A First Course}.
+		
+		\bibitem{Quantum Theory}
+		Peter Woit
+		\textit{Quantum Theory, Groups and Representations: An Introduction}.
+		
+	\end{thebibliography}
+
+	
+	\subparagraph{\Eq(2.5.23)}
+	\blue{$D^{(j)}(R)$ is the $j$-th irreducible representation of $R\in \mathrm{SO}(3)$.
+		
+		``A particle is spin $j$'' = ``the wave function describing the particle is the $j$-th irreducible representation''.}
+	
+	\red{It is possible that the wave function is not reducible representation?
+		Then it is not single-particle anymore?}
+	
+	\paragraph{P69 (87)}
+	\subparagraph{Mass Zero}
+	$W$ should preserve inner product. It should preserve $k$ as well:
+	\[(Wt)\id{^\mu}k\id{_\mu}=(Wt)\id{^\mu}(Wk)\id{_\mu}=t\id{^\mu}k\id{_\mu}=-1. \]
+	\paragraph{P70 (88)}
+	\subparagraph{\Eq(2.5.26)}
+	See \eqref{eqSmunu}.
+	Exchange 1st and 4th row, 2nd and 3rd row.
+	Then exchange 1st/4th column, 2nd/3rd column.
+	$a\to-\beta, b\to-\alpha$.
+	
+	\subparagraph{\Eq(2.5.28)}
+	This is inconsistent with \eqref{eqLambda}.
+	Because $S(\alpha,\beta)$ is not commutative with $R(\theta)$.
+	So $\exp(\dd S+\dd R)\ne \exp(\dd S)\exp(\dd R)$.
+	
+	\eqref{eqLambda} is a Lorentz transform.
+	And it preserves inner product between $k$ and $t$.
+	
+	To get \eqref{eqLambda}, we need to calculate
+	\[S\left(
+	-\frac{b\sin\theta+a\left(1-\cos\theta\right)}{\theta},
+	 - \frac{a\sin\theta-b\left(1-\cos\theta\right)}{\theta}\right)R\left(\theta\right).\]
+	 
+	\subparagraph{\Eq(2.5.29)--(2.5.31)}
+	Confirmed with Mathematica.
+	
+	\Eq(2.5.31) shows that the conjugacy class
+	$\ec{S(\alpha,\beta)}\subseteq \set{S(\alpha',\beta')|\alpha'\in \re,\beta'\in\re}$
+	(because all $S$'s commute).
+	
+	Actually the conjugacy class is
+	\[\ec{S(\alpha,\beta)}= \set{S(\alpha',\beta')|\alpha'^2+\beta'^2=\alpha^2+\beta^2}.\]
+	
+	\red{Test this is isomorphic to ISO(2).}
+	
+	\paragraph{P71 (89)}
+	\subparagraph{\Eq(2.5.32)}
+	Consistent with \eqref{eqdLambda}.
+	\subparagraph{Diagonalize}
+	\begin{prop*}
+		If $A$ and $B$ are Hermitian and $[A,B]=0$, they can be diagonalized simultaneously.
+	\end{prop*}
+	\begin{proof}
+		Since $A$ is Hermitian, there exists
+		$S^{-1}AS=D$, where $D$ is diagonal.
+		Then the commutativity is expressed as
+		\[SDS^{-1}B=BSDS^{-1}.\]
+		Left multiply $S^{-1}$ and right multiply $S$:
+		\[DS^{-1}BS=S^{-1}BSD.\]
+		Let $B'=S^{-1}BS$, then $[D,B']=0$.
+		
+		To write it in a scalar form:
+		\[(B')_{ij}d_i=(B')_{ij}d_j,\]
+		where $d$ are diagonal elements in $D$, \ie, eigenvalues of $A$.
+		
+		For this to be true,
+		$B'$ must be block diagonal where the block corresponds to same eigenvalues in $D$,
+		in which case there is always a way to adjust $S$ matrix (re-diagonalization) such that $B'$ is diagonal.
+	\end{proof}
+
+	\paragraph{P72 (90)}	
+	\subparagraph{Masslesss Particles}
+	\blue{Massless particles are not observed to have any continuous degree of 
+	freedom like $\theta$.}
+	\subparagraph{\Eq(2.5.39)}
+	Note that $\Psi_{k,\sigma}$ is actually
+	$\Psi_{k,a=0,b=0,\sigma}$.
+	The $\sigma$ states are diagonalized \textit{within} $a=0,b=0$ states.
+	Therefore, this does not contradict with the fact that $A, B$ and $J$ does not commute.
+	
+	And hence 
+	\begin{eqlong}\label{eqUSabPsi}
+		U(S(\alpha,\beta))\Psi_{k,\sigma}= \Psi_{k,\sigma}.
+	\end{eqlong}
+	
+	\subparagraph{Helicity}
+	\blue{$J_3$ is the direction of motion because the four-vector momentum
+		$k$ is chosen to be nonzero in the third spatial axis.}
+	
+	\paragraph{P73 (91)}
+	\subparagraph{Lorentz-invariant Helicity}
+	A general Lorentz transform can be decomposed as $L(p)W(\alpha,\beta,\theta)$,
+	the former of which has 3 DOF, the latter has 3.
+	
+	We have shown from \eqref{eqUSabPsi} that $W$ preserves helicity ($R$ preserves as well because it is eigenstate).
+	
+	In short, this is shown in \Eq(2.5.42), $\Lambda$ should be any proper orthochronous Lorentz transform.
+	(The equation holds because $D$ matrix is diagonal.)
+	The pure translation preserves $\sigma$ as well because the state is in $p$-eigenstate.
+	So does space/time inversion.
+	
+	\subsubsection{2.6 Space Inversion and Time-Reversal}
+	\paragraph{P75 (93)}
+	\subparagraph{\Eq(2.6.1)}
+	\red{These equations do not hold because there is no connected path for space/time inversion?}
+	\paragraph{P76 (94)}
+	\subparagraph{\Eq(2.6.7)}
+	\blue{Space inversion is linear and time inversion is antilinear. Both commutes with Hamiltonian.}
+	\section{Volume 2}
+	\section{Volume 3}
+	
+\end{document}
+	

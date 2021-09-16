@@ -1,0 +1,311 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{amsmath,amssymb,amsthm,amsopn,amscd}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{multirow}
+\usepackage[reftex]{theoremref}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{algorithm}      % pseudo-code
+\usepackage{algpseudocode}  %
+\usepackage{stmaryrd}       % double brackets
+\usepackage{amstext}    % \text macro
+\usepackage{array}      % \newcolumntype macro
+\usepackage{tikz}       % for flow chart
+\usetikzlibrary{cd}     % commutative diagram
+\usetikzlibrary{shapes.geometric} % pentagon
+\usepackage{graphics, tkz-berge} % icosahedron
+\usepackage{afterpage}
+\usepackage[export]{adjustbox}
+\usepackage{tensor}
+\usepackage{braket}
+\usepackage{etoolbox}
+\usepackage{xparse}
+%   \usepackage{commath}    % for abs and norm
+
+\usepackage{ytableau}
+
+%\setcounter{secnumdepth}{-2} % remove section numbering
+\setcounter{section}{-1}
+
+%\newcommand{\executeiffilenewer}[3]{%
+%	\ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+%	{\pdffilemoddate{#2}}>0%
+%	{\immediate\write18{#3}}\fi%
+%}
+%\newcommand{\includesvg}[1]{%
+%	\executeiffilenewer{#1.svg}{#1.pdf}%
+%	{inkscape -z -D --file=#1.svg %
+%		--export-pdf=#1.pdf --export-latex}%
+%	\input{#1.pdf_tex}%
+%}
+
+
+
+\graphicspath{ {./} }
+
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{0.75ex plus 0.1ex}% space after heading
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\rp}{\mathbb{RP}}
+
+%   Sets
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\inte}{\mathbb{Z}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\renn}{\mathbb{R}_0^+}
+\newcommand{\co}{\mathbb{C}}
+\newcommand{\hil}{\mathbb{H}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\MM}{\operatorname{M}}
+\newcommand{\ZZ}{\operatorname{Z}}
+\newcommand{\SZ}{\operatorname{SZ}}
+\newcommand{\ob}{\operatorname{ob}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\class}{\operatorname{class}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\idt}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
+
+\newcommand{\ext}[1]{\bigwedge\!^{#1}}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+\newcommand{\id}{\indices}
+%   \newcommand{\cp}{\mathbb{CP}}
+%   \newcommand{\dS}{\mathbb{S}}
+%   \newcommand{\dP}{\mathbb{P}}
+%   \newcommand{\dE}{\mathbb{E}}
+%   \newcommand{\dZ}{\mathbb{Z}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfK}{\mathbf{K}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\idm}{\mathbf{I}}
+\newcommand{\bfA}{\mathbf{A}}
+\newcommand{\bfB}{\mathbf{B}}
+\newcommand{\bfC}{\mathbf{C}}
+\newcommand{\bfD}{\mathbf{D}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\bfL}{\mathbf{L}}
+\newcommand{\bfT}{\mathbf{T}}
+\newcommand{\bfS}{\mathbf{S}}
+\newcommand{\bfe}{\mathbf{e}}
+%   \newcommand{\bm}{\boldsymbol{m}}
+%   \newcommand{\bmu}{\boldsymbol{\mu}}
+%   \newcommand{\bS}{\boldsymbol{\Sigma}}
+%   \newcommand{\uvec}[1]{\mathrm{\mathbf{\hat{e}}}_#1}
+%   \newcommand{\rmbf}[1]{\mathrm{\mathbf{#1}}}
+%   \newcommand{\javg}{J_{\mathrm{avg^2}}}
+%   \newcommand{\pgl}[1]{\mathbf{PGL}(#1,\mathbb{R})}
+%   \newcommand{\Sl}[1]{\mathbf{SL}(#1,\mathbb{R})}
+%   \newcommand{\gl}[1]{\mathbf{GL}(#1,\mathbb{R})}
+
+\makeatletter
+\newcommand\etc{etc\@ifnextchar.{}{.\@}}
+\newcommand\ie{i.e\@ifnextchar.{}{.\@}}
+\newcommand\eg{e.g\@ifnextchar.{}{.\@}}
+\newcommand\Eq{Eq.\ }
+\makeatother
+
+
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}		
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\domain}{\mathcal{D}}
+
+
+
+\newcommand{\na}{\nabla}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\define}{\coloneqq}
+\newcommand{\tp}[1]{{#1}^T}
+\newcommand{\hadj}[1]{{#1}^{\dagger}}
+\newcommand{\conj}{\overline}
+%
+%   \newcommand{\lst}[2]{\{#1_{1}, #1_{2}, \dots, #1_{#2}\}}
+%   \newcommand{\lstf}[2]{\{#1{1}, #1{2}, \dots, #1{#2}\}}
+%   % prt stands for parenthesis
+%   \newcommand{\prt}[2]{(#1_{1}, #1_{2}, \dots, #1_{#2})}
+%   \newcommand{\prtf}[2]{(#1{1}, #1{2}, \dots, #1{#2})}
+%   % general list formatted, #1: fxn, #2: first one, #3: last one, #4: delimiter, #5: left, #6: right
+%   \newcommand{\glstf}[6]{#5 #1{#2} #4 #1{\number\numexpr#2+1\relax} #4 \dots #4 #1{#3} #6}
+%
+% wc = wild card
+\newcommand*{\wcthin}{{\mkern 2mu\cdot\mkern 2mu}}
+\newcommand*{\wc}{{}\cdot{}}    %   This one is wider
+%
+% Operators
+% ec = equivalence class
+\newcommand{\ec}[1]{\left[{#1}\right]}
+% generating subgroup
+\newcommand{\gensub}[1]{\left\langle{#1}\right\rangle}
+%
+%   automatic math mode in tabular
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+\newenvironment{centabular}{\center\tabular}{\endtabular\endcenter}
+\newenvironment{centikzpic}{\center\tikzpicture}{\endtikzpicture\endcenter}
+\newenvironment{centikzcd}{\center\tikzcd}{\endtikzcd\endcenter}
+\newenvironment{eqlong}{\equation\aligned}{\endaligned\endequation}
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem*{prop*}{Proposition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}[prop]{Lemma}
+\newtheorem{cor}[prop]{Corollary}
+\newtheorem{thm}[prop]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{conjec}[prop]{Conjecture}
+
+%https://tex.stackexchange.com/questions/280313/how-to-put-the-list-of-definitions-at-contents-page
+%https://tex.stackexchange.com/questions/51691/creating-list-of-for-newtheoremstyle
+%\usepackage{amsthm}
+%\newtheoremstyle{mystyle}
+%{\topsep}{\topsep}{}{}{\bfseries}{:}{\newline}
+%{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}%
+%	\ifstrempty{#3}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef}}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef~(#3)}}}
+%
+%\theoremstyle{mystyle}
+%\newtheorem*{def*}{Definition}
+\theoremstyle{definition}
+\newtheorem*{defaux}{Definition}
+
+%https://tex.stackexchange.com/questions/60872/ams-theorems-in-table-of-contents
+\NewDocumentEnvironment{def*}{o}
+{\IfNoValueTF{#1}
+	{\defaux\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition}}
+	{\defaux[#1]\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition (#1)}}%
+	\ignorespaces}
+{\label{#1}}
+{\enddefaux}
+
+%\makeatletter
+%\newcommand\definitionname{Definition}
+%\newcommand\listdefinitionname{List of Definitions}
+%\newcommand\listofdefinitions{%
+%	\section*{\listdefinitionname}\@starttoc{def}}
+%\makeatother
+
+\theoremstyle{remark}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{ack*}{Acknowledgements}
+
+\theoremstyle{definition}
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{exe*}[exe]{Exercise*}
+\newtheorem{exam}[exe]{Example in Book}
+\newtheorem{eq}[exe]{Equation in Book}
+\newtheorem{ddef}[exe]{Definition in Book}
+\theoremstyle{plain}
+\newtheorem{pprop}[exe]{Proposition in Book}
+\newtheorem{ccor}[exe]{Corollary in Book}
+\newtheorem{llem}[exe]{Lemma in Book}
+\newtheorem{tthm}[exe]{Theorem in Book}
+\captionsetup{width=0.9\textwidth}
+
+
+%%  \usetikzlibrary{shadows}% for shadow
+%%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
+%   \tikzstyle{event} = [draw, circle]
+%   \tikzstyle{arrow} = [thick,->,>=stealth]
+%%  \usetikzlibrary{arrows}
+%%  \tikzstyle{arrow} = [draw, -latex', thick]
+%
+%   %only for this doc
+%   \newcommand{\llb}{\llbracket}
+%   \newcommand{\rrb}{\rrbracket}
+
+%opening
+\title{Reading Notes for \\ \large \textit{Abstract Algebra} \\ \small by Dummit and Foote}
+\author{Zhi Wang}
+
+\begin{document}
+	
+	\ytableausetup{centertableaux}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	%	\listofdefinitions
+	
+	\section{Preliminaries}
+	Read the book
+	\section{Introduction to Groups}
+	\subsection{Basic Axioms and Examples}
+	if a is any element of G and for some 
+	$b \in G$, ab = e or ba = e, then $b = a^{-1}$
+	, i.e., we do not have to show both equations 
+	hold.
+	
+	 the order of an element in a group is the 
+	same as the cardinality of the set of all its (distinct) powers so the two uses of the word 
+	"order" are naturally related.
+	
+	\subsection{Dihedral Groups}
+
+	 presentation = Generators + Relations
+	 
+	 some "collapsing" may 
+	 occur because the relations are intertwined in some unobvious way, i.e., there may be 
+	 "hidden," or implicit, relations that are not explicitly given in the presentation but rather 
+	 are consequences of the specified ones.
+
+	This collapsing makes it difficult in general to 
+	determine even a lower bound for the size of the group being presented.
+	
+	While in general it is necessary to be extremely careful in prescribing groups by 
+	presentations, the use of presentations for known groups is a powerful conceptual and 
+	computational tool. Additional results about presentations, including more elaborate 
+	examples, appear in Section 6.3.
+	
+	\subsection{Symmetric Groups}
+	For any $a \in S_n$ , the cycle decomposition of $a^{-1}$ is obtained by writing the numbers in each cycle of the cycle decomposition of a in reverse order.
+	
+	\subsection{MATRIX GROUPS}
+\end{document}

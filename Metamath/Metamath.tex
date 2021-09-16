@@ -1,0 +1,921 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{amsmath,amssymb,amsthm,amsopn,amscd}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{multirow}
+\usepackage[reftex]{theoremref}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{algorithm}      % pseudo-code
+\usepackage{algpseudocode}  %
+\usepackage{stmaryrd}       % double brackets
+\usepackage{amstext}    % \text macro
+\usepackage{array}      % \newcolumntype macro
+\usepackage{tikz}       % for flow chart
+\usetikzlibrary{cd}     % commutative diagram
+\usetikzlibrary{shapes.geometric} % pentagon
+\usepackage{graphics, tkz-berge} % icosahedron
+\usepackage{afterpage}
+\usepackage[export]{adjustbox}
+\usepackage{tensor}
+\usepackage{braket}
+\usepackage{etoolbox}
+\usepackage{xparse}
+\usepackage{mathrsfs,mathabx}
+
+% converse
+%\usepackage{scalerel}
+%\usepackage{stackengine}
+%   \usepackage{commath}    % for abs and norm
+
+%\setcounter{secnumdepth}{-2} % remove section numbering
+\setcounter{section}{-1}
+
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{0.75ex plus 0.1ex}% space after heading
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\rp}{\mathbb{RP}}
+
+%   Sets
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\inte}{\mathbb{Z}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\renn}{\mathbb{R}_0^+}
+\newcommand{\co}{\mathbb{C}}
+\newcommand{\hil}{\mathbb{H}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\MM}{\mathrm{M}}
+\newcommand{\ob}{\mathrm{ob}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\class}{\mathrm{class}}
+\newcommand{\supp}{\,\operatorname{supp}\,}
+
+\newcommand{\ext}[1]{\bigwedge\!^{#1}}
+
+
+\newcommand{\id}{\indices}
+\newcommand{\idt}{\mathrm{id}}
+%   \newcommand{\cp}{\mathbb{CP}}
+%   \newcommand{\dS}{\mathbb{S}}
+%   \newcommand{\dP}{\mathbb{P}}
+%   \newcommand{\dE}{\mathbb{E}}
+%   \newcommand{\dZ}{\mathbb{Z}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfK}{\mathbf{K}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\idm}{\mathbf{I}}
+\newcommand{\bfA}{\mathbf{A}}
+\newcommand{\bfB}{\mathbf{B}}
+\newcommand{\bfC}{\mathbf{C}}
+\newcommand{\bfD}{\mathbf{D}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\bfL}{\mathbf{L}}
+\newcommand{\bfT}{\mathbf{T}}
+\newcommand{\bfS}{\mathbf{S}}
+%   \newcommand{\bm}{\boldsymbol{m}}
+%   \newcommand{\bmu}{\boldsymbol{\mu}}
+%   \newcommand{\bS}{\boldsymbol{\Sigma}}
+%   \newcommand{\uvec}[1]{\mathrm{\mathbf{\hat{e}}}_#1}
+%   \newcommand{\rmbf}[1]{\mathrm{\mathbf{#1}}}
+%   \newcommand{\javg}{J_{\mathrm{avg^2}}}
+%   \newcommand{\pgl}[1]{\mathbf{PGL}(#1,\mathbb{R})}
+%   \newcommand{\Sl}[1]{\mathbf{SL}(#1,\mathbb{R})}
+%   \newcommand{\gl}[1]{\mathbf{GL}(#1,\mathbb{R})}
+
+\makeatletter
+\newcommand\etc{etc\@ifnextchar.{}{.\@}}
+\newcommand\ie{i.e\@ifnextchar.{}{.\@}}
+\newcommand\eg{e.g\@ifnextchar.{}{.\@}}
+\newcommand\Eq{Eq.\ }
+\makeatother
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}		
+\newcommand{\purple}[1]{{\color{purple} #1}}		
+
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\symdif}{\triangle}
+\newcommand{\provable}{\vdash}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\setvar}{\red}
+\newcommand{\wff}{\blue}
+\newcommand{\classvar}{\purple}
+
+\newcommand{\wffphi}{\wff{\varphi}}
+\newcommand{\wffpsi}{\wff{\psi}}
+\newcommand{\wffchi}{\wff{\chi}}
+\newcommand{\sff}{\setvar{f}}
+\newcommand{\sg}{\setvar{g}}
+\newcommand{\si}{\setvar{i}}
+\newcommand{\su}{\setvar{u}}
+\newcommand{\sv}{\setvar{v}}
+\newcommand{\sw}{\setvar{w}}
+\newcommand{\sx}{\setvar{x}}
+\newcommand{\sy}{\setvar{y}}
+\newcommand{\sz}{\setvar{z}}
+\newcommand{\clA}{\classvar{A}}
+\newcommand{\clB}{\classvar{B}}
+\newcommand{\clC}{\classvar{C}}
+\newcommand{\clD}{\classvar{D}}
+\newcommand{\clE}{\classvar{E}}
+\newcommand{\clF}{\classvar{F}}
+\newcommand{\clG}{\classvar{G}}
+\newcommand{\clR}{\classvar{R}}
+\newcommand{\clS}{\classvar{S}}
+\newcommand{\clX}{\classvar{X}}
+\newcommand{\clY}{\classvar{Y}}
+
+\newcommand{\Or}{{\,\mathrm{Or}\,}}
+\newcommand{\Po}{{\,\mathrm{Po}\,}}
+\newcommand{\Fr}{{\,\mathrm{Fr}\,}}
+\newcommand{\Se}{{\,\mathrm{Se}\,}}
+\newcommand{\We}{{\,\mathrm{We}\,}}
+\newcommand{\VV}{\mathrm{V}}
+\newcommand{\relE}{{\,\operatorname{E}\,}}
+\newcommand{\Isom}{{\,\operatorname{Isom}\,}}
+\newcommand{\II}{\mathrm{I}}
+\newcommand{\relI}{{\,\II\,}}
+%\newcommand{\nonfree}{{\mathpalette\rotF\relax}}
+\newcommand{\nonfree}{\Finv}
+%\newcommand{\rotF}[2]{\rotatebox[origin=c]{180}{$#1\mathrm{F}$}}
+\newcommand{\unique}{\exists^*}
+
+
+
+\newcommand{\rotiota}[2]{\rotatebox[origin=c]{180}{$#1\boldsymbol{\iota}$}}
+\newcommand{\iiota}{{\mathpalette\rotiota\relax}}
+\newcommand{\defdes}{\iiota}
+
+\newcommand{\Fn}{{\,\operatorname{Fn}\,}}
+\newcommand{\Fun}{{\operatorname{Fun}\,}}
+\newcommand{\at}{`}
+
+\newcommand{\mapinto}[3]{{#1}\colon{#2}\xrightarrow[]{\mathmakebox[1.5em]{}}{#3}}
+\newcommand{\injmapinto}[3]{{#1}\colon{#2}\xrightarrow[]{\mathmakebox[1.5em]{\text{1-1}}}{#3}}
+\newcommand{\maponto}[3]{{#1}\colon{#2}\xrightarrow[\text{onto}]{\mathmakebox[1.5em]{}}{#3}}
+\newcommand{\bijmaponto}[3]{{#1}\colon{#2}\xrightarrow[\text{onto}]{\mathmakebox[1.5em]{\text{1-1}}}{#3}}
+
+\newcommand{\Tr}{{\operatorname{Tr}\,}}
+\newcommand{\Rel}{{\operatorname{Rel}\,}}
+\newcommand{\dom}{{\operatorname{dom}\,}}
+\newcommand{\Ord}{{\operatorname{Ord}\,}}
+\newcommand{\suc}{{\operatorname{suc}\,}}
+\newcommand{\Lim}{{\operatorname{Lim}\,}}
+\newcommand{\On}{{\operatorname{On}\,}}
+\newcommand{\ran}{{\operatorname{ran}\,}}
+\newcommand{\tpos}{\operatorname{tpos}\,}
+\newcommand{\Pred}{{\operatorname{Pred}}}
+\newcommand{\image}{``}
+\makeatletter
+\newlength{\temp@wip@width}
+\newlength{\temp@wip@height}
+\newcommand{\converse}[1]{%
+	\vfuzz=30pt% BAD: to remove overfull vbox warnings...
+	\setlength{\temp@wip@width}{\widthof{$#1$}}%
+	\setlength{\temp@wip@height}{\heightof{$#1$}}%
+	#1\hspace{-\temp@wip@width}%
+	\raisebox{\temp@wip@height+1pt}[\heightof{$\wideparen{#1}$}]%
+	{\rotatebox[origin=c]{180}{\vbox to 0pt{\hbox{$\wideparen{\hphantom{#1}}$}}}}%
+}
+\makeatother
+%\newcommand{\converse}{\widecheck}%{\breve}
+%\stackMath
+%
+%\newcommand\converse[1]{%
+%	\stackon[0.5pt]{#1}{%
+%		\stretchto{%
+%			\scaleto{%
+%				\scalerel*[\widthof{#1}]{\mkern-1.5mu\smile\mkern-2mu}%
+%				{\rule[-\textheight/2]{1ex}{\textheight}}%
+%			}{\textheight}%
+%		}{0.8ex}}%
+%}
+%%\parskip 1ex
+\newcommand{\opair}[2]{\left\langle{#1,#2}\right\rangle}
+
+\newcommand{\fst}{\operatorname{1^{st}}}
+\newcommand{\snd}{\operatorname{2^{nd}}}
+
+\newcommand{\power}{\mathscr{P}}
+\newcommand{\domain}{\mathcal{D}}
+
+
+
+\newcommand{\na}{\nabla}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\define}{\coloneqq}
+\newcommand{\tp}[1]{{#1}^T}
+\newcommand{\hadj}[1]{{#1}^{\dagger}}
+\newcommand{\conj}{\overline}
+%
+%   \newcommand{\lst}[2]{\{#1_{1}, #1_{2}, \dots, #1_{#2}\}}
+%   \newcommand{\lstf}[2]{\{#1{1}, #1{2}, \dots, #1{#2}\}}
+%   % prt stands for parenthesis
+%   \newcommand{\prt}[2]{(#1_{1}, #1_{2}, \dots, #1_{#2})}
+%   \newcommand{\prtf}[2]{(#1{1}, #1{2}, \dots, #1{#2})}
+%   % general list formatted, #1: fxn, #2: first one, #3: last one, #4: delimiter, #5: left, #6: right
+%   \newcommand{\glstf}[6]{#5 #1{#2} #4 #1{\number\numexpr#2+1\relax} #4 \dots #4 #1{#3} #6}
+%
+% wc = wild card
+\newcommand*{\wcthin}{{\mkern 2mu\cdot\mkern 2mu}}
+\newcommand*{\wc}{{}\cdot{}}    %   This one is wider
+%
+% Operators
+% ec = equivalence class
+\newcommand{\ec}[1]{\left[{#1}\right]}
+% generating subgroup
+\newcommand{\gensub}[1]{\left\langle{#1}\right\rangle}
+%
+%   automatic math mode in tabular
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+\newenvironment{centabular}{\center\tabular}{\endtabular\endcenter}
+\newenvironment{centikzpic}{\center\tikzpicture}{\endtikzpicture\endcenter}
+\newenvironment{centikzcd}{\center\tikzcd}{\endtikzcd\endcenter}
+\newenvironment{eqlong}{\equation\aligned}{\endaligned\endequation}
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem*{prop*}{Proposition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}[prop]{Lemma}
+\newtheorem{cor}[prop]{Corollary}
+\newtheorem{thm}[prop]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{conjec}[prop]{Conjecture}
+
+%https://tex.stackexchange.com/questions/280313/how-to-put-the-list-of-definitions-at-contents-page
+%https://tex.stackexchange.com/questions/51691/creating-list-of-for-newtheoremstyle
+%\usepackage{amsthm}
+%\newtheoremstyle{mystyle}
+%{\topsep}{\topsep}{}{}{\bfseries}{:}{\newline}
+%{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}%
+%	\ifstrempty{#3}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef}}%
+%	{\addcontentsline{def}{subsection}{#1~\thedef~(#3)}}}
+%
+%\theoremstyle{mystyle}
+%\newtheorem*{def*}{Definition}
+\theoremstyle{definition}
+\newtheorem*{defaux}{Definition}
+
+%https://tex.stackexchange.com/questions/60872/ams-theorems-in-table-of-contents
+\NewDocumentEnvironment{def*}{o}
+{\IfNoValueTF{#1}
+	{\defaux\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition}}
+	{\defaux[#1]\addcontentsline{toc}{subsubsection}{\protect\numberline{}Definition (#1)}}%
+	\ignorespaces}
+{\label{#1}}
+{\enddefaux}
+
+%\makeatletter
+%\newcommand\definitionname{Definition}
+%\newcommand\listdefinitionname{List of Definitions}
+%\newcommand\listofdefinitions{%
+%	\section*{\listdefinitionname}\@starttoc{def}}
+%\makeatother
+
+\theoremstyle{remark}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{ack*}{Acknowledgements}
+
+\theoremstyle{definition}
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{exe*}[exe]{Exercise*}
+\newtheorem{exam}[exe]{Example in Book}
+\newtheorem{eq}[exe]{Equation in Book}
+\theoremstyle{plain}
+\newtheorem{pprop}[exe]{Proposition in Book}
+\newtheorem{ccor}[exe]{Corollary in Book}
+\newtheorem{llem}[exe]{Lemma in Book}
+\newtheorem{tthm}[exe]{Theorem in Book}
+\captionsetup{width=0.9\textwidth}
+
+
+%%  \usetikzlibrary{shadows}% for shadow
+%%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
+%   \tikzstyle{event} = [draw, circle]
+%   \tikzstyle{arrow} = [thick,->,>=stealth]
+%%  \usetikzlibrary{arrows}
+%%  \tikzstyle{arrow} = [draw, -latex', thick]
+%
+%   %only for this doc
+%   \newcommand{\llb}{\llbracket}
+%   \newcommand{\rrb}{\rrbracket}
+
+%opening
+\title{Reading Notes for \\ \large \textit{Metamath Proof Explorer}}
+\author{Zhi Wang}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	%	\listofdefinitions
+	
+
+	\section{Notations}
+	$\&$ and $\implies$ is used in statements, while $\land$ and $\ra$ is used as logical conjunction.
+	
+	Order of operation
+	\begin{enumerate}
+		\item $\neg$ is evaluated first
+		\item $\land$ and $\lor$ are evaluated next
+		\item Quantifiers ($\exists$, $\forall$) are evaluated next
+		\item $\ra$, $\lra$ are evaluated last.
+	\end{enumerate}
+	
+	\section{CLASSICAL FIRST-ORDER LOGIC WITH EQUALITY}
+	In \href{http://us.metamath.org/mpeuni/mmtheorems2.html#mm194s}{1.2.5  Logical equivalence},
+	$\neg (\wff{\varphi} \ra \neg \wff{\psi})$ means $\wff{\varphi} \land \wff{\psi}$.
+	
+	The \href{http://us.metamath.org/mpeuni/mmtheorems11.html#mm1006s}
+	{1.2.8  The conditional operator for propositions}
+	is equivalent to $\wc ?\wc :\wc $ operator in C programming language.
+	
+	In \href{http://us.metamath.org/mpeuni/mmtheorems16.html#mm1523s}
+	{1.2.15  Half adder and full adder in propositional calculus},
+	binary addition is defined.
+	
+	In \href{http://us.metamath.org/mpeuni/mmtheorems19.html#mm1839s}
+	{1.4.7  Axiom scheme ax-6 (Existence)},
+	this should indicate the existence of a set.
+	
+	First, we need to define \href{http://us.metamath.org/mpeuni/mmtheorems20.html#mm1984s}
+	{1.5.3  Axiom scheme ax-12 (Substitution)}.
+	Then \href{http://us.metamath.org/mpeuni/df-clab.html}
+	{Class Abstraction (df-clab)} can be defined.
+	
+	\section{ZF (ZERMELO-FRAENKEL) SET THEORY}
+	\subsection{ZF Set Theory - start with the Axiom of Extensionality}
+	\subsubsection*{2.1.1  Introduce the Axiom of Extensionality}
+	\paragraph{axext2}
+	
+	\subparagraph{Theorem 19.36v}
+	
+	It references \href{http://us.metamath.org/mpeuni/mmtheorems19.html#mm1839s}
+	{Theorem 19.36v}:
+	\[\provable \Big(\exists \setvar{x} (\wff{\varphi} \ra \wff{\psi}) \lra (\forall \setvar{x} \wff{\varphi} \ra \wff{\psi}) \Big) .\]
+	
+	Note:
+	$\forall \setvar{x} \wff{\varphi} \ra \wff{\psi}$ means $(\forall \setvar{x} \wff{\varphi}) \ra \wff{\psi}$.
+	
+	To prove this, think $\wff{\varphi}$ and $\wff{\psi}$ as predicates (Boolean-valued functions) of $\setvar{x}$.
+	\begin{itemize}
+		\item Left to right:
+		
+		$\because$ ``$\wff{\varphi}$ is true for all $\setvar{x}$'' is a stronger condition than
+		``there exists $\setvar{x}$ such that $\wff{\varphi}$ is true'',\\
+		$\therefore$ ``there exists one $\setvar{x}$ such that $\wff{\varphi} \ra \wff{\psi}$'' 
+		indicates (``$\wff{\varphi}$ is true for all $\setvar{x}$'' $\ra$ ``$\wff{\psi}$ is true'').
+		
+		\item Right to left:
+		
+		If ``$\wff{\varphi}$ is true for all $\setvar{x}$'' will lead to ``$\wff{\psi}$ is true'',
+		then there must be one $\setvar{x}$ at which $\wff{\psi}$ is evaluated true.
+		Therefore at this $\setvar{x}$, $\wff{\varphi} \ra \wff{\psi}$.
+		
+	\end{itemize}
+	
+	\subparagraph{The set z}
+	
+	\href{http://us.metamath.org/mpeuni/mmtheorems25.html#mm2495s}{Theorem axext2} claims that
+	\[\provable \exists \setvar{z}\Big((\setvar{z}\in\setvar{x}\lra\setvar{z}\in\setvar{y})
+	\ra \setvar{x}=\setvar{y} \Big) .\]
+	
+	So what is this set $\setvar{z}$?
+	One of the solutions is
+	\begin{equation}
+		\setvar{z} = \begin{cases}
+			\emptyset & (\setvar{x}=\setvar{y})\\
+			\setvar{w} & (\setvar{x}\ne\setvar{y})\\
+		\end{cases},
+	\end{equation}
+	where $\setvar{w}$ is any element of $\setvar{x}\symdif\setvar{y}$ (defined in \href{http://us.metamath.org/mpeuni/mmtheorems38.html#mm3709s}
+	{df-symdif}), the latter of which must be nonempty if $\setvar{x}\ne \setvar{y}$.
+	
+	\subsubsection*{2.1.2  Class abstractions (a.k.a. class builders)}
+	\paragraph{Theorem dfcleq}
+	The equality of class is only checked by its containing sets:
+	\[\provable \Big(\clA=\clB\lra\forall \sx(\sx\in\clA\lra\sx\in\clB) \Big). \]
+	\paragraph{Definition df-clel}
+	The membership of class is checked by set:
+	\[\provable \Big(\clA\in\clB\lra\exists\sx(\sx=\clA\land\sx\in\clB)\Big). \]
+	This means, if a class is not a set, then it does not belong to any class.
+	
+	\subsubsection*{2.1.5  Restricted quantification}
+	It gives the following definitions:
+	\begin{eqlong}
+		&\provable \Big(\forall \sx\in\clA\,\wffphi \lra\forall \sx(\sx\in\clA\ra\wffphi) \Big),\\
+		&\provable \Big(\exists \sx\in\clA\,\wffphi \lra\exists \sx(\sx\in\clA\land\wffphi) \Big).\\
+		&\provable  \set{\sx\in\clA|\wffphi} =\set{\sx|(\sx\in\clA\land\wffphi)}.\\		
+	\end{eqlong}	
+	
+	\subsubsection*{2.1.6  The universal class}
+	$\VV$ is the class (\blue{not set}) of all sets.
+	
+	\subsubsection*{2.1.9  Proper substitution of classes for sets}
+	
+	Similar to 1.5.3  Axiom scheme ax-12 (Substitution).
+	
+	\subsubsection*{2.1.15  ``Weak deduction theorem'' for set theory}
+	This is similar to 1.2.8, but instead of generating a proposition (well-formed formula),
+	it outputs a class (or set).
+	
+	\subsection{ZF Set Theory - add the Axiom of Replacement}
+	\subsubsection*{2.2.1  Introduce the Axiom of Replacement}
+	If a map $\wffphi'=\forall\sy\wffphi$ maps every set $\sw$ in $\VV$
+	to at most one set $\sz$ in $\VV$,
+	then there exists the \textbf{image} $\sy$ (as a set) of the map $\wffphi'$ from $\sx$,
+	\ie, $\wffphi'\colon\sx\to\sy$ such that each element in $\sy$ has at least one preimage in $\sx$.
+	This is the generalized axiom of replacement:
+		
+	% Given the map $\wffphi'\colon \sx\to \sy$ defined as $\wffphi'(\sw)\sim\sz$ (there could be multiple $\sz$),
+	% the below axiom asserts the existence of $\sy$:
+	\[\provable\Big(\forall\sw\exists\sy\forall\sz \big(\forall\sy\wffphi\ra\sz=\sy\big)\ra \exists\sy\forall\sz\big(
+	\sz\in\sy\lra\exists\sw(\sw\in\sx\land\forall\sy\wffphi)
+	\big) \Big). \]
+	
+	Alternatively \red{(\href{http://us.metamath.org/mpeuni/mmtheorems47.html}{axrep4, 4602*})}, we rewrite it this way ($\wffphi'=\forall\sy\wffphi$ is a well-formed formula not free in $\sy$)
+	using \href{http://us.metamath.org/mpeuni/mmtheorems24.html#mm2363b}{Theorem mo2v (2370*)}:
+	\[\provable\nonfree \sy\wffphi'\implies \provable\Big(\forall\sw\unique\sz\wffphi'\ra \exists\sy\forall\sz\big(
+	\sz\in\sy\lra\exists\sw(\sw\in\sx\land\forall\wffphi')
+	\big) \Big). \]
+	
+	The correspondence to the one in the \href{https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#6._Axiom_schema_of_replacement}{Wikipedia} is 
+	\begin{centabular}{c | C C C C}
+		\hline
+		Wikipedia& x& y&A &B\\
+		\hline
+		Metamath& \sw &\sz & \sx & \sy\\
+		\hline
+	\end{centabular}
+	
+	The difference from the one in the Wikipedia
+	is 
+	\begin{itemize}
+		\item In the left half, $\sw$ ($x$) is not restricted within $\sx$ ($A$) (added in Theorem axrep5).
+		\item In the left half, $\sz$ ($y$) does not have to exist.
+		\item In the right half, $\sy$ ($B$) is the image instead of a codomain. (Maybe this is why axiom of separation/specification can be derived?)
+		\item In the right half, ``every element in the domain has a mapped value in codomain'' becomes
+		``every element in the image has at least a preimage in the domain''.
+	\end{itemize}
+		
+	\subsubsection*{2.2.2  Derive the Axiom of Separation}
+	\paragraph{Other sources}
+	\href{https://math.stackexchange.com/questions/680376/proving-separation-from-replacement}{Proving Separation from Replacement}
+	
+	\href{https://math.stackexchange.com/questions/32483/how-do-the-separation-axioms-follow-from-the-replacement-axioms}{How do the separation axioms follow from the replacement axioms?}
+	
+	\href{https://math.stackexchange.com/questions/1352431/prove-the-axiom-of-replacement-implies-the-axiom-of-specification?noredirect=1&lq=1}{Prove the Axiom of Replacement implies the Axiom of Specification.}
+	
+	\paragraph{Derive Axiom schema of specification from Theorem bm1.3ii}
+	
+	\red{Axiom schema of specification \textit{is} the Axiom of Separation.}
+	% The Hypothesis of axiom schema of specification is:
+	% \begin{centabular}{c|c}
+	% 	Ref & Expression\\
+	% 	\hline
+	% 	axspec.1 & $\provable\Big(\Big)$
+	% \end{centabular}
+	% This means $\sz$ is a set.
+	
+	The assertion of axiom schema of specification is:
+	\begin{centabular}{c|c}
+		Ref & Expression\\
+		\hline
+		axspec & $\provable\Big(\forall\sz\in\VV \,\exists \sx \,\forall \sy\big(\sy\in \sx \lra(\sy\in \sz\land\wffphi)\big)\Big)$
+	\end{centabular}
+	This means a subset $\sx$ of a set $\sz$ exists.
+
+	Proof of Theorem axspec:
+	\begin{centabular}{C | C | c | L}
+		\text{Step} & \text{Hyp} & Ref & \text{Expression}\\
+		\hline
+		1 & & ? & \provable \Big(\forall\sz\in\VV \,\forall \sy (\sy\in\sz\land\wffpsi\ra\sy\in\sz)\Big) \\
+		2 &1 & ? & \provable \Big(\forall\sz\in\VV \,\exists \sx \,\forall \sy (\sy\in\sz\land\wffpsi\ra\sy\in\sx)\Big) \\
+		3 & 2& bm1.3ii & \provable \Big(\forall\sz\in\VV \,\exists \sx\, \forall \sy (\sy\in\sx\lra\sy\in\sz\land\wffpsi)\Big) \\
+	\end{centabular}
+
+	The step 1 references the fact that $\provable(\wffphi\land\wffpsi\ra\wffphi)$.
+	
+	The step 2 references the fact that $\sz$ exists.
+	
+	The step 3 references \href{http://us.metamath.org/mpeuni/mmtheorems47.html#mm4607s}{Theorem bm1.3ii}:
+	\[\provable\exists\sx\forall\sy(\wffphi\ra\sy\in\sx)\implies\provable\exists\sx\forall\sy(\sy\in\sx\lra\wffphi) \]
+	where $\wffphi$ is $\sy\in\sz\land\wffpsi$.
+	
+	\blue{The axiom of subset/separation/specification is result of the existence of the image of an identity map (restricted by $\wffphi$).}
+	
+	\subsection{ZF Set Theory - add the Axiom of Power Sets}
+	\subsubsection*{2.3.2  Derive the Axiom of Pairing}
+	\paragraph{zfpair}
+	Prove axiom of pairing form axiom of power set (no axiom of union). 
+	
+	This is because
+	\[\power\power\emptyset=\set{\emptyset,\set{\emptyset}} \]	
+	exists (\href{http://us.metamath.org/mpeuni/mmtheorems47.html}{Theorem pp0ex, 4681}).
+	
+	Then map $\emptyset$ to $\sx$ and $\set{\emptyset}$ to $\sy$. The image set $\set{\sx,\sy}$ is what we need.
+	
+	\subsubsection*{2.3.6  Epsilon and identity relations}
+	$\relE$ is the membership relationship
+	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4842s}{Theorem	epelg 4845}).
+	\[\provable\Big(\clB\in\VV\ra(\clA\relE\clB\lra\clA\in\clB)\Big)\]
+	
+	$\II$ is the identity function
+	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4842s}{Theorem	dfid4 4850})
+	\[\provable \II=(\sx\in\VV\mapsto\sx) \]
+	
+	\subsubsection*{2.3.7  Partial and complete ordering}
+	These are strict partial/complete(total) ordering.
+	
+	\subsubsection*{2.3.8  Founded and well-ordering relations}
+
+	\paragraph{Set-Like}	
+	``$\clR$ is set-like on $\clA$'' ($\clR\Se\clA$) means,
+	given any $\sx\in\clA$, the class of all $\sy\in\clA$ satisfying $\sy\,\clR\,\sx$ is a set
+	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4889s}{df-se 4893*}).
+	
+	Theorem exse 4897: Any relation on a set is set-like on it.
+		
+	Theorem	epse 4916: The epsilon relation is set-like on any class.
+	(This is the origin of the term ``set-like'':
+	a set-like relation ``acts like'' the epsilon relation of sets and their elements.)
+	\[\provable \relE\Se\clA \]
+	
+	\paragraph{Well-Founded/Ordered}
+	A binary relation $\clR$ is called well-founded on a class $\clA$
+	if every non-empty subset $\sx\subseteq\clA$ has a \textit{minimal} element with respect to $\clR$.
+	
+	A binary relation $\clR$ is called well-ordered on a class $\clA$
+	if every non-empty subset $\sx\subseteq\clA$ has a \textit{least} element with respect to $\clR$
+	(\href{http://us.metamath.org/mpeuni/dfwe2.html}{Theorem dfwe2}).
+	
+	Minimal element is not necessarily unique,
+	but a least element, if it exists, is unique and is the only minimal element.
+	
+	Theorem	efrirr 4914: Irreflexivity of the epsilon relation---a class founded
+	by epsilon is not a member of itself.
+	\[\provable(\relE\Fr\clA\ra\neg\clA\in\clA) \]
+	You can always stop the process of finding a containing element?
+	
+	\subsubsection*{2.3.9  Relations}
+	\paragraph{Converse}
+	The converse of a binary relation swaps its arguments, \ie,
+	\[\provable \clA\in\VV \& \provable \clB\in\VV \implies \provable(\clA \converse{\clR} \clB\lra\clB\clR\clA) \]
+	See \href{http://us.metamath.org/mpeuni/brcnv.html}{Theorem brcnv 5120}.
+	
+	\paragraph{Composition}
+	The composition follows the convention ($\sz$ does not need to be unique).
+	\begin{centikzcd}
+		\sx\ar[r,"\clB"]&\sz\ar[r,"\clA"]&\sy\ar[from=ll,bend right,"\clA\circ\clB"']
+	\end{centikzcd}
+
+	\paragraph{Restriction}
+	$\clA\restriction\clB$ is to restrict the domain of $\clA$ into $\clB$.
+	\paragraph{Image}
+	$\clA\image\clB$ is the image of $\clB$ under $\clA$.
+	
+	Then the axiom of replacement can be expressed as
+	\[ \provable \clA=\set{\opair{\sw}{\sz}|\forall\sy\wffphi}\& 
+	\provable \forall \sw\unique\sz (\sw\clA\sz)
+	\implies\clA\image\sx\in\VV \]
+	\subsubsection*{2.3.10  The Predecessor Class}
+	$\Pred(\clR,\clA,\clX)$ is the class of all elements $\sy$ of $\clA$ such that $\sy\clR\clX$
+	(\href{http://us.metamath.org/mpeuni/mmtheorems56.html}{Theorem	elpredg 5502}):
+	\[\provable\Big( \big(\clX\in\clB\land\clY\in\clA\big)\ra\big(\clY\in\Pred(\clR,\clA,\clX)\lra\clY\clR\clX \big)\Big) \]
+	
+	\subsubsection*{2.3.12  Ordinals}
+	\paragraph{Ordinal Number}
+	An ordinal number is a \textbf{transitive} class
+	whose nonempty subset must have a least element that belongs to all other elements of the subset.
+	\red{Need proof!}
+	
+	\red{This need to be checked:}
+	\[ \provable \Big(\Ord\clA\ra\forall \sz \big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra \exists\sx\in\sz\forall\sy\in\sz(\sx\ne\sy\ra\sx\in\sy)\big)\Big) \]
+	But this is not sufficient condition. Consider the following set
+	\[\clA=\set{\emptyset,\set{\emptyset,\set{\emptyset}}}. \]
+	It is not transitive but $\provable( \relE \We \clA )$.
+	
+	\red{The table below might be wrong!}
+	\begin{center}
+		\scriptsize
+		\begin{tabular}{c | c | c | L}
+			
+			\text{Step} & \text{Hyp} & Ref & \text{Expression}\\
+			\hline
+			We & & \href{http://us.metamath.org/mpeuni/dfwe2.html}{dfwe2} & \provable \Big(\relE\We\clA\lra \big(\relE\Fr\clA\land
+			\forall\sx\in\clA\forall\sy\in\clA(\sx\relE\sy\lor\sx=\sy\lor\sy\relE\sx)\big) \Big) \\
+			E1 & & \href{http://us.metamath.org/mpeuni/epel.html}{epel} & \provable \Big(\sx\in\sy\lra\sx\relE\sy \Big) \\
+			E2 & & \href{http://us.metamath.org/mpeuni/epel.html}{epel} & \provable \Big(\sy\in\sx\lra\sy\relE\sx \Big) \\		
+			We2 &We,E1,E2 & ? & \provable \Big(\relE\We\clA\lra \big(\relE\Fr\clA\land
+			\forall\sx\in\clA\forall\sy\in\clA(\sx\in\sy\lor\sx=\sy\lor\sy\in\sx)\big) \Big) \\
+			Fr & & \href{http://us.metamath.org/mpeuni/df-fr.html}{df-fr} &
+			\provable \Big( \relE\Fr\clA\lra\forall\sz\big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra\exists\sx\in\sz
+			\forall\sy\in\sz\neg\sy\relE\sx\big) \Big)\\
+			Ss1&&?& \provable\Big(\sz\subseteq\clA\ra (\sx\in\sz\ra\sx\in\clA) \Big)\\
+			Ss2&&?& \provable\Big(\sz\subseteq\clA\ra (\sy\in\sz\ra\sy\in\clA) \Big)\\
+			NyEx&&?& \provable\Big(\big(\sx\relE\sy\lor\sx=\sy\lor\sy\relE\sx\big)\ra\big((\neg\sy\relE\sx\big)\lra(\sx=\sy\lor\sx\relE\sy)\big)\Big)\\
+			WeR &We,Fr,Ss1,Ss2,NyEx,E1 & ? &
+			\provable \Big( \relE\We\clA\ra\forall\sz\big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra\exists\sx\in\sz
+			\forall\sy\in\sz(\sx=\sy\lor\sx\in\sy)\big) \Big)\\
+			NxEx &&?& \provable (\sx\notin\sx)\\
+			NyEx.1 &NxEx,E2&?& \provable \Big((\sx=\sy)\ra(\neg\sy\relE\sx)\Big)\\
+			NyEx.2 &E2&?& \provable \Big((\sx\in\sy)\ra(\neg\sy\relE\sx)\Big)\\
+			FrL &Fr,NyEx.1,NyEx.2 & ? &
+			\provable \Big( \forall\sz\big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra\exists\sx\in\sz
+			\forall\sy\in\sz(\sx=\sy\lor\sx\in\sy)\big)\ra\relE\Fr\clA \Big)\\
+			W&&?& \provable \Big(\forall\sx\in\clA\forall\sy\in\clA\exists \sw(\sw=\set{\sx,\sy}\land\sw\subseteq \clA\land\sw\ne\emptyset) \Big)\\
+			W2&W&?& \begin{aligned}\provable \Big(&
+			\forall\sz\big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra\exists\sx\in\sz
+			\forall\sy\in\sz(\sx=\sy\lor\sx\in\sy)\big)\\
+			&\ra
+			\forall\sx\in\clA\forall\sy\in\clA\exists \sw\big(\sw=\set{\sx,\sy}\land
+			\exists\su\in\sw
+			\forall\sv\in\sw(\su=\sv\lor\su\in\sv)
+			\big) \Big)\\\end{aligned}\\
+			QED.1 & WeR,WeL& ? & \provable \Big(\relE\We\clA\lra\forall \sz \big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra \exists\sx\in\sz\forall\sy\in\sz(\sx=\sy\lor\sx\in\sy)\big)\Big) \\
+			QED & QED.1& ? & \provable \Big(\relE\We\clA\lra\forall \sz \big((\sz\subseteq\clA\land\sz\ne\emptyset)\ra \exists\sx\in\sz\forall\sy\in\sz(\sx\ne\sy\ra\sx\in\sy)\big)\Big) \\
+		\end{tabular}
+	\end{center}
+
+	\href{http://us.metamath.org/mpeuni/dfepfr.html}{Theorem dfepfr 4918*}: An alternate way of saying that the epsilon relation is well-founded.
+	\[\provable \Big(\relE\Fr\clA\lra \forall\sx\big((\sx\subseteq\clA\land
+	\sx\ne\emptyset)\ra\exists\sy\in\sx(\sx\cap\sy)=\emptyset\big)\Big) \]
+	
+	\href{http://us.metamath.org/mpeuni/wefrc.html}{Theorem wefrc 4927}:
+	A nonempty (possibly proper) subclass of a class well-ordered by $\relE$ has a minimal element.
+	\[\provable\Big((\relE\We\clA\land\clB\subseteq\clA\land\clB\ne\emptyset)
+	\ra\exists\sx\in\clB(\clB\cap\sx)=\emptyset\Big) \]
+	
+	\href{http://us.metamath.org/mpeuni/onelss.html}{Theorem onelss 5573}: An element of an ordinal number is a subset of the number.
+	\[\provable\Big(\clA\in\On\ra(\clB\in\clA\ra\clB\subseteq\clA)\Big) \]
+
+	\href{http://us.metamath.org/mpeuni/dford2.html}{Theorem dford2 8275}:
+	Assuming ax-reg 8255, an ordinal is a transitive class on which inclusion satisfies trichotomy.
+	\[\provable\Big(\Ord \clA\lra \big(\Tr \clA\land\forall\sx\in\clA\forall\sy\in\clA(\sx\in\sy\lor\sx=\sy\lor\sy\in\sx)\big)\Big) \]
+	
+	Theorem	ordirr 5549	Epsilon irreflexivity of ordinals: no ordinal class is a member of itself. Theorem 2.2(i) of [BellMachover] p. 469, generalized to classes. We prove this without invoking the Axiom of Regularity.
+	
+	Theorem	nordeq 5550	A member of an ordinal class is not equal to it. 
+	
+	orci/clci
+	sylancb
+	\paragraph{Limit Ordinal}	
+	\href{http://us.metamath.org/mpeuni/dflim3.html}
+	{Theorem dflim3 6814}:
+	An alternate definition of a limit ordinal, which is any ordinal that is neither zero nor a successor.
+	\[\provable\Big(\Lim\clA\lra\big(\Ord\clA\land\neg(\clA=\emptyset
+	\lor\exists\sx\in\On\,\clA=\suc\sx)\big)\Big) \]
+
+	\subsubsection*{2.3.13  Definite description binder (inverted iota)}		
+	
+	Define ``the unique $\sx$ such that $\wffphi$'',
+	where $\wffphi$ ordinarily contains $\sx$ as a free variable.
+	Our definition is meaningful only when there is exactly one $\sx$
+	such that $\wffphi$ is true;
+	otherwise, it evaluates to the empty set.
+	
+	\href{http://us.metamath.org/mpeuni/iota1.html}{Theorem iota1 5668}:
+	Property of iota.
+	\[\provable\bigg(\exists!\sx\wffphi\ra\Big(\wffphi\lra\big((\defdes \sx\wffphi) = \sx\big)\Big)\bigg) \]
+	
+	\href{http://us.metamath.org/mpeuni/iotanul.html}{Theorem iotanul 5669}
+	This theorem is the result if there isn't exactly one $\sx$
+	that satisfies $\wffphi$.
+	\[\provable\Big( \neg\exists!\sx\wffphi\ra \big((\defdes\sx\wffphi)=\emptyset\big) \Big) \]
+	
+	\subsubsection*{2.3.14  Functions}
+	\paragraph{Function}
+	Class $\clF$ is a function if and only it is a relation
+	where there exists at most one right-hand-side value for any left-hand-side value.
+	(\href{http://us.metamath.org/mpeuni/mmtheorems58.html}{Theorem dffun6 5705*},
+	\href{http://us.metamath.org/mpeuni/df-rel.html}{df-rel})
+	\[\provable\Big(\Fun\clF\lra\big(\clF\subseteq(\VV\times\VV)\land\forall\sx\unique\sy\,\sx\clF\sy\big)\Big) \]
+
+	Theorem funopab 5723*: A class of ordered pairs is a function when there is at most one second member for each pair.
+	\[\provable \Big(\Fun\set{\opair{\sx}{\sy}|\wffphi}\lra\forall\sx\unique\sy\,\wffphi\Big)\]
+	
+	Theorem funmpt 5726: A function in maps-to notation (``the function defined by the map from $\sx$ (in $\clA$) to $\clB(\sx)$'',
+	\href{http://us.metamath.org/mpeuni/df-mpt.html}{df-mpt})
+	is a function.
+	\[\provable\Fun(\sx\in\clA\mapsto\clB) \]
+	
+	Theorem	funco 5728	The composition $\clF\circ\clG$ of two functions is a function.
+	
+	Theorem	funres 5729	A restriction $\clF\restriction\clA$ of a function is a function. 
+	
+	Theorem	funssres 5730	The restriction of a function to the domain of a subclass equals the subclass.
+	
+	Theorem	fun0 5754	The empty set is a function. 
+	
+	Theorem	f0 5883	The empty function.
+	\[\provable\mapinto{\emptyset}{\emptyset}{\clA} \]
+
+	\paragraph{Function with domain and codomain}
+	\[\mapinto{\clF}{\clA}{\clB} \]
+	\[\injmapinto{\clF}{\clA}{\clB} \]
+	\[\maponto{\clF}{\clA}{\clB} \]
+	\[\bijmaponto{\clF}{\clA}{\clB} \]
+
+	\paragraph{Evaluation}
+	The definition of evaluated function
+	(\href{http://us.metamath.org/mpeuni/df-fv.html}{df-fv}) does not require $\Fun\clF$.
+	\[\provable (\clF\at\clA) = (\defdes\sx\clA\clF\sx)\]
+	It generates empty set if $\clF$ evaluated at $\clA$ is not unique or 
+	$\clA\notin\dom\clF$:
+	Theorem	ndmfv 6012, the value of a class outside its domain is the empty set.
+	\[\provable\Big( \neg \clA\in\dom\clF\ra(\clF\at\clA)=\emptyset\Big) \]
+	
+	Theorem	fvprc 5981	A function's value at a proper class is the empty set. 
+	\[\provable\Big(\neg\clA\in\VV \ra (\clF\at\clA)=\emptyset\Big)
+	\]
+	
+	Theorem	fveq1 5986	Equality theorem for function value.
+	\[\provable\Big(\clF=\clG\ra(\clF\at\clA)=(\clG\at\clA)
+	\big) \]
+	
+	Theorem	fveq2 5987	Equality theorem for function value.
+	\[\provable\Big(\clA=\clB\ra(\clF\at\clA)=(\clF\at\clB)
+	\big) \]	
+	
+	Theorem	fvex 5997	The value of a class exists.
+	\[\provable (\clF\at\clA)\in\VV \]
+
+	\paragraph{Isomorphism}
+	Isomorphism is a bijection from $\clA$ onto $\clB$
+	with relation $\clR$ in $\clA$ preserved in $\clB$ as $\clS$ (df-isom).
+
+	\subsubsection*{2.3.15  Cantor's Theorem}
+	Theorem	canth 6385	No set is equinumerous to its power set (Cantor's theorem), i.e. no function can map a set onto its power set.
+	
+	Cantor's Theorem. No set is equinumerous to its power set. Specifically, any set has a cardinality (size) strictly less than the cardinality of its power set. For example, the cardinality of real numbers is the same as the cardinality of the power set of integers, so real numbers cannot be put into a one-to-one correspondence with integers.
+	
+	Theorem	ncanth 6386	Cantor's theorem fails for the universal class (which is not a set but a proper class by vprc 4624). Specifically, the identity function maps the universe onto its power class.	
+	
+	\subsubsection*{2.3.16  Restricted iota (description binder)}
+	Definition	df-riota 6388	Define restricted description binder. In case there is no unique $\sx$ such that $(\sx \in \clA \land \wffphi)$ holds, it evaluates to the empty set. 
+	
+	\subsubsection*{2.3.17  Operations}
+	
+	Note that the syntax is simply three class symbols in a row surrounded by parentheses.
+	
+	Difference between operations and relations
+	\begin{itemize}
+		\item Relations $\clA\clR\clB$ are not parenthesized,
+		while operations are $(\clA\clF\clB)$.
+		\item Relations are \textit{well-formed formulas},
+		while operations are \textit{classes}.
+	\end{itemize}
+
+	Theorem	funoprabg 6533*	``At most one'' is a sufficient condition for an operation class abstraction to be a function.
+	\[\provable\Big( \forall\sx\forall\sy\unique\sz\wffphi\ra \Fun\set{\opair{\opair{x}{y}}{z}|\wffphi}\Big) \]
+	
+	\subsubsection*{2.3.19  Function operation}
+	Given a binary operation $\clR$, this maps two functions into a single function:
+	\[ \circ_f\clR \]
+	
+	Example:
+	\[\provable \Big( \sx\in(\dom\sff\cap\dom\sg)\ra
+	 \big((\setvar{f}\circ_f\clR\setvar{g})\at\sx\big) = \big((\sff\at\sx)\clR(\sg\at\sx)\big)\Big) \]
+	 
+	Given a binary relation $\clR$, this is a relation between two functions:
+	\[\provable \Big( (\sff\circ_r\clR\sg)  \lra \forall
+	\sx \in (\dom\sff\cap\dom\sg)\, (\sff\at\sx)\clR(\sg\at\sx) \Big) \]
+	
+	\[\provable \Big( (\dom\sff\cap\dom\sg=\emptyset)\ra (\sff\circ_r\clR\sg) \Big) \]
+	
+	\subsubsection*{2.3.20  Proper subset relation}
+	This is a relation of sets instead of a wff of classes.
+	
+	\subsection{ZF Set Theory - add the Axiom of Union}
+	\subsubsection*{2.4.3  Transfinite induction}
+	
+	\blue{If $\clA \in \On$, then $\in$ means $<$, $\cap$ means $\min$ of containing elements, $\cup$ means $\max$ of containing elements, $\subseteq$ means $\le$.}
+	
+	Theorem	tfis 6821*	Transfinite Induction Schema.
+	If all ordinal numbers less than a given ordinal number $\sx$ have a property (induction hypothesis),
+	then all ordinal numbers have the property (conclusion).
+	\[\provable\Big(\sx\in\On \ra \big((\forall\sy\in\sx[\sy/\sx]\wffphi)\ra\wffphi\big) \Big)\implies\provable\Big(\sx\in\On\ra\wffphi\Big) \]
+	
+	Theorem	tfindes 6829*	Transfinite Induction with explicit substitution.
+	\begin{enumerate}
+		\item The first hypothesis is the basis,
+		\item the second is the induction step for successors, 
+		\item and the third is the induction step for limit ordinals.
+	\end{enumerate}
+	\[\begin{aligned}
+		&\provable[\emptyset/\sx]\wffphi \& \provable \Big(\sx\in\On\ra \big(\wffphi\ra([\suc\sx/\sx]\wffphi)\big) \Big)\&
+		\provable \Big(\Lim\sy\ra\big((\forall\sx\in\sy\wffphi) \ra[\sy/\sx]\wffphi\big)\Big)\\
+		&\implies
+		\provable\Big(\sx\in\On\ra\wffphi\Big)
+	\end{aligned} \]
+	
+	\subsubsection*{2.4.4  The natural numbers (\ie. finite ordinals)}
+	Define the class of natural numbers $\omega$,
+	which are all ordinal numbers that are less than every limit ordinal, \ie, all finite ordinals.
+	(\href{http://us.metamath.org/mpeuni/mmtheorems69.html#mm6832s}{df-om})
+	
+	Theorem	peano2b 6848	A class belongs to omega iff its successor does. 
+	
+	\href{http://us.metamath.org/mpeuni/omsinds.html}{Theorem	omsinds 6851*}	Strong (or "total") induction principle over the finite ordinals.
+	
+	Allowed substitution hints:   \[\wffphi(\sx),   \wffpsi(\sy) ,  \wffchi(\sy)  , \clA(\sy)\]
+	\[\begin{aligned}
+		&\provable \Big(\sx=\sy\ra\big(\wffphi\lra\wffpsi\big) \Big)
+		\& \provable \Big( \sx=\clA \ra \big(\wffphi\lra\wffchi
+		\big)\Big) \&
+		\provable \Big( \sx\in\omega \ra \big( (\forall\sy\in\sx\wffpsi)\ra\wffphi\big)\Big)\\
+		&\implies
+		\provable \Big(\clA\in\omega\ra\wffchi\Big)
+	\end{aligned}
+	 \]
+	 (actually it is $\wffchi(\clA)$)
+	 
+	 Hypothesis: if $\wffpsi(\sy)$ holds for all $\sy$ smaller than $\sx$,
+	 then $\wffphi(\sx)$ is also true.
+	 
+	 Assertion: $\wffchi(\clA)$ is true for all $\clA\in\omega$.
+	 
+	 Note that $\provable([\emptyset/\sx]\wffphi)$ must be true, because $\provable\emptyset\in\omega$
+	 and $\provable(\forall\sy\in\emptyset\wffpsi)$, \ie,
+	 \[\provable\Big(\forall \sy(\sy\notin\emptyset \lor \wffpsi) \Big)\]
+	 are constantly true.
+	 
+	\subsubsection*{2.4.6  Finite induction (for finite ordinals)}
+	Theorem	findes 6863:
+	Finite induction (mathematical induction) with explicit substitution.
+	\begin{enumerate}
+		\item 	The first hypothesis is the basis
+		\item and the second is the induction step.
+	\end{enumerate}
+	\[\provable[\emptyset/\sx]\wffphi
+	\& \provable \Big(\sx\in\omega\ra \big( \wffphi\ra ([\suc\sx/\sx]\wffphi)\big) \Big)
+	\implies \provable \Big(\sx\in\omega\ra\wffphi\Big)
+	 \]
+	 
+	\subsubsection*{2.4.7  First and second members of an ordered pair}
+	\[\fst \snd \]
+	Theorem	1stnpr 6937	Value of the first-member function at non-pairs.
+	\[\provable \Big(\clA \notin (\VV\times\VV)\ra (\fst\at\clA)=\emptyset \Big) \]
+	
+	Theorem	2ndnpr 6938	Value of the second-member function at non-pairs.
+	\[\provable \Big(\clA \notin (\VV\times\VV)\ra (\snd\at\clA)=\emptyset \Big) \]
+	
+	Theorem	1st0 6939	The value of the first-member function at the empty set.
+	\[\provable (\fst\at\emptyset)=\emptyset \]
+	
+	Theorem	2nd0 6940	The value of the second-member function at the empty set.
+	\[\provable (\snd\at\emptyset)=\emptyset \]
+	
+	Theorem	op1st 6941	Extract the first member of an ordered pair.
+	\[\provable\clA\in\VV\&\provable\clB\in\VV\&\implies \provable(\fst\at\opair{\clA}{\clB})=\clA \]
+	
+	Theorem	op2nd 6942	Extract the second member of an ordered pair.
+	\[\provable\clA\in\VV\&\provable\clB\in\VV\&\implies \provable(\snd\at\opair{\clA}{\clB})=\clB \]
+	
+	\subsubsection*{2.4.8  The support of functions}
+	\[
+	\provable \Big((\sx\supp\sz)=\set{\si\in\dom\sx|(\sx\image\set{\si})\ne\set{\sz}} \Big)
+	\]
+	The reason why $(\sx\image\set{\si})\ne\set{\sz}$ is used instead of $(\sx\at\si)\ne\sz$ is that $\sx$ is allowed to have multiple
+	mapped values for $\si$.
+	
+	\subsubsection*{2.4.10  Function transposition}
+	Definition	df-tpos 7113*
+	Define the transposition of a function, which is a function $\clG = \tpos \clF$ satisfying $\clG(\sx, \sy) = \clF(\sy, \sx)$.
+	\[\provable \tpos \clF=\Big(\clF\circ\big(\sx\in(	\converse{\dom\clF}\cup\set{\emptyset})\mapsto\cup \converse{\set{\sx}}\big)
+	\Big) \]
+\end{document}
