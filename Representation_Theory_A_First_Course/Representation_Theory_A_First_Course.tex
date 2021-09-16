@@ -6866,11 +6866,53 @@
 		It can be viewed as how we group things together?
 		\href{https://blogs.scientificamerican.com/roots-of-unity/change-your-open-sets-change-your-life/}{Some intuition.}
 	\end{rem*}
+	\subparagraph{Neighbourhood, Base}
+	\begin{def*}[neighbourhood of a set]
+		An \textbf{neighbourhood of a subset} $S$ of a topological space $(X,\tau)$ is a subset $N$ such that
+		either one of the equivalent conditions hold
+		\begin{itemize}
+			\item $\exists U\in \tau [A\subseteq U\subseteq N]$.
+			\item it is a neighbourhood of all the points in $S$.
+			\item $S$ is a subset of the interior $\interior{N}$ of $N$,
+		\end{itemize}
+	\end{def*}
+
+	\begin{def*}[neighbourhood of a point]
+		An \textbf{neighbourhood of point} $x$ in topological space $(X,\tau)$ is a subset $N$ such that
+		\begin{itemize}
+			\item either 
+			\[\exists U\in \tau [x\in U\subseteq N], \]
+			\item or $N$ is a neighbourhood of set $\set{x}$.
+		\end{itemize}
+	\end{def*}
+
+	\begin{def*}[base]
+		A \textbf{base} or basis for the topology $\tau$ of a topological space $(X, \tau)$
+		is a family $\mathcal{B}\subseteq\tau$ such that every open set of the topology is equal to a union of some sub-family of $\mathcal{B}$.
+		
+		Equivalently, $\mathcal{B}$ is a base of topology $(X, \tau)$ iff
+		\[\forall S [S\in\tau\iff \exists \mathcal{A}\subseteq \mathcal{B} ( S=\bigcup \mathcal{A})].\]
+	\end{def*}
+	\begin{rem*}
+		$\mathcal{B}\subseteq\tau$ is induced from the above formula.
+	\end{rem*}
+
+	\begin{def*}[local base]
+		Given a topological space $(X,\tau)$,
+		a \textbf{local base} for a point $x\in X$ is a collection of neighbourhoods $\mathcal{B}_x\subseteq \mathcal{N}_x$ such that
+		all neighbourhoods $U_x$ of $x$ is a superset of some set $B$ in $\mathcal{B}_x$:
+		\[ \forall B\in \mathcal{B}_x\exists U_x\in\tau[x\in U_x\subseteq B]\land \forall U_x\in\tau\exists B\in\mathcal{B}_x [x\in U_x\implies B\subseteq U_x] .\]
+		
+		Equivalently,
+		\[ \forall U_x [x\in U_x\in\tau \iff \exists B\in\mathcal{B}_x (B\subseteq U_x) ]  .\]
+	\end{def*}
+
 	\subparagraph{Continuity}
 	\begin{def*}[continuous function]
 		A \textbf{function} from a topological space $(X,\sigma)$ to a topological space $(Y,\tau)$
 		is \textbf{continuous} if and only if \textit{the inverse image for every open set is open}, \ie,
-		\[\forall \calS\in\tau[\set{x\in X|f(x)\in\calS}\in\sigma]. \]
+		%\[\forall \calS\in\tau[\set{x\in X|f(x)\in\calS}\in\sigma]. \]
+		\[\forall S\in\tau[\set{x\in X|f(x)\in S}\in\sigma]. \]
 	\end{def*}
 	\begin{thm}
 		A continuous function
@@ -6903,9 +6945,11 @@
 			\item it is injective and surjective \[\forall x\in X\forall x'\in X[f(x)=f(x')\implies x=x']
 			\land\forall y\in Y\exists x\in X[f(x)=y],\]
 			\item it is continuous
-			\[\forall \calT\in\tau[\set{x\in X|f(x)\in\calT}\in\sigma],\]
+			%\[\forall \calT\in\tau[\set{x\in X|f(x)\in\calT}\in\sigma],\]
+			\[\forall T\in\tau[\set{x\in X|f(x)\in T}\in\sigma],\]
 			\item it is a strongly open map
-			\[\forall \calS\in\sigma[\set{f(x)\in Y|x\in\calS}\in\tau].\]
+			%\[\forall \calS\in\sigma[\set{f(x)\in Y|x\in\calS}\in\tau].\]
+			\[\forall S\in\sigma[\set{f(x)\in Y|x\in S}\in\tau].\]
 		\end{itemize}
 	\end{def*}
 	\subparagraph{Limit}
@@ -6921,6 +6965,41 @@
 		there exists some $N \in \nat$ such that for every $n\ge N$,
 		$x_{n}\in U$, \ie,
 		\[\forall U\in\tau[ x\in U \implies \exists N\in\nat\forall n\in\nat(n\ge N\implies x_n\in U) ] .\]
+	\end{def*}
+
+	\begin{def*}[adherent point]
+		An \textbf{adherent point} of a subset $A$ of a topological space $(X,\tau)$,
+		is a point $x \in X$
+		such that
+		\[ \forall U\in\tau [x\in U \implies U\cap A\notin \emptyset]. \]
+	\end{def*}
+	\begin{rem*}
+		This definition differs from that of a limit point,
+		in that for a limit point it is required that every neighborhood of $x$ contains at least one point of $A$
+		\textbf{different from} $x$.
+		
+		Thus every limit point is an adherent point, but the converse is not true.
+		An adherent point of $A$ is either a limit point of $A$ or an element of $A$ (or both).
+	\end{rem*}
+	\begin{def*}[isolated point]
+		An adherent point which is not a limit point is an \textbf{isolated point}.
+	\end{def*}
+
+	\subparagraph{Closure}
+	\begin{def*}[closure]
+		The \textbf{closure} of a subset $S$ of a topological space $(X,\tau )$,
+		denoted by $\operatorname {cl} _{(X,\tau )}S$
+		or possibly by $\operatorname {cl} _{X}S, \operatorname {cl} S, {\overline {S}},{\displaystyle S{}^{-}}$,
+		can be defined using any of the following equivalent definitions:
+		it is 
+		\begin{itemize}
+			\item the set of all adherent points of ${S}$,
+			\item the set $S$ combined with all of its limit points,
+			\item the intersection of all closed sets containing $S$,
+			\item the smallest closed set containing $S$,
+			\item the union of $S$ and its boundary $\partial{S}$,
+		\end{itemize}
+		
 	\end{def*}
 	\paragraph{Metric Space}
 	\subparagraph{Definition}
@@ -6952,6 +7031,11 @@
 		or more explicitly
 		\[ \tau=\set{\calS\in\power(M)| \exists \sigma'\forall \calT\in\sigma'\exists r\in\re^+\exists p\in M[\calT=B_r(p)\land \calS=\bigcup \sigma'] } .\]
 	\end{def*}
+	\begin{rem*}
+		The metric topology on a metric space $(M,d)$ is the coarsest topology on $M$ relative to
+		which the metric $d$ is a continuous map from the product of $M$ with itself to the non-negative real numbers.
+	\end{rem*}
+
 	\subparagraph{Complete Metric Space}
 	\begin{def*}[Cauchy sequence]
 		A sequence $\left(x_{n}\right)_{n\in \nat }$ in a metric space $(X, \tau, d)$ is
@@ -7102,6 +7186,11 @@
 		\[\langle x,y\rangle = \sum_{i=1}^n x_iy_i,\]
 		since $y_i\in \re$.
 	\end{proof}
+	\begin{rem*}
+		Actually, all Hilber spaces can be described this way.
+		See \ref{thmHilbertOrthonormal}.
+	\end{rem*}
+
 	\begin{def*}[Euclidean topology]
 		The $\tau$ defined in the above Euclidean space is called the \textbf{Euclidean topology}.
 	\end{def*}
@@ -7963,29 +8052,6 @@
 		A topological space is metrizable if and only if it is regular, Hausdorff and has a $\sigma$-locally finite base. A $\sigma$-locally finite base is a base which is a union of countably many locally finite collections of open sets.
 	\end{thm}
 
-	\subsubsection{Countability Axioms}
-	
-	every Hausdorff second-countable regular space is metrizable. 
-\red{TODO}
-Using an infinite-dimensional analog of the Gram-Schmidt process one may show:
-
-Theorem. Any separable inner product space has an orthonormal basis.
-
-Using the Hausdorff maximal principle and the fact that in a complete inner product space orthogonal projection onto linear subspaces is well-defined, one may also show that
-
-Theorem. Any complete inner product space has an orthonormal basis.
-
-	\paragraph{More on Metric Space}
-	
-	
-	
-	Metric spaces are paracompact[9] Hausdorff spaces[10] and hence normal (indeed they are perfectly normal). An important consequence is that every metric space admits partitions of unity and that every continuous real-valued function defined on a closed subset of a metric space can be extended to a continuous map on the whole space (Tietze extension theorem). It is also true that every real-valued Lipschitz-continuous map defined on a subset of a metric space can be extended to a Lipschitz-continuous map on the whole space.
-	
-	Metric spaces are first countable since one can use balls with rational radius as a neighbourhood base.
-	
-	%The metric topology on a metric space {\displaystyle M}M is the coarsest topology on {\displaystyle M}M relative to which the metric {\displaystyle d}d is a continuous map from the product of {\displaystyle M}M with itself to the non-negative real numbers.
-	
-
 	\subsubsection{Compactness}
 	\paragraph{Paracompactness and Compactness}
 	\begin{def*}[cover]
@@ -8084,7 +8150,7 @@ Theorem. Any complete inner product space has an orthonormal basis.
 		\end{itemize}
 	\end{def*}
 
-	\begin{figure}[H]
+	\begin{figure}
 		\centering
 		\begin{tikzpicture}	
 			\node[scale=.8] (a) at (0,0){
@@ -8093,38 +8159,177 @@ Theorem. Any complete inner product space has an orthonormal basis.
 					row sep={2.0cm,between origins}
 					]
 					%%%%%%%%%%%%%%%
-					&\text{Sequentially Compact}\ar[r,leftrightarrow,dashed,"\text{M + AC}{}_\omega"]&\text{Compact}\ar[rd]
-					\ar[d,tail,"\text{CC}"]\ar[ld,tail,"\text{PC/L/(M+AC)}"']&\text{Metric} \ar[from=l,leftrightarrow,dashed,"\text{Complete + TB}"]\ar[d]\\
+					&\text{Sequentially Compact}\ar[d,dashed,leftrightarrow,"\text{1C/S}T_2"']
+					\ar[r,leftrightarrow,dashed,"\text{M + AC}{}_\omega"]&\textbf{Compact}\ar[rd]
+					\ar[d]\ar[ld,tail,"\text{PC/L/(M+AC)}"{sloped}']&\text{Metrizable} \ar[from=l,leftrightarrow,dashed,"\text{Complete + TB}"]
+					\ar[d,tail,"\text{Manifold}"]\\
 					%%%%%%%%%%%%%%%
-					\text{Pseudocompact} \ar[from=r,tail,"T_4"]\ar[from=ur,tail,"M"']
-					&\text{Countably Compact}\ar[d,tail,"\text{M+AC}"]&\text{Lindelöf}\ar[r,dashed,"\text{Regular}"]&\text{Paracompact}\\
+					\text{Pseudocompact} \ar[from=r,tail,"T_4"']\ar[from=ur,tail,"M"']
+					&\text{Countably Compact}\ar[d,tail,"\text{M+AC}"']&\text{Hemicompact}\ar[d]&\text{Paracompact}\\
 					%%%%%%%%%%%%%%%
-					&\text{Limit Point Compact}&T_4\ar[from=ur,dashed,"T_2"]&\text{Mesocompact}\ar[from=u]\ar[d] \\
-					&&&\text{Metacompact}\ar[d]\\
-					&&&\text{Orthocompact}\\
+					&\text{Limit Point Compact}&\sigma\text{-compact}\ar[d]&\text{Mesocompact}\ar[from=u]\ar[d] &[-4cm]T_4\ar[from=ul,dashed,"T_2"]\\
+					%%%%%%%%%%%%%%%
+					\text{Separable}&\textbf{Second-Countable}\ar[r,tail,"\text{M}"]\ar[l,tail,"\text{M}"'] &\text{Lindelöf}\ar[from=uu,leftrightarrow,bend left=50,dashed,"\text{LC}"]\ar[ruu,dashed,pos=0.7,"\text{Regular}"{sloped}]
+					\ar[uuu,leftrightarrow,bend left=50,dashed,"\text{CC}"]
+					&\text{Metacompact}\ar[d] \\
+					%%%%%%%%%%%%%%%
+					\text{Metrizable}\ar[r]\ar[from=ur,dashed,"T_3"']
+					&\text{First-Countable}\ar[from=u]&\text{Fréchet--Urysohn}\ar[from=l]&\text{Orthocompact}\\
+					%%%%%%%%%%%%%%%
+					&&\text{Sequential}\ar[from=u]\\
 				\end{tikzcd}
 			};
 		\end{tikzpicture}
-		\caption{Hierarchy of compactness: solid line = unconditional, dashed line = conditional, tailed arrow = unconditional + conditional converse\\
-			M = metric space, L = Lindelöf, CC = countably compact, PC = paracompact, AC = axiom of choice, TB = totally bounded
+		\caption{Hierarchy of compactness/countability: \\
+			solid line = unconditional, dashed line = conditional, \\
+			tailed arrow = unconditional + conditional converse\\
+			M = metrizable, L = Lindelöf, CC = countably compact, PC = paracompact, LC = locally compact, AC = axiom of choice, TB = totally bounded,
+			S$T_2$ = sequential Hausdorff, 1C = first countable
 		}
 		\label{fig:compactness}
 	\end{figure}
-
-
-Every metric space is naturally a topological space, and for metric spaces, the notions of compactness and sequential compactness are equivalent (if one assumes countable choice). However, there exist sequentially compact topological spaces that are not compact, and compact topological spaces that are not sequentially compact.
-
-In a metric space, the notions of sequential compactness, limit point compactness, countable compactness and compactness are all equivalent (if one assumes the axiom of choice).
-
-In a sequential (Hausdorff) space sequential compactness is equivalent to countable compactness.[3]
-
-	\subsubsection{Manifold}
-	\begin{def*}[topological manifold]
-		A \textbf{topological manifold} is a second countable Hausdorff space that is locally homeomorphic to Euclidean space.
+	
+	\subsubsection{Countability Axioms}
+	
+	\begin{def*}[dense]
+		Let $A$ and $B$ be two sets in a topological space $(X,\tau)$.
+		We call $A$ is \textbf{dense} in $B$ if the one of following equivalent conditions holds
+		\begin{itemize}
+			\item $B$ is a subset of the closure of $A$, \ie, $B\subseteq\closure{A}$,
+			\item points in $B$ are adherent points of $A$, \ie, either in $A$ or a limit point of $A$,
+			\item all open neighbourhoods of $x\in B$ intersects with $A$, \ie,
+			\[ \forall x\in B\forall U\in\tau[x\in  U \implies A\cap U\ne\emptyset ],\]
+			\item all open sets intersecting with $B$ must also intersect $A$, \ie,
+			\[ \forall U\in\tau[B\cap  U\ne\emptyset \implies A\cap U\ne\emptyset ].\]
+		\end{itemize}
+		 $A$ is \textbf{everywhere dense} or simply dense (in $X$) iff $\closure{A} = X$, \ie,
+		 \[\forall U\in\tau[U\ne\emptyset\implies A\cap U\ne\emptyset ].\]
 	\end{def*}
-A topological manifold is a locally Euclidean Hausdorff space. 
+	\begin{rem*}
+		Below shows the equivalence.
+		
+		\[ \forall x\in B\forall U\in\tau[x\in  U \implies A\cap U\ne\emptyset ],\]
+		iff (exchanging $\forall$)
+		\[ \forall U\in\tau\forall x\in B[x\in  U \implies A\cap U\ne\emptyset ],\]
+		iff (definition of qualified $\forall$ and set intersection)
+		\[ \forall U\in\tau\forall x[x\in B \cap  U \implies A\cap U\ne\emptyset ],\]
+		iff (right hand side is free of $x$)
+		\[ \forall U\in\tau[\exists x\in B \cap  U \implies A\cap U\ne\emptyset ],\]
+		iff (definition and uniqueness of empty set)
+		\[ \forall U\in\tau[B\cap  U\ne\emptyset \implies A\cap U\ne\emptyset ].\]
+		
+	\end{rem*}
+	\begin{rem*}
+		Given wff $\varphi(x)$ and wff $\psi$ free of $x$, we have
+		\[ \forall x \big(\varphi(x) \implies \psi \big) \]
+		iff (definition of $\implies$)
+		\[ \forall x \big(\neg\varphi(x) \lor \psi \big) \]
+		iff ($\psi$ is free of $x$)
+		\[ \big(\forall x \neg\varphi(x)\big)  \lor \psi \]
+		iff (definition of $\forall$)
+		\[ \big(\neg\exists x \varphi(x)\big)  \lor \psi \]
+		iff (definition of $\implies$)
+		\[ \exists x \varphi(x) \implies \psi . \]
+	\end{rem*}
+	
+	\begin{def*}[countability axioms]
+		A topological space $(X,\tau)$ is called 
+		\begin{itemize}
+			\item \textbf{sequential}: a set is open if every sequence convergent to a point in the set is eventually in the set,
+			\item \textbf{first-countable}: every point has a countable local base,
+			\[ \forall x\in X\exists \mathcal{B}_x \Big[\big(\card{\mathcal{B}_x}\le\aleph_0\big)\land \forall U_x \big(x\in U_x\in\tau \iff \exists B\in\mathcal{B}_x (B\subseteq U_x)\big) \Big]  ,\]
+			
+			\item \textbf{second-countable}: the topology has a countable base,
+			\[\exists \mathcal{B}\Big[\big( \card{\mathcal{B}}\le\aleph_0 \big)
+			\land \forall S \big(S\in\tau\iff \exists \mathcal{A}\subseteq \mathcal{B} ( S=\bigcup \mathcal{A})\big)\Big],\]
+			
+			\item \textbf{separable}: there exists a countable dense subset, \ie,
+			there exists a sequence $\set{ x_n }_{n=1}^{\infty}$ of elements of the space
+			such that every nonempty open subset of the space contains at least one element of the sequence,
+			or symbolically,
+			\[ \exists S [\card{S}\le \aleph_0 \land \forall U\in \tau\exists x\in S(U=\emptyset \lor x\in U) ]. \]
+		\end{itemize}
+		%\textbf{separable} if it contains a countable, dense subset;
+	\end{def*}
+	
+	
+	\subsubsection{More on Metric Space}
+	
+	\begin{thm}
+		Any separable inner product space has an orthonormal basis.
+	\end{thm}
+	\begin{rem*}
+		Use an infinite-dimensional analog of the Gram--Schmidt process to show this.
+	\end{rem*}
+	
+	\begin{thm}\label{thmHilbertOrthonormal}
+		Any complete inner product space has an orthonormal basis.
+	\end{thm}
+	\begin{rem*}
+		Use the Hausdorff maximal principle and the fact that in a complete inner product space orthogonal projection
+		onto linear subspaces is well-defined to show this.
+	\end{rem*}
+	
+	\begin{thm}
+		Every metric space admits partitions of unity.
+	\end{thm}
 
-A manifold is metrizable if and only if it is paracompact.
+	\begin{thm}
+		Every continuous real-valued function defined on a closed subset of a metric space can be extended to a continuous map on the whole space (Tietze extension theorem).
+	\end{thm}
+
+	\begin{thm}
+		Every real-valued Lipschitz-continuous map defined on a subset of a metric space can be extended to a Lipschitz-continuous map on the whole space.
+	\end{thm}
+	
+	\subsubsection{Manifold}
+	\begin{def*}[locally Euclidean]
+		A topological space $(X,\tau)$ is called \textbf{locally Euclidean}
+		if every point in $X$ has a neighborhood homeomorphic to an Euclidean space.
+		%if there is a non-negative integer $n$ such that every point in $X$ has a neighborhood which is homeomorphic to
+		%the Euclidean space $\re^n$.
+	\end{def*}
+	\begin{rem*}
+		Given a topological space $(X,\tau)$, below statements are equivalent
+		\begin{itemize}
+			\item $X$ is locally Euclidean,
+			\item each point in $X$ has an (open) neighborhood homeomorphic to an open neighborhood in Euclidean space,
+			\item every point in $X$ has a neighborhood homeomorphic to an open ball in some Euclidean space,
+			\item each point in $X$ has a neighborhood homeomorphic to the unit ball in an Euclidean space:
+			\[ \set{(x_{1},x_{2},\dots ,x_{n})\in \mathbb {R} ^{n}\mid x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}<1} ,\]
+			for some $n\in\inte^+$.
+		\end{itemize}		
+	\end{rem*}
+
+	\begin{thm}
+		A local Euclidean space is 
+		locally compact, locally connected, first countable, locally contractible, and locally metrizable.
+	\end{thm}
+	
+	\begin{def*}[topological manifold]
+		%A \textbf{topological manifold} is a second countable Hausdorff space that is locally homeomorphic to Euclidean space.
+		A \textbf{topological manifold} is a locally Euclidean Hausdorff space. 
+	\end{def*}
+	
+	\begin{def*}[pure manifold]
+		If the dimensionality of the Euclidean space $n$ is fixed for all points,
+		then we call it a \textbf{pure manifold}, or an $n$-manifold.
+	\end{def*}
+	\begin{rem*}
+		The disjoint union of a sphere and a line in three-dimensional space is not a pure manifold.
+		Since dimension is a local invariant (i.e. the map sending each point to the dimension of its neighbourhood over which a chart is defined, is locally constant), each connected component has a fixed dimension.
+	\end{rem*}
+
+	\begin{cor}
+		Manifolds are necessarily $T_{3\frac{1}{2}}$.
+	\end{cor}
+
+	\begin{thm}
+		A manifold need not be connected, but every manifold $M$ is a disjoint union of connected manifolds.
+		These are just the connected components of $M$, which are open sets since manifolds are locally-connected.
+		Being locally path connected, a manifold is path-connected if and only if it is connected.
+		It follows that the path-components are the same as the components.
+	\end{thm}
 
 A manifold is second-countable iff it is separable and paracompact.
 
