@@ -8161,15 +8161,25 @@
 					%%%%%%%%%%%%%%%
 					&\text{Sequentially Compact}\ar[d,dashed,leftrightarrow,"\text{1C/S}T_2"']
 					\ar[r,leftrightarrow,dashed,"\text{M + AC}{}_\omega"]&\textbf{Compact}\ar[rd]
-					\ar[d]\ar[ld,tail,"\text{PC/L/(M+AC)}"{sloped}']&\text{Metrizable} \ar[from=l,leftrightarrow,dashed,"\text{Complete + TB}"]
-					\ar[d,tail,"\text{Manifold}"]\\
+					\ar[d]
+					\ar[ld,shift left]
+					\ar[from=ld,dashed,shift left,"\text{PC/L/(M+AC)}"{sloped}']
+					&\text{Metrizable} \ar[from=l,leftrightarrow,dashed,"\text{Complete + TB}"]
+					\ar[d,shift right]\ar[from=d,dashed,shift right,"\text{MF}"']\\
 					%%%%%%%%%%%%%%%
-					\text{Pseudocompact} \ar[from=r,tail,"T_4"']\ar[from=ur,tail,"M"']
-					&\text{Countably Compact}\ar[d,tail,"\text{M+AC}"']&\text{Hemicompact}\ar[d]&\text{Paracompact}\\
+					\text{Pseudocompact} \ar[from=r,shift left]\ar[r,dashed,shift left,"T_4"]\ar[ur,dashed,shift left,"M"]\ar[from=ur,shift left]
+					&\text{Countably Compact}\ar[from=d,dashed,shift left,"\text{M+AC}"]\ar[d,shift left]
+					&\text{Hemicompact}\ar[d]&\text{Paracompact}\\
 					%%%%%%%%%%%%%%%
-					&\text{Limit Point Compact}&\sigma\text{-compact}\ar[d]&\text{Mesocompact}\ar[from=u]\ar[d] &[-4cm]T_4\ar[from=ul,dashed,"T_2"]\\
+					&\text{Limit Point Compact}&\sigma\text{-compact}
+					\ar[d,shift left]
+					\ar[from=d,dashed,shift left,"\text{MF}"]
+					&\text{Mesocompact}\ar[from=u]\ar[d] &[-4cm]T_4\ar[from=ul,dashed,"T_2"]\\
 					%%%%%%%%%%%%%%%
-					\text{Separable}&\textbf{Second-Countable}\ar[r,tail,"\text{M}"]\ar[l,tail,"\text{M}"'] &\text{Lindelöf}\ar[from=uu,leftrightarrow,bend left=50,dashed,"\text{LC}"]\ar[ruu,dashed,pos=0.7,"\text{Regular}"{sloped}]
+					\text{Separable}&\textbf{Second-Countable}
+					\ar[r,shift right]\ar[from=r,shift right,dashed,"\text{M/MF}"']
+					\ar[l,shift left] \ar[from=l,dashed,shift left,"\text{M}"] 
+					&\text{Lindelöf}\ar[from=uu,leftrightarrow,bend left=50,dashed,"\text{LC}"]\ar[ruu,dashed,pos=0.7,"\text{Regular}"{sloped}]
 					\ar[uuu,leftrightarrow,bend left=50,dashed,"\text{CC}"]
 					&\text{Metacompact}\ar[d] \\
 					%%%%%%%%%%%%%%%
@@ -8182,9 +8192,8 @@
 		\end{tikzpicture}
 		\caption{Hierarchy of compactness/countability: \\
 			solid line = unconditional, dashed line = conditional, \\
-			tailed arrow = unconditional + conditional converse\\
 			M = metrizable, L = Lindelöf, CC = countably compact, PC = paracompact, LC = locally compact, AC = axiom of choice, TB = totally bounded,
-			S$T_2$ = sequential Hausdorff, 1C = first countable
+			S$T_2$ = sequential Hausdorff, 1C = first countable, MF = manifold
 		}
 		\label{fig:compactness}
 	\end{figure}
@@ -8283,6 +8292,7 @@
 	\end{thm}
 	
 	\subsubsection{Manifold}
+	\paragraph{Definition}
 	\begin{def*}[locally Euclidean]
 		A topological space $(X,\tau)$ is called \textbf{locally Euclidean}
 		if every point in $X$ has a neighborhood homeomorphic to an Euclidean space.
@@ -8302,7 +8312,7 @@
 	\end{rem*}
 
 	\begin{thm}
-		A local Euclidean space is 
+		A local Euclidean space is $T_1$,
 		locally compact, locally connected, first countable, locally contractible, and locally metrizable.
 	\end{thm}
 	
@@ -8310,6 +8320,14 @@
 		%A \textbf{topological manifold} is a second countable Hausdorff space that is locally homeomorphic to Euclidean space.
 		A \textbf{topological manifold} is a locally Euclidean Hausdorff space. 
 	\end{def*}
+	\begin{rem*}
+		In some pages, second countability is required.
+		
+		Second countable and Hausdorff are point-set conditions;
+		second countable excludes spaces which are in some sense ``too large'' such as the long line,
+		while Hausdorff excludes spaces such as ``the line with two origins''.
+	\end{rem*}
+
 	
 	\begin{def*}[pure manifold]
 		If the dimensionality of the Euclidean space $n$ is fixed for all points,
@@ -8320,6 +8338,7 @@
 		Since dimension is a local invariant (i.e. the map sending each point to the dimension of its neighbourhood over which a chart is defined, is locally constant), each connected component has a fixed dimension.
 	\end{rem*}
 
+	\paragraph{Properties}
 	\begin{cor}
 		Manifolds are necessarily $T_{3\frac{1}{2}}$.
 	\end{cor}
@@ -8331,13 +8350,40 @@
 		It follows that the path-components are the same as the components.
 	\end{thm}
 
-A manifold is second-countable iff it is separable and paracompact.
-
-Every compact manifold is second-countable and paracompact.
 	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}	
+			\node[scale=.8] (a) at (0,0){
+				\begin{tikzcd}[anchor=center,
+					column sep={4.0cm,between origins},
+					row sep={1.5cm,between origins}
+					]
+					%%%%%%%%%%%%%%%
+					&\text{Compact}\ar[d]&&\\
+					%%%%%%%%%%%%%%%
+					%\begin{aligned}\text{Paracompact} \\ \text{+ Separable}\end{aligned}
+					\parbox{2.5cm}{\centering Paracompact + Separable}
+					\ar[r,leftrightarrow]
+					&\text{Second-Countable}\ar[d]&\text{Lindelöf}\ar[l,leftrightarrow]&\sigma\text{-compact}\ar[l,leftrightarrow]\\
+					%%%%%%%%%%%%%%%
+					&\text{Paracompact}\ar[d]&\text{Metrizable}\ar[l,leftrightarrow]&T_6\ar[from=l]\\
+					%%%%%%%%%%%%%%%
+					\text{Long Line}\ar[r,blue]&T_2 (*) \ar[d,dotted]& T_{3\frac{1}{2}}\ar[l,leftrightarrow] \\
+					%%%%%%%%%%%%%%%
+					\text{Line with 2 Origins}\ar[r,blue]&T_1\ar[r,leftrightarrow]&\text{First-Countable}\ar[r,leftrightarrow]&
+					\parbox{2.5cm}{\centering L'compact L'connected L'contractible L'metrizable}
+				\end{tikzcd}
+			};
+		\end{tikzpicture}
+		\caption{Hierarchy of manifolds. Any manifold above $T_2$ assumes $T_2$, whereas those below only assumes locally Euclidean.
+			A Property starting with ``L'' indicates it is local.
+		}
+		\label{fig:manifold_hierarchy}
+	\end{figure}
 
-Second countable and Hausdorff are point-set conditions; second countable excludes spaces which are in some sense 'too large' such as the long line, while Hausdorff excludes spaces such as "the line with two origins"
-
+	\paragraph{Examples}
+	
 	\subsection{Lie groups: definitions}
 	
 	\subsection{Examples of Lie groups}
