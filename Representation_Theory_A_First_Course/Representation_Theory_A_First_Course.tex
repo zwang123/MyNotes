@@ -8313,10 +8313,10 @@
 		\end{itemize}		
 	\end{rem*}
 
-	\begin{thm}
-		A locally Euclidean space is $T_1$,
-		locally compact, locally connected, first countable, locally contractible, and locally metrizable.
-	\end{thm}
+	%\begin{thm}
+	%	A locally Euclidean space is $T_1$,
+	%	locally compact, locally connected, first countable, locally contractible, and locally metrizable.
+	%\end{thm}
 	
 	\paragraph{Topological Manifold}
 	\begin{def*}[topological manifold]
@@ -8343,10 +8343,14 @@
 		The disjoint union of a sphere and a line in three-dimensional space is not a pure manifold.
 		Since dimension is a local invariant (i.e. the map sending each point to the dimension of its neighbourhood over which a chart is defined, is locally constant), each connected component has a fixed dimension.
 	\end{rem*}
+	\begin{def*}[dimensionality of manifold]
+		The \textbf{dimensionality of a pure manifold} is the dimensionality, $n$, of the Euclidean space $\re^n$
+		to which the manifold is locally homeomorphic.
+	\end{def*}
 
-	\begin{cor}
-		Manifolds are necessarily $T_{3\frac{1}{2}}$.
-	\end{cor}
+	%\begin{cor}
+	%	Manifolds are necessarily $T_{3\frac{1}{2}}$.
+	%\end{cor}
 
 	\begin{thm}
 		A manifold need not be connected, but every manifold $M$ is a disjoint union of connected manifolds.
@@ -8724,7 +8728,8 @@
 	\end{cor}
 
 	\begin{def*}[compatible atlases]
-		Two $C^r$ atlases are compatible iff the union is still a $C^r$ atlas.
+		Two $C^r$ atlases are ($C^r$-)compatible iff the union is still a $C^r$ atlas,
+		\ie, the transition maps between them are $C^r$.
 	\end{def*}
 	\begin{rem*}
 		See this for more information:
@@ -8732,7 +8737,7 @@
 	\end{rem*}
 
 	\begin{cor}
-		All $C^0$ atlases are compatible.
+		All atlases are $C^0$-compatible.
 	\end{cor}
 	\begin{thm}
 		Compatibility of atlases is a equivalence relation.
@@ -8768,6 +8773,18 @@
 		A \textbf{differential manifold}
 		$M$ of class $C^r$ consists of a \textit{second countable} Hausdorff topological space $M$ and a
 		$C^r$ structure on it.
+		
+		Below are aliases of different types of differential manifold.
+		\begin{centabular}{l| l  l  l}
+			\hline
+			Differentiability & Atlas type & Structure type & Manifold type\\
+			\hline
+			$C^{\infty}$ & smooth atlas & smooth structure & \textbf{smooth manifold}\\
+			%\hline
+			$C^{\omega}$ & analytic atlas & analytic structure & \textbf{analytic manifold}\\
+			\hline
+		\end{centabular}
+		%A $C^{\infty}$ manifold is also called a smooth manifold.
 	\end{def*}
 	\begin{cor}
 		A differential manifold is a second-countable topological manifold.
@@ -8779,8 +8796,90 @@
 	\begin{proof}
 		See H. Whitney, Differentiable manifolds. Ann. of Math. 37 (1936), 645-680.
 	\end{proof}
-	
+
+	\begin{def*}[differentiable at a point]
+		Given two $C^k$ ($r\le k$) manifolds, $M_1$ and $M_2$,
+		a map $f\colon M_1\to M_2$
+		% from a $C^r$ manifold $M_1$ to a $C^r$ manifold $M_2$
+		is called \textbf{differentiable (or $C^r$) at a point} $p\in M_1$
+		iff there is a chart $(U_1,\varphi_1)$ in $M_1$ and a chart $(U_2,\varphi_2)$ in $M_2$
+		and $U\subseteq M_1$ such that
+		\[ p\in U \land f(p)\in f(U)  \land U \subseteq U_1 \land f(U)\subseteq U_2 \]
+		and the map from an open set of Euclidean space onto an open Euclidean set
+		\[ \varphi_2 \circ f\circ \varphi_1^{-1} \colon \varphi_1(U)\to\varphi_2(f(U)) \]
+		is differentiable or $C^r$ at point $\varphi_1(p)\in\re^n$.
+	\end{def*}
+	\begin{rem*}
+		One can choose $U=f^{-1}(U_2)\cap U_1$. Or choose $U=U_1$ by enforcing $f(U_1)\subseteq U_2$.
 		
+		In general, there will be many available charts;
+		however, the definition of differentiability does not depend on the choice of chart at $p$.
+		It follows from the chain rule applied to the transition functions between one chart and another
+		that if $f$ is differentiable in any particular chart at $p$, then it is differentiable in all charts at $p$.
+	\end{rem*}
+	\begin{def*}[differentiable map]
+		A map is called \textbf{differentiable (or $C^r$)} if it is differentiable (or $C^r$)
+		at all points in the domain.
+	\end{def*}
+
+	\begin{def*}[diffeomorphism]
+		A ($C^r$-)\textbf{diffeomorphism} $f$ is a bijection such that both $f$ and $f^{-1}$ are 
+		($C^r$-)differentiable.
+		Two differential manifolds are ($C^r$-)\textbf{diffeomorphic} if there is a ($C^r$-)diffeomorphism between them.
+	\end{def*}
+
+	\subsubsection{Lie Group}
+	\paragraph{Product Manifold}
+	
+	\begin{def*}[Cartesian product]
+		If $I$ is any index set, and $\set{X_{i}}_{i\in I}$ is a family of sets indexed by $I$,
+		then the \textbf{Cartesian product} of the sets in $\set{X_{i}}_{i\in I}$ is defined to be
+		\[\prod _{i\in I}X_{i}=\left\{\left.f\colon I\to \bigcup _{i\in I}X_{i}\ \right|\ \forall i\in I\Big(f(i)\in X_{i}\Big)\right\},\]
+		that is, the set of all functions defined on the index set such that the value of the function at a particular index $i$ is an element of $X_i$.
+	\end{def*}
+
+	\begin{def*}[canonical projection]
+		If $I$ is any (nonempty) index set, and $\set{X_{i}}_{i\in I}$ is a family of sets indexed by $I$,
+		then given any $i\in I$, the canonical projection
+		\[p_i\colon \prod_{i\in I}X_i\to X_i\]
+		is defined as
+		\[ p_i(f)=f(i). \]
+	\end{def*}
+	
+	\begin{def*}[product topology]
+		Let $I$ be some non-empty index set and for every index $i\in I$, $X_{i}$ be a topological space.
+		Given the Cartesian product of the sets $X_{i}$
+		\[X\define\prod _{{i\in I}}X_{i},\]
+		equipped with the canonical projections
+		\[p_{i}:X\to X_{i},\] the \textbf{product topology} on
+		$X$ is defined to be the coarsest topology (\ie, the topology with the fewest open sets) for which all the projections $p_{i}$ are continuous.
+		The Cartesian product $X$ endowed with the product topology is called the \textbf{product space}.
+	\end{def*}
+	
+	\begin{def*}[product manifold]
+		The \textbf{product manifold} 
+		is the Cartesian product of manifolds.
+		
+		Its point set is the Cartesian product of point sets.
+		Its topology is the product topology,
+		and a Cartesian product of charts is a chart for the product manifold.		
+		An atlas for the product manifold can be constructed using atlases for its factors.
+	\end{def*}
+	
+	\paragraph{Definition of Lie Group}
+	
+
+	\subsubsection{TODO}
+	
+	\url{https://en.wikipedia.org/wiki/Immersion_(mathematics)}
+	
+	\url{https://math.stackexchange.com/questions/102950/is-an-immersed-submanifold-second-countable}
+	
+	\url{https://mathoverflow.net/questions/362154/when-why-did-we-allow-manifolds-to-be-non-hausdorff-and-or-non-second-countabl}
+
+	\url{https://en.wikipedia.org/wiki/Partition_of_unity}
+	
+	\url{https://en.wikipedia.org/wiki/Diffeomorphism}
 	
 	\subsection{Lie groups: definitions}
 	
