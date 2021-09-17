@@ -27,6 +27,7 @@
 \usepackage{xparse}
 \usepackage{titlesec}	% lv4 title
 %\usepackage{subfigure}
+\usepackage{mathrsfs}
 
 %   \usepackage{commath}    % for abs and norm
 
@@ -161,7 +162,7 @@
 \newcommand{\power}{\mathcal{P}}
 \newcommand{\domain}{\mathcal{D}}
 
-
+\newcommand{\opp}[1]{{#1}^{\mathrm{op}}}
 
 \newcommand{\na}{\nabla}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -424,7 +425,7 @@
 	\end{def*}
 	\begin{def*}[matrix algebra]
 		When $R$ is a commutative ring, the matrix ring $\MM_n(R)$ is a unital associative algebra over $R$
-		(\ref{remRingAsUniAssAlgebra}),
+		(\autoref{remRingAsUniAssAlgebra}),
 		and may be called a \textbf{matrix algebra}. 
 	\end{def*}
 	
@@ -711,6 +712,7 @@
 	\end{proof}
 
 	\subsubsection{Commutative Diagram}
+	\label{sec:comm_diag}
 
 	\begin{def*}[category]
 		A \textbf{category} $C$ is a collection of
@@ -1307,7 +1309,7 @@
 	\end{exe*}
 	\begin{proof}
 		We have shown there is at least some Hermitian inner product
-		in \ref{propHermPreserve}, say $H$ for any finite representation.
+		in \autoref{propHermPreserve}, say $H$ for any finite representation.
 		
 		Given a basis set $E=\{e_1,e_2,\dots,e_n\}$ of the $n$-dimensional vector space $V$,
 		the representation $\rho \colon G \to \GL(V)$ can be represented as the $\mathbf{G}$ matrix:
@@ -1887,12 +1889,12 @@
 		$1$-cycles are trivial permutations, \ie, the identity element,
 		which itself forms a conjugacy class.
 		
-		Any group element can be expressed as product of cycles (\ref{thmPermutationExpression}),
-		each of which transforms a $k$-cycle to a $k$-cycle (see \ref{corSigmaPiSigma-1}).
+		Any group element can be expressed as product of cycles (\autoref{thmPermutationExpression}),
+		each of which transforms a $k$-cycle to a $k$-cycle (see \autoref{corSigmaPiSigma-1}).
 		Therefore, the conjugacy class is a subset of all $k$-cycles.
 		
 		Any $k$-cycle can be transformed from another $k$-cycle by changing
-		each of its orbit (see \ref{propCycleTransform}).
+		each of its orbit (see \autoref{propCycleTransform}).
 		Given $\sigma=(s_1s_2\dots s_k)$ and $\pi=(t_1t_2\dots t_k)$,
 		\[\sigma=\rho\circ\pi\circ\rho^{-1},\]
 		where
@@ -1910,7 +1912,7 @@
 		there is a bijection mapping from partitions of $d$ onto conjugacy classes of $\mathfrak{S}_d$.
 	\end{prop}
 	\begin{proof}
-		Any permutation acting on set $X$ is product of disjoint cycles (\ref{thmPermutationExpression}).
+		Any permutation acting on set $X$ is product of disjoint cycles (\autoref{thmPermutationExpression}).
 		If the union of orbits of multiplicands does not equal to $X$,
 		it can be always completed by adding identities, whose orbit is a singleton.
 		
@@ -1921,7 +1923,7 @@
 		\[\sum_{i}k_i=\card{X}=d,\]
 		and $s_{i,j}= s_{m,n}\iff (i=m\land j=n)$.
 		
-		Given any permutation $\pi$ (\ref{propSigmaPiSigma-1}),
+		Given any permutation $\pi$ (\autoref{propSigmaPiSigma-1}),
 		\begin{eqlong}\label{eqPiSigmaPi-1}
 			\pi\circ\sigma\circ\pi^{-1}=\prod_i\pi\circ(s_{i,1}\,s_{i,2}\,\dots\,s_{i,k_i})\circ\pi^{-1}
 			=\prod_i(\pi(s_{i,1})\,\pi(s_{i,2})\,\dots\,\pi(s_{i,k_i})).
@@ -1932,7 +1934,7 @@
 		
 		Given another permutation expressed by $\prod_i(p_{i,1}\,p_{i,2}\,\dots\,p_{i,k_i})$,
 		possibly with different permutation of $(k_i)$.
-		Since disjoint cycles are commutative (\ref{propCommutativeDisjointCycle}),
+		Since disjoint cycles are commutative (\autoref{propCommutativeDisjointCycle}),
 		the order of multiplication does not matter,
 		therefore you can always align the $(k_i)$ to make them consistent.
 		Since $p_{i,j}= p_{m,n}\iff (i=m\land j=n)$, we can always find a permutation $\pi$
@@ -1964,7 +1966,7 @@
 	\end{cor}
 	\begin{proof}
 		The disjoint union of all conjugacy classes should be the group itself,
-		whose size is $d!$ (\ref{thmSymGrpCard}).
+		whose size is $d!$ (\autoref{thmSymGrpCard}).
 	\end{proof}
 
 	\begin{prop}
@@ -1988,7 +1990,7 @@
 		Standard representation is irreducible.
 	\end{prop}
 	\begin{proof}
-		From \ref{exeCharPerm} we know the character of the permutation representation is
+		From \autoref{exeCharPerm} we know the character of the permutation representation is
 		\[\chi_{\co^d}(k_i) = m_1(k_i), \]
 		where $m_j(k_i)$ is the cardinality of set $\{i\in\inte^+|k_i=j\}$.
 		
@@ -1997,7 +1999,7 @@
 			\chi_V(k_i)=m_1(k_i)-1.
 		\end{equation}
 	
-		The squared norm (\ref{eqInnerProdClFunc}) of the representation is
+		The squared norm (\autoref{eqInnerProdClFunc}) of the representation is
 		\begin{eqlong}\label{eqchiVchiV}
 			(\chi_V,\chi_V)&=\frac{1}{d!}\sum_{\mathbf{k}\in p(d)} \frac{d!}{\prod_{j=1}^d j^{m_j}m_j! } (m_1-1)^2.\\
 		\end{eqlong}
@@ -2031,7 +2033,7 @@
 		
 		%$	d'-\sum_{j=2}^{d'}jm_j'$
 		%Define $m_1'$ as $\max(1,m_1-s-1)$.
-		Since $1^{m_1'}=1$, $0!=1!$, \eqref{eqfds2} can be rewritten as (using \ref{corEqjmjmj!})
+		Since $1^{m_1'}=1$, $0!=1!$, \eqref{eqfds2} can be rewritten as (using \autoref{corEqjmjmj!})
 		\begin{eqlong}\label{eqfds3}
 			f(d,s)&=\sum_{\mathbf{k}\in p(d), m_1>s} \left[\frac{1}{\prod_{j=1}^{d'} j^{m_j'}m_j'! } \right]\\
 			&=\sum_{\mathbf{k}\in p(d')} \left[\frac{1}{\prod_{j=1}^{d'} j^{m_j'}m_j'! } \right]\\
@@ -2045,7 +2047,7 @@
 		(\chi_V,\chi_V)=f(d,1) -f(d,0)+1=1.
 		\]
 	
-		From \ref{ccorTestIrr}, we know $V$ is irreducible.
+		From \autoref{ccorTestIrr}, we know $V$ is irreducible.
 	\end{proof}
 	\begin{rem*}
 		Alternatively, we can separate $s=d-1$ case from the $s<d-1$ cases.
@@ -2067,7 +2069,7 @@
 		\ie, the number of disjoint trivial cycles in the conjugacy class.
 	\end{cor}
 	\begin{proof}
-		See \ref{propIrrStdRep}.
+		See \autoref{propIrrStdRep}.
 	\end{proof}
 	\begin{prop}
 		The character of a 1-dimensional representation of a finite group is roots of unity.
@@ -2106,7 +2108,7 @@
 		Character is sum of eigenvalues, which are roots of unity.
 		Therefore the eigenvalues must be all $1$'s.
 		
-		Since the representation are unitary matrix (\ref{propRepUnitary}), it must be identity matrix.
+		Since the representation are unitary matrix (\autoref{propRepUnitary}), it must be identity matrix.
 
 		$\chi_V(e)$ is the dimension of the representation $V$.
 	\end{proof}
@@ -2260,7 +2262,7 @@
 	\end{pprop}
 	\begin{rem*}
 		$\varphi_{\alpha,V}$ is $G$-like linear map from irreducible representation $V$ to $V$,
-		therefore $\varphi_{\alpha,V}=\lambda \cdot \idt$ from Schur's Lemma (\ref{llemSchur}).
+		therefore $\varphi_{\alpha,V}=\lambda \cdot \idt$ from Schur's Lemma (\autoref{llemSchur}).
 		
 		Since $\varphi_{\alpha,V}$ is zero for all irreducible representations,
 		and any representation is finite direct sum of irreducible representations,
@@ -2284,7 +2286,7 @@
 		Direct sum is commutative.
 		The irreducible representations form a complete basis set.
 		The coefficient is the duplicity (non-negative).
-		Also: \ref{ppropUniqueDecomp}.
+		Also: \autoref{ppropUniqueDecomp}.
 	\end{proof}
 	
 	\begin{def*}[representation ring]
@@ -2378,7 +2380,7 @@
 	\end{prop}
 	\begin{proof}
 		Irreducible representations are represented by unitary matrices:
-		we have shown here (\ref{exe1.14}) that
+		we have shown here (\autoref{exe1.14}) that
 		for any finite representation, we can construct a Hermitian inner product such that
 		\[\hadj{\mathbf{G}}\mathbf{H}\mathbf{G}=\mathbf{H}.\]
 		We can also perform Cholesky decomposition
@@ -2404,7 +2406,7 @@
 	\end{cor}
 	\begin{exe*}
 		Represent all irreducible representations as unitary matrices.
-		Rewrite \ref{exe2.34} into matrix form:
+		Rewrite \autoref{exe2.34} into matrix form:
 		\begin{eqlong}
 			\frac{1}{\card{G}}\sum_{g\in G} \bfG(g^{-1};W) \bfL \bfG(g;V)=\delta_{VW} \frac{\tr(\bfL)}{\dim(V)}\idm.
 		\end{eqlong}
@@ -2423,11 +2425,11 @@
 		\end{eqlong}
 		Therefore, the matrix entries of these representations $G_{sj}(g;V)$ are orthogonal.
 		
-		Since (\ref{eqdimV2}) \[\card{G}=\sum_i\dim \left(V_i\right)^2,\]
+		Since (\autoref{eqdimV2}) \[\card{G}=\sum_i\dim \left(V_i\right)^2,\]
 		these entries form a complete orthogonal basis set.
 		
 		%\[\{\sqrt{\frac{\dim(V)}{\card{G}}}G_{ij}(g;V)\}\] should form a orthonormal basis set.
-		\[\{\sqrt{\dim(V)}G_{ij}(g;V)\}\] should form a orthonormal basis set given the Hermitian inner product (\ref{eqInnerProdClFunc}).
+		\[\{\sqrt{\dim(V)}G_{ij}(g;V)\}\] should form a orthonormal basis set given the Hermitian inner product (\autoref{eqInnerProdClFunc}).
 	\end{exe*}
 
 	\begin{exe*}
@@ -2464,7 +2466,7 @@
 		Reversely, if $\rho(g)=\idt$ for $g\ne e$, then $\rho(h)=\rho(gh)$ and $h\ne gh$.
 		
 		Since eigenvalues of the representation of a finite group must be roots of unity (otherwise the group would be infinite)
-		and any group element can be represented as a unitary matrix (and therefore diagonalizable) (see \ref{propRepUnitary}),
+		and any group element can be represented as a unitary matrix (and therefore diagonalizable) (see \autoref{propRepUnitary}),
 		\[\chi(g)=\chi(e)=\dim(V) \] is true if and only if \[\rho(g)=\idt.\]
 	\end{proof}
 
@@ -2484,7 +2486,7 @@
 		 Since $\chi_V(e)\ne 0$, $\chi_U(e) \ne 0$, $\card{\ec{e}}\ne 0$,
 		 it is nonzero when $C=\ec{e}$.
 		 
-		 Also, $\chi_V(C) = \dim(V)$ only for $C = \ec{e}$ (\ref{propFaithful}),
+		 Also, $\chi_V(C) = \dim(V)$ only for $C = \ec{e}$ (\autoref{propFaithful}),
 		 therefore other terms cannot cancel out the $\ec{e}$ term.
 		 
 		 In conclusion, the right-hand side is a nontrivial rational function of $t$;
@@ -2590,7 +2592,7 @@
 		If the ring is commutative then the group ring is also referred to as a \textbf{group algebra}.
 	\end{def*}
 	\begin{rem*}
-		This is a unital associative algebra (\ref{unital associative algebra}).
+		This is a unital associative algebra (\autoref{unital associative algebra}).
 	\end{rem*}
 
 	\begin{def*}[monic polynomial]
@@ -2651,7 +2653,7 @@
 		Denote the group as $G$, the vector space as $V$, the irreducible representation as $\rho$.
 		Given a conjugacy class $C\subseteq G$,
 		construct $\varphi\in\End(V)$ as \[\varphi=\sum_{g\in C}\rho(g).\]
-		This is a $G$-map (\ref{pprop2.28}).
+		This is a $G$-map (\autoref{pprop2.28}).
 		From Schur's lemma,
 		\[\varphi = \lambda_C \cdot \idt, \]
 		where $\lambda_C$ is a scalar.
@@ -2668,6 +2670,7 @@
 	\end{exe*}
 
 	\subsubsection{More on Category Theory}
+	\label{sec:more_cat_theory}
 	\begin{def*}[product category]
 		The \textbf{product category} $C \times D$ of two categories $C$ and $D$ has:
 		
@@ -2697,7 +2700,8 @@
 		\begin{itemize}
 			\item The natural transformation must associate $\eta_X\in\hom_D(F(X), G(X))$ to every object $X \in \ob(C)$,
 			the former of which is called the \textbf{component} of $\eta$ at $X$.
-			\item The following diagram must commute $\forall X,Y \in \ob(C), \forall f \in \hom_C(X,Y)$:
+			\item The following diagram must commute $\forall X,Y \in \ob(C), \forall f \in \hom_C(X,Y)$
+			(If both $F$ and $G$ are contravariant, the vertical arrows in this diagram are reversed.):
 			\begin{center}
 				\begin{tikzcd}
 					X\ar[d,"f"]&F(X)\ar[r,dashed,"\eta_X"]\ar[d,"F(f)"]&G(X)\ar[d,"G(f)"]\\
@@ -2754,7 +2758,7 @@
 		\end{center}
 	\end{def*}
 	
-	Test: \ref{order}
+	Test: \autoref{order}
 	
 	\section{Examples; Induced Representations; Group Algebras; Real Representations}
 	\subsection{Examples: $\mathfrak{S}_5$ and $\mathfrak{A}_5$}
@@ -3025,7 +3029,7 @@
 		(b)
 		Assume $m>0$.
 		
-		From \ref{thmClCongMat} and \ref{thmEvenCliffAlgComCong}, 
+		From \autoref{thmClCongMat} and \autoref{thmEvenCliffAlgComCong}, 
 		the following relation is a multiplicative group homomorphism $\rho$ (and another one $\rho'$ if $m$ is even)
 		and thus gives a representation $\mathcal{H}=\co^{2^{\ceil{m/2}-1}}$ (and another one $\mathcal{H}'$ if $m$ is even):
 		\[
@@ -3036,7 +3040,7 @@
 		\]
 		where the multiplication by 2 means direct sum.
 		
-		From \ref{corConjGm0}, we know that elements not in the center are paired as
+		From \autoref{corConjGm0}, we know that elements not in the center are paired as
 		$\set{\pm \varepsilon_I}$ in the conjugacy class. Therefore, if $\varepsilon_I\notin \ZZ(H_m)$, then
 		(since $\rho$ and $\Tr$ preserve scalar multiplication)
 		\[\chi_{\mathcal{H}}(-\varepsilon_I)=\Tr(\rho(-\varepsilon_I))=-\Tr(\rho(\varepsilon_I))=-\chi_{\mathcal{H}}(\varepsilon_I), \]
@@ -3094,9 +3098,9 @@
 		They are irreducible representations because 
 		\[(\chi_{S^-},\chi_{S^-})=(\chi_{S^+},\chi_{S^+})=\frac{1}{2^{2n}}(4(2^{n-1})^2)=1.\]
 	
-		(c)	From \ref{propCenterGm0} and \ref{corConjGm0}, we know that there are
+		(c)	From \autoref{propCenterGm0} and \autoref{corConjGm0}, we know that there are
 		$2^{2n}+1$ conjugacy classes for $H_{2n+1}$ and $2^{2n-1}+2$ for $H_{2n}$.
-		Since the order of $H_m$ is $2\cdot2^{m-1}=2^m$ (\ref{propOrderEvenSubalgebra}),
+		Since the order of $H_m$ is $2\cdot2^{m-1}=2^m$ (\autoref{propOrderEvenSubalgebra}),
 		all remaining irreducible representations must be one-dimensional %if we find
 		because we found
 		\begin{itemize}
@@ -3109,14 +3113,14 @@
 		Also, the subgroup $\set{\pm1}$ is in the center of $H_m$, and therefore a normal subgroup.
 		Therefore, the quotient group $H_m/\set{\pm 1}$ exists.
 		It is a Boolean group (elementary Abelian 2-group) isomorphic to a group $\mathcal{G}(H_m)$ of diagonal matrices
-		with $\pm1$ diagonal entries and determinant $1$ (\ref{propEvenSubAlgToBool}).
+		with $\pm1$ diagonal entries and determinant $1$ (\autoref{propEvenSubAlgToBool}).
 		
 		Therefore it has $\card{H_m/\set{\pm 1}}=2^{m-1}$ 1-d irreducible representations which are also 1-d representations in $H_m$
 		because elements in the same conjugacy class are mapped to the same element in the quotient subgroup.
 		In this way, we have found all irreducible representations of $H_m$.
 
-		Given any subset $A$ of $\inte_{m-1}$ (there are $2^{m-1}$ such subsets), %, see \ref{propOrderEvenSubalgebra}),
-		we can construct the character tables (\ref{propChacTblEvenBoolGrp}):
+		Given any subset $A$ of $\inte_{m-1}$ (there are $2^{m-1}$ such subsets), %, see \autoref{propOrderEvenSubalgebra}),
+		we can construct the character tables (\autoref{propChacTblEvenBoolGrp}):
 		\begin{center}
 			\begin{tabular}{C | C C C C}
 				& 1 & 1 & 2 & \dots \\
@@ -3278,7 +3282,7 @@
 		\[
 		Q(u+v)-Q(u)-Q(v)=(1+1)^{-1}\cdot [\Psi(u+v,u+v)-\Psi(u,u)-\Psi(v,v)]=\Psi(u,v).
 		\]
-		Similar to the proof in \ref{propSymBilToQuad}.
+		Similar to the proof in \autoref{propSymBilToQuad}.
 		
 		If $Q'$ is a quadratic form whose associated bilinear form is $\Psi$,
 		then
@@ -3418,7 +3422,7 @@
 	\end{prop}
 	\begin{proof}
 		We have $\bigotimes_{i=1}^{m}e_i$ as the basis of $T(V)$.
-		From \ref{propCliffSqr} and \ref{propCliffAnticomm},
+		From \autoref{propCliffSqr} and \autoref{propCliffAnticomm},
 		$e_i\cdot e_j, e_j\cdot c_i, 1$ are linearly dependent,
 		and so are $e_i\cdot e_i, 1$.
 	\end{proof}
@@ -4204,7 +4208,7 @@
 
 	$\mathcal{G}$ is still a group homomorphism.
 	
-	\blue{$H_{0,m}^{[0]}$ is $H_m$ in the book (\ref{exe3.9}). $\mathcal{G}(H_{0,m}^{[0]})$ is the abelian 2-group in the book.}
+	\blue{$H_{0,m}^{[0]}$ is $H_m$ in the book (\autoref{exe3.9}). $\mathcal{G}(H_{0,m}^{[0]})$ is the abelian 2-group in the book.}
 	
 	\subsection{Exterior powers of the standard representation of $\mathfrak{S}_d$}
 	\begin{lem}
@@ -4234,7 +4238,7 @@
 		For $k=0$, $\ext{k}V=U$ is irreducible. For $k>0$, both $\ext{k}V$ and $\ext{k-1}V$ are not zero representations,
 		so $\forall 1\le k\le d-1[(\chi,\chi)=2]\implies$ both of the right hand side are irreducible.
 		
-		All possible sets $B$ forms the basis for $\ext{k}\co^{d}$. Since $G=\mathfrak{S}_d$ acts on the basis of $\ext{k}\co^d$ as permutation (with possible multiplication by 1), from \ref{exeCharPerm} we know the character for $g\in G$ in $\ext{k}\co^{d}$ is the number of basis fixed by $g$. But even if $g(B)=B$, it might permutes it. As transposition change the sign, all odd permutations should be multiplied by $-1$. Therefore,
+		All possible sets $B$ forms the basis for $\ext{k}\co^{d}$. Since $G=\mathfrak{S}_d$ acts on the basis of $\ext{k}\co^d$ as permutation (with possible multiplication by 1), from \autoref{exeCharPerm} we know the character for $g\in G$ in $\ext{k}\co^{d}$ is the number of basis fixed by $g$. But even if $g(B)=B$, it might permutes it. As transposition change the sign, all odd permutations should be multiplied by $-1$. Therefore,
 		\[\chi(g)=\sum_{g(B)=B} \sgn g|_{B},\]
 		where $g|_{B}$ denotes the permutation of the set $B$ determined by $g$.
 		
@@ -4243,18 +4247,18 @@
 		ways to choose $C$ given a set $B$. The original equation becomes
 		\[\frac{1}{d!} \binom{d}{k} \binom{k}{k-1}\binom{d-k}{1}(k-1)!(d-k-1)!=1. \]
 		
-		Note that when $k=1$, $\ext{k}V=V$. This is an extension of \ref{propIrrStdRep}.
+		Note that when $k=1$, $\ext{k}V=V$. This is an extension of \autoref{propIrrStdRep}.
 	\end{rem*}
 	\begin{rem*}
 		Every irreducible real representation
 		admits an inner product (unique, up to scalars) invariant under the group 
-		action (corollary from \ref{exe1.14}).
+		action (corollary from \autoref{exe1.14}).
 	\end{rem*}
 
 	\subsection{Induced representations}
 	\subsubsection{Cosets}
 	
-	See the definition in \ref{coset}.
+	See the definition in \autoref{coset}.
 	
 	\begin{lem}\label{lemgingH}
 		Given subgroup $H$ of group $G$ and $g\in G$,
@@ -4271,7 +4275,7 @@
 	\end{lem}
 	\begin{proof}
 		For any $x\in G$ and there exists a left coset $xH$ 
-		containing $x$ because \ref{lemgingH}.
+		containing $x$ because \autoref{lemgingH}.
 		%xe=x$ where $e$ is the identity in $G$ (and $H$).
 	\end{proof}
 
@@ -4326,13 +4330,13 @@
 		\[g\in \sigma\iff\sigma=gH. \]
 	\end{lem}
 	\begin{proof}
-		$\sigma=gH\implies g\in\sigma$ due to \ref{lemgingH}.
+		$\sigma=gH\implies g\in\sigma$ due to \autoref{lemgingH}.
 		
 		%Given a subgroup $H$ of group $G$,
 		%and $g\in G$.
 		If $g\in \sigma$, let $\sigma$ be $g'H$ where $g'\in G$,
 		\ie, $g\in g'H$.
-		Then from \ref{lemCosetToSubGrp}, $(g')^{-1}g\in H$ and $g^{-1}g'\in H$.
+		Then from \autoref{lemCosetToSubGrp}, $(g')^{-1}g\in H$ and $g^{-1}g'\in H$.
 		Hence, for any $x\in G$,
 		
 		\[ \begin{aligned}
@@ -4351,9 +4355,9 @@
 		\[ \forall g\in G \forall g'\in G [gH=g'H\iff g^{-1}g'\in H\iff (g')^{-1}g\in H].\]
 	\end{cor}
 	\begin{proof}
-		Let $\sigma=gH$ and apply \ref{lemSameCoset}
+		Let $\sigma=gH$ and apply \autoref{lemSameCoset}
 		\[gH=g'H\iff g'\in gH.\]
-		From \ref{lemCosetToSubGrp} we get the second half.
+		From \autoref{lemCosetToSubGrp} we get the second half.
 	\end{proof}
 
 	\begin{lem}\label{lemDisjointLeftCoset}
@@ -4361,7 +4365,7 @@
 	\end{lem}
 	\begin{proof}
 		Given subgroup $H$ of group $G$ and $g\in G$,
-		we have shown in \ref{lemSameCoset} that if $x\in gH$, then $xH=gH$.
+		we have shown in \autoref{lemSameCoset} that if $x\in gH$, then $xH=gH$.
 		
 		For any $x\in G\setminus gH$ (if any),
 		if $\exists h,h'\in H[xh=gh']$, then $x=gh'h^{-1}\in gH$ because $h'h^{-1}\in H$.
@@ -4380,13 +4384,13 @@
 		\[\exists \sigma\in G/H(x\in\sigma \land y\in \sigma)\iff x^{-1}y\in H\iff y^{-1}x\in H.\]
 	\end{prop}
 	\begin{proof}
-		From \ref{lemSameCoset},
+		From \autoref{lemSameCoset},
 		\[\exists \sigma\in G/H(x\in\sigma \land y\in \sigma)\iff \exists \sigma \in G/H(xH=\sigma=yH).\]
 		
 		Since $xH\in G/H,yH\in G/H$,
 		\[\exists \sigma \in G/H(xH=\sigma=yH)\iff xH=yH.\]
 		
-		With \ref{lemgHg'H}, we finish the proof.
+		With \autoref{lemgHg'H}, we finish the proof.
 	\end{proof}
 
 	\begin{def*}[left action of group on quotient set]
@@ -4402,9 +4406,9 @@
 		\[\forall g\in G\forall \sigma \in G/H\forall g_\sigma\in\sigma[ g(\sigma)= (gg_{\sigma})H].\]
 	\end{prop}
 	\begin{proof}
-		Since (\ref{lemXsigmaYsigma})
+		Since (\autoref{lemXsigmaYsigma})
 		\[g'_\sigma\in\sigma\land g_\sigma\in\sigma \implies g_\sigma^{-1}g'_\sigma\in H, \]
-		and ($g_\sigma H=\sigma$, \ref{lemSameCoset})
+		and ($g_\sigma H=\sigma$, \autoref{lemSameCoset})
 		\[ \forall h \in H \exists g'_\sigma=g_\sigma h\in \sigma (g^{-1}_\sigma g'_\sigma=h),\]
 		we have
 		\[\begin{aligned}
@@ -4414,31 +4418,31 @@
 			\iff& x\in(gg_\sigma)H.\\
 		\end{aligned}
 		\]
-		%For any $g'_\sigma\in \sigma$, we have $g'_\sigma H=\sigma=g_\sigma H$ (\ref{lemSameCoset} and $g_\sigma\in\sigma$).
-		%From \ref{lemgHg'H}, $g_\sigma^{-1}g'_\sigma\in H$.
+		%For any $g'_\sigma\in \sigma$, we have $g'_\sigma H=\sigma=g_\sigma H$ (\autoref{lemSameCoset} and $g_\sigma\in\sigma$).
+		%From \autoref{lemgHg'H}, $g_\sigma^{-1}g'_\sigma\in H$.
 		%But \[(gg_\sigma)^{-1}(gg'_\sigma)=g_\sigma^{-1}g^{-1}gg'_\sigma=g_\sigma^{-1}g'_\sigma\in H.\]
-		%Therefore $(gg_\sigma) H =(gg'_\sigma) H$ (\ref{lemgHg'H}).
+		%Therefore $(gg_\sigma) H =(gg'_\sigma) H$ (\autoref{lemgHg'H}).
 	\end{proof}
 	\begin{cor}\label{cor3.54}
 		Given subgroup $H$ of group $G$ and $g,g'\in G$,
 		\[g(g'H)=(gg')H.\]
 	\end{cor}
 	\begin{proof}
-		we have $g'\in g'H$ (\ref{lemgingH}), from \ref{prop3.53} this is proved.
+		we have $g'\in g'H$ (\autoref{lemgingH}), from \autoref{prop3.53} this is proved.
 	\end{proof}
 	\begin{cor}\label{lemValidLeftAction}
 		The above definition is a valid left action.
 	\end{cor}
 	\begin{proof}
 		For any $g_\sigma\in\sigma$,
-		%we have $(g'g_\sigma)\in(g'g_\sigma)H$ (\ref{lemgingH}),
+		%we have $(g'g_\sigma)\in(g'g_\sigma)H$ (\autoref{lemgingH}),
 		%therefore
-		 from \ref{prop3.53} and \ref{cor3.54}
+		 from \autoref{prop3.53} and \autoref{cor3.54}
 		\[g(g'(\sigma))=g((g'g_\sigma)H)=(g(g'g_\sigma))H=((gg')g_\sigma)H=(gg')(\sigma).\]
 	\end{proof}
 	\begin{rem*}\label{rem_g_sigma}
-		Since  $g'(g(\sigma))=(g'g)(\sigma)$ (\ref{lemValidLeftAction}),
-		and $g(H)=(ge)H=gH$ (since $e\in H$ and \ref{prop3.53})
+		Since  $g'(g(\sigma))=(g'g)(\sigma)$ (\autoref{lemValidLeftAction}),
+		and $g(H)=(ge)H=gH$ (since $e\in H$ and \autoref{prop3.53})
 		there is no ambiguity
 		in writing $g(\sigma)$ as $g\sigma$.
 	\end{rem*}
@@ -4453,12 +4457,12 @@
 	\begin{proof}
 		Given any $x,y\in G$,
 		if $g(xH)=g(yH)$, then 
-		$(gx)H=(gy)H$ (\ref{cor3.54}). Therefore $(gy)^{-1}(gx)=y^{-1}x\in H$ (\ref{lemgHg'H}).
-		Applying \ref{lemgHg'H} again and we get $xH = yH$. Therefore $g$ is injection.
+		$(gx)H=(gy)H$ (\autoref{cor3.54}). Therefore $(gy)^{-1}(gx)=y^{-1}x\in H$ (\autoref{lemgHg'H}).
+		Applying \autoref{lemgHg'H} again and we get $xH = yH$. Therefore $g$ is injection.
 		
 		For any $\sigma\in G/H$, we take $g_\sigma\in\sigma$, 
 		$\because g^{-1}g_\sigma\in G,\therefore (g^{-1}g_\sigma)H\in G/H$,
-		then (\ref{cor3.54}, \ref{lemSameCoset})
+		then (\autoref{cor3.54}, \autoref{lemSameCoset})
 		\[g((g^{-1}g_\sigma)H)= (g(g^{-1}g_\sigma))H=g_\sigma H=\sigma.\]
 		Therefore $g$ is a surjection.
 	\end{proof}
@@ -4474,8 +4478,8 @@
 		 \[|G|=|G:H||H|.\]
 	\end{prop}
 	\begin{proof}
-		Because $G$ is the disjoint union of the left cosets (\ref{lemDisjointLeftCoset}, \ref{lemCosetsCoverAll})
-		and because each left coset has the same size as $H$ (\ref{lemSubGrpBijecCoset}),
+		Because $G$ is the disjoint union of the left cosets (\autoref{lemDisjointLeftCoset}, \autoref{lemCosetsCoverAll})
+		and because each left coset has the same size as $H$ (\autoref{lemSubGrpBijecCoset}),
 		the index is related to the orders of the two groups by the formula.
 	\end{proof}
 
@@ -4487,12 +4491,12 @@
 	\end{prop}
 	\begin{proof}
 		Let $a\in \rho, b\in\sigma$. Then the element in the product set is
-		$ahbh'$, where $h,h'\in H$. This is a coset if and only if (\ref{lemXsigmaYsigma})
+		$ahbh'$, where $h,h'\in H$. This is a coset if and only if (\autoref{lemXsigmaYsigma})
 		\[\forall h_1,h_2,h_3,h_4\in H[(ah_1bh_2)^{-1}(ah_3bh_4)\in H].
 		\]
 		Let $h_1=h_2=h_4=e$, the identity in $G$ (and $H$), then $b^{-1}h_3b\in H$ is required
 		for all $h_3\in H$.
-		Since the union of all cosets is $G$ (\ref{lemCosetsCoverAll}),
+		Since the union of all cosets is $G$ (\autoref{lemCosetsCoverAll}),
 		this is to say
 		\[\forall g \in G [ghg^{-1}\in H],\]
 		where $g=b^{-1}$.
@@ -4544,9 +4548,9 @@
 		\[W=\bigoplus_{h\in H}\co\cdot e_h.\]
 		
 		If $g_{\sigma}\in\sigma\in G/H$, then
-		(the last two equality signs are results of \ref{lemSubGrpBijecCoset} and \ref{lemSameCoset})
+		(the last two equality signs are results of \autoref{lemSubGrpBijecCoset} and \autoref{lemSameCoset})
 		\[\sigma (W) = g_{\sigma} (W)=\bigoplus_{h\in H}\co\cdot e_{g_{\sigma}h}=\bigoplus_{g\in g_\sigma H}\co\cdot e_{g}=\bigoplus_{g\in \sigma}\co\cdot e_{g}.\]
-		Then (a result of \ref{lemDisjointLeftCoset} and \ref{lemCosetsCoverAll})
+		Then (a result of \autoref{lemDisjointLeftCoset} and \autoref{lemCosetsCoverAll})
 %		\[\bigoplus_{\sigma\in G/H} \sigma (W)= \bigoplus_{\sigma\in G/H}\bigoplus_{h\in H}\co\cdot e_{g_{\sigma}h}. \]
 		\[\bigoplus_{\sigma\in G/H} \sigma (W)= \bigoplus_{\sigma\in G/H}\bigoplus_{g\in \sigma}\co\cdot e_{g}=\bigoplus_{g\in G}
 		\co\cdot e_g=V. \]
@@ -4591,7 +4595,7 @@
 		Next we define 
 		%the map $\lambda\colon G\to G/H$ such that
 		%\[g\in\lambda(g).\]
-		%This can be uniquely defined as a result of \ref{lemDisjointLeftCoset} and \ref{lemCosetsCoverAll}.
+		%This can be uniquely defined as a result of \autoref{lemDisjointLeftCoset} and \autoref{lemCosetsCoverAll}.
 		%We then define
 		 some $\varphi \colon G/H \to G$ such that
 		\begin{eqlong}\label{eqVarphiSigma}
@@ -4607,7 +4611,7 @@
 		Now we choose them arbitrarily and fix it in the following discussion.
 		
 		$\because e\in H,\therefore \varphi(\sigma)\in\sigma$.
-		As a result of (\ref{lemSameCoset}),
+		As a result of (\autoref{lemSameCoset}),
 		\begin{eqlong}\label{eqVarphiSigmaH}
 			\varphi(\sigma) H =\sigma.
 		\end{eqlong}
@@ -4622,17 +4626,17 @@
 			\tau_\sigma&=(g\varphi(\sigma))H\in G/H,\\
 			h_\sigma&=(\varphi(\tau_{\sigma}))^{-1}g\varphi(\sigma)\in H.\\
 		\end{aligned} \]
-		$h_\sigma\in H$ because $g\varphi(\sigma)\in\tau_\sigma$ (\ref{lemgingH}) and $\tau_\sigma =\varphi(\tau_\sigma)H$
-		(\eqref{eqVarphiSigmaH}) and \ref{lemCosetToSubGrp}.
+		$h_\sigma\in H$ because $g\varphi(\sigma)\in\tau_\sigma$ (\autoref{lemgingH}) and $\tau_\sigma =\varphi(\tau_\sigma)H$
+		(\eqref{eqVarphiSigmaH}) and \autoref{lemCosetToSubGrp}.
 		Therefore $\rho_W(h_\sigma)$ is well-defined.
 
 		We then show $\rho_V$ is a \textbf{group homomorphism}.
 		
-		Since $\tau_\sigma=(g\varphi(\sigma))H=g(\varphi(\sigma)H)=g(\sigma)$ is an action (\ref{cor3.54}, \eqref{eqVarphiSigmaH}),
+		Since $\tau_\sigma=(g\varphi(\sigma))H=g(\varphi(\sigma)H)=g(\sigma)$ is an action (\autoref{cor3.54}, \eqref{eqVarphiSigmaH}),
 		for a given $g\in G$, the map $\sigma\mapsto\tau_{\sigma}$ is a
 		bijection $G/H\to G/H$.
 		
-		Therefore we can rewrite (use $\varphi_\sigma$ as a short notation of $\varphi(\sigma)$ and $g\sigma$ for $g(\sigma)$ (\ref{rem_g_sigma})):
+		Therefore we can rewrite (use $\varphi_\sigma$ as a short notation of $\varphi(\sigma)$ and $g\sigma$ for $g(\sigma)$ (\autoref{rem_g_sigma})):
 		\begin{eqlong}\label{eqIndRep}
 			h_\sigma&=\varphi_{g\sigma}^{-1}g\varphi_{\sigma},\\
 			\rho_V(g)&=\sum_{\sigma\in G/H} I_{g\sigma}\circ I_{H}^{g\sigma}\circ \rho_W(\varphi_{g\sigma}^{-1}g\varphi_{\sigma})\circ I^{H}_{\sigma}\circ P^\sigma.\\
@@ -4681,7 +4685,7 @@
 			&=
 			I_{hH}\circ I_{H}^{hH}\circ \rho_W(\varphi_{hH}^{-1}h\varphi_{H})\circ I_H^H(w)\\
 		\end{aligned}\]
-		But $h\in H$, so $hH=H$ (\ref{lemSameCoset}). From \eqref{eqVarphiSigma},
+		But $h\in H$, so $hH=H$ (\autoref{lemSameCoset}). From \eqref{eqVarphiSigma},
 		we know $\varphi_H=\varphi_{hH}=e$.
 		And $I_H^{hH}$ is identity map (see \eqref{eqIHHidm})
 		Therefore,
@@ -4728,9 +4732,9 @@
 		=\rho_{V'}(\varphi_{g\sigma})\rho_{W}({h_\sigma}),\]
 		where $h_\sigma$ is given in \eqref{eqIndRep}.
 		
-		Since \eqref{eqVarphiSigmaH} and \ref{prop3.53},
+		Since \eqref{eqVarphiSigmaH} and \autoref{prop3.53},
 		\[\varphi_{g\sigma}\in g\sigma=g\varphi_\sigma H,\]
-		$\therefore h_\sigma=\varphi_{g\sigma}^{-1}g\varphi_\sigma\in H$ (\ref{lemCosetToSubGrp}).
+		$\therefore h_\sigma=\varphi_{g\sigma}^{-1}g\varphi_\sigma\in H$ (\autoref{lemCosetToSubGrp}).
 		
 		\[.\]
 		
@@ -4797,7 +4801,7 @@
 		
 		(a) \[U\otimes \Ind W=\Ind (\Res(U)\otimes W).\]
 		When $W$ is trivial representation, $\Ind(\Res (U))=U\otimes P$
-		(\ref{examPermOnCoset}).
+		(\autoref{examPermOnCoset}).
 		
 		(b) ...
 	\end{exe}
@@ -4817,7 +4821,7 @@
 		The combination shows that such $\tilde{\sigma}$ is independent on the choice of the representative $g_\sigma$
 		for any coset $\sigma$.
 		
-		From \ref{diagSigmaWToGSigmaW}, we know that any $g\in G$ maps $W^\sigma$ to $W^{g\sigma}$.
+		From \autoref{diagSigmaWToGSigmaW}, we know that any $g\in G$ maps $W^\sigma$ to $W^{g\sigma}$.
 		Therefore the following diagram commutes
 		\begin{centikzcd}
 			W^{g\sigma}\ar[rr,"\rho_V(g^{-1})"]&&W^\sigma\ar[rr,"\rho_V(g_\sigma^{-1})"]&&W\ar[d,"\varphi"] \\
@@ -4827,16 +4831,16 @@
 		The right half is the definition of $\tilde{\varphi}$ on $W^\sigma$,
 		the combination is its definition on $W^{g\sigma}$ (note
 		$\rho_V(g_\sigma^{-1}) \circ \rho_V(g^{-1})=\rho_V((gg_\sigma)^{-1})$ and $gg_\sigma\in (gg_\sigma)H= g\sigma$
-		(\ref{lemgingH}, \ref{prop3.53})
+		(\autoref{lemgingH}, \autoref{prop3.53})
 		therefore representing $g\sigma$).
 		This proves the left half, \ie, $\tilde{\varphi}$ is $G$-module.
 		
 	\end{proof}
 
 	\begin{eq}
-		Given $s\in\sigma$, \ref{prop3.53} gives $g\sigma=gsH$,
-		and  \ref{lemSameCoset} gives $\sigma=sH$.
-		Therefore \ref{lemgHg'H}
+		Given $s\in\sigma$, \autoref{prop3.53} gives $g\sigma=gsH$,
+		and  \autoref{lemSameCoset} gives $\sigma=sH$.
+		Therefore \autoref{lemgHg'H}
 		\[g\sigma=\sigma \iff gsH=sH \iff s^{-1}gs\in H.\]
 		
 		Hence
@@ -4846,7 +4850,7 @@
 	\begin{exe}
 		(a) \red{TODO}
 		
-		(b) \ref{prop|G|=|G:H||H|}, $\chi_W(D_i)=1$ and $\sum_{i=1}^r\card{D_i}=\card{C\cap H}$.
+		(b) \autoref{prop|G|=|G:H||H|}, $\chi_W(D_i)=1$ and $\sum_{i=1}^r\card{D_i}=\card{C\cap H}$.
 	\end{exe}
 
 	\begin{ccor}
@@ -5033,7 +5037,7 @@
 	\begin{exe*}
 		\red{TODO}
 		
-		From \ref{lemResIrr}
+		From \autoref{lemResIrr}
 		($G=\mathfrak{S}_d$,
 		$H=\mathfrak{A}_d$)
 		\[\Res U \text{ is irreducible}
@@ -5190,7 +5194,7 @@
 	\end{pprop}
 	\begin{rem*}
 		Regular representation is permutation representation,
-		and therefore it is identity map only for $e$ (the identity in group), \ie, faithful representation (\ref{propFaithful}).
+		and therefore it is identity map only for $e$ (the identity in group), \ie, faithful representation (\autoref{propFaithful}).
 			\red{TODO}
 	\end{rem*}
 
@@ -5214,7 +5218,7 @@
 	\subsection{Real representations and representations over subfields of $\co$}
 	
 	\begin{exe*}
-		See \ref{charTableH3} and \ref{charTableD4m}.
+		See \autoref{charTableH3} and \autoref{charTableD4m}.
 		
 		
 		\begin{center}
@@ -5727,17 +5731,17 @@
 		The first relation is a result of closed multiplication in the group $H$.
 		
 		$G$ can be divided into two disjoint left cosets: $H$ and $G\setminus H$ (definition of index,
-		\ref{lemCosetsCoverAll}, \ref{lemDisjointLeftCoset}).
+		\autoref{lemCosetsCoverAll}, \autoref{lemDisjointLeftCoset}).
 		
 		Since $s\in G\setminus H$ and $G\setminus H$ is a left coset,
-		$\therefore sH=G\setminus H$ (\ref{lemSameCoset}).
+		$\therefore sH=G\setminus H$ (\autoref{lemSameCoset}).
 		If $s^{-1}\in H$, then by definition of coset, $e=ss^{-1}\in sH=G\setminus H$,
 		which contradicts with $e\in H$.
 		Therefore $s^{-1}\notin H$.
 		Since $(s^{-1})^{-1}=s$, the reverse is also true.
 		
 		If $r,s\in G\setminus H$, then $r^{-1}\in G\setminus H$.
-		From \ref{lemgHg'H}, we know $rs=(r^{-1})^{-1}s\in H$.
+		From \autoref{lemgHg'H}, we know $rs=(r^{-1})^{-1}s\in H$.
 		
 		The last equation is a result of disjoint left/right cosets.
 	\end{proof}
@@ -5749,9 +5753,9 @@
 		
 		Since $H$ is a group, $\therefore h,h'\in H\implies hh'h^{-1}\in H$.
 		
-		If $s\in G\setminus H, h\in H$, then (\ref{lemHalfGroupEvenOdd})
+		If $s\in G\setminus H, h\in H$, then (\autoref{lemHalfGroupEvenOdd})
 		\[ s^{-1}\in G\setminus H, sh\in G\setminus H ,\]
-		leading to (\ref{lemHalfGroupEvenOdd})
+		leading to (\autoref{lemHalfGroupEvenOdd})
 		\[ shs^{-1}\in H.\]
 	\end{proof}
 	\begin{rem*}
@@ -5772,8 +5776,8 @@
 		The conjugacy classes of $G$ must be either subset of $H$ or subset of $G\setminus H$.
 	\end{cor}
 	\begin{proof}
-		\ref{lemNormalSubGroupConjugacy},
-		\ref{lemHalfGroupNormal}.
+		\autoref{lemNormalSubGroupConjugacy},
+		\autoref{lemHalfGroupNormal}.
 	\end{proof}
 
 	\begin{prop}
@@ -5796,7 +5800,7 @@
 		\end{cases}. \]
 	\end{def*}
 	\begin{rem*}
-		This is a valid representation due to \ref{lemHalfGroupEvenOdd}.
+		This is a valid representation due to \autoref{lemHalfGroupEvenOdd}.
 		
 		This is the \textbf{alternating representation} in $\mathfrak{S}_d$.
 	\end{rem*}
@@ -5811,14 +5815,14 @@
 		Conjugate representation is unique up to isomorphism.
 	\end{prop}
 	\begin{proof}
-		\[tht^{-1}\in H \] because \ref{lemHalfGroupNormal}.
+		\[tht^{-1}\in H \] because \autoref{lemHalfGroupNormal}.
 		
 		\red{TODO: Prove conjugate representation \textit{is} a representation of $H$.}
 		
 		Given $\chi_{W'}(h)=\chi_{W}(tht^{-1})$, and $\chi_{W''}(h)=\chi_{W}(shs^{-1})$,
 		where $t,s\in G\setminus H$.
 		
-		Then $t^{-1}s\in H$ (\ref{lemHalfGroupEvenOdd}), denoted as $n=t^{-1}s$, \ie, $s=tn$.
+		Then $t^{-1}s\in H$ (\autoref{lemHalfGroupEvenOdd}), denoted as $n=t^{-1}s$, \ie, $s=tn$.
 		
 		Therefore
 		\[\chi_{W''}(h)=\chi_{W}((tn)h(tn)^{-1})=\chi_{W}(t(nhn^{-1})t^{-1})=\chi_{W'}(nhn^{-1})=\chi_{W'}(h),\]
@@ -5836,14 +5840,14 @@
 		as $tht^{-1}$ and $h$ are in the same conjugate class of $G$.
 
 		If $W$ as a representation of $H$ is self-conjugate,
-		then for any $g\in G,h\in H$ ($ghg^{-1}\in H $ because \ref{lemHalfGroupNormal}),
+		then for any $g\in G,h\in H$ ($ghg^{-1}\in H $ because \autoref{lemHalfGroupNormal}),
 		\[f(ghg^{-1})=2\chi_W(ghg^{-1})=2\chi_W(h)=f(h),\]
 		where $f$ is a class function of $G$
 		\[ f(g)=\begin{cases}
 			2\chi_W(g)&g\in H\\
 			0& g\notin H\\
 		\end{cases}, \]
-		which is possible because \ref{lemHalfGroupConjugacy}.
+		which is possible because \autoref{lemHalfGroupConjugacy}.
 		
 		\red{Prove this: $f$ is the character of $\Ind W$ and it is direct sum of two representations whose restriction
 		is $W$.}
@@ -5859,10 +5863,10 @@
 		\[\Ind(\Res(U)) = U \otimes P,\]
 		where $P$ is the permutation representation of $G$ on $G/H$.
 		
-		For $h\in H$, since $hH=H$ (\ref{lemSameCoset}) and $h(G\setminus H)=G\setminus H$ (\ref{lemHalfGroupEvenOdd}),
+		For $h\in H$, since $hH=H$ (\autoref{lemSameCoset}) and $h(G\setminus H)=G\setminus H$ (\autoref{lemHalfGroupEvenOdd}),
 		$\chi_P(h)=2$.
 		
-		For $t\in G\setminus H$, since $tH=G\setminus H, t(G\setminus H)=H$ (\ref{lemHalfGroupEvenOdd}),
+		For $t\in G\setminus H$, since $tH=G\setminus H, t(G\setminus H)=H$ (\autoref{lemHalfGroupEvenOdd}),
 		$\chi_P(t)=0$.
 		
 		Therefore $P=T\oplus T'$, where $T$ is the trivial representation and $T'$ is the alternating representation.
@@ -5893,8 +5897,8 @@
 			\exists t\notin H[\chi_V(t)\ne 0]\]
 			which means $V$ is not isomorphic to $V'=V\otimes U'$ where $U'$ is the alternating representation.
 			
-			$W$ is self-conjugate because \ref{lemSelfConjugateRestriction}.
-			$\Ind W=\Ind \Res V=V\oplus V'$ because \ref{lemIndResU=U+U'}.
+			$W$ is self-conjugate because \autoref{lemSelfConjugateRestriction}.
+			$\Ind W=\Ind \Res V=V\oplus V'$ because \autoref{lemIndResU=U+U'}.
 			
 			\item If $\sum_{h\in H}\abs{\chi_V(h)}^2=\card{G}$, then $W$ is a direct sum of two irreducible representations 
 			because $(\chi_W,\chi_W)_H=2$. Then $W$ is a direct sum of two different irreducible representations
@@ -6214,7 +6218,7 @@
 
 	Therefore the number of conjugacy classes is $q(q-1)$ and total number of elements is $q(q-1)^2$.
 	
-	The conjugacy classes of $B$ is summarized in \ref{tblConjBorel}.
+	The conjugacy classes of $B$ is summarized in \autoref{tblConjBorel}.
 
 	\paragraph{Projective Line}
 
@@ -6328,9 +6332,9 @@
 		and the $\field_{q^2}$ can be viewed as a 2-dimensional vector space over $\field_q$.
 		
 		Since $\field_q^*$ is a cyclic group, it must have a multiplicative generator (primitive element), denoted $\varepsilon$.
-		Since it is a generator, it must not have square root in $\field_q$ if $q$ is odd (\ref{propPrimNoSqrt}).
+		Since it is a generator, it must not have square root in $\field_q$ if $q$ is odd (\autoref{propPrimNoSqrt}).
 		
-		Denote one of its square root in $\field_{q^2}$ as $\sqrt{\varepsilon}$ (existence: \ref{propPrimHasSqrtInExtension})
+		Denote one of its square root in $\field_{q^2}$ as $\sqrt{\varepsilon}$ (existence: \autoref{propPrimHasSqrtInExtension})
 		and therefore this combined with $1$
 		form a basis of the vector space $\field_{q^2}$.
 	\end{proof}
@@ -6515,7 +6519,7 @@
 
 	\paragraph{1-dimensional Representations}
 	\begin{rem*}
-		Since $\field_q^*$ is a cyclic group of order $q - 1$ (\ref{thmGF*Cyclic}),
+		Since $\field_q^*$ is a cyclic group of order $q - 1$ (\autoref{thmGF*Cyclic}),
 		it has $q - 1$ 1-d representations $\alpha\colon \field_q^* \to \co^*$
 		
 		For each $\alpha$, we have a one-dimensional representation $U_\alpha$ of $G$ defined by $U_\alpha(g) = \alpha(\det(g))$.
@@ -6606,7 +6610,7 @@
 
 	\paragraph{Induced Representation of the 1-d Representation of the Borel Subgroup}
 	
-	See \ref{tblConjBorel} for conjugacy classes of the Borel subgroup.
+	See \autoref{tblConjBorel} for conjugacy classes of the Borel subgroup.
 	
 	Each $a_x,b_x$ class bijectively corresponds to the $a_x',b_x'$ class respectively, with possibly reduced elements.
 	$\ec{c_{x,y}}=\ec{c_{y,x}}$ is split into two different conjugacy classes in the Borel subgroup.
@@ -6720,7 +6724,7 @@
 	\paragraph{Character Table}
 	
 	Given that \begin{itemize}
-		\item $\varepsilon$ is a primitive element (\ref{primitive element}) in $\field_q^*$;
+		\item $\varepsilon$ is a primitive element (\autoref{primitive element}) in $\field_q^*$;
 		\item $\xi=x+y\sqrt{\varepsilon}\in \field_{q^2}^*$ where 
 		$x,y\in\field_q$ has the properties
 		\begin{eqlong}
@@ -6794,13 +6798,13 @@
 
 	$\Sym^dV$ and $\ext{d}V$ are images of symmetrizing 
 	operators from $V^{\otimes d}$ to itself:
-	see \ref{figAlambdaOnVd}.
+	see \autoref{figAlambdaOnVd}.
 	
 	$a_{(d)}$ maps $V^{\otimes d}$ to $\Sym^dV$ and
 	$b_{(1,\dots,1)}$ maps it to $\ext{d}V$.
 
 	\subsubsection{Right Action on Tensor Space}
-	In \ref{subsubsecGModule2}, given a commutative ring $K$ and a group $G$,
+	In \autoref{subsubsecGModule2}, given a commutative ring $K$ and a group $G$,
 	$\lambda\in K[G]$ defines a right action as well as an endomorphism on the group algebra $(K[G],+,\cdot,*)$
 	\[ \alpha \mapsto \alpha* \lambda,\forall \alpha\in K[G], \]
 	whose image is a linear subspace $(V_\lambda,+,\cdot)$ of $K[G]$ over $K$:
@@ -7193,7 +7197,7 @@
 	\end{proof}
 	\begin{rem*}
 		Actually, all Hilber spaces can be described this way.
-		See \ref{thmHilbertOrthonormal}.
+		See \autoref{thmHilbertOrthonormal}.
 	\end{rem*}
 
 	\begin{def*}[Euclidean topology]
@@ -7556,7 +7560,7 @@
 
 	\begin{rem*}
 		For perfectly normal space,
-		see this for more equivalent definition: \ref{thmPerfectlyNormal}.
+		see this for more equivalent definition: \autoref{thmPerfectlyNormal}.
 	\end{rem*}
 		
 	\begin{def*}[separation axioms]
@@ -7633,7 +7637,7 @@
 	
 	\subparagraph{Visualization of Hierarchy}
 	
-	See \ref{fig:separation_axiom_hierarchy}.
+	See \autoref{fig:separation_axiom_hierarchy}.
 	
 	\begin{figure}[H]
 		\centering
@@ -7690,7 +7694,7 @@
 	
 	\subparagraph{Visualization of Separation Axioms}
 	
-	See \ref{fig:visualized_separation_axiom}.
+	See \autoref{fig:visualized_separation_axiom}.
 	
 	\begin{figure}[H]
 		\centering
@@ -8613,10 +8617,10 @@
 		{this} for the proof.
 		
 		We only need to prove local homeomorphism at $\langle\lambda,0\rangle$ where $\lambda$ is a limit ordinal.
-		Since $\lambda\in\omega_{1}$, we know $\lambda<\omega_{1}$ (\ref{lem_smaller_iff_in}).
+		Since $\lambda\in\omega_{1}$, we know $\lambda<\omega_{1}$ (\autoref{lem_smaller_iff_in}).
 		Meanwhile, $\omega_{1}$ is the \textit{first} uncountable ordinal,
 		meaning $\lambda$ must be countable ordinal.
-		Therefore $\lambda\times[0,1)$ is homeomorphic to $[0,1)$ (\ref{lem_countable_homeomorphic}).
+		Therefore $\lambda\times[0,1)$ is homeomorphic to $[0,1)$ (\autoref{lem_countable_homeomorphic}).
 		
 		For $(\omega_{1}+1)\times[0,1)$, since $\omega_{1}\in(\omega_{1}+1)$ is an uncountable limit point,
 		no neighbourhood of $\langle\omega_1,0\rangle$ is homeomorphic to $\re$.
@@ -8946,7 +8950,7 @@
 	\begin{proof}
 		Choose a orthonormal basis $(e_k)_{k=1,\dots,2n}$ for $\re^{2n}$
 		and $(e'_k)_{k=1,\dots,n}$ for $\co^n$,
-		which always exists due to \ref{thmHilbertOrthonormal},
+		which always exists due to \autoref{thmHilbertOrthonormal},
 		then the inner product in $\re^{2n}$ is expressed as
 		\[ \langle x,y\rangle = \sum_{i=1}^{2n} x_iy_i, \]
 		and the inner product in $\co^{n}$ is
@@ -9075,7 +9079,232 @@
 	\end{def*}
 
 	\red{TODO, structure sheaf}
+	
+	\subsubsection{Sheaf and Germ}
+	\paragraph{Category Theory Continued}
+		
+	See \nameref{sec:comm_diag} and \nameref{sec:more_cat_theory} for background.
+	
+	\subparagraph{Category of Sets}
+	\begin{def*}[partial function]
+		A \textbf{partial function} $f$ from a set $X$ to a set $Y$
+		is a function $S\to Y$,
+		where $S\subseteq X$ is called the \textbf{domain of definition} of $f$.
+		If $S=X$, $f$ is said to be \textbf{total}.
+		%A \textbf{partial function} $f$ from a set $X$ to a set $Y$ is
+		%a function from a subset $S$ of $X$ (possibly $X$ itself) to $Y$.
+		%The subset $S$, that is, the domain of $f$ viewed as a function, is called the domain of definition of $f$.
+		%If $S$ equals $X$, that is, if $f$ is defined on every element in $X$, then $f$ is said to be \textbf{total}.
+	\end{def*}
+	\begin{def*}[category of sets]
+		The \textbf{category of sets}, denoted as $\mathbf{Set}$,
+		is the category whose objects are sets.
+		The morphisms from $A$ to $B$ are the (total) functions from $A$ to $B$,
+		and the composition of morphisms is the composition of functions.
+	\end{def*}
 
+	
+	\begin{def*}[category of algebraic structure]
+		The category of some algebraic structure is the category whose objects
+		are structures of a given kind, and morphisms are homomorphisms.
+	\end{def*}
+	\begin{rem*}
+		For example,
+		\begin{itemize}
+			\item $\mathbf{Grp}$ is the category of groups with group homomorphisms;
+			\item $\mathbf{Ab}$ is the category of Abelian groups with group homomorphisms;
+			\item $\mathbf{Ring}$ is the category whose objects are rings (with identity) and whose morphisms are ring homomorphisms;
+			\item $K$-$\mathbf{Vect}$ is the category of all vector spaces over a field $K$ as objects,
+			and $K$-linear maps as morphisms.
+			\item $\mathbf{Top}$ is the category whose objects are topological spaces and whose morphisms are continuous maps;
+			\item $\mathbf{Man}^p$
+			is the category of $C^p$-manifolds and whose morphisms are $C^p$-differentiable maps;
+			$C^p$-manifolds on spaces in a fixed category A, denoted $\mathbf{Man}^p(A)$,
+			$C^p$-manifolds modeled on a fixed space $E$ denoted $\mathbf{Man}^p(E)$ are also categories.
+		\end{itemize}
+		
+	\end{rem*}
+
+	\subparagraph{Category of Open Sets}
+
+	\begin{def*}[category of open sets]
+		If $X$ is a topological space,
+		then the \textbf{open sets} in $X$ form a partially ordered set $\operatorname{Open}(X)$ under inclusion.\\
+		Explicitly,
+		$\operatorname{Open}(X)$ is formed by adding a single morphism $U \to V$
+		if and only if $U\subseteq V$.
+	\end{def*}
+
+	\begin{def*}[proper class]
+		A \textbf{class} is a collection of sets built from
+		\[\set{x|\varphi}, \]
+		where $x$ are sets and $\varphi$ is some rule (\eg, well-formed formula) restricting the selection of $x$.\\		
+		A class that is not a set (informally in Zermelo--Fraenkel) is called a \textbf{proper class}.
+	\end{def*}
+	
+	\begin{def*}[small category]
+		A category $C$ is called \textbf{small} if both $\ob(C)$ and $\hom(C)$ are not proper classes,
+		and \textbf{large} otherwise.\\
+		A \textbf{locally small category} is a category such that for all objects $a$ and $b$,
+		the hom-class $\hom(a, b)$ is a set, called a \textbf{homset}.
+	\end{def*}
+	\begin{lem}
+		Poset is small category.
+	\end{lem}
+	\begin{cor}
+		Category of open sets is small.
+	\end{cor}
+
+	\subparagraph{Sheaf}
+
+	\begin{def*}[opposite category]
+		The \textbf{opposite category} or dual category $\opp{C}$ of a given category $C$ is formed by reversing the morphisms,
+		\ie, interchanging the source and target of each morphism.
+	\end{def*}
+	\begin{prop}
+		Doing the reversal twice yields the original category, so the opposite of an opposite category is the original category itself. In symbols, \[\opp{(\opp{C})}=C.\]
+	\end{prop}
+	\begin{prop}
+		Opposite preserves products:
+		\[\opp{(C\times D)}\cong \opp{C}\times \opp{D}.\]
+		Opposite preserves functors:
+		\[\opp{(\mathcal{F}(C,D))}\cong \mathcal{F}(\opp{C},\opp{D}).\]
+		Opposite preserves slices:
+		\[(F\downarrow G)^{\text{op}}\cong (G^{\text{op}}\downarrow F^{\text{op}}).\]
+	\end{prop}
+
+	
+	\begin{def*}[contravariant functor]
+		A \textbf{contravariant functor}, or a cofunctor, associates two categories
+		by ``turning morphisms around'' and ``reversing the composition''.
+		
+		Let $C$ and $D$ be categories.
+		A functor $F$ from $C$ to $D$ is a mapping containing
+		\begin{itemize}
+			\item $F\colon \ob(C) \to \ob(D)$,
+			\item $\forall X , Y\in \ob(C)$, $F_{X,Y}\colon \hom_C(X, Y) \to \hom_D(F(Y), F(X))$
+			such that
+			\begin{itemize}
+				\item 
+				\begin{equation}
+					\forall X \in \ob(C) [F_{X,X}(1_X)=1_{F(X)}],
+				\end{equation}
+				\item
+				\begin{eqlong}
+					&\forall X,Y,Z\in \ob(C)\\
+					&\Big[\forall f \in \hom_C(X,Y)	\forall g \in \hom_C(Y,Z)\\
+					&\big(F_{X,Z}(g\circ_C f)=F_{X,Y}(f)\circ_D F_{Y,Z}(g)\big)\Big].\\
+				\end{eqlong}
+			\end{itemize}
+		\end{itemize}
+	\end{def*}
+
+	\begin{rem*}
+		Note that one can also define a contravariant functor as a covariant functor on the opposite category.
+	\end{rem*}
+
+
+	\begin{def*}[presheaf on category]
+		A \textbf{presheaf on a category} $C$ is a functor
+		from its opposite category $\opp{C}$ to a category $J$,
+		usually being the category of sets, $\mathbf{Set}$.
+		It is contravariant on  $C$.
+	\end{def*}
+
+
+	\begin{def*}[presheaf on a topological space]
+		A \textbf{presheaf on a topological space} is
+		\[ \opp{C}\to \mathbf{Set},\]
+		where $C$ is the poset of open sets in a topological space.
+		In general $\mathbf{Set}$ can be replaced by any category.
+		%and $J$ is a category, usually assigned as $\mathbf{Set}$.
+	\end{def*}
+	\begin{rem*}
+		Explicitly, given a topological space $(X,\mathcal{T})$,
+		%this is to
+		\textit{a presheaf of sets} $\mathscr{F}$ on $X$ consists of the following
+		\begin{itemize}
+			\item a set $\mathscr{F}(U)$ for each $U\in\tau$; 
+			$\mathscr{F}(U)$ is called the \textbf{sections} of $\mathscr{F}$ over $U$;
+			$\mathscr{F}(X)$ is the \textbf{global sections} of $\mathscr{F}$;
+			%a collection of sets,
+			%\[\set{\mathscr{F}(U)|U\in\tau},\]
+			%whose element $\mathscr{F}(U)$ is called the section of $\mathscr{F}$
+			%over $U$;%$\forall U\in\tau\big[\mathscr{F}(U)\big]$
+			\item a function  $ \Res_V^U\colon \mathscr{F}(U)\to\mathscr{F}(V) $ for each
+			pair of open sets $V\subseteq U$, usually called a \textbf{restriction morphism};
+			if $s\in\mathscr{F}(U)$, then denote $s|_V\define \Res_V^U(s)$.
+			%$\operatorname{res}_{}
+		\end{itemize}
+		such that
+		\begin{itemize}
+			\item For every open set $U\in\tau$,
+			the restriction morphism $\Res_U^U\colon \mathscr{F}(U)\to \mathscr{F}(U)$
+			is the identity morphism on $\mathscr{F}(U)$.
+			\item For any three open sets $ W\subseteq V\subseteq U$,
+			the composite $\Res_W^V\circ \Res_V^U=\Res_W^U$.
+		\end{itemize}
+		
+		For instance, by assigning to every open set $U$ the associative algebra of real-valued continuous functions on $U$,
+		one obtains a presheaf of algebras on $X$.
+	\end{rem*}
+
+	\begin{def*}[sheaf]
+		A \textbf{sheaf} $\mathscr{F}$ on a topological space $(X,\mathcal{T})$ is a presheaf
+		where \textit{compatible sections can be uniquely glued together}, \ie,
+		it follows the two axioms below\\
+		($\forall$ open set $U\in \mathcal{T}$ and $\forall$ open cover $\mathcal{U}\subseteq\mathcal{T}$ of $U$
+		such that $\bigcup \mathcal{U} = U$):
+		\begin{itemize}
+			\item locality: 
+			%\[ \forall U\in \mathcal{T} \forall \mathcal{U}\subseteq\mathcal{T} \forall s,t\in\mathscr{F}(U)
+			%\Big[ \big( \bigcup \mathcal{U} = U\big)
+			% \land \forall U_i\in\mathcal{U}\big(s|_{U_i}=t|_{U_i} \big) \implies s=t \Big]. \]
+			\[\forall U_i\in\mathcal{U}\big(s|_{U_i}=t|_{U_i} \big) \implies s=t.\]
+			\item gluing/concatenation/collation:
+			\[
+			\begin{aligned}
+				&\exists \sigma \in \prod_{U_k\in\mathcal{U}} \mathscr{F}(U_k) \forall U_i,U_j\in\mathcal{U}
+				 \big[\sigma(U_i)|_{U_i\cap U_j}=\sigma(U_j)|_{U_i\cap U_j}\big]\\
+				&\implies \exists s\in\mathscr{F}(U)\forall U_i\in \mathcal{U}\big[ s|_{U_i}=\sigma(U_i)\big],
+			\end{aligned}\]
+			%\[ \forall U_i,U_j\in\mathcal{U} () .\]
+			where the Cartesian product is defined as
+			\[  \prod_{U_k\in\mathcal{U}}\mathscr{F}(U_k)  = \set{ \sigma\colon  \mathcal{U} \to \bigcup \mathscr{F}(\mathcal{U})
+			| \forall U_k\in \mathcal{U}  \big( \sigma(U_k)\in \mathscr{F}(U_k) \big)	
+			} .\]
+		\end{itemize}
+	\end{def*}
+	\begin{rem*}
+		The locality axiom indicates the uniqueness, \ie,
+		a section over any open set $U$ is uniquely determined by its restriction to smaller open sets (covering $U$).
+		
+		The image of $\sigma$, sections $s_i=\sigma(U_i)\in\mathscr{F}(U_i)$, are called \textbf{compatible} if
+		the gluing condition is satisfied. The axiom claims the existence of a glued section.
+	\end{rem*}
+	\begin{rem*}
+		Without using the notation of Cartesian product, the gluing axiom can be rewritten as
+		\[\begin{aligned}
+			&\exists\big( \sigma\colon \mathcal{U} \to \bigcup \mathscr{F}(\mathcal{U})\big) \forall U_i,U_j\in
+			\mathcal{U}\\
+			& \big[\sigma(U_i)\in\mathscr{F}(U_i) \land \sigma(U_j)\in\mathscr{F}(U_j) 
+			\land \sigma(U_i)|_{U_i\cap U_j}=\sigma(U_j)|_{U_i\cap U_j}
+			\big]\\
+			&\implies \exists s\in\mathscr{F}(U)\forall U_i\in \mathcal{U}\big[ s|_{U_i}=\sigma(U_i)\big]. 
+		\end{aligned}\]
+	\end{rem*}
+
+	\begin{def*}[structure sheaf of manifold]
+		On an $C^k$-manifold $M$, the sheaf of $C^j$-differentiable functions ${\mathcal {O}}_{M}^{j}$ (with $j \le k$)
+		is a sheaf of unital associative algebra.
+		Its sections on some open set $U$ are the $C^j$-functions $U \to K$ (with $K$ being either $\re$ or $\co$).
+		For $j = k$, this sheaf is called the \textbf{structure sheaf} and is denoted $\mathcal {O}_{M}$.
+		The nonzero $C^k$ functions also form a sheaf, denoted $ {\mathcal {O}}_{X}^{\times }$.
+		Differential forms (of degree p) also form a sheaf %ΩpM. In all these examples, the restriction morphisms are given by restricting functions or forms.
+		
+		The assignment sending U to the compactly supported functions on U is not a sheaf, since there is, in general, no way to preserve this property by passing to a smaller open subset. Instead, this forms a cosheaf, a dual concept where the restriction maps go in the opposite direction than with sheaves.[2] However, taking the dual of these vector spaces does give a sheaf, the sheaf of distributions.
+	\end{def*}
+	
 	\subsubsection{Lie Group}
 	\paragraph{Product Manifold}
 	
@@ -9176,7 +9405,7 @@
 				\end{aligned}
 			\end{equation}
 		\end{itemize}
-		where $\mathcal{T}(K^{n'})$ retrieves the metric topology on a $n'$-dimensional Hilbert space $K^{n'}$ (\ref{propEuclideanTopology}). $n',n_i\in\nat$.
+		where $\mathcal{T}(K^{n'})$ retrieves the metric topology on a $n'$-dimensional Hilbert space $K^{n'}$ (\autoref{propEuclideanTopology}). $n',n_i\in\nat$.
 	\end{rem*}
 	%\restoregeometry
 	\begin{rem*}
