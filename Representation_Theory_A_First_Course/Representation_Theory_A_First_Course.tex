@@ -31,6 +31,8 @@
 %   \usepackage{commath}    % for abs and norm
 
 \usepackage{ytableau}
+%\usepackage{geometry}		% change margin
+\usepackage[margin=1.5in]{geometry} 		% change margin
 
 %\setcounter{secnumdepth}{-2} % remove section numbering
 \setcounter{section}{-1}
@@ -8979,15 +8981,17 @@
 		\[ (x,y)\mapsto x^{-1}y,\] is smooth (or holomorphic).
 		%in which the group operations of multiplication and inversion are smooth (or holomorphic) maps.
 	\end{def*}
+	\pagebreak
+	%\newgeometry{top=2cm}
 	\begin{rem*}
-		In total, a Lie group is a tuple ($K$ is either $\re$ or $\co$)
+		Lie group is a tuple ($K$ is either $\re$ or $\co$)
 		\[(G,\cdot\colon G\times G\to G, (\bullet)^{-1}\colon G\to G
 		,\tau\in\power(\power(G)), I,\mathcal{A}=(U_i,\varphi_i\colon U_i\to K^{n_i})_{i\in I} )\]
 		satisfying the following axioms\\
 		($
 		\exists! e\in G, 
 		\forall x,y,z\in G, \forall \mathcal{S}\subseteq\tau,
-		\forall i\in I, \forall (V,\psi\colon V\to K^{n'})$):
+		\forall (V,\psi\colon V\to K^{n'})$):
 		\begin{itemize}
 			\item it is a Hausdorff topological space, \ie,
 			\begin{eqlong}
@@ -9000,13 +9004,17 @@
 			\item it contains a smooth or complex structure, \ie,
 			\begin{eqlong}
 				&\bigcup_{j\in I}U_j=G, \\
-				&(V,\psi\colon V\to K^{n'})\in \mathcal{A} \iff\\
+				&(V,\psi\colon V\to K^{n'})\in \mathcal{A} \iff \\% \forall i\in I\\
 				&\Big( V\in\tau \land \forall p,q \in V 
 				%\forall \alpha,\beta \in \psi(V) 
 				\big( p=q\iff\psi(p)=\psi(q) \big) \\
 				&\land \forall S \subseteq V 
 				\big( S\in\tau\iff\psi(S)\in \mathcal{H}(K^{n'}) \big)\\
-				&\land (\psi \circ \varphi_i^{-1}) \text{ and } (\varphi_i \circ \psi^{-1}) \text{ are smooth/holomorphic}
+				&\land 
+				 \forall i\in I
+				\big(
+				(\psi \circ \varphi_i^{-1}) \text{ and } (\varphi_i \circ \psi^{-1}) \text{ are smooth/holomorphic}
+				\big)
 				 \Big);
 				 \\
 			\end{eqlong}
@@ -9018,15 +9026,18 @@
 				(x)^{-1}\cdot x&= x\cdot (x)^{-1} = e ;\\
 			\end{eqlong}
 			\item the group operations are smooth/holomorphic, \ie,
-			\begin{eqlong}
-				&\exists j,k,l\in I\bigg[ x\in U_j\land y\in U_k\land (x)^{-1}\cdot y\in U_l\land\\
+			\[
+			\begin{aligned}
+				&\exists j,k,l\in I\Big[ x\in U_j\land y\in U_k\land (x)^{-1}\cdot y\in U_l\land\\
 				&\Big( \varphi_l \circ \big( (p,q)\mapsto (p)^{-1}\cdot q \big) \circ (\varphi_j\times\varphi_k)^{-1} \Big)
 				\text{ is smooth/holomorphic}
-				\bigg],\\
-			\end{eqlong}
+				\Big],\\
+			\end{aligned}
+			\]
 		\end{itemize}
-		where $\mathcal{H}(K^{n})$ retrieves the topology on a finite-dimensional Hilbert space $K^{n}$ (\ref{propEuclideanTopology}).
+		where $\mathcal{H}(K^{n'})$ retrieves the metric topology on a finite-dimensional Hilbert space $K^{n'}$ (\ref{propEuclideanTopology}).
 	\end{rem*}
+	%\restoregeometry
 	\begin{rem*}
 		The last two group axioms can be rewritten without assuming the uniqueness of identity:
 		\begin{eqlong}
@@ -9040,6 +9051,28 @@
 		$V\in\tau$ is required to make sure the image is an open set.
 		
 		Condition \[\bigcup_{j\in I}U_j=G\] is redundant since it is equivalent to \[\forall x\in G\exists j\in I (x\in U_j).\]
+	\end{rem*}
+	\begin{rem*}
+		One may add more properties to the Lie group, like paracompactness
+		\begin{center}
+			\small
+			\setlength{\tabcolsep}{0pt}
+			\begin{tabular}{LRL}
+				\forall \mathcal{U}\subseteq\tau \Big[&G=\bigcup \mathcal{U}\implies&\\
+				&\exists \mathcal{V}\subseteq\tau\big(&G=\bigcup \mathcal{V}\land \forall V\in\mathcal{V} \exists U\in \mathcal{U}(V\subseteq U)\\
+				&&\land\forall x\in G \exists W_x\in \tau (x\in W_x\land \card{\set{V\in\mathcal{V} | V\cap W_x\ne\emptyset}}\in\nat )\\
+				&\big) & \Big],\\
+			\end{tabular}
+		\end{center}
+		or a stronger condition, second countability,
+		\[\exists \mathcal{B}\Big[\big( \card{\mathcal{B}}\le\aleph_0 \big)
+		\land \forall S \big(S\in\tau\iff \exists \mathcal{A}\subseteq \mathcal{B} ( S=\bigcup \mathcal{A})\big)\Big].\]
+		
+		A compact Lie group satisfies
+		\begin{eqlong}
+			\forall \mathcal{U}\subseteq\tau [G=\bigcup \mathcal{U}\implies
+			\exists \mathcal{V}\subseteq\mathcal{U}\big(G=\bigcup \mathcal{V}\land \card{\mathcal{V}}\in\nat\big)].
+		\end{eqlong}
 	\end{rem*}
 
 	\subsubsection{TODO}
