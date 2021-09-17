@@ -8310,6 +8310,51 @@
 	\begin{thm}
 		Every real-valued Lipschitz-continuous map defined on a subset of a metric space can be extended to a Lipschitz-continuous map on the whole space.
 	\end{thm}
+
+	\subsubsection{Connectedness}
+	
+	\begin{def*}[connected space]
+		For a topological space $(X,\tau)$ the following conditions are equivalent:
+		\begin{itemize}
+			\item $X$ is \textbf{connected}, that is, it cannot be divided into two disjoint non-empty open sets:
+			\[\neg\exists A,B\in\tau[A\ne\emptyset\land B\ne\emptyset \land A\cup B=X\land A\cap B =\emptyset ]. \]
+			\item $X$ cannot be divided into two disjoint non-empty closed sets.
+			\item $X$ The only subsets of X which are both open and closed (clopen sets) are $X$ and the empty set:
+			\[ A\in\tau\land X\setminus A\in\tau \iff A \in\set{\emptyset,X}. \]
+			\item The only subsets of $X$ with empty boundary are $X$ and the empty set.
+			\item $X$ cannot be written as the union of two non-empty separated sets
+			(sets for which each is disjoint from the other's closure).
+			\item All continuous functions from $X$ to $\set{0,1}$ are constant,
+			$\set{0,1}$ is the two-point space endowed with the discrete topology.
+		\end{itemize}
+	\end{def*}
+
+	\begin{def*}[connected components]
+		The maximal connected subsets (ordered by inclusion) of a non-empty topological space are called the \textbf{connected components} of the space.
+	\end{def*}
+	\begin{thm}
+		The components of any topological space form a partition of the space: they are disjoint, non-empty, and their union is the whole space. Every component is a closed subset of the original space. 
+	\end{thm}
+
+	\begin{def*}[path]
+		A \textbf{path} from a point $x$ to a point $y$ in a topological space $X$ is a continuous function $f\colon [0,1] \to X$ with $f(0) = x, f(1) = y$.
+	\end{def*}
+	\begin{def*}
+		A path-component of $X$ is an equivalence class of $X$ under the equivalence relation
+		which makes $x$ equivalent to $y$ if there is a path from $x$ to $y$, \ie,
+		\[ x\sim y \iff \exists f\in \mathcal{C}^0([0,1], X) [ f(0)=x \land  f(1)=y ] ,\]
+		where $\mathcal{C}^0([0,1], X)$ is the class of all continuous function from $[0,1]$ to $X$.
+	\end{def*}
+	\begin{def*}[path-connected space]
+		The space $X$ is said to be path-connected (or pathwise connected or 0-connected)
+		if there is exactly one path-component, \ie, if there is a path joining any two points in $X$.
+	\end{def*}
+	\begin{thm}
+		A path-connected space is connected.
+	\end{thm}
+	\begin{rem*}
+		Every path-connected space is connected. The converse is not always true: examples of connected spaces that are not path-connected include the extended long line $L^*$ and the topologist's sine curve.
+	\end{rem*}
 	
 	\subsubsection{Manifold}
 	\paragraph{Locally Euclidean Space}
@@ -8404,8 +8449,9 @@
 				\end{tikzcd}
 			};
 		\end{tikzpicture}
-		\caption{Hierarchy of manifolds. Any manifold above $T_2$ assumes $T_2$, whereas those below only assumes locally Euclidean.
-			A Property starting with ``L'' indicates it is local.
+		\caption{Hierarchy of manifolds. Any manifold above $T_2$ assumes $T_2$, whereas those below are necessary conditions
+			of a locally Euclidean space.
+			A Property starting with ``L'' indicates it is a local property.
 		}
 		\label{fig:manifold_hierarchy}
 	\end{figure}
@@ -8507,19 +8553,30 @@
 		\begin{tikzpicture}
 			\def\intv{1.5}
 			\foreach \x in {0,1,...,6,8} {
-				\draw[thick,->] ({\x*\intv},0) -- ({\x*\intv+\intv-.08},0);
+				\draw[thick,->] ({\x*\intv},-1) -- ({\x*\intv+\intv-.08},-1);
 				%\node at ({\x*\intv+\intv*.5},0) [above] {\ifthenelse{\x=8}{$\omega_1$}{$\x$}};
 				\ifthenelse{\x=8}{
-					\node at ({\x*\intv+\intv},0) [above] {$\omega_{1}$};
+					\node at ({\x*\intv},-1) [above] {$\omega_{1}$};
+					\node at ({\x*\intv},0) [above] {$\omega_{1}$};
+					\draw[fill=black] ({\x*\intv},0) circle (2pt);
+					\node at ({\x*\intv},1) [above] {$\omega_{1}$};
+					\node at ({\x*\intv+\intv},-1) [above] {$\omega_{1}+1$};
+					%\node at ({\x*\intv+\intv},0) [above] {$\omega_{1}$};
 				}{
+					\node at ({\x*\intv},-1) [above] {$\x$};
 					\node at ({\x*\intv},0) [above] {$\x$};
+					\node at ({\x*\intv},1) [above] {$\x$};
+					\draw[thick,->] ({\x*\intv},1) -- ({\x*\intv+\intv-.08},1);
+					\draw[thick,->] ({\x*\intv},0) -- ({\x*\intv+\intv-.08},0);
 				}
 				%\node at ({\intv*("\ifthenelse{\x=1}{1}{0}")},0) [above] {\ifthenelse{\x=8}{$\omega_1$}{$\x$}};
  			}
 			\def\x{7}
+			\node at ({\x*\intv+\intv*.5},-1) {$\cdots$};
 			\node at ({\x*\intv+\intv*.5},0) {$\cdots$};
+			\node at ({\x*\intv+\intv*.5},1) {$\cdots$};
 		\end{tikzpicture}
-		\caption{Closed long ray}
+		\caption{Above: the closed long ray.\\Middle: the closed extended long ray.\\Below: a ray too long to be locally Euclidean.}
 		\label{fig:closed_long_ray}
 	\end{figure}
 
@@ -8531,6 +8588,12 @@
 	\begin{rem*}
 		Intuitively, this is obtained by putting together a long ray in each direction.
 	\end{rem*}
+
+	\begin{def*}[extended long line]
+		The (closed) \textbf{extended long ray}, $L^{*}$, is obtained as the one-point compactification of $L$
+		by adjoining an additional element to the right end of $L$.\\
+		One can similarly define the \textbf{extended long line} by adding two elements to the long line, one at each end.
+	\end{def*}
 
 	\begin{lem}\label{lem_smaller_iff_in}
 		Given two ordinal numbers $\alpha, \beta$,
@@ -8586,6 +8649,8 @@
 		\end{itemize}
 	
 		There are $2^{\aleph_1}$ pairwise non-diffeomorphic smooth structures on the long line.
+		
+		The extended long line is connected but ``too long'' to be path-connected.
 	\end{rem*}
 
 	\subparagraph{``Abnormal'' manifold}
@@ -8911,6 +8976,12 @@
 		\[ \varphi_2 \circ f\circ \varphi_1^{-1} \colon \varphi_1(U)\to\varphi_2(f(U)) \]
 		is differentiable or $C^r$ at point $\varphi_1(p)$.
 	\end{def*}
+
+	\begin{centikzcd}
+		U\subseteq U_1\subseteq M_1 \ar[rr,"f"]\ar[from=d,"\varphi_1^{-1}"] && f(U)\subseteq U_2 \subseteq M_2\ar[d,"\varphi_2"]\\
+		\varphi_1(U)\subseteq K^{n_1}\ar[rr,red,"\varphi_2 \circ f\circ \varphi_1^{-1} "] &&\varphi_2(f(U))\subseteq K^{n_2}\\
+	\end{centikzcd}
+	
 	\begin{rem*}
 		One can choose $U=f^{-1}(U_2)\cap U_1$. Or choose $U=U_1$ by enforcing $f(U_1)\subseteq U_2$.
 		
@@ -8933,7 +9004,77 @@
 		All concept above can be generalized to holomorphic maps.
 	\end{rem*}
 
+	\paragraph{Tangent Space}
+	From now on, every manifold/mapping/atlas is assumed the same class of smoothness,
+	being either $C^r$ with $r\ge1$, smooth, analytic, or holomorphic.
+	%being either differentiable, $C^r$, smooth, analytic, or holomorphic.
+	For the sake of simplicity, \blue{the term ``differentiable'' %$C^r$ 
+		is adopted to represent all these cases unless specified explicitly,}
+	\ie, assuming at least $C^1$.
+		%from now on,
+		%but one can easily generalize it to other cases unless specified explicitly.}
+	
+	\begin{def*}[differentiable curve]
+		%A differentiable/$C^r$/holomorphic curve on a differential manifold $M$
+		%is a differentiable/$C^r$/holomorphic map from a non-empty (preferably connected) 1-manifold
+		A \textbf{differentiable curve} on a real differential manifold $M$
+		is a differentiable map from a non-empty (preferably connected) real 1-manifold
+		to $M$
+	\end{def*}
+	\begin{rem*}
+		The domain is usually set as an interval in $\re$.
+	\end{rem*}
 
+	\begin{def*}[holomorphic curve]
+		A \textbf{holomorphic curve} in a complex manifold $M$
+		is a non-constant holomorphic map $f$ from the complex plane to $M$.
+	\end{def*}
+	\begin{rem*}
+		Note that $\co$ is not holomorphic to an open ball.
+	\end{rem*}
+	
+	\begin{def*}[initialized differential curve]
+		Given a real differentiable manifold $(M,\tau,\mathcal{A})$ and a point $x\in M$,
+		a \textbf{differentiable curve initialized at $x$}
+		is a differentiable curve $\gamma\colon(-1,1)\to M$ such that $\gamma(0)=x$.
+	\end{def*}
+	\begin{rem*}		
+		We need some special treatment for complex manifolds.
+	\end{rem*}
+
+	\begin{rem*}
+		Initialized differential curve might also be defined in this way:
+		
+		Given a real differentiable manifold $(M,\tau,\mathcal{A})$ and a point $x\in M$,
+		%pick a coordinate chart $(\varphi \colon U \to K ^{n})$ from the atlas $\mathcal{A}$, where $U$ is an open neighbourhood
+		pick a coordinate chart $(\varphi \colon U \to \re^{n})$ from the atlas $\mathcal{A}$, where $U$ is an open neighbourhood
+		of $x$ (that is, $x\in U\in\tau$). Let $\gamma\colon (-1,1)\to U$ be a mapping such that $\gamma(0)=x$ and that
+		$\varphi\circ\gamma\colon(-1,1)\to \re^{n}$ is differentiable,
+		%$\varphi\circ\gamma|_U\colon(-1,1)\to \re^{n}$ is differentiable (where $\gamma|_U$
+		%is the restriction of $\gamma$ to $U$),
+		then $\gamma$ is a \textbf{differentiable curve initialized at $x$}.
+		
+		%$K$ is either $\re$ or $\co$.
+		
+		%This should be independent on the choice of the coordinate chart.
+		
+		The codomain is dependent on the choice of the coordinate chart,
+		and the algebra of differentiable curves initialized at a given point defined this way
+		might be smaller than allowing the codomain to be the whole manifold (? need proof!).
+		(even though the image is restricted within a path-connected component (?)
+		but there might not be a single coordinate chart covering the whole
+		path-connected component, or is there???)
+		
+		
+		However, when considering local property,
+		it should be equivalent to allowing the codomain to be the whole manifold.
+	\end{rem*}
+
+	\begin{def*}
+		\red{directional derivative}
+	\end{def*}
+
+	\red{TODO, structure sheaf}
 
 	\subsubsection{Lie Group}
 	\paragraph{Product Manifold}
@@ -8984,7 +9125,7 @@
 	\pagebreak
 	%\newgeometry{top=2cm}
 	\begin{rem*}
-		Lie group is a tuple ($K$ is either $\re$ or $\co$)
+		Lie group is a tuple (with $K$ being either $\re$ or $\co$)
 		\[(G,\cdot\colon G\times G\to G, (\bullet)^{-1}\colon G\to G
 		,\tau\in\power(\power(G)), I,\mathcal{A}=(U_i,\varphi_i\colon U_i\to K^{n_i})_{i\in I} )\]
 		satisfying the following axioms\\
@@ -9009,7 +9150,7 @@
 				%\forall \alpha,\beta \in \psi(V) 
 				\big( p=q\iff\psi(p)=\psi(q) \big) \\
 				&\land \forall S \subseteq V 
-				\big( S\in\tau\iff\psi(S)\in \mathcal{H}(K^{n'}) \big)\\
+				\big( S\in\tau\iff\psi(S)\in \mathcal{T}(K^{n'}) \big)\\
 				&\land 
 				 \forall i\in I
 				\big(
@@ -9026,16 +9167,16 @@
 				(x)^{-1}\cdot x&= x\cdot (x)^{-1} = e ;\\
 			\end{eqlong}
 			\item the group operations are smooth/holomorphic, \ie,
-			\[
-			\begin{aligned}
-				&\exists j,k,l\in I\Big[ x\in U_j\land y\in U_k\land (x)^{-1}\cdot y\in U_l\land\\
-				&\Big( \varphi_l \circ \big( (p,q)\mapsto (p)^{-1}\cdot q \big) \circ (\varphi_j\times\varphi_k)^{-1} \Big)
-				\text{ is smooth/holomorphic}
-				\Big],\\
-			\end{aligned}
-			\]
+			\begin{equation}
+				\begin{aligned}
+					&\exists j,k,l\in I\Big[ x\in U_j\land y\in U_k\land (x)^{-1}\cdot y\in U_l\land\\
+					&\Big( \varphi_l \circ \big( (p,q)\mapsto (p)^{-1}\cdot q \big) \circ (\varphi_j\times\varphi_k)^{-1} \Big)
+					\text{ is smooth/holomorphic}
+					\Big],\\
+				\end{aligned}
+			\end{equation}
 		\end{itemize}
-		where $\mathcal{H}(K^{n'})$ retrieves the metric topology on a finite-dimensional Hilbert space $K^{n'}$ (\ref{propEuclideanTopology}).
+		where $\mathcal{T}(K^{n'})$ retrieves the metric topology on a $n'$-dimensional Hilbert space $K^{n'}$ (\ref{propEuclideanTopology}). $n',n_i\in\nat$.
 	\end{rem*}
 	%\restoregeometry
 	\begin{rem*}
@@ -9112,6 +9253,10 @@
 	}
 	
 	\subsection{Lie groups: definitions}
+
+	\red{a map of connected Lie 
+	groups $\varphi\colon G\to H$ is a surjective map of groups is equivalent to saying that the 
+	differential $d\varphi$ is surjective at every point.}
 	
 	\subsection{Examples of Lie groups}
 	
