@@ -7054,6 +7054,8 @@
 		\exists x\in M\forall \varepsilon\in\re^+\exists N\in\nat\forall n\in\nat[n\ge N\implies d(x_n,x)<\varepsilon]. \]
 	\end{def*}
 	\paragraph{Normed Vector Space}
+	
+
 	\begin{def*}[normed vector space]
 		A \textbf{normed vector space} or normed space is a vector space $(V,+,\cdot,\norm{\wc}\colon V\to\re_0^+)$ over $K$ (either $\re$ or $\co$), on which the norm $\norm{\wc}$, $\forall x\in V,a\in K$, has the following properties:
 		\begin{itemize}
@@ -7612,6 +7614,20 @@
 			\item every open subset of $X$ is normal with the subspace topology.
 		\end{itemize}
 	\end{thm}
+
+	\begin{thm}
+		Any $T_1$ topological real or complex vector space of dimension $n<\infty$ is homeomorphic to a finite dimensional
+		Hilbert space.
+	\end{thm}
+	\begin{rem*}
+		\href{https://mathoverflow.net/questions/50328/are-all-topological-finite-dim-real-vector-spaces-homeomorphic-to-a-coordinate}
+		{Are all topological (finite-dim) real vector spaces homeomorphic to a coordinate space?}
+		
+		See e.g. Rudin, Functional analysis, theorem 1.21.
+		
+		Also:
+		\href{https://math.stackexchange.com/questions/2763257/is-rudin-wrong-when-is-a-finite-dimensional-topological-vector-space-homeomorph}{Is Rudin wrong? When is a finite dimensional topological vector space homeomorphic to coordinate space?}
+	\end{rem*}
 	
 	\subparagraph{Visualization of Hierarchy}
 	
@@ -8765,13 +8781,16 @@
 		\href{https://math.stackexchange.com/questions/2473974/is-the-maximal-atlas-for-a-topological-manifold-unique}
 		{Is the maximal atlas for a topological manifold unique?}
 		
-		However, the maximal atlas of a given manifold \textit{equipped with some differential atlas} should be unique.
+		However, the maximal atlas of a given manifold \textit{equipped with some differential atlas} should be unique
+		per Zorn’s lemma.
+		
+		\includegraphics{unique_maximal_atlas}
 	\end{rem*}
 
 	\begin{def*}[differential manifold]
 		A maximal $C^r$ atlas on a manifold $M$ is called a \textbf{$C^r$ structure}.
 		A \textbf{differential manifold}
-		$M$ of class $C^r$ consists of a \textit{second countable} Hausdorff topological space $M$ and a
+		$M$ of class $C^r$ consists of a \textit{(preferably second countable)} Hausdorff topological space $M$ and a
 		$C^r$ structure on it.
 		
 		Below are aliases of different types of differential manifold.
@@ -8782,12 +8801,23 @@
 			$C^{\infty}$ & smooth atlas & smooth structure & \textbf{smooth manifold}\\
 			%\hline
 			$C^{\omega}$ & analytic atlas & analytic structure & \textbf{analytic manifold}\\
+			%holomorphic & holomorphic atlas & complex structure & 
 			\hline
 		\end{centabular}
 		%A $C^{\infty}$ manifold is also called a smooth manifold.
 	\end{def*}
+	\begin{rem*}
+		There are some benefits of enforcing second countability:
+		
+		\href{https://math.stackexchange.com/questions/102950/is-an-immersed-submanifold-second-countable}{Is an immersed submanifold second-countable?}
+		
+		\href{https://mathoverflow.net/questions/362154/when-why-did-we-allow-manifolds-to-be-non-hausdorff-and-or-non-second-countabl}
+		{When (why) did we allow manifolds to be non-Hausdorff and/or non-second countable?}
+	\end{rem*}
+	
 	\begin{cor}
-		A differential manifold is a second-countable topological manifold.
+		A differential manifold is a (possibly second-countable) topological manifold,
+		\ie, the existence of an atlas grants its locally Euclidean property.
 	\end{cor}
 	
 	\begin{thm}
@@ -8797,6 +8827,75 @@
 		See H. Whitney, Differentiable manifolds. Ann. of Math. 37 (1936), 645-680.
 	\end{proof}
 
+	\paragraph{Complex Manifold}
+	%holomorphic & holomorphic atlas & complex structure & 
+	
+	\begin{def*}[complex chart]
+		Given a neighborhood $U$ of a topological space, a homeomorphism $\varphi \colon U \to \varphi(U) \in\tau(\co ^{n})$
+		to a open subset of a finite dimensional Hilbert space is a (complex) \textbf{chart} on $U$.
+	\end{def*}
+	
+	\begin{def*}[holomorphic function]
+		A \textbf{holomorphic function} is a complex-valued function of one or more complex variables
+		that is complex differentiable in a neighbourhood of each point in a domain in complex coordinate space $\co^n$.
+	\end{def*}
+	\begin{thm}
+		All holomorphic functions are complex analytic functions, and vice versa.
+	\end{thm}
+
+	\begin{def*}[biholomorphically compatible charts]
+		Two overlapping charts $(U_{\alpha },\varphi _{\alpha })$ and $(U_{\beta },\varphi _{\beta })$
+		are called \textbf{biholomorphically
+		compatible} if the transition map
+		\[ \tau _{\alpha ,\beta }\colon\varphi _{\alpha }(U_{\alpha }\cap U_{\beta })\to \varphi _{\beta }(U_{\alpha }\cap U_{\beta })\]
+		defined by
+		\[\tau _{\alpha ,\beta }=\varphi _{\beta }\circ \varphi _{\alpha }^{-1}\]
+		is biholomorphic, \ie, holomorphic, bijective and possessing a holomorphic inverse.
+	\end{def*}
+
+	
+
+	\begin{def*}[holomorphic atlas]
+		Given a topological space $X$,
+		an \textbf{holomorphic atlas}, if existent, is an indexed family 
+		\[\set{(U_{\alpha },\varphi _{\alpha })|\alpha \in I}\]
+		of pairwise biholomorphically
+		compatible (complex) charts on $X$ which covers $X$ (that is, $\bigcup _{\alpha \in I}U_{\alpha }=X$).
+	\end{def*}
+	\begin{rem*}
+		There is a unique maximal atlas for a given atlas.
+		But, unlike real charts, the codomain of charts actually matters,
+		as an open ball in $\re^n$ is not holomorphic to $\re^n$.
+	\end{rem*}
+	
+	\begin{def*}[complex manifold]
+		A \textbf{complex manifold} is a Hausdorff topological space $M$ equipped
+		with a complex structure, \ie, a maximal holomorphic atlas.
+	\end{def*}
+
+	\begin{lem}
+		The space $\re^{2n}$ is homeomorphic to $\co^{n}$.
+	\end{lem}
+	\begin{proof}
+		Choose a orthonormal basis $(e_k)_{k=1,\dots,2n}$ for $\re^{2n}$
+		and $(e'_k)_{k=1,\dots,n}$ for $\co^n$,
+		which always exists due to \ref{thmHilbertOrthonormal},
+		then the inner product in $\re^{2n}$ is expressed as
+		\[ \langle x,y\rangle = \sum_{i=1}^{2n} x_iy_i, \]
+		and the inner product in $\co^{n}$ is
+		\[ \langle x,y\rangle = \sum_{i=1}^{n} x_i \conj{y_i}, \]
+		then the map
+		\[ \sum_{k=1}^n x_{k} e_k + x_{k+n} e_{k+n} \mapsto \sum_{k=1}^n (x_{k}+x_{k+n}i) e'_{k} \]
+		is a homeomorphism.
+	\end{proof}
+
+	\begin{cor}
+		All complex manifolds are locally Euclidean.
+	\end{cor}
+
+	\red{Confirm ``local compactness'' is not needed here.}
+		
+	\paragraph{Diffeomorphism}
 	\begin{def*}[differentiable at a point]
 		Given two $C^k$ ($r\le k$) manifolds, $M_1$ and $M_2$,
 		a map $f\colon M_1\to M_2$
@@ -8805,9 +8904,10 @@
 		iff there is a chart $(U_1,\varphi_1)$ in $M_1$ and a chart $(U_2,\varphi_2)$ in $M_2$
 		and $U\subseteq M_1$ such that
 		\[ p\in U \land f(p)\in f(U)  \land U \subseteq U_1 \land f(U)\subseteq U_2 \]
-		and the map from an open set of Euclidean space onto an open Euclidean set
+		and the map from an open set of a finite-dimensional Hilbert space
+		onto an open set of a finite-dimensional Hilbert space
 		\[ \varphi_2 \circ f\circ \varphi_1^{-1} \colon \varphi_1(U)\to\varphi_2(f(U)) \]
-		is differentiable or $C^r$ at point $\varphi_1(p)\in\re^n$.
+		is differentiable or $C^r$ at point $\varphi_1(p)$.
 	\end{def*}
 	\begin{rem*}
 		One can choose $U=f^{-1}(U_2)\cap U_1$. Or choose $U=U_1$ by enforcing $f(U_1)\subseteq U_2$.
@@ -8827,6 +8927,9 @@
 		($C^r$-)differentiable.
 		Two differential manifolds are ($C^r$-)\textbf{diffeomorphic} if there is a ($C^r$-)diffeomorphism between them.
 	\end{def*}
+	\begin{rem*}
+		All concept above can be generalized to holomorphic maps.
+	\end{rem*}
 
 	\subsubsection{Lie Group}
 	\paragraph{Product Manifold}
@@ -8868,14 +8971,17 @@
 	
 	\paragraph{Definition of Lie Group}
 	
+	\begin{def*}[Lie group]
+		A real (or complex) \textbf{Lie group} is a group $G$ that is also a finite-dimensional real (or complex) smooth manifold,
+		in which the mapping from the product manifold $G\times G$ to $G$
+		\[ (x,y)\mapsto x^{-1}y,\] is smooth (or holomorphic).
+		%in which the group operations of multiplication and inversion are smooth (or holomorphic) maps.
+	\end{def*}
 
 	\subsubsection{TODO}
 	
 	\url{https://en.wikipedia.org/wiki/Immersion_(mathematics)}
 	
-	\url{https://math.stackexchange.com/questions/102950/is-an-immersed-submanifold-second-countable}
-	
-	\url{https://mathoverflow.net/questions/362154/when-why-did-we-allow-manifolds-to-be-non-hausdorff-and-or-non-second-countabl}
 
 	\url{https://en.wikipedia.org/wiki/Partition_of_unity}
 	
