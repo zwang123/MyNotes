@@ -9296,14 +9296,17 @@
 
 	\begin{def*}[structure sheaf of manifold]
 		On an $C^k$-manifold $M$, the sheaf of $C^j$-differentiable functions ${\mathcal {O}}_{M}^{j}$ (with $j \le k$)
-		is a sheaf of unital associative algebra.
-		Its sections on some open set $U$ are the $C^j$-functions $U \to K$ (with $K$ being either $\re$ or $\co$).
+		is a sheaf of unital associative algebra over $K$  (with $K$ being either $\re$ or $\co$).
+		Its sections on some open set $U$ are the $C^j$-functions $U \to K$.
 		For $j = k$, this sheaf is called the \textbf{structure sheaf} and is denoted $\mathcal {O}_{M}$.
-		The nonzero $C^k$ functions also form a sheaf, denoted $ {\mathcal {O}}_{X}^{\times }$.
-		Differential forms (of degree p) also form a sheaf %ΩpM. In all these examples, the restriction morphisms are given by restricting functions or forms.
-		
-		The assignment sending U to the compactly supported functions on U is not a sheaf, since there is, in general, no way to preserve this property by passing to a smaller open subset. Instead, this forms a cosheaf, a dual concept where the restriction maps go in the opposite direction than with sheaves.[2] However, taking the dual of these vector spaces does give a sheaf, the sheaf of distributions.
 	\end{def*}
+	\begin{rem*}
+		The nonzero $C^k$ functions also form a sheaf of Abelian groups, denoted $ {\mathcal {O}}_{X}^{\times }$.
+		
+		%Differential forms (of degree p) also form a sheaf %ΩpM. In all these examples, the restriction morphisms are given by restricting functions or forms.
+		
+		%The assignment sending U to the compactly supported functions on U is not a sheaf, since there is, in general, no way to preserve this property by passing to a smaller open subset. Instead, this forms a cosheaf, a dual concept where the restriction maps go in the opposite direction than with sheaves.[2] However, taking the dual of these vector spaces does give a sheaf, the sheaf of distributions.
+	\end{rem*}
 	
 	\subsubsection{Lie Group}
 	\paragraph{Product Manifold}
@@ -9332,6 +9335,147 @@
 		$X$ is defined to be the coarsest topology (\ie, the topology with the fewest open sets) for which all the projections $p_{i}$ are continuous.
 		The Cartesian product $X$ endowed with the product topology is called the \textbf{product space}.
 	\end{def*}
+	\begin{rem*}
+		For example, consider two topological spaces $(X,\sigma)$ and $(Y,\tau)$,
+		In the product space $(X\times Y, \rho)$, we have canonical projections
+		\[ \forall b \in Y, (a,b) \mapsto a, \]
+		which must be continuous, \ie,
+		\[ \calS = \set{ S\times Y   |S\in \sigma} \subseteq \rho. \]
+		%\[ \calS_1 = \set{ S\times\set{b}   |S\in \sigma, b\in Y } \subseteq \rho. \]
+		%\[ \calS_1 = \set{ \set{ (a,b) |  a\in S }   |S\in \sigma, b\in Y } \subseteq \rho. \]
+		%\[ \calS = \set{ \set{ (a,b)\in X\times Y |  a\in S } \in \power(X\times Y)  | b\in Y, S\in \sigma} \subseteq \rho. \]
+		%Since union of open sets must be a open set, this indicates:
+		%\[ \calS = \set{ \set{(a,b)|a\in f(b), b\in T}   | f\colon T\to \sigma, T\subseteq Y } \subseteq \rho. \]
+		%\[ \calS = \set{ \set{ (a,b) |  a\in S,b\in T }   | S\in \sigma,T\subseteq Y } \subseteq \rho, \]
+		%or succinctly,
+		%\[ \calS = \set{ S\times T   | S\in \sigma,T\subseteq Y} \subseteq \rho, \]
+		
+		Similarly,
+		%\[ \calT = \set{ \set{ (a,b) |  b\in T }   | a\in X, T\in \tau} \subseteq \rho. \]
+		%\[ \calT = \set{ S\times T   | S\subseteq X,T\in\tau } \subseteq \rho, \]
+		%\[ \calT = \set{ \set{(a,b)|a\in S, b\in g(a)}   | S\subseteq X, g\colon S\to \tau} \subseteq \rho. \]
+		\[ \calT = \set{ X\times T   |T\in \tau} \subseteq \rho. \]
+		
+		Since the intersection of two open sets is open, we have
+		\[ \set{ S\times T   |S\in \sigma, T\in \tau} \subseteq \rho.  \]
+		
+		%Since the union of two open sets is open, we have
+		%\[ \set{ S\times Y\cup X\times  T   |S\in \sigma, T\in \tau} \subseteq \rho.  \]
+		
+		Since the union of open sets is open, we have
+		\[ \set{  \bigcup_{i\in I} (S_i \times T_i)  | (S_i,T_i)_{i\in I} \subseteq \sigma \times \tau} \subseteq \rho.  \]
+		
+		Since the product topology is defined as the coarsest topology satisfying the above condition,
+		we obtain
+		\[ \rho =  \set{  \bigcup_{i\in I} (S_i \times T_i)  | (S_i,T_i)_{i\in I} \subseteq \sigma \times \tau}, \]
+		\ie, open sets in product topology are the unions of Cartesian products of open sets.
+		
+		This can be generalized to finite product of topological spaces
+		(because finite intersection of open sets is still open set).
+		Given spaces $(X_1,\tau_1), \dots, (X_n,\tau_n)$ where $n\in\inte^+$,
+		the product topology is
+		\[ \set{ \bigcup_{i\in I} \prod_{j=1}^n S_{ij} |  S_{ij}\in \tau_j }. \]
+		
+		For infinite Cartesian product of $(X_j,\tau_j)_{j\in J}$, a base consists of
+		\[ \prod_{j\in J} S_j \]
+		where $S_j$ is $X_j$ except finite number of them is allowed to be an open subset of $X_j$.
+		
+		If the number of open sets is allowed to be infinite, then the topology is called the \textbf{box topology},
+		which is finer than the product topology.
+	\end{rem*}
+
+	\begin{prop}\label{propContinuousInjection}
+		If $P$ is the product space of spaces $(X_\lambda)_{\lambda\in \Lambda}$, then for any partition of the index set $\Lambda$
+		into two subsets $\Lambda_1$ and $\Lambda_2$
+		($\Lambda = \Lambda_1 \cup \Lambda_2, \Lambda_1 \cap \Lambda_2=\emptyset$), and
+		any $f_2\in \prod_{\lambda\in\Lambda_2} X_\lambda$, the mapping
+		\[\mathcal{I}\colon\prod_{\lambda\in\Lambda_1} X_\lambda\to\prod_{\lambda\in\Lambda} X_\lambda, f_1 \mapsto f  \]
+		such that
+		\[f(\lambda)=\begin{cases}
+			f_1(\lambda) & (\lambda\in\Lambda_1)\\
+			f_2(\lambda) & (\lambda\in\Lambda_2)\\
+		\end{cases}.
+		\]
+		is a continuous injection.
+	\end{prop}
+	\begin{proof}
+		Any open set $A$ in the product space $P=\prod_{\lambda\in\Lambda} X_\lambda$
+		is an union
+		\[ A = \bigcup_{\gamma\in \Gamma} \prod_{\lambda\in \Lambda} S_{\gamma\lambda} =
+		\bigcup_{\gamma\in \Gamma} \mathscr{P} \left[
+		\left(\prod_{\lambda\in \Lambda_1} S_{\gamma\lambda}\right)
+		\times
+		\left(\prod_{\lambda\in \Lambda_2} S_{\gamma\lambda}\right) \right]
+		 ,\]
+		 where for each $\gamma$ there are finite sets in $S_{\gamma\lambda}$ is an open subset of $X_\lambda$
+		 (others must be $X_\lambda$) (let's call it ``finite support'') and $\mathscr{P}$ is a permutation function.
+		 Since $(S_{\gamma\lambda})_{\lambda\in\Lambda}$ has finite support iff
+		 both $(S_{\gamma\lambda})_{\lambda\in\Lambda_1}$ and $(S_{\gamma\lambda})_{\lambda\in\Lambda_2}$
+		 have finite support, therefore such partition is valid.
+		 
+		 Partition $\Gamma$ into two subsets $\Gamma_1$ and $\Gamma_2$ such that
+		 \[f_2\in \prod_{\lambda\in \Lambda_2} S_{\gamma\lambda} \iff \gamma \in \Gamma_1. \]
+		 Then the preimage of $A$ is the same as the preimage of $A'$
+		 \[ A' = 
+		 \bigcup_{\gamma\in \Gamma_1} \mathscr{P} \left[
+		 \left(\prod_{\lambda\in \Lambda_1} S_{\gamma\lambda}\right)
+		 \times
+		 \left(\prod_{\lambda\in \Lambda_2} S_{\gamma\lambda}\right) \right]
+		 .\]
+		 
+		 That is to say, the preimage is
+		 \[\mathcal{I}^{-1}(A)=\mathcal{I}^{-1}(A')=\bigcup_{\gamma\in \Gamma_1}
+		 \left(\prod_{\lambda\in \Lambda_1} S_{\gamma\lambda}\right), \]
+		 which is an open set because $(S_{\gamma\lambda})_{\lambda\in\Gamma_1}$ has finite support.
+		 
+		 Therefore $\mathcal{I}$ is a continuous function.
+		 From the property of Cartesian product, we know it is injection.
+	\end{proof}
+
+	\begin{cor}
+		Given $f_2\in \prod_{\lambda\in\Lambda_2} X_\lambda$, the cross section (or slice) of an open set
+		$A\subseteq \prod_{\lambda\in\Lambda} X_\lambda$
+		in the product space into some smaller product space
+		\[ \set{ f_1 \in \prod_{\lambda\in\Lambda_1} X_\lambda | f\in A
+			\land  f(\lambda)=\begin{cases}
+				f_1(\lambda) & (\lambda\in\Lambda_1)\\
+				f_2(\lambda) & (\lambda\in\Lambda_2)\\
+		\end{cases} } \]
+		is open.
+	\end{cor}
+	\begin{cor}\label{corContinuousInjection}
+		If $X$ and $Y$ are topological spaces, and $x_0\in X,y_0\in Y$,
+		then 
+		\[ f_{x_0} \colon Y \to X\times Y, y\mapsto (x_0,y) \]
+		and
+		\[ f_{y_0} \colon X \to X\times Y, x\mapsto (x,y_0) \]
+		are continuous injections.
+		If $A$ is an open set in $X\times Y$, then
+		\[ \set{ x\in X | (x,y_0) \in A} \]
+		and
+		\[ \set{ y\in Y | (x_0,y) \in A} \]
+		are open sets in $X$, $Y$, respectively.
+	\end{cor}
+
+	\begin{prop}\label{propContinuousCartesianProduct}
+		If $f\colon X_1\to X_2$ is continuous,
+		then
+		\[ f_1\colon X_1\times Y \to X_2 \times Y\colon  (x,y)\mapsto (f(x),y) \]
+		and 
+		\[ f_2\colon W\times X_1 \to W\times X_2 \colon  (w,x)\mapsto (w,f(x)) \]
+		are continuous for any topological spaces $W,Y$.
+	\end{prop}
+	\begin{proof}
+		The open set in $X_2\times Y$ is a union
+		\[ A=\bigcup_{i\in I} (S_i \times T_i) \]
+		where $S_i$ are open sets in $X_2$ and $T_i$ are open sets in $Y$.
+		
+		Therefore the preimage
+		\[ f_{1}^{-1}(A) =\bigcup_{i\in I} f_1^{-1}(S_i \times T_i) =\bigcup_{i\in I} f^{-1}(S_i) \times T_i \]
+		is open in $X_1\times Y$ because $f^{-1}(S_i) $ is open in $X_1$.
+		
+		$f_2$ is continuous for similar reasons.
+	\end{proof}
 	
 	\begin{def*}[product manifold]
 		The \textbf{product manifold} 
@@ -9490,4 +9634,172 @@
 	\subsection{Examples of Lie groups}
 	
 	\subsection{Two constructions}
+	
+	\section{Lie Algebras and Lie Groups}
+	
+	\setcounter{subsection}{-1}
+	\subsection{Topological Group}
+	
+	\begin{def*}[topological group]
+		A \textbf{topological group}, $G$, is a topological space that is also a group such that the map
+		\[G\times G\to G,(x,y)\mapsto x^{-1}y\]
+		is continuous.
+	\end{def*}
+	
+	%\newgeometry{top=2cm}
+	\begin{rem*}
+		The preimage of $(x,y)\mapsto z$, where $z=x^{-1}y$,
+		is \[ \set{(x,xz)|x\in G} \] which is bijectively corresponding to the right coset $Gz$.
+		Therefore we can write down a formal definition without terminologies.
+		
+		\pagebreak
+		A topological group is a tuple
+		\[\big(G,\cdot\colon G\times G\to G, (\bullet)^{-1}\colon G\to G
+		,\tau\in\power(\power(G)) \big)\]
+		satisfying the following axioms\\
+		($\exists! e\in G, 
+		\forall x,y,z\in G,\forall S\in \tau, \forall \mathcal{S}\subseteq\tau$):
+		\begin{itemize}
+			\item it is a topological space, \ie,
+			\begin{eqlong}
+				\set{\emptyset, G} \subseteq &\tau,\\
+				\bigcup \calS \in& \tau,\\
+				\card{\calS}\in\inte^+\implies &\bigcap \calS \in \tau;\\
+			\end{eqlong}
+			\item it is a group, \ie,
+			\begin{eqlong}
+				(x\cdot y) \cdot z &= x \cdot (y \cdot z), \\
+				e \cdot x& = x \cdot e = x ,\\
+				(x)^{-1}\cdot x&= x\cdot (x)^{-1} = e ;\\
+			\end{eqlong}
+			\item the group operations are continuous, \ie,
+			$\exists (P_i,Q_i)_{i\in I}\subseteq (\tau\times\tau)$ such that
+			%or equivalently
+			\[ \forall p\forall q \big[ (p\in G\land q\in S) \iff \exists i\in I (p\in P_i \land p\cdot q \in Q_i)  \big]. \]
+		\end{itemize}
+	\end{rem*}
+	\begin{rem*}
+		The last equation can be simplified as
+		\begin{eqlong}
+			%&\big( (w=y\land x=z) \iff w^{-1}x  = y^{-1}z \big) \\
+			%&\land \forall S,T \subseteq G 
+			%\big( S\in\tau  \iff \psi(S)\in \tau \big)\\
+			%&\land 
+			%
+			%\big[
+			\set{(p,p\cdot q)|p\in G,q\in S} = \bigcup_{i\in I} (P_i \times Q_i)
+			%\big]
+			.
+		\end{eqlong}
+	\end{rem*}
+	%\restoregeometry
+
+
+	\begin{lem}\label{lemTopGrpHomeo}
+		Let $G$	be a topological group and 
+		$x,y,r\in G$.
+		The multiplication $(x,y)\mapsto xy$, $(x,y)\mapsto xy^{-1}$ are continuous,
+		the left multiplication $s\mapsto rs$,
+		right multiplication $s\mapsto sr$, and inversion $s\mapsto s^{-1}$, are self-homeomorphisms of 
+		$G$.
+		
+	\end{lem}
+	\begin{proof}
+		If $e\in G$ is the identity, then due to \ref{corContinuousInjection},
+		\[ s\mapsto (s,e)\mapsto s^{-1}e=s^{-1} \]
+		is a continuous map (the composition of continuous maps is continuous).
+		Since $(s^{-1})^{-1}=s$ and this is unique, the inverse map
+		\[ s^{-1}\mapsto (s^{-1})^{-1}=s \]
+		is also well-defined and continuous. Therefore the inversion is self-homeomorphism.
+		
+		And hence the following mappings are well-defined and continuous (\ref{propContinuousCartesianProduct}):
+		\[\begin{aligned}
+			(x,y)&\mapsto (x^{-1},y) \mapsto (x^{-1})^{-1}y=xy, \\
+			(x,y)&\mapsto (x,y^{-1}) \mapsto xy^{-1}, \\
+			s&\mapsto (r,s)\mapsto rs,\\
+			s&\mapsto (s,r)\mapsto sr,\\
+			rs&\mapsto (r^{-1},rs)\mapsto r^{-1}rs=s,\\
+			sr&\mapsto(sr,r^{-1})\mapsto srr^{-1}=s.\\
+		\end{aligned} \]
+	\end{proof}
+	\begin{rem*}
+		If $G$ is a group equipped with some topology, such self-homeomorphism property does not guarantee $G$ be a topological group.
+		Therefore all topological groups are semitopological groups but the converse does not hold.
+	\end{rem*}
+	\begin{def*}[semitopological group]
+		A \textbf{semitopological group} $G$ is a topological space that is also a group such that
+		\[g_{1}:G\times G\to G:(x,y)\mapsto xy\]
+		is continuous with respect to both $x$ and $y$.
+	\end{def*}
+
+	\begin{lem}\label{lemUVopen}
+		Let $G$
+		be a topological group. If 
+		$U\subseteq G$
+		is open and 
+		$V\subseteq G$
+		is any subset of $G$, then 
+		\[UV=\set{ uv\in G| u\in U, v\in V} \]
+		and
+		\[VU=\set{ vu\in G| u\in U, v\in V} \]
+		are open in $G$.
+	\end{lem}
+	\begin{proof}
+		Given any $v\in V$, $v^{-1}\in G$, $\therefore$ the mappings below are homeomorphisms on $G$:
+		%\[ uy\mapsto (uy,y^{-1}) \mapsto uyy^{-1}=u \]
+		\[ x\mapsto xv^{-1}, x\mapsto v^{-1}x.  \]
+		
+		The preimage of an open set $U$ for both mappings are
+		\[Uv=\set{uv|u\in U},vU=\set{vu|u\in U},\]
+		respectively. So they must be open in $G$.
+
+		Since
+		\[ UV=\bigcup _{v\in V}Uv, VU=\bigcup_{v\in V}vU, \]
+		and union of open sets is open, $\therefore$ $UV$ and $VU$ are open in $G$.
+	\end{proof}
+	\begin{rem*}
+		See more about topological group \href{https://planetmath.org/BasicResultsInTopologicalGroups}{here}.
+	\end{rem*}
+
+	\begin{thm}
+		The identity component of a topological or algebraic group is a closed normal subgroup.
+	\end{thm}
+	\begin{proof}
+		It is closed since components are always closed.
+		It is a subgroup since multiplication and inversion in a topological or algebraic group are continuous maps by definition.
+		Moreover, for any continuous automorphism $a$ of $G$ we have
+		$a(G^0) = G^0$.
+		Thus, $G^0$ is a characteristic subgroup of $G$, so it is normal.
+	\end{proof}
+	\begin{rem*}
+		The identity component  need not be open.
+		However, the identity component of a locally path-connected space (for instance a Lie group) is always open.
+	\end{rem*}
+
+	\begin{prop}
+		Any neighbourhood of the identity of a topological group generates an non-empty clopen set.
+	\end{prop}
+	\begin{proof}
+		See \href{https://planetmath.org/connectedtopologicalgroupisgeneratedbyanyneighborhoodofidentity}{this proof}.
+		
+		Since $u\mapsto u^{-1}$ is homeomorphism (\ref{lemTopGrpHomeo}) (and therefore open map),
+		$U$ being open implies that $U^{-1}$ is open, and therefore $gU^{-1}=\set{g} U^{-1}$ is open (\ref{lemUVopen}).
+		the identity is in $U$ and therefore in $U^{-1}$, so $g\in gU^{-1}$.
+	\end{proof}
+	\begin{cor}\label{corExe8.1}
+		Any neighbourhood of the identity of a topological group generates the identity component of a Lie group
+		or the whole group if it is connected.
+	\end{cor}
+	
+	
+	\subsection{Lie Algebras: Motivation and Definition}
+	\begin{exe}
+		See \ref{corExe8.1}.
+	\end{exe}
+	\begin{rem*}
+		See also: \href{https://math.stackexchange.com/questions/282442/a-neighbourhood-of-identity-u-generates-g-where-g-is-a-connected-lie-group}{a neighbourhood of identity U generates G where G is a connected lie group}.
+	\end{rem*}
+	
+	\subsection{Examples of Lie algebras}
+	\subsection{The exponential map}
 \end{document}
