@@ -6940,6 +6940,10 @@
 		Because an open set is a set that is a neighborhood of all its points.
 	\end{rem*}
 
+	\begin{thm}
+		The preimage of continuous function on a closed set is closed.
+	\end{thm}
+
 	\begin{def*}[open map]
 		A map is called an \textbf{open map} or a strongly open map
 		if it maps open subsets of its domain to open subsets of its codomain.
@@ -8246,13 +8250,17 @@
 		\[ \forall U\in\tau\forall x\in B[x\in  U \implies A\cap U\ne\emptyset ],\]
 		iff (definition of qualified $\forall$ and set intersection)
 		\[ \forall U\in\tau\forall x[x\in B \cap  U \implies A\cap U\ne\emptyset ],\]
-		iff (right hand side is free of $x$)
+		iff (right hand side is free of $x$, see \ref{propExistsForall})
 		\[ \forall U\in\tau[\exists x\in B \cap  U \implies A\cap U\ne\emptyset ],\]
 		iff (definition and uniqueness of empty set)
 		\[ \forall U\in\tau[B\cap  U\ne\emptyset \implies A\cap U\ne\emptyset ].\]
 		
 	\end{rem*}
-	\begin{rem*}
+	\begin{prop}\label{propExistsForall}
+		Given wff $\varphi(x)$ and wff $\psi$ free of $x$, we have
+		\[ \forall x \big(\varphi(x) \implies \psi \big) \iff \exists x \varphi(x) \implies \psi . \]
+	\end{prop}
+	\begin{proof}
 		Given wff $\varphi(x)$ and wff $\psi$ free of $x$, we have
 		\[ \forall x \big(\varphi(x) \implies \psi \big) \]
 		iff (definition of $\implies$)
@@ -8263,7 +8271,7 @@
 		\[ \big(\neg\exists x \varphi(x)\big)  \lor \psi \]
 		iff (definition of $\implies$)
 		\[ \exists x \varphi(x) \implies \psi . \]
-	\end{rem*}
+	\end{proof}
 	
 	\begin{def*}[countability axioms]
 		A topological space $(X,\tau)$ is called 
@@ -8998,6 +9006,10 @@
 		A map is called \textbf{differentiable (or $C^r$)} if it is differentiable (or $C^r$)
 		at all points in the domain.
 	\end{def*}
+	\begin{def*}[differentiable function]
+		A \textbf{differentiable function} on a differential manifold is a differential map from the manifold
+		to $\re^n$ or $\co^n$.
+	\end{def*}
 
 	\begin{def*}[diffeomorphism]
 		A ($C^r$-)\textbf{diffeomorphism} $f$ is a bijection such that both $f$ and $f^{-1}$ are 
@@ -9072,6 +9084,27 @@
 		
 		However, when considering local property,
 		it should be equivalent to allowing the codomain to be the whole manifold.
+	\end{rem*}
+
+	\begin{def*}[tangent space]
+		Given a real differentiable manifold $(M,\tau,\mathcal{A})$ and a point $x\in M$,
+		pick a coordinate chart $(\varphi \colon U \to \re^{n})$ from the atlas $\mathcal{A}$, where $U$ is an open neighbourhood
+		of $x$ (that is, $x\in U\in\tau$). Let $\gamma_1,\gamma_2\colon (-1,1)\to M$ be 
+		two differentiable curves initialized at $x$ ($\gamma_1(0)=x=\gamma_2(0)$), they are said to be \textbf{equivalent at $ 0$}
+		if and only if the derivatives of $ \varphi \circ \gamma _{1}|_{\gamma_1^{-1}(U)}$
+		and $ \varphi \circ \gamma _{2}|_{\gamma_2^{-1}(U)}$ 
+		at $ 0$ coincide.
+		
+		The quotient space of all differentiable curves initialized at $x$ by this equivalence relation 
+		is the \textbf{tangent space} of $M$ at $x$, denoted $T_xM$, and equivalence classes in the tangent space
+		are known as \textbf{tangent vectors} of $M$ at $x$, denoted $\gamma'(0)$.
+		
+		One can define a bijective linear map $\dd\varphi_x\colon T_xM\to \re^n$ as
+		\[\dd\varphi_x(\gamma'(0))=\left.\frac{\dd}{\dd t}[\varphi\circ\gamma(t) ]\right|_{t=0} ,\]
+		where $\gamma\in\gamma'(0)$ is a curve in the equivalence class.
+	\end{def*}
+	\begin{rem*}
+		The definition does not depend on the choice of coordinate chart.
 	\end{rem*}
 
 	\begin{def*}
@@ -9306,6 +9339,64 @@
 		%Differential forms (of degree p) also form a sheaf %ΩpM. In all these examples, the restriction morphisms are given by restricting functions or forms.
 		
 		%The assignment sending U to the compactly supported functions on U is not a sheaf, since there is, in general, no way to preserve this property by passing to a smaller open subset. Instead, this forms a cosheaf, a dual concept where the restriction maps go in the opposite direction than with sheaves.[2] However, taking the dual of these vector spaces does give a sheaf, the sheaf of distributions.
+	\end{rem*}
+
+	\paragraph{Stalk and Germ}
+
+	\begin{def*}[stalk]
+		Given a topological space $(X,\tau)$,
+		the \textbf{stalk} of presheaf ${\mathcal{F}}$ at $x\in X$, usually denoted ${\mathcal {F}}_{x}$, is:
+		\[{\mathcal  {F}}_{x}\define\varinjlim _{{U\ni x}}{\mathcal  {F}}(U),\]
+		where the direct limit is indexed over all the open neighbourhoods of $x$,
+		with order relation induced by reverse inclusion ($U\le V$ iff $V\subseteq U $).
+		Explicitly, this is the disjoint union over an equivalence relation
+		\[ \mathcal{F}_x = \bigsqcup _{U\ni x}\mathcal{F}(U){\bigg /}\sim , \]
+		where
+		\[ \forall s\in\mathcal{F}(U) \forall t\in \mathcal{F}(V)
+		[s\sim t \iff \exists W\subseteq U\cap V (x\in W\in \tau\land s|_{W}=t|_{W}) ],
+		\]
+		\ie, two sections are considered equivalent if the restrictions of the two sections
+		coincide on some open neighborhood of $x$.
+	\end{def*}
+	\begin{rem*}
+		Let $M$ be a complex manifold of dimension $n$ and
+		$x \in M$. Then
+		\[\mathcal{O}_{X,x} \cong \co[z_1, \dots , z_n]\]
+		is the ring of convergent power series: If $\varphi \colon U \to V \subseteq \co^n$
+		is a chart around $x$ with $\varphi(x) = 0$, then any $f_x \in \mathcal{F}_x$ can be mapped
+		to the Taylor series expansion of $f_x \circ \varphi^{-1}$.
+		On the other hand, any
+		holomorphic function is locally determined by its Taylor series.
+	\end{rem*}
+
+	\begin{def*}[germ]
+		The canonical map
+		\[\mathcal{F}(U) \to \mathcal{F}_x, s \mapsto s_x \define \ec{s}\]
+		is a homomorphism. We call $s_x$ the
+		\textbf{germ} of $s$ in $x$.
+	\end{def*}
+
+	\paragraph{Holomorphic Tangent Space}
+	
+	\begin{def*}[holomorphic tangent space]
+		Let $(M,\tau,\mathcal{A})$ be a complex manifold and $x\in M$ be a point in the manifold.
+		On the stalk $\mathcal{O}_{M,x}$ of the structure sheave $\mathcal{O}_M$
+		of unital associative algebra of holomorphic functions from open sets to $\co$,
+		the set of all linear maps satisfying the Leibniz identity
+		\[T_xM=\set{D\colon\mathcal{O}_{M,x}\to\co | \forall f,g\in\mathcal{O}_{M,x}[ D(fg)=D(f)\cdot g(x)+D(g)\cdot f(x)] }\]
+		is called the \textbf{holomorphic tangent space} of $M$ at $x$.
+		It is a $\co$-vector space.
+		%Given a complex manifold $(M,\tau,\mathcal{A})$ and a point $x\in M$,
+		%pick a chart $\varphi\colon U\to \co^n$ on an open neighbourhood of $x$ ($x\in U\in \tau$)
+		%from atlas $\mathcal{A}$.
+		%
+		%The sheaf of holomorphic functions
+		%
+		%The holomor
+	\end{def*}
+	\begin{rem*}
+		Tangent space of a real differential manifold can be defined similarly,
+		equivalent to the previous definition.
 	\end{rem*}
 	
 	\subsubsection{Lie Group}
@@ -9589,6 +9680,474 @@
 		\end{eqlong}
 	\end{rem*}
 
+	\subsubsection{Algebraic Variety}
+	
+	\paragraph{Group Actions}
+	
+	See \ref{group action} for the definition of group action.
+	\begin{def*}[types of actions]
+		The group action of $G$ on set $X$ is called:
+		\begin{itemize}
+			\item \textbf{Transitive} if 
+			\[ X\ne \emptyset \land \forall x,y\in X\exists g\in G[gx=y]. \]
+			\item \textbf{Faithful} (or effective) if
+			%\[ \forall g,h\in G\exists x\in X[g\ne h\implies gx\ne hx], \]
+			\[ \forall g,h\in G\exists x\in X[g= h\iff gx= hx], \]
+			or equivalently
+			%\[ \forall g\in G\exists x\in X[g\ne e\iff gx\ne x],  \]
+			\[ \forall g\in G\exists x\in X[g=e\iff gx= x],  \]
+			or, different elements of $G$ induce different permutations of $X$. (see \ref{propFaithful})
+			\item \textbf{Free} (or semiregular or fixed point-free) if, 
+			\[ \forall g,h\in G [ \exists x \in X(gx=hx)\implies g=h ], \]
+			or equivalently
+			\[ \forall g\in G[\exists x\in X (gx=x)\implies g=e ] ,\]
+			or, by applying \ref{propExistsForall} and the fact that $ex=x$,
+			equivalently
+			\[ \forall g\in G\forall x\in X[ g=e\iff  gx=x ] .\]
+			
+			\item \textbf{Regular} (or simply transitive or sharply transitive) if it is both transitive and free, \ie,
+			\[ X\ne \emptyset\land \forall x,y\in X \exists! g\in G[gx=y]. \]
+			\item \textbf{$n$-transitive} if
+			\[ \begin{aligned}
+				&\card{X}\ge n \land \forall (x_i)_{i\in\inte_n},(y_i)_{i\in\inte_n} \in X^n\\
+				&\Big[ \forall i,j \in \inte_n\big(i=j\iff (x_i= x_j\land y_i=y_j) \big)\\
+				&\implies \exists g\in G\forall i\in\inte_n\big(gx_i=y_i\big) \Big].\\
+			\end{aligned}
+			\]
+			%\[ \card{X}\ge n \land \forall A,B \subseteq X
+			%[\card{A}=\card{B}=n \implies \exists g\in G\forall i\in\inte_n(gA_i=B_i) ].
+			% \]
+			A 2-transitive action is also called \textbf{doubly transitive},
+			a 3-transitive action is also called \textbf{triply transitive}, and so on.
+			\item \textbf{Sharply $n$-transitive} if there is exactly one such $g$:
+			\[ \begin{aligned}
+				&\card{X}\ge n \land \forall (x_i)_{i\in\inte_n},(y_i)_{i\in\inte_n} \in X^n\\
+				&\Big[ \forall i,j \in \inte_n\big(i=j\iff (x_i= x_j\land y_i=y_j) \big)\\
+				&\implies \exists! g\in G\forall i\in\inte_n\big(gx_i=y_i\big) \Big].\\
+			\end{aligned}
+			\]
+			\item \textbf{Locally free} if $(G,\tau)$ is a topological group and
+			\[ \exists U\in\tau \forall g\in U\forall x\in X [ e\in U \land (gx=x\iff g=e) ] .\]
+		\end{itemize}
+	\end{def*}
+	\begin{def*}[principal homogeneous space]
+		If $G$ is a regular group action on set $X$, then
+		$X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-torsor.
+	\end{def*}
+
+	\begin{prop}
+		A free action on a non-empty set is faithful, and locally free (topological group).
+	\end{prop}
+	\begin{proof}
+		Because $ex=x$ is guaranteed by definition, and forall implies exists for nonempty set.
+		
+		It is locally free because the topological group $G$ contains the identity and it is an open set.
+	\end{proof}
+
+	\begin{prop}
+		The action of any group $G$ on itself by left multiplication is regular, and thus faithful as well.
+	\end{prop}
+
+	\begin{prop}
+		The action of the symmetric group $\mathfrak{S}_n$ on a set with $n$ elements is always $n$-transitive;
+ 		the action of the alternating group $\mathfrak{A}_n$  is $(n - 2)$-transitive.
+	\end{prop}
+
+	\begin{prop}\label{propRegularActionBijection}
+		Group $G$ is a regular action on set $X$ iff the map $G\to X$
+		\[ g\mapsto gx \]
+		is bijective for all $x\in X$.
+	\end{prop}
+	\begin{proof}
+		$G$ is regular action on $X$\\
+		iff (by definition)
+		\[ X\ne \emptyset\land \forall x,y\in X \exists! g\in G[gx=y]. \]
+		iff (by definition of $\exists!$)
+		\[ X\ne \emptyset\land \forall x,y\in X \exists g\in G\forall h\in G[hx=y\iff g=h]. \]
+		\red{TODO}
+	\end{proof}
+
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}	
+			\node[scale=1] (a) at (0,0){
+				\begin{tikzcd}[anchor=center,
+					column sep={1.2cm,between origins},
+					row sep={1.4cm,between origins}]
+					&\text{Sharply } n \text{-transitive} \ar[ld]\ar[rd]&&&\\
+					n \text{-transitive} \ar[rd]  & & \mathrm{Regular} \ar[rd] \ar[ld] \\
+					&\mathrm{Transitive} && \mathrm{Free}\ar[ld]\ar[rd]\\
+					&&\text{Locally free}{}^*&&\mathrm{Faithful}\\
+				\end{tikzcd}
+			};
+		\end{tikzpicture}
+		\caption{Hierarchy of group actions on \textit{non-empty} set. $n>1$.\\
+		*For topological group.}
+		\label{fig:group_actions}
+	\end{figure}	
+
+	\paragraph{Affine Space}
+	\begin{def*}[affine space]
+		An \textbf{affine space} is a principal homogeneous space $A$
+		for the action of the additive group of a vector space $\overrightarrow{A}$.
+		
+		The elements of the affine space $A$ are called \textbf{points}.
+		The vector space $\overrightarrow{A}$ is said to be \textbf{associated} to the affine space,
+		and its elements are called \textbf{vectors}, \textbf{translations}, or sometimes free vectors.
+	\end{def*}
+	\begin{rem*}
+		$A$ should be nonempty.
+		
+		If the group action is defined as the right action:
+		\[ +\colon A\times \overrightarrow{A}\to A, \]
+		then it is equivalent to say this action $+$ satisfies\\
+		($\forall v,w\in \overrightarrow{A},\forall a\in A$)
+		\begin{itemize}
+			\item Right identity:
+			\[ a+\mathbf{0}=a, \]
+			where $\mathbf{0}$ is the zero vector in $\overrightarrow{A}$.
+			\item Associativity:
+			\[ (a+v)+w=a+(v+w) . \]
+			\item Regular action: the map 
+			\[ \begin{aligned}
+				\overrightarrow{A} &\to A,\\
+				v' &\mapsto a+v',\\
+			\end{aligned} \]
+			is a bijection.
+		\end{itemize}
+		Right identity and Associativity claims $+$ is a right action.
+		Therefore $A\to A\colon a\mapsto a+v$ is bijection for any $v\in \overrightarrow{A}$.
+		
+		For the map between affine space $A$ and the associated vector space $\overrightarrow{A}$,
+		see \ref{propRegularActionBijection}.
+		For any $a,b\in A$, $\exists! v\in \overrightarrow{A}$, such that $a+v=b$.
+		Such $v$ is denoted $b-a$.
+		
+		Affine space can be considered as a space ``parallel to'' the associated vector space.
+		It can be thought of a space where only subtraction is well-defined.
+	\end{rem*}
+	\begin{prop}
+		The second Weyl's axiom: $(c-b)+(b-a)=(c-a)$.
+	\end{prop}
+	
+	\paragraph{Affine Variety and Zariski Topology}
+	
+	\begin{def*}[affine variety]
+		For an \textit{algebraically closed field} $K$ and a natural number $n$,
+		let $\mathbb{A}^n$ be an affine space 
+		to which an $n$-dimensional $K$-vector space is associated.
+		That is to say, $\mathbb{A}^n$ is formed by the $n$-tuples of elements of $K$.
+		
+		Let $S$ be a set of multivariate polynomials in $x_1, \dots, x_n$ with coefficients in $K$,
+		\ie, $S \subseteq K[x_1, \dots, x_n]$,
+		define the zero-locus $\ZZ(S)$ to be intersection of zero sets
+		of the functions in $S$, that is to say
+		\[ \ZZ(S)\define \set{(x_1,\dots,x_n) \in \mathbb{A}^n | \forall f \in S [f(x_1,\dots,x_n)=0] }. \]
+		
+		This is called an \textbf{affine algebraic set}.
+		An affine algebraic set $\ZZ(S)$ is called \textbf{irreducible}	if
+		it is nonempty and cannot be written as the union of two proper algebraic subsets, \ie,
+		\begin{eqlong}
+			&\ZZ(S)\ne \emptyset \land \neg\exists S_1,S_2\subseteq K[x_1,\dots,x_n]\\
+			&\Big( \ZZ(S_1)\ne \ZZ(S)\land \ZZ(S_2)\ne\ZZ(S)\land\ZZ(S_1)\cup \ZZ(S_2)=\ZZ(S) \Big). \\
+		\end{eqlong}
+	
+		Depending on author, \textbf{affine variety} might be defined as affine algebraic set or irreducible affine algebraic set.
+	\end{def*}
+
+	\begin{def*}[ideal operations]
+		The \textbf{sum and product of ideals} $I$ and $J$ are defined as
+		\[ I+J\define\set{a+b|a\in I,b\in J},
+		IJ\define\set{\sum_{(a,b)\in S} ab| S\subseteq I\times J,\card{S}\in\inte^+ },
+		 \]
+		where $I\times J$ is the Cartesian product.
+		$I$ and $J$ are called \textbf{comaximal} ideals if $I+J=R$.
+	\end{def*}
+	\begin{rem*}
+		$I+J$ is the smallest ideal containing $I\cup J$, $IJ\subseteq I\cap J$.
+	\end{rem*}
+	\begin{prop}
+		Given two ideals $I$, $J$ of a commutative ring $R$,
+		\[ I+J=R\implies IJ=I\cap J. \]
+	\end{prop}
+	\begin{proof}
+		\[ \because 1\in I+J=R, \therefore \exists i\in I, j\in J [i+j=1]. \]
+		Hence, $\forall x \in I\cap J$,
+		\[ x = x\cdot 1 = x\cdot( i + j)=i\cdot x+ x\cdot j\in IJ. \]
+	\end{proof}
+
+	\begin{def*}[Zariski topology]
+		The \textbf{Zariski topology} on an affine space is the topology in which
+		closed sets are the affine algebraic sets.\\
+		The Zariski topology on an affine algebraic set is the subspace topology
+		inherited from the Zariski topology on an affine space.
+		%induced by its inclusion into some affine space.
+	\end{def*}
+	\begin{rem*}
+		This is a valid topology because
+		\begin{itemize}
+			\item Empty set and the affine space are affine algebraic sets.
+			\[\ZZ(K[x_1,\dots,x_n])=\ZZ(\set{1})=\emptyset, \ZZ(\emptyset)=\ZZ(\set{0})=\mathbb{A}^n.\]
+			\item $\ZZ(S)=\ZZ(I_S)$ where $I_S\subseteq K[x_1,\dots,x_n]$ is the ideal generated by $S$.
+			\item Given two ideals $I,J\subseteq K[x_1,\dots,x_n]$,
+			\[\ZZ(I)\cup\ZZ(J)=\ZZ(IJ), \ZZ(I)\cap\ZZ(J)=\ZZ(I+J). \]
+		\end{itemize}
+	\end{rem*}
+
+	\begin{prop}
+		Affine variety is a $T_1$ space.
+	\end{prop}
+	\begin{proof}
+		Let $(c_1,c_2,\dots,c_n)\in V\subseteq\mathbb{A}^n$ be a point in an affine space $V$ over $K$.
+		Then the zero locus of the set of polynomials $\set{(x_1-c_1),\dots,(x_n-c_n)}\subseteq K[x_1,\dots,x_n]$
+		is a singleton $\set{(c_1,c_2,\dots,c_n)}$.
+		
+		Therefore, any singleton in an affine variety is a closed set, \ie, it is $T_1$ space (\ref{separation axioms}).
+	\end{proof}
+	\begin{rem*}
+		Affine variety is not $T_2$.
+		
+		The Zariski topology on a commutative ring (that is, the prime spectrum of a ring) is $T_0$ but not, in general, $T_1$.
+	\end{rem*}
+
+	\begin{def*}[coordinate ring]
+		Given an affine space $\mathbb{A}^n$ and
+		an affine algebraic set $V\subseteq\mathbb{A}^n$ over an algebraically closed field $K$,
+		the ideal
+		\[I(V)=\set{f\in K[x_1,\dots,x_n]|\forall x\in V[f(x)=0] } \]
+		consists of all polynomial functions vanishing on $V$,
+		and thus the zero locus of $I(V)$ is $V$ itself.
+		\[ \ZZ(I(V))=V. \]
+		The \textbf{coordinate ring} of $V$ is the quotient algebra:
+		\[  K[x_1,\dots,x_n]/I(V). \]
+		Elements in the coordinate ring are called \textbf{regular functions}.
+	\end{def*}
+	\begin{rem*}
+		A regular function on a variety can be viewed as an analytical total function.
+		See \href{https://mathworld.wolfram.com/RegularFunction.html}{Wolfram Math World}.
+	\end{rem*}
+
+	\begin{def*}[regular map]
+		If $X$ and $Y$ are affine varieties as closed subvarieties of
+		${\mathbb  {A}}^{n}$ and ${\displaystyle \mathbb {A} ^{m}}$,
+		then a regular map $f\colon X\to Y$ is the restriction of
+		a polynomial map $\mathbb {A} ^{n}\to \mathbb {A} ^{m}$.
+		Explicitly, let $\mathcal{O}_X(X)$ be the coordinate ring of $X$,
+		then the regular maps are elements of the Cartesian product
+		\[(\mathcal{O}_X(X))^n \]
+		such that the image is a subset of $Y$.
+	\end{def*}
+	\begin{rem*}
+		A regular function can also be viewed as a regular map to $\mathbb{A}^1$.
+	\end{rem*}
+
+	\begin{def*}[structure sheaf of affine variety]
+		The \textbf{structure sheaf ${\mathcal {O}}_{X}$ of affine variety} $X$ over $K$ is a sheaf of $K$-algebras
+		such that the section ${\mathcal {O}}_{X}(U)$ over a closed subset $U\subseteq X$ is the ring of regular functions on $U$.
+		% all regular functions on closed subvarieties.
+	\end{def*}
+	\begin{rem*}
+		Therefore, the coordinate ring consists of the global sections of the structure sheaf.
+	\end{rem*}
+	
+	\paragraph{Scheme}
+	
+	See more in \blue{OSCAR MICHEL, AN INTRODUCTION TO THE ZARISKI TOPOLOGY.}
+	
+	\subparagraph{Prime Spectrum}
+	
+	
+	\begin{def*}[maximal ideal]
+		An ideal $I$ is a \textbf{maximal ideal} of a ring $R$ if there are no other ideals contained between $I$ and $R$.
+	\end{def*}
+
+	\begin{def*}[prime ideal]
+		An ideal $P$ of a commutative ring $R$ is prime if 
+		\[ P\ne R \land \forall a,b \in R[ab\in P\implies(a\in P\lor b\in P)]. \]
+	\end{def*}
+	\begin{rem*}
+		This generalizes the following property of prime numbers: if $p$ is a prime number and if $p|ab, a,b\in\inte$, then $p|a\lor p|b$. We can therefore say:\\
+		a positive integer $n$ is a prime number if and only if $ n\inte$ is a prime ideal of $\inte$.
+	\end{rem*}
+
+	\begin{thm}
+		Non-trivial commutative ring with unity
+		has non-empty prime spectrum.
+	\end{thm}
+
+	\begin{def*}[integral domain]
+		An \textbf{integral domain} $R$ can be defined equivalently as
+		\begin{itemize}
+			\item 
+			a nonzero commutative ring
+			in which the product of any two nonzero elements is nonzero:
+			\[ \exists x\in R\Big[x\ne0\Big] \land \forall x,y\in R\Big[\big(xy=yx\big)\land \big((xy=0 )\iff (x=0\lor y=0)\big)  \Big]; \]
+			\item 
+			a nonzero commutative ring with no nonzero zero divisors;
+			\item a commutative ring in which the zero ideal $\set{0}$ is a prime ideal;
+			\item a ring for which the set of nonzero elements is a commutative monoid under multiplication;
+			\item a ring that is isomorphic to a subring of a field.
+		\end{itemize}
+	\end{def*}
+	%\begin{thm}
+	%	The ideal $I$ of a commutative ring $R$ is prime iff $R/I$ is an integral domain.
+	%\end{thm}
+	%\begin{thm}
+	%	Maximal ideal of a commutative ring is prime.
+	%\end{thm}
+	
+	\begin{thm}
+		An integral domain $R$ has no nonzero nilpotent elements:
+		\[\forall x\in R [x=0\iff \exists n \in \inte^+ (x^n=0)].\]
+	\end{thm}
+
+
+	\begin{def*}[prime spectrum]
+		The (prime) \textbf{spectrum} of a ring $R$
+		is the set of all prime ideals of $R$, and is usually denoted by $\operatorname {Spec} {R}$.
+	\end{def*}
+	\begin{def*}[Zariski topology on spectrum]
+		The \textbf{Zariski topology on the spectrum} of a commutative ring $R$ is the topology for which the closed sets are
+		\[V(I)=\set{P\in\operatorname{Spec}(R)|I\subseteq P}, \]
+		where $I$ is an ideal, \ie, a close set is a set of all prime ideals containing some ideal.
+	\end{def*}
+	\begin{thm}
+		The Zariski topology on a spectrum is compact and $T_0$ and spectral.
+	\end{thm}
+	%\begin{thm}[Lattice Isomorphism Theorem]
+	%	ss
+	%\end{thm}
+	
+	\begin{def*}[nilpotent ideal]
+		A \textbf{nilpotent ideal} is an ideal $I$ such that
+		\[ \exists n\in\inte^+[I^n=\set{0}]. \]
+	\end{def*}
+	
+	\begin{def*}[nil ideal]
+		A \textbf{nil ideal} is an ideal $I$ of ring $R$ such that
+		\[ \forall x\in R [x\in I\implies \exists n\in \inte^+(x^n=0) ]. \]
+		The \textbf{nilradical} of a ring $R$ is $\operatorname{rad}(\set{0};R)$, defined as
+		\[ \forall x\in R [x\in \operatorname{rad}(\set{0};R)\iff \exists n\in \inte^+(x^n=0) ]. \]
+		\[  \]
+	\end{def*}
+	
+	\subparagraph{Collection of Theorems}
+	\begin{def*}[irreducible space]
+		A topological space $(X,\tau)$ is \textbf{irreducible} or \textbf{hyperconnected} if it cannot be written as
+		the union of two nonempty proper closed subsets of $X$, \ie,
+		($\tau$ is the collection of open sets)
+		\[ \forall A,B\in \tau\setminus \set{\emptyset,X} [A\cap B \ne \emptyset]. \]
+	\end{def*}
+	\begin{rem*}
+		Note that a topological space $(X,\tau)$ is connected iff
+		\[\forall A,B\in\tau\setminus \set{\emptyset}[ A\cup B\ne X\lor A\cap B \ne \emptyset ]. \]
+		
+		Therefore, a nonempty irreducible space is connected.
+	\end{rem*}
+	
+	\begin{thm}
+		Given a commutative ring $R$ and its ideal $I$, let
+		\begin{itemize}
+			\item $\operatorname{Ideal}(R)$ be the set of all ideals of $R$,
+			\item $\operatorname{Spec}(R)$  be the set of all prime ideals of $R$,
+			\item $\operatorname{mSpec}(R)$ be the set of all maximal ideals of $R$,
+			\item $V_i(I;R) = \set{J\in \operatorname{Ideal}(R)|I\subseteq J}, $
+			\item $V(I;R) = \set{P\in \operatorname{Spec}(R)|I\subseteq P}, $
+			\item $V_m(I;R) = \set{M\in \operatorname{mSpec}(R)|I\subseteq M}, $
+			\item the radical of $I$ be $\operatorname{rad}(I;R)=\set{r\in R| \exists n\in\inte^+ [r^n\in I]}$,
+			\item $\mathbf{NZComRing}$ be the category of non-trivial commutative rings.
+		\end{itemize}
+		
+		Then
+		$\forall R,S \in \mathbf{NZComRing}, \forall \varphi\in \hom(R,S),
+		\forall I,J\in\operatorname{Ideal}(R), \forall K\in \operatorname{Ideal}(S),\forall P\in \operatorname{Spec}(R),
+		\forall Q\in \operatorname{Spec}(S)$,
+		\begin{eqlong}
+			\ker (\varphi)&\in \operatorname{Ideal}(R),\\
+			\operatorname{im}(\varphi)&\cong R/\ker(\varphi) \in \mathbf{NZComRing},\\
+			\varphi^{-1}(K)&\in\operatorname{Ideal}(R),\\
+			\varphi(I)&\in\operatorname{Ideal}(\operatorname{im}(\varphi)),\\
+			V_i(I;R)&\cong \operatorname{Ideal}(R/I),\\
+			I\ne R&\iff \exists M\in\operatorname{mSpec}(R)[I\subseteq M],\\
+			I=R&\iff 1\in I,\\
+			R\in\mathbf{Field}&\iff \operatorname{Ideal}(R)=\set{\set{0},R}\\
+			&\iff \set{0}\in\operatorname{mSpec}(R), \\
+			I\in \operatorname{mSpec}(R)&\iff R/I\in\mathbf{Field},\\
+			I\in \operatorname{Spec}(R)&\iff R/I\in\mathbf{IntegralDomain},\\
+			\varphi^{-1}(Q)&\in\operatorname{Spec}(R),\\
+			IJ\subseteq P &\iff I\subseteq P \lor J\subseteq P,\\
+			I\subseteq \operatorname{rad}(I;R)&\in\operatorname{Ideal}(R),\\
+			\operatorname{rad}(\set{0};R)&\subseteq P,\\
+			\operatorname{mSpec}(R)&\subseteq\operatorname{Spec}(R)\subseteq\operatorname{Ideal}(R),\\
+			V(I;R)=\emptyset&\iff I=R,\\
+			V(I;R)=\set{I}&\iff I\in \operatorname{mSpec}(R),\\
+			V(I;R)&=V(\operatorname{rad}(I;R);R),\\
+			V(I;R)=V(J;R)&\iff \operatorname{rad}(I;R)=\operatorname{rad}(J;R),\\
+			\operatorname{Spec}(R)&\in\mathbf{CompactSpace},\\
+			\big(\varphi^*\colon Q\mapsto \varphi^{-1}(Q)\big) &\in \mathcal{C}^0\big(\operatorname{Spec}(S)\to\operatorname{Spec}(R)\big),\\
+			\big(\power(R)\supseteq Q'\mapsto \bigcup Q' \subseteq R \big) &\in \mathbf{Homeo}\big(\operatorname{Spec}(R/I)\to
+			V(I;R)\subseteq \operatorname{Spec}(R)\big),\\
+			\operatorname{Spec}(R)&\cong\operatorname{Spec}(R/\operatorname{rad}(\set{0};R)),\\
+			\operatorname{Spec}(R\times S)&\cong\operatorname{Spec}(R)\sqcup\operatorname{Spec}(S),\\
+			%\operatorname{rad}(\set{0};R)=\set{0}&\land \operatorname{Spec}(R)\text{ disconnected}\\
+			%\implies
+			%\exists R_1,R_2& [R\cong R_1\times R_2\land \operatorname{Spec}(R)
+			%\cong\operatorname{Spec}(R_1)\sqcup\operatorname{Spec}(R_2)] ,\\
+			\operatorname{Spec}(R)\text{ disconnected}&\iff
+			\exists R_1,R_2 \in \mathbf{NZComRing}[R\cong R_1\times R_2],\\
+			\operatorname{rad}(\set{0};R)\in\operatorname{Spec}(R)&\iff\operatorname{Spec}(R)\text{ irreducible},\\
+			R\in\mathbf{IntegralDomain}&\iff\operatorname{Spec}(R)\text{ irreducible}\land \operatorname{rad}(\set{0};R)=\set{0},\\
+		\end{eqlong}
+	\end{thm}
+	\begin{proof}
+		Prove \[ \varphi(I)\in\operatorname{Ideal}(\operatorname{im}(\varphi)).\]
+		First prove $\varphi(I)$ is a subgroup of $\operatorname{im}(\varphi)$ under addition.
+		
+		By definition,
+		\[ \varphi(I)\subseteq\operatorname{im}(\varphi) .\]
+		
+		Since $\varphi$ is ring homomorphism,
+		\[\begin{aligned}
+			&0\in I\land \varphi(0)=0\implies 0\in\varphi(I),\\
+			&\forall a,b\in R [a+b\in I \implies \varphi(a)+\varphi(b)=\varphi(a+b)\in\varphi(I) ].\\
+		\end{aligned}  \]
+	
+		Therefore $\varphi(I)$ is a subgroup of $\operatorname{im}(\varphi)$ under addition.
+		
+		Next prove it is an ideal of $\operatorname{im}(\varphi)$.
+		
+		By definition of image,
+		\[ \forall s\in\operatorname{im}(\varphi)\exists a\in R[\varphi(a)=s].  \]
+		Therefore,
+		\[ \forall a\in R[\varphi(a)\varphi(I)=\varphi(aI)\subseteq \varphi(I) ]. \]
+		
+	\end{proof}
+	
+	\subparagraph{Scheme}
+	\begin{def*}[ringed space]
+		A \textbf{ringed space} $(X,{\mathcal {O}}_{X})$ is a topological space $X$
+		together with a sheaf of rings ${\mathcal {O}}_{X}$ on $X$,
+		called the structure sheaf of $X$.
+	\end{def*}
+	
+	\begin{def*}[locally ringed space]
+		A locally ringed space is a ringed space $(X,{\mathcal  {O}}_{X})$ such that all stalks of 
+		are local rings (\ie, they have unique maximal ideals).
+	\end{def*}
+	\begin{rem*}
+		An arbitrary topological space $X$ can be considered a locally ringed space by taking ${\mathcal {O}}_{X}$ to be the sheaf of real-valued (or complex-valued) continuous functions on open subsets of $X$.
+		
+		Manifolds and varieties are locally ringed space too.
+	\end{rem*}
+
+	\begin{def*}[affine scheme]
+		\red{TODO}
+	\end{def*}
+	\begin{rem*}
+		\red{Affine variety is affine scheme?}
+	\end{rem*}
+	
+
 	\subsubsection{TODO}
 	
 	\url{https://en.wikipedia.org/wiki/Immersion_(mathematics)}
@@ -9777,7 +10336,7 @@
 	\end{rem*}
 
 	\begin{prop}
-		Any neighbourhood of the identity of a topological group generates an non-empty clopen set.
+		Any neighbourhood of the identity of a topological group generates a non-empty clopen set.
 	\end{prop}
 	\begin{proof}
 		See \href{https://planetmath.org/connectedtopologicalgroupisgeneratedbyanyneighborhoodofidentity}{this proof}.
