@@ -10039,14 +10039,14 @@
 			\item $\operatorname{mSpec}(R)$ be the set of all maximal ideals of $R$,
 			\item $V_i(I;R) = \set{J\in \operatorname{Ideal}(R)|I\subseteq J}, $
 			\item $V(I;R) = \set{P\in \operatorname{Spec}(R)|I\subseteq P}, $
-			\item $V_m(I;R) = \set{M\in \operatorname{mSpec}(R)|I\subseteq M}, $
+			%\item $V_m(I;R) = \set{M\in \operatorname{mSpec}(R)|I\subseteq M}, $
 			\item the radical of $I$ be $\operatorname{rad}(I;R)=\set{r\in R| \exists n\in\inte^+ [r^n\in I]}$,
 			\item $\mathbf{NZComRing}$ be the category of non-trivial commutative rings.
 		\end{itemize}
 		
 		Then
-		$\forall R,S \in \mathbf{NZComRing}, \forall \varphi\in \hom(R,S),
-		\forall I,J\in\operatorname{Ideal}(R), \forall K\in \operatorname{Ideal}(S),\forall P\in \operatorname{Spec}(R),
+		$\forall R,S \in \mathbf{NZComRing}, \forall \varphi\in \hom(R,S)$,\\
+		$\forall I,J\in\operatorname{Ideal}(R), \forall K\in \operatorname{Ideal}(S),\forall P\in \operatorname{Spec}(R),
 		\forall Q\in \operatorname{Spec}(S)$,
 		\begin{eqlong}
 			\ker (\varphi)&\in \operatorname{Ideal}(R),\\
@@ -10060,7 +10060,6 @@
 		\end{eqlong}
 
 		\begin{eqlong}
-			V_i(I;R)&\cong \operatorname{Ideal}(R/I),\\
 			I\ne R&\iff \exists M\in\operatorname{mSpec}(R)[I\subseteq M],\\
 			I=R&\iff 1\in I,\\
 			R\in\mathbf{Field}&\iff \operatorname{Ideal}(R)=\set{\set{0},R}\\
@@ -10071,17 +10070,23 @@
 			I\subseteq \operatorname{rad}(I;R)&\in\operatorname{Ideal}(R),\\
 			\operatorname{rad}(\set{0};R)&\subseteq P,\\
 			\operatorname{mSpec}(R)&\subseteq\operatorname{Spec}(R)\subseteq\operatorname{Ideal}(R),\\
+		\end{eqlong}
+		\begin{eqlong}	
+			V_i(I;R)&\cong \operatorname{Ideal}(R/I),\\
+			V(I;R)&\cong \operatorname{Spec}(R/I),\\
+			V(I;R)&=V(\operatorname{rad}(I;R);R),\\
 			V(I;R)=\emptyset&\iff I=R,\\
 			V(I;R)=\set{I}&\iff I\in \operatorname{mSpec}(R),\\
-			V(I;R)&=V(\operatorname{rad}(I;R);R),\\
 			V(I;R)=V(J;R)&\iff \operatorname{rad}(I;R)=\operatorname{rad}(J;R),\\
+		\end{eqlong}
+		\begin{eqlong}	
 			\operatorname{Spec}(R)&\in\mathbf{CompactSpace},\\
 			\operatorname{Spec}(R)&\cong\operatorname{Spec}(R/\operatorname{rad}(\set{0};R)),\\
 			\operatorname{Spec}(R\times S)&\cong\operatorname{Spec}(R)\sqcup\operatorname{Spec}(S),\\
 			\operatorname{Spec}(R)\text{ disconnected}&\iff
 			\exists R_1,R_2 \in \mathbf{NZComRing}[R\cong R_1\times R_2],\\
 			\operatorname{rad}(\set{0};R)\in\operatorname{Spec}(R)&\iff\operatorname{Spec}(R)\text{ irreducible},\\
-			R\in\mathbf{IntegralDomain}&\iff\operatorname{Spec}(R)\text{ irreducible}\land \operatorname{rad}(\set{0};R)=\set{0},\\
+			R\in\mathbf{IntegralDomain}&\iff\operatorname{Spec}(R)\text{ irreducible}\land \operatorname{rad}(\set{0};R)=\set{0}.\\
 		\end{eqlong}
 	\end{thm}
 	\begin{proof}
