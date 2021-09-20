@@ -9989,18 +9989,6 @@
 			\item a ring that is isomorphic to a subring of a field.
 		\end{itemize}
 	\end{def*}
-	%\begin{thm}
-	%	The ideal $I$ of a commutative ring $R$ is prime iff $R/I$ is an integral domain.
-	%\end{thm}
-	%\begin{thm}
-	%	Maximal ideal of a commutative ring is prime.
-	%\end{thm}
-	
-	\begin{thm}
-		An integral domain $R$ has no nonzero nilpotent elements:
-		\[\forall x\in R [x=0\iff \exists n \in \inte^+ (x^n=0)].\]
-	\end{thm}
-
 
 	\begin{def*}[prime spectrum]
 		The (prime) \textbf{spectrum} of a ring $R$
@@ -10014,9 +10002,7 @@
 	\begin{thm}
 		The Zariski topology on a spectrum is compact and $T_0$ and spectral.
 	\end{thm}
-	%\begin{thm}[Lattice Isomorphism Theorem]
-	%	ss
-	%\end{thm}
+
 	
 	\begin{def*}[nilpotent ideal]
 		A \textbf{nilpotent ideal} is an ideal $I$ such that
@@ -10066,7 +10052,14 @@
 			\ker (\varphi)&\in \operatorname{Ideal}(R),\\
 			\operatorname{im}(\varphi)&\cong R/\ker(\varphi) \in \mathbf{NZComRing},\\
 			\varphi^{-1}(K)&\in\operatorname{Ideal}(R),\\
+			\varphi^{-1}(Q)&\in\operatorname{Spec}(R),\\
 			\varphi(I)&\in\operatorname{Ideal}(\operatorname{im}(\varphi)),\\
+			\big(\varphi^*\colon Q\mapsto \varphi^{-1}(Q)\big) &\in \mathcal{C}^0\big(\operatorname{Spec}(S)\to\operatorname{Spec}(R)\big),\\
+			\big(\power(R)\supseteq Q'\mapsto \bigcup Q' \subseteq R \big) &\in \mathbf{Homeo}\big(\operatorname{Spec}(R/I)\to
+			V(I;R)\subseteq \operatorname{Spec}(R)\big),\\
+		\end{eqlong}
+
+		\begin{eqlong}
 			V_i(I;R)&\cong \operatorname{Ideal}(R/I),\\
 			I\ne R&\iff \exists M\in\operatorname{mSpec}(R)[I\subseteq M],\\
 			I=R&\iff 1\in I,\\
@@ -10074,7 +10067,6 @@
 			&\iff \set{0}\in\operatorname{mSpec}(R), \\
 			I\in \operatorname{mSpec}(R)&\iff R/I\in\mathbf{Field},\\
 			I\in \operatorname{Spec}(R)&\iff R/I\in\mathbf{IntegralDomain},\\
-			\varphi^{-1}(Q)&\in\operatorname{Spec}(R),\\
 			IJ\subseteq P &\iff I\subseteq P \lor J\subseteq P,\\
 			I\subseteq \operatorname{rad}(I;R)&\in\operatorname{Ideal}(R),\\
 			\operatorname{rad}(\set{0};R)&\subseteq P,\\
@@ -10084,15 +10076,8 @@
 			V(I;R)&=V(\operatorname{rad}(I;R);R),\\
 			V(I;R)=V(J;R)&\iff \operatorname{rad}(I;R)=\operatorname{rad}(J;R),\\
 			\operatorname{Spec}(R)&\in\mathbf{CompactSpace},\\
-			\big(\varphi^*\colon Q\mapsto \varphi^{-1}(Q)\big) &\in \mathcal{C}^0\big(\operatorname{Spec}(S)\to\operatorname{Spec}(R)\big),\\
-			\big(\power(R)\supseteq Q'\mapsto \bigcup Q' \subseteq R \big) &\in \mathbf{Homeo}\big(\operatorname{Spec}(R/I)\to
-			V(I;R)\subseteq \operatorname{Spec}(R)\big),\\
 			\operatorname{Spec}(R)&\cong\operatorname{Spec}(R/\operatorname{rad}(\set{0};R)),\\
 			\operatorname{Spec}(R\times S)&\cong\operatorname{Spec}(R)\sqcup\operatorname{Spec}(S),\\
-			%\operatorname{rad}(\set{0};R)=\set{0}&\land \operatorname{Spec}(R)\text{ disconnected}\\
-			%\implies
-			%\exists R_1,R_2& [R\cong R_1\times R_2\land \operatorname{Spec}(R)
-			%\cong\operatorname{Spec}(R_1)\sqcup\operatorname{Spec}(R_2)] ,\\
 			\operatorname{Spec}(R)\text{ disconnected}&\iff
 			\exists R_1,R_2 \in \mathbf{NZComRing}[R\cong R_1\times R_2],\\
 			\operatorname{rad}(\set{0};R)\in\operatorname{Spec}(R)&\iff\operatorname{Spec}(R)\text{ irreducible},\\
