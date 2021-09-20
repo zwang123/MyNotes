@@ -10135,8 +10135,15 @@
 	\end{rem*}
 
 	\begin{def*}[affine scheme]
-		\red{TODO}
+		An \textbf{affine scheme} is a locally ringed space isomorphic to the spectrum $\operatorname{Spec}(R)$
+		of a commutative ring $R$.\\
+		A \textbf{scheme} is a locally ringed space $X$ admitting a open over $(U_i)_{i\in I}$, such that each $U_i$
+		(as a locally ringed space) is an affine scheme.
 	\end{def*}
+	\begin{rem*}
+		One can think of a scheme as being covered by ``coordinate charts'' which are affine schemes.
+		The definition means exactly that schemes are obtained by gluing together affine schemes using the Zariski topology.
+	\end{rem*}
 	\begin{rem*}
 		\red{Affine variety is affine scheme???}
 		
@@ -10291,6 +10298,17 @@
 	\begin{rem*}
 		Therefore algebraic variety, a non-$T_2$ but $T_1$ space, is not affine scheme. (?)
 	\end{rem*}
+
+	\begin{def*}[structure sheaf of spectrum]
+		For $f \in R$, define $D_f$ to be the set of prime ideals of $R$ not containing $f$.
+		Then each $D_f$ is an open subset of $X=\operatorname {Spec} (R)$,
+		and $\set{D_{f}|f\in R}$ is a basis for the Zariski topology.
+		
+		For an arbitrary open set $U$, written as the union $\bigcup_{i\in I}D_{f_i}$ ,
+		the \textbf{structure sheaf} $\mathcal{O}_X$ is defined as
+		\[\Gamma(U,\mathcal{O}_X) = \lim_{i\in I} R_{f_i},\]
+		where $R_{f_i}$ is the localization of $R$ by the powers of $f_i$.
+	\end{def*}
 
 	\subsubsection{TODO}
 	
