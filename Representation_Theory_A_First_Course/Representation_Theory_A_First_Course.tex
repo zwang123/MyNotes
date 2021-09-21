@@ -28,7 +28,7 @@
 \usepackage{titlesec}	% lv4 title
 %\usepackage{subfigure}
 \usepackage{mathrsfs}
-
+\usepackage{pgfplots}
 %   \usepackage{commath}    % for abs and norm
 
 \usepackage{ytableau}
@@ -9114,6 +9114,13 @@
 	\red{TODO, structure sheaf}
 	
 	\subsubsection{Sheaf and Germ}
+
+	See more:
+	
+	\href{https://arxiv.org/pdf/1603.00807.pdf}{CATEGORIFIED PRESHEAVES AND SIEVES}
+	
+	\href{http://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/WengD.pdf}{A CATEGORICAL INTRODUCTION TO SHEAVES}
+
 	\paragraph{Category Theory Continued}
 		
 	See \nameref{sec:comm_diag} and \nameref{sec:more_cat_theory} for background.
@@ -9577,6 +9584,25 @@
 		and a Cartesian product of charts is a chart for the product manifold.		
 		An atlas for the product manifold can be constructed using atlases for its factors.
 	\end{def*}
+
+	\begin{def*}[disjoint union]
+		The \textbf{disjoint union} $X$
+		(also called the direct sum, free union, free sum, topological sum, or coproduct)
+		of a family of topological spaces $(X_i,\tau_i)_{i\in I}$ is a space
+		formed by equipping the disjoint union of the underlying sets
+		\[ X=\bigsqcup_{i\in I}X_i=\bigcup_{i\in I}\set{(x, i)|x\in X_i}, \]
+		with the \textbf{disjoint union topology} $\tau$,
+		\ie, finest topology on $X$ for which all the \textbf{canonical injections}
+		\[ \varphi _{i}\colon X_{i}\to X \]
+		are continuous.
+		
+		Explicitly, the collection of open sets is
+		\[ \tau = \set{U\subseteq \bigsqcup_{i\in I}X_i| \forall i \in I[U\cap X_i\in \tau_i] },\]
+		\ie, the open sets injected into the disjoint union form a basis of the disjoint union topology.
+	\end{def*}
+	\begin{thm}
+		The canonical injections are open and closed maps.
+	\end{thm}
 	
 	\paragraph{Definition of Lie Group}
 	
@@ -9682,9 +9708,25 @@
 
 	\subsubsection{Algebraic Variety}
 	
-	\paragraph{Group Actions}
+	\paragraph{Group Actions}\label{par:group_actions}
 	
 	See \ref{group action} for the definition of group action.
+	
+	\begin{prop}\label{propBijectiveGroupAction}
+		If a group $G$ is a left action on $X$, then $X\to X \colon x\mapsto gx$ is a bijection for each $g\in G$.
+		The converse is not necessarily true.
+	\end{prop}
+	\begin{proof}
+		$\forall g\in G\forall x,y\in X[gx=gy\iff g^{-1}gx=g^{-1}gy\iff x=y]$.
+		
+		$\forall g\in G\forall y\in X\exists x\in X[x=g^{-1}y\land gx=y]$.
+		
+		A counter example of converse is a cyclic group of order 4:
+		$\set{1,i,-1,-i}$
+		permuting itself
+		where $1,i,-i$ are mapped to identity permutation $(1)$ and $-1$ to $(21)(43)$.
+	\end{proof}
+	
 	\begin{def*}[types of actions]
 		The group action of $G$ on set $X$ is called:
 		\begin{itemize}
@@ -9754,17 +9796,30 @@
 	\end{prop}
 
 	\begin{prop}\label{propRegularActionBijection}
-		Group $G$ is a regular action on set $X$ iff the map $G\to X$
+		Group $G$ is a free/transitive/regular action on a nonempty set $X$ iff the map $G\to X$
 		\[ g\mapsto gx \]
-		is bijective for all $x\in X$.
+		is injective/surjective/bijective for all $x\in X$.
 	\end{prop}
 	\begin{proof}
-		$G$ is regular action on $X$\\
-		iff (by definition)
-		\[ X\ne \emptyset\land \forall x,y\in X \exists! g\in G[gx=y]. \]
-		iff (by definition of $\exists!$)
-		\[ X\ne \emptyset\land \forall x,y\in X \exists g\in G\forall h\in G[hx=y\iff g=h]. \]
-		\red{TODO}
+		Free action iff (\ref{propExistsForall})
+		\[ \forall g,h\in G\forall x \in X [ gx=hx\implies g=h ], \]
+		iff ($\forall$ commutes)
+		\[ \forall x \in X\forall g,h\in G [ gx=hx\implies g=h ], \]
+		iff
+		\[ \forall x [ g\mapsto gx \text{ is injective} ] .\]
+		
+		For nonempty $X$, transitive action iff
+		\[\forall x\in X \forall y\in X \exists g\in G[gx=y]\]
+		iff
+		\[\forall x\in X [g\mapsto gx \text{ is surjective}].\]
+		
+		Therefore, regular iff bijective.
+		%$G$ is regular action on $X$\\
+		%iff (by definition)
+		%\[ X\ne \emptyset\land \forall x,y\in X \exists! g\in G[gx=y]. \]
+		%iff (by definition of $\exists!$)
+		%\[ X\ne \emptyset\land \forall x,y\in X \exists g\in G\forall h\in G[hx=y\iff g=h]. \]
+		%\red{TODO}
 	\end{proof}
 
 	\begin{figure}[H]
@@ -10275,7 +10330,8 @@
 		with the induced topology, labeled $\operatorname{mSpec}(R)$ here,
 		 does not have the nice functorial
 		properties of $\operatorname{Spec} (R)$, because the inverse image of a maximal
-		ideal under a ring homomorphism need not be maximal. 
+		ideal under a ring homomorphism need not be maximal. 
+
 		
 		
 	\end{rem*}
@@ -10310,6 +10366,278 @@
 		where $R_{f_i}$ is the localization of $R$ by the powers of $f_i$.
 	\end{def*}
 
+	\subsubsection{Tangent Bundle}
+	
+	\paragraph{Fiber Bundle}
+	\begin{def*}[fiber bundle]
+		A \textbf{(locally trivial) fiber bundle} over $B$ is a structure $ (E,\,B,\,\pi, \,F)$,
+		where $E,B,F\in \mathbf{Top}$ are topological spaces
+		and $\pi \colon E\to B$ is a \textit{continuous surjection} satisfying the following 
+		\textit{local triviality} condition:
+		$\forall x\in B, \exists x \in U$ open in $B$,
+		$ \exists \varphi\colon\pi^{-1}(U)\to U\times F $ is homeomorphism and the following diagram commutes.
+		\begin{centikzcd}
+			\pi^{-1}(U)\ar[r,"\varphi"]&U\times F\ar[dl,"\text{proj}{}_1"] \\
+			U\ar[from=u,"\pi"]
+		\end{centikzcd}
+		where $\text{proj}{}_1$ is the canonical projection into $U$.
+	
+		The space $B$ is called the \textbf{base space} of the bundle,
+		$E$ the \textbf{total space}, and $F$ the \textbf{fiber}.
+		The map $\pi$ is called the \textbf{projection map} (or bundle projection).
+		$U$ is called the \textbf{trivializing neighborhood}.
+		The set of all $\set{(U_i,\varphi_i)}$ is called a \textbf{local trivialization} of the bundle.
+		For any $p \in B$, the preimage $\pi ^{-1}(\set{p})$ is called \textbf{the fiber over $p$}.
+		%A \textbf{fiber bundle} is a structure $ (E,\,B,\,\pi, \,I,\,\sqcup_{i\in I}F_i)$,
+		%where $E$, $B$, and $F_i$ are topological spaces and $\pi \colon E\to B$ is a continuous surjection satisfying a local triviality condition outlined below.
+		%The space $B$ is called the \textbf{base space} of the bundle,
+		%$E$ the \textbf{total space}, and $F_i$ a \textbf{fiber}.
+		%The map $\pi$ is called the \textbf{projection map} (or bundle projection).
+		
+		A fiber bundle $(E,\,B,\,\pi ,\,F)$ is often denoted
+		\[{\begin{matrix}{}\\F\longrightarrow E\ {\xrightarrow {\,\ \pi \ }}\ B\\{}\end{matrix}}\]
+	\end{def*}
+
+	\begin{thm}
+		Every projection map $\pi \colon E\to B$  of a fiber bundle
+		$(E,\,B,\,\pi ,\,F)$ is an \textit{open map}.
+		Therefore $B$ carries the quotient topology determined by the map $\pi$.
+		
+		If $B$ is connected, any fiber over a point $p\in B$ is homeomorphic to $F$.
+	\end{thm}
+	\begin{def*}[bundle map]
+		The \textbf{bundle map} or \textbf{morphism of bundles}
+		$\phi\colon (E,B,\pi,F)\to (E',B',\pi',F')$
+		is determined by the total space $\phi_{\mathrm{tot}}\colon E\to E'$,
+		the map between base spaces $\phi_{\mathrm{base}}\colon B\to B'$ is determined by the commutative diagram:
+		\begin{centikzcd}
+			E\ar[r,"\phi_{\mathrm{tot}}"] \ar[d,"\pi"] &E' \ar[d,"\pi'"]\\
+			B \ar[r,"\phi_{\mathrm{base}}"]&B'\\
+		\end{centikzcd}
+	
+		$\phi$ is called a \textbf{bundle map over $B$}, if $B=B'$ and $\phi_{\mathrm{base}}=\idt_B$.
+	\end{def*}
+	\begin{def*}[cross section]
+		A section (or \textbf{cross section}) of a fiber bundle $\pi\colon E\to B$
+		is a continuous map $f\colon B\to E$
+		such that $\pi\circ f=\idt_B$, \ie,
+		$\forall x\in B[ \pi (f(x))=x]$.
+	\end{def*}
+
+	\begin{def*}[structure group]
+		Given a bundle $(E, B, \pi, F) $,
+		let $G$ be a topological group containing (self-)homeomorphisms of $F$.
+		A \textbf{$G$-atlas} for the bundle is a set of local trivialization charts  $\set{(U_{k},\,\varphi _{k})}$ such that
+		for any overlapping charts $(U_{i},\,\varphi _{i})$ and $ (U_{j},\,\varphi _{j})$
+		($U_i\cap U_j\ne\emptyset$)
+		there is a \textit{continuous} map $t_{ij} \colon U_i \cap U_j \to G$, called a \textbf{transition function},
+		such that
+		the function
+		\[\varphi _{i}\circ\varphi _{j}^{-1}\colon \left(U_{i}\cap U_{j}\right)\times F\to \left(U_{i}\cap U_{j}\right)\times F\]
+		is given by
+		\[(x,\,\xi )\mapsto \left(x,\,t_{ij}(x)(\xi) \right).\]
+		
+		Two $G$-atlases are \textbf{equivalent} if their union is also a $G$-atlas (compatible with $G$?).
+		A \textbf{$G$-bundle} is a fiber bundle with an equivalence class of $G$-atlases (\ie, a maximal atlas?).
+		The group $G$ is called the \textbf{structure group} of the bundle.
+	\end{def*}
+
+	\paragraph{Continuous Group Action}
+	\subparagraph{Definition and Properties}
+	
+	See \ref{par:group_actions} for more on group actions.
+	
+	\begin{def*}[continuous group action]
+		A \textbf{continuous group action} of a topological group $G$ on a topological space $X$ is a continuous mapping
+		\[ G\times X\to X\colon (g,x)\mapsto gx \]
+		that is also a group action.
+	\end{def*}
+	\begin{prop}\label{propContGrpActionHomeo}
+		A topological group action $G$ on a topological group $X$ is continuous
+		if the action $X\to X\colon x\mapsto gx$ is continuous for all $g\in G$
+		or is an open map for all $g\in G$.
+		
+		If $G$ is a continuous group action, then $x\mapsto gx$ is homeomorphism.
+	\end{prop}
+	\begin{proof}
+		We have proved group action is bijection (\ref{propBijectiveGroupAction}).
+		
+		Therefore $ (g,x)\mapsto gx $ is continuous if
+		\begin{itemize}
+			\item $\forall g\in G(x\mapsto gx \text{ is continuous})$ because $(g,x)\mapsto x\mapsto gx$.
+			\item $\forall g\in G(gx\mapsto x \text{ is continuous})$ because $(g,x)\mapsto x=g^{-1}(gx)\mapsto gx$.
+		\end{itemize}
+	
+		If $ (g,x)\mapsto gx $ is continuous then so are the following:
+		\begin{itemize}
+			\item $x\mapsto (g,x)\mapsto gx$,
+			\item $gx\mapsto (g^{-1},gx)\mapsto g^{-1}gx=x$.
+		\end{itemize}
+	\end{proof}
+
+
+	\begin{prop}
+		A topological group $G$ is a continuous (faithful) group action
+		on a topological space $X$
+		if %f
+		 it is group homomorphic (isomorphic) $\varphi\colon G\to H$ to a group $H$ of self-homeomorphisms of $X$,
+		by defining the action as $gx\define\varphi(g)x$.
+	\end{prop}
+	\begin{proof}
+		Since $\varphi$ is homomorphism,
+		\[ e_Gx=e_Hx=x, (g_1g_2)x=(h_1h_2)x=h_1(h_2x)=g_1(g_2x). \]
+		Therefore $G$ is an group action.
+		
+		The action is continuous iff for all $g\in G$,
+		\[x\mapsto \varphi(g)x  \]
+		is homeomorphism (\ref{propContGrpActionHomeo}).
+		
+		$G$ is faithful iff
+		$\varphi(g_1)=\varphi(g_2)\implies g_1=g_2$ iff $G$ is isomorphic to $\varphi(G)$.
+		
+		
+	\end{proof}
+
+	\begin{prop}
+		A group action of topological group $G$ on a topological space $X$
+		is a continuous regular action iff the mapping
+		\[ G\to X\colon g\mapsto g x \]  
+		is a homeomorphism for all $x\in X$.
+	\end{prop}
+	\begin{proof}
+		Since group is nonempty, we have proved that the group action is regular iff the mapping is bijective (\ref{propRegularActionBijection}).
+		Therefore we only need to prove that a regular group action is continuous iff such mapping is continuous and open map.
+		
+		\begin{itemize}
+			\item If both $g\mapsto gx$ and its inverse are continuous for all $x\in X$, then so are the following maps:
+			\begin{eqlong}
+				(g,x)&\mapsto (gx,x)\mapsto gx,\\
+				gx & \mapsto (gx,x)\mapsto (g,x),\\
+			\end{eqlong}
+			because \ref{propContinuousCartesianProduct}, \ref{corContinuousInjection},
+			and the canonical projection is by definition continuous.
+			\item if the group action is continuous, then
+			so are the followings ($\forall x\in X$):
+			\begin{eqlong}
+				 g&\mapsto (g,x) \mapsto gx,\\
+				gx &\mapsto (g^{-1},gx)\mapsto x.\\
+			\end{eqlong}
+			because group action satisfies associativity.
+		\end{itemize}
+		%Since inclusion into product space is continuous (\ref{corContinuousInjection}),
+		%the following map is continuous:
+		%\[ g\mapsto g\times x \mapsto gx.  \]
+	\end{proof}
+	\begin{prop}
+		A group action of topological group $G$ on a topological space $X$
+		is a continuous regular action iff the mapping
+		\[ G\times X \to  X\times X\colon (g,x)\mapsto (x,g x) \]  
+		is a homeomorphism.
+	\end{prop}
+	\begin{proof}
+		See the proof below.
+		\begin{itemize}
+			\item if $
+			%G\times X \to  X\times X\colon
+			 (g,x)\mapsto (x,g x) $ is homeomorphism,
+			then $g \mapsto gx$ is bijective for all $x\in X$, and the following is continuous and open map for all $x\in X$
+			\[
+				g \mapsto (g,x)\mapsto (x,gx)\mapsto gx.
+			\]
+		
+			\item if $g\mapsto gx$ is homeomorphism for all $x\in X$, then 
+			$(g,x)\mapsto(x,gx)$ is bijective and
+			the following is continuous and open map:
+			\[ (g,x)\mapsto g\mapsto gx\mapsto(x,gx). \]
+		\end{itemize}
+	\end{proof}
+
+	\subparagraph{Insight}
+	
+	We can view a group $G$ as a category with a single object in which every morphism is invertible.
+	A (left) group action is then nothing but a (covariant) functor from $G$ to the category of sets,
+	and a group representation is a functor from $G$ to the category of vector spaces.
+	A morphism between $G$-sets is then a natural transformation between the group action functors.
+	In analogy, an action of a groupoid is a functor from the groupoid to the category of sets or to some other category.
+	
+	In addition to continuous actions of topological groups on topological spaces,
+	one also often considers smooth actions of Lie groups on smooth manifolds,
+	regular actions of algebraic groups on algebraic varieties,
+	and actions of group schemes on schemes.
+	All of these are examples of group objects acting on objects of their respective category.
+	
+	For example, a functor from the category of a single group $G$ to the the category of topological spaces
+	defines continuous group actions.
+
+	\paragraph{Principal $G$-bundle}
+	\begin{def*}[principal G-bundle]
+		A \textbf{principal $G$-bundle} is a $G$-bundle
+		where the fiber $F$ is a principal homogeneous space for $G$ (\ie, $G$ as a regular left action on $F$).
+	\end{def*}
+	
+	
+	%	In the smooth category, a G-bundle is a smooth fiber bundle where G is a Lie group and the corresponding action on F is smooth and the transition functions are all smooth maps.
+	
+	%The transition functions tij satisfy the following conditions
+	%
+	%{\displaystyle t_{ii}(x)=1\,}t_{ii}(x)=1\,
+	%{\displaystyle t_{ij}(x)=t_{ji}(x)^{-1}\,}t_{ij}(x)=t_{ji}(x)^{-1}\,
+	%{\displaystyle t_{ik}(x)=t_{ij}(x)t_{jk}(x).\,}t_{ik}(x)=t_{ij}(x)t_{jk}(x).\,
+	%The third condition applies on triple overlaps Ui ∩ Uj ∩ Uk and is called the cocycle condition (see Čech cohomology). The importance of this is that the transition functions determine the fiber bundle (if one assumes the Čech cocycle condition).
+	
+	%	A smooth fiber bundle is a fiber bundle in the category of smooth manifolds. That is, {\displaystyle E}E, {\displaystyle B}B, and {\displaystyle F}F are required to be smooth manifolds and all the functions above are required to be smooth maps.
+	
+	\red{TODO}
+	fiber
+	fiber bundle
+	vector bundle
+	tangent bundle
+	
+	. If there is a numerable open
+	cover of B by open sets with homeomorphisms as above then the bundle is said to be numerabl
+	
+
+	\subsubsection{Immersion}
+	partition of unity requires paracompactness
+	
+	\href{https://mathoverflow.net/questions/362154/when-why-did-we-allow-manifolds-to-be-non-hausdorff-and-or-non-second-countabl}
+	{A bijective immersion between second-countable differential manifolds is a diffeomorphism.}
+	
+	\href{https://math.stackexchange.com/questions/102950/is-an-immersed-submanifold-second-countable}
+	{A non-second-countable manifold $M$ cannot be immersed into a second countable manifold $N$.}
+
+	\url{https://en.wikipedia.org/wiki/Embedding#Differential_topology}	
+	
+	\url{https://en.wikipedia.org/wiki/Immersion_(mathematics)}
+	
+	\url{https://en.wikipedia.org/wiki/Submanifold}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[grid=none,%both,
+				trig format plots=rad,
+				axis equal,
+				xmin=-.4,xmax=1.2,ymin=-1.1,ymax=0.5%,
+				%axis lines=middle,
+				%restrict y to domain=-7:12,
+				%enlargelimits
+				]
+				\addplot [domain=-pi/4:3*pi/4,samples=200, red]({cos(x)*cos(2*x)},{sin(x)*cos(2*x)})
+				%(1,150)
+				node[below right=1.2cm] {{\tiny $ \begin{aligned}
+						\left(\frac{-\pi}{4},\frac{3\pi}{4}\right)\to& \re ^2\colon\\
+						x\mapsto &\big(\cos(x)\cos(2x),\\
+						&\sin(x)\cos(2x)\big)
+					\end{aligned} $}};
+				%\addplot[green]  {pow(2,x)} node[above]{$y=2^x$};
+				%\addplot[blue,domain=1/2^6:10,samples=100]  {log2(x)} node[above left] {$y=\log_2(x)$};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Immersion but not embedded submanifold}
+		\label{fig:Immersion_NonEmbedded}
+	\end{figure}
+
 	\subsubsection{TODO}
 	
 	\url{https://en.wikipedia.org/wiki/Immersion_(mathematics)}
@@ -10318,6 +10646,8 @@
 	\url{https://en.wikipedia.org/wiki/Partition_of_unity}
 	
 	\url{https://en.wikipedia.org/wiki/Diffeomorphism}
+	
+	\url{https://en.wikipedia.org/wiki/Universal_property}
 
 	\red{	Directional differentiation
 		
@@ -10345,7 +10675,18 @@
 		
 		Lie groups
 	}
+
+	\href{https://arxiv.org/pdf/1812.04936.pdf}{Counts of (tropical) curves in $E\times \mathbb{P}^1$ and Feynman integrals}
 	
+	\href{https://www.mathematik.uni-kl.de/~boehm/lehre/1819_CM/cm.pdf}{Complex Manifolds}
+	
+	\href{https://www.jstage.jst.go.jp/article/jcss/28/1/28_2020.074/_pdf/-char/en}{cognition}
+	
+	\href{https://en.wikipedia.org/wiki/Zariski_tangent_space}{Zariski tangent space}
+	
+	
+
+
 	\subsection{Lie groups: definitions}
 
 	\red{a map of connected Lie 
