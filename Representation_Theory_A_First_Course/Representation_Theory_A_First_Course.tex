@@ -10442,6 +10442,20 @@
 		The group $G$ is called the \textbf{structure group} of the bundle.
 	\end{def*}
 
+	\begin{thm}
+		To give the data of an $F$-bundle over $X$ it suffices to give an open cover $(U_i)_{i\in I}$
+		of $X$ and
+		\begin{enumerate}
+			\item (transition functions) for each $i, j\in I$ a continuous map $t_{ij}  \colon U_i \cap U_j \to G$ satisfying
+			\item (cocycle condition) for each $i, j, k\in I $, % the following is true 
+			$t_{ik}(x)=t_{ij}(x)t_{jk}(x)$
+			for all $x\in U_i\cap U_j \cap U_k$.
+		\end{enumerate}
+	\end{thm}
+	\begin{rem*}
+		See the \href{https://en.wikipedia.org/wiki/%C4%8Cech_cohomology}{Čech cohomology}.
+	\end{rem*}
+
 	\paragraph{Continuous Group Action}
 	\subparagraph{Definition and Properties}
 	
@@ -10573,7 +10587,31 @@
 	\begin{def*}[principal G-bundle]
 		A \textbf{principal $G$-bundle} is a $G$-bundle
 		where the fiber $F$ is a principal homogeneous space for $G$ (\ie, $G$ as a regular left action on $F$).
+		
+		Equivalently,
+		Let $G$ be a topological group and $B$ a topological space.
+		A principal $G$-bundle over $B$ consists of a fiber bundle $\pi\colon E \to B$
+		together with an action $G \times E \to E$ such
+		that:
+		\begin{itemize}
+			\item the ``shearing map'' $G \times E \to E \times E$
+			 given by $(g, x) \to (x, g  x)$ maps homeomorphically to its image;
+			\item $B = E/G$, the quotient of the action, \ie, the set of all orbits of $E$
+			  under the action of $G$, and $\pi \colon E \to B$ is the quotient map to the orbits, \ie, $x\mapsto Gx$;
+			\item $\forall b\in B\exists U\ni b$ open such that $\pi|_{\pi^{-1}(U)}$ is a $G$-bundle 
+			isomorphic to the trivial bundle $\pi''\colon G \times U \to U$.
+			That is, there exists a
+			homeomorphism $\phi\colon \pi^{-1}(U)\to G\times U$ satisfying $\pi= \pi''\circ\phi$
+			and $\phi(g  x) = g  \phi(x)$,
+			where
+			$g (g', u) \define (gg', u)$.
+		\end{itemize}
 	\end{def*}
+	\begin{rem*}
+		\red{TODO} show the equivalence of definitions.
+		
+		$G$ should be homeomorphic to the fiber.
+	\end{rem*}
 	
 	
 	%	In the smooth category, a G-bundle is a smooth fiber bundle where G is a Lie group and the corresponding action on F is smooth and the transition functions are all smooth maps.
