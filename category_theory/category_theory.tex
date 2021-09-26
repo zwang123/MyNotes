@@ -346,6 +346,24 @@
 	
 	\section{Notes and Definitions}
 	\subsection{Notes}
+	All exercises that are not written here should be considered \red{TODO}.
+	\subsection{Category of natural language}	
+	\begin{enumerate}
+		\item alphabet/stroke
+		\item word/kanji
+		\item phrase/tango
+		\item object/subject
+		\item subsentence (clause/...)
+		\item sentence
+		\item sentence group
+		\item paragraph
+		\item paragraph group
+		\item article
+		\item section
+		\item issue
+		\item volume
+		\item journal/brand
+	\end{enumerate}
 	
 	\section{Categories}
 	\subsection{Introduction}
@@ -472,7 +490,7 @@
 			every matrix/.append style={name=arrows}
 		]
 		X\ar[d,red,"f"']\ar[rd,blue,"g\circ f"]&\\
-		C\ar[r,purple,"g"]&D&&\red{\bar{C}}\ar[r,purple,"\bar{g}"] & \blue{\bar{D}} \\
+		C\ar[r,red!50!blue!100,"g"]&D&&\red{\bar{C}}\ar[r,red!50!blue!100,"\bar{g}"] & \blue{\bar{D}} \\
 		Y\ar[u,red,"h"]\ar[ru,blue,"g\circ h"']&
 	\end{centikzcd}
 	%\begin{tikzpicture}[remember picture, overlay]
@@ -562,6 +580,7 @@
 	\paragraph{Definition 1.12}
 	
 	\subparagraph{The category of sets is locally small}
+	\label{par:sets_locally_small}
 	
 	Given two \textit{sets} $X$ and $Y$,
 	an ordered pair $(x,y)\in X\times Y$ can be viewed as an element in $\power\power(X\cup Y)$
@@ -697,9 +716,10 @@
 
 	\paragraph{11}
 	\subparagraph{b}
-	Assume $\forall A\in \mathbf{Sets}\, \exists! i_A\colon A \to |M(A)|$ as UMP,
+	Assume $\forall A\in \mathbf{Sets}\, \exists! i_A\colon A \to |M(A)|$ as a UMP
+	(existence: \ref{par:kleene_exist}, uniqueness: just pick any one for each $A$ and fix it),
 	then \[ \forall (f\colon A\to B)\, \exists! i_B\circ f\, \exists! M(f) \]
-	such that the following diagram commutes.
+	(existential uniqueness of $i_B\circ f$ is given by \ref{prop:exist_unique}) such that the following diagram commutes.
 	\begin{centikzcd}
 		\mathbf{Mon}& M(A)\ar[r,red,dashed,"\exists!M(f)"]&M(B)\\
 		\mathbf{Sets}& \vert M(A) \vert \ar[r,red,"|M(f)|"]& \vert M(B)\vert \\
@@ -774,31 +794,44 @@
 	so there will be ``more'' arrows than ``necessary''.
 	
 	\subparagraph{AC vs projective}
+	\label{par:split_epi_projective}
 	
-	\blue{If all epis are split, then all objects are projective.} Because for any epi $e\colon E\twoheadrightarrow X$
-	there is a mono $m\colon X\rightarrowtail E$ such that $em=1_X$, therefore for any $f\colon P \to X$,
-	there must be $\bar{f}=m\circ f$ such that the following diagram commutes.
-	\begin{centikzcd}
-		&E\ar[rd,two heads,"e"]&\\
-		P\ar[r,"f"]\ar[ru,dashed,"m\circ f"]&X\ar[r,"1_X"]\ar[u,tail,"m"]&X
-	\end{centikzcd}
+	\begin{prop}
+		\blue{If all epis are split, then all objects are projective.}
+	\end{prop}
+
+	\begin{proof}
+		Because for any epi $e\colon E\twoheadrightarrow X$
+		there is a mono $m\colon X\rightarrowtail E$ such that $em=1_X$, therefore for any $f\colon P \to X$,
+		there must be $\bar{f}=m\circ f$ such that the following diagram commutes.
+		\begin{centikzcd}
+			&E\ar[rd,two heads,"e"]&\\
+			P\ar[r,"f"]\ar[ru,dashed,"m\circ f"]&X\ar[r,"1_X"]\ar[u,tail,"m"]&X
+		\end{centikzcd}
+	\end{proof}
 
 	\red{It follows that
 		free objects in many (but not all!) categories of algebras then are also projective.}
 
 	\subparagraph{Retract of projective object}
-	
-	Let $R$ be a retract of a projective object $P$,
-	and let $rs=1_R$.
-	Then given any epi $e\colon E\twoheadrightarrow X$, 
-	and any $f\colon R\to X$, the following diagram must commute.
-	\begin{centikzcd}
-		&&E\ar[d,red,two heads,"\forall e"]\\
-		&P\ar[r,red,"f\circ r"]\ar[ru,dashed,red,"\exists \overline{f\circ r}"]\ar[d,two heads,"r"]&X\\
-		R\ar[ru,tail,"s"]\ar[r,"1_R"]&R\ar[ru,purple,"\forall f"'] &
-	\end{centikzcd}
-
-	And therefore $f$ lifts across $e$ to $\overline{f\circ r} \circ s$.
+	\label{par:retract_projective}
+	\begin{prop}
+		Any retract of a projective object is also
+		projective.
+	\end{prop}
+	\begin{proof}
+		Let $R$ be a retract of a projective object $P$,
+		and let $rs=1_R$.
+		Then given any epi $e\colon E\twoheadrightarrow X$, 
+		and any $f\colon R\to X$, the following diagram must commute.
+		\begin{centikzcd}
+			&&E\ar[d,red,two heads,"\forall e"]\\
+			&P\ar[r,red,"f\circ r"]\ar[ru,dashed,red,"\exists \overline{f\circ r}"]\ar[d,two heads,"r"]&X\\
+			R\ar[ru,tail,"s"]\ar[r,"1_R"]&R\ar[ru,red!50!blue!100,"\forall f"'] &
+		\end{centikzcd}
+		
+		And therefore $f$ lifts across $e$ to $\overline{f\circ r} \circ s$.
+	\end{proof}
 	
 	\subsection{Initial and terminal objects}
 	
@@ -1087,9 +1120,455 @@
 	
 	
 	\subsection{Categories with products}
+	\paragraph{Multiplication of arrows}
 	
+	$f\times f'$ exists and is uniquely defined because $B\times B'$ is a product and
+	\begin{centikzcd}
+		&A\times A' \ar[d,dashed,"\exists! f\times f'"] \ar[dl,bend right,"f\circ p_1"']\ar[dr,bend left,"f'\circ p_2"] &\\
+		B&B\times B' \ar[l,"q_1"]\ar[r,"q_2"']&B'
+	\end{centikzcd}
 	
+	\paragraph{Functor from product category to itself}
+	First, we need to choose \textit{a} product for each pair of objects because there might be multiple products.
+	
+	The functor $\times$ maps $(A,B)$ to $A\times B$, and $(f,g)$ to $f\times g$ defined above.
+	
+	\paragraph{Ternary product}
+	\red{Prove the associativity}
+	
+	\paragraph{$I$-ary product/coproduct}
+	\label{par:Iary_product}
+	
+	\begin{def*}[I-ary product/coproduct]
+		Given any set $I$, define the $I$-th power $\bfC^I$ of a category $\bfC$
+		whose object is a family of objects $(C_i)_{i\in I}$ in $\bfC$ and
+		whose arrow is a family of arrows $(f_i\colon A_i\to B_i)_{i\in I}\colon (A_i)_{i\in I}\to (B_i)_{i\in I}$
+		in $\bfC$.
+		
+		The identity arrow is
+		\[ 1_{(A_i)_{i\in I}} \define (1_{A_i})_{i\in I}, \]
+		
+		and the composite is
+		\[ (f_i\colon B_i\to C_i)_{i\in I} \circ (g_i\colon A_i\to B_i)_{i\in I}\define (f_i\circ g_i)_{i\in I} .\]
+		
+		The functor $F$ is defined as $F(A)=(A)_{i\in I}, F(f)=(f)_{i\in I}$.
+		
+		Then an \textbf{$I$-ary product} $P$ in $\bfC$ is a universal morphism from $F$ to $(A_i)_{i\in I}$:
+		\[ \Big(P, (p_i)_{i\in I}\colon (P)_{i\in I}\to (A_i)_{i\in I} \Big) \]
+		such that
+		\begin{centikzcd}
+			(P)_{i\in I}\ar[d,"{(p_i)_{i\in I}}"'] &(A')_{i\in I}\ar[l,dashed,"{\exists! (h)_{i\in I}}"']\ar[ld,"{\forall (x_i)_{i\in I}}"] \\
+			(A_i)_{i\in I}&
+		\end{centikzcd}
+	
+		A \textbf{$J$-ary coproduct} $C$ in $\bfC$ is a universal morphism from $(A_j)_{j\in J}$ to $F$:
+		\[ \Big(C, (i_j)_{j\in J}\colon  (A_j)_{j\in J}\to (C)_{j\in J} \Big) \]
+		such that
+		\begin{centikzcd}
+			(C)_{j\in J}\ar[from=d,"{(i_j)_{j\in J}}"] &(A')_{j\in J}\ar[from=l,dashed,"{\exists! (h)_{j\in J}}"]
+			\ar[from=ld,"{\forall (x_j)_{j\in J}}"'] \\
+			(A_j)_{j\in J}&
+		\end{centikzcd}
+	\end{def*}
 	
 	\subsection{Hom-sets}
+	\paragraph{Representable functor}
+	
+	It maps any object $B$ in $\bfC$ to a set $\Hom(A,B)$,
+	and any arrow $g\colon B\to B'$ to $g_{*}\colon \Hom(A,B)\to \Hom(A,B')\colon f\mapsto g\circ f$.
+	\paragraph{Proposition 2.20}
+	This function is a product function of $\Hom(X,p_1)$ and $\Hom(X,p_2)$.
+	
+	Since it is a function between sets, bijective is equivalent to isomorphic.
+	\paragraph{Definition 2.21}
+	Let $p_1',p_2'$ be the projection map for $FA\times FB$ in $\bfD$, then
+	\begin{centikzcd}
+		&F(A\times B)\ar [ld,bend right,"Fp_1"']\ar[rd,bend left,"Fp_2"]\ar[d,dashed,"{\langle Fp_1,Fp_2\rangle}"] &\\
+		FA& FA\times FB \ar[l,"p_1'"]\ar[r,"p_2'"'] & FB\\
+	\end{centikzcd}
+
+	If $f=\langle Fp_1,Fp_2\rangle$ is an iso, then $\exists! g\colon FA\times FB\to F(A\times B)$ such that
+	$fg=1_{FA\times FB},gf=1_{F(A\times B)}$. Therefore both $f$ and $g$ are monos and epis.
+	
+	\begin{centikzcd}
+		&F(A\times B)\ar [ld,bend right,"Fp_1"']\ar[rd,bend left,"Fp_2"]\ar[d,shift left,tail,two heads,"\exists ! f"] &\\
+		FA& FA\times FB \ar[l,"p_1'"]\ar[r,"p_2'"'] \ar[u,shift left,"g'"]\ar[loop below,"1_{FA\times FB}"] & FB\\
+	\end{centikzcd}
+
+	If there is $g'\colon FA\times FB\to F(A\times B)$ such that the diagram commutes, since $f$ is the only arrow from $F(A\times B)$
+	to $FA\times FB$ and $1_{FA\times FB}$ from $FA\times FB$ to $FA\times FB$ which make the diagram commute,
+	therefore $f\circ g'=1_{FA\times FB}$. Since $f$ is epi and mono, $g'=g$. So, $g$ is the only arrow which makes the diagram commute. So $F(A\times B)$ is a product, given the projection maps $Fp_1$ and $Fp_2$.
+	\subsection{Exercises}
+	\paragraph{4}
+	\subparagraph{b}
+	\label{par:trig_mono}
+	$i=j$ if the following diagram commutes.
+	\begin{centikzcd}
+		D\ar[r,shift left,"i"]\ar[r,shift right,"j"']&A\ar[r,dashed,tail,"f"]\ar[rd,tail,"h"']&B\ar[d,"g"]\\
+		&&C
+	\end{centikzcd}
+	\subparagraph{c}
+	$i=j$ if the following diagram commutes.
+	\begin{centikzcd}
+		A\ar[r,"f"]\ar[rd,two heads,"h"']&B\ar[d,two heads,dashed,"g"]&\\
+		&C\ar[r,shift left,"i"]\ar[r,shift right,"j"']&D
+	\end{centikzcd}
+	\paragraph{7}
+	
+	See \ref{par:retract_projective}.
+	
+	\paragraph{8}
+	
+	See \ref{par:split_epi_projective}.
+
+	\paragraph{11}
+	\subparagraph{Definition of $A$-monoid}
+	
+	Let $U\colon \mathbf{Mon}\to \mathbf{Sets}$ be the forgetful functor and $A$ be any set
+	and $M$ be any monoid.
+	An object in $A$-$\mathbf{Mon}$ is a pair $\Big(M,m\in\Hom_{\mathbf{Sets}} \big(A, U(M)\big)\Big)$
+	and an arrow $h\colon (M,m)\to (N,n)$ in $A$-$\mathbf{Mon}$ is an arrow
+	$h\colon M\to N$ in $\mathbf{Mon}$ such that the following diagram in $\mathbf{Sets}$ commutes:
+	\begin{centikzcd}
+		A\ar[r,"m"]\ar[rd,"n"']&U(M)\ar[d,"U(h)"] \\
+		&U(N)
+	\end{centikzcd}
+	\subparagraph{$A$-Mon is a category}
+	
+	The identity is
+	\[ 1_{(M,m)}=1_M. \]
+	
+	The composite is
+	\[ h\circ g\colon (M,m)\to(N,n)\to(O,o) \]
+	such that the following diagram commutes.
+	\begin{centikzcd}
+		&A\ar[dl,"m"']\ar[d,"n"]\ar[dr,"o"]&\\
+		U(M)\ar[r,"U(g)"]&U(N)\ar[r,"U(h)"]&U(O)
+	\end{centikzcd}
+	\subparagraph{Initial objects in $A$-Mon}
+	$(M,m)$ is an initial object in $A$-$\mathbf{Mon}$, iff
+	for any object $(N,n)$ in $A$-$\mathbf{Mon}$, there is an unique arrow $g\in \Hom_{\mathbf{Mon}}(M, N)$
+	such that the following diagram commutes.
+	\begin{centikzcd}
+		\mathbf{Mon}&\blue{M}\ar[r,dashed,"\exists! g"]&N\\
+		\mathbf{Sets}&U(\blue{M})\ar[r,"U(g)"]&U(N)\\
+		&A\ar[u,blue,"m"]\ar[ru,"n"']
+	\end{centikzcd}
+
+	This is exactly the definition of free monoid.
+	
+	\paragraph{14}
+	\subparagraph{a}
+	See \ref{par:Iary_product}.
+	\subparagraph{b}
+	
+	Given any sets $I,X$,
+	for any $i\in I$, define an arrow in $\mathbf{Sets}$:
+	\[ p_i\colon \Hom_{\mathbf{Sets}}(I,X)\to X\colon f\mapsto f(i). \]
+	
+	Then let  $A'$ be any set, take $x_i\colon A'\to X$ as any function for any $i\in I$.
+	If we want to make the following diagram commute
+	\begin{centikzcd}
+		\mathbf{Sets}&\Hom_{\mathbf{Sets}}(I,X)&\ar[l,dashed,"h"']A'\\
+		\mathbf{Sets}^I&\big(\Hom_{\mathbf{Sets}}(I,X)\big)_{i\in I}\ar[d,"(p_i)_{i\in I}"']&\ar[l,"(h)_{i\in I}"']\ar[ld,"(x_i)_{i\in I}"] (A')_{i\in I}\\
+		&(X)_{i\in I}&
+	\end{centikzcd}
+	then we need to have the following equivalence for all $i\in I$ (let $X^I$ be $\Hom_{\mathbf{Sets}}(I,X)$):
+	\begin{centikzcd}
+		 A'\ar[rr,"x_i"] && X\\
+		 a \ar[rr,mapsto,"x_i"]&& x_i(a)\\
+		a \ar[r,mapsto,"h"]& h_a\ar[r,mapsto,"p_i"] & h_a(i)\\
+		A'\ar[r,"h"] & X^I\ar[r,"p_i"] & X
+	\end{centikzcd}
+	Therefore \[\forall i\in I \forall a\in A' [h_a( i)=x_i(a)].\]
+	
+	%Since $x_i(a)\in X$,  $\therefore$ we also have $h_a(i)\in X$.\\
+	%Since the above condition holds for all $i\in I$, $\therefore$ the function $h_a$ is uniquely and well defined
+	%as $i\mapsto x_i(a)$, because
+	\[ \because \forall a\in A'\forall i\in I[\exists! x_i(a)\in X], \]
+	$\therefore \forall a\in A'$,  $h_a$ is uniquely and well defined
+	as $i\mapsto x_i(a)$;\\also, $h_a\in X^I=\Hom_{\mathbf{Sets}}(I,X)$.
+	
+	That is to say,
+	\[ \forall a\in A'[\exists! h_a\in X^I], \]
+	%Since $h_a\in X^I$ is uniquely defined for each $a\in A'$, proving the uniqueness of $h_a$
+	\[\therefore \exists! h\in \Hom_{\mathbf{Sets}}(A',X^I),\]
+	such that the diagram is commutative.
+	
+	This is exactly the definition of $I$-ary product. Therefore \[\Hom_{\mathbf{Sets}}(I,X)=I^X\cong \prod_{i\in I}X.\]
+	
+	\subparagraph{General Cartesian product of sets}
+	\label{par:cart_sets}
+	
+	Given any set $I$ and any family of sets $(X_i)_{i\in I}$,
+	let \[P=\set{ f\in \Hom_{\mathbf{Sets}}(I, \bigcup_{i\in I}X_i )| \forall i\in I\big(f(i)\in X_i\big) }.\]
+	For any $i\in I$, define an arrow in $\mathbf{Sets}$:
+	\[ p_i\colon P \to X_i\colon f\mapsto f(i). \]
+	%Note that $f(i)$ is guaranteed to be in $X_i$ by definition of $P$.
+	Note that $\forall i\in I\,\forall f\in P[\exists! p_i(f)=f(i)\in X_i]$, by definition of $P$.
+	
+	Then let  $A'$ be any set, take $x_i\colon A'\to X_i$ as any function for any $i\in I$.
+	If we want to make the following diagram commute
+	\begin{centikzcd}
+		\mathbf{Sets}&P&\ar[l,dashed,"h"']A'\\
+		\mathbf{Sets}^I&\big(P\big)_{i\in I}\ar[d,"(p_i)_{i\in I}"']&\ar[l,"(h)_{i\in I}"']\ar[ld,"(x_i)_{i\in I}"] (A')_{i\in I}\\
+		&(X_i)_{i\in I}&
+	\end{centikzcd}
+	then we need to have the following equivalence for all $i\in I$:
+	\begin{centikzcd}
+		A'\ar[rr,"x_i"] && X_i\\
+		a \ar[rr,mapsto,"x_i"]&& x_i(a)\\
+		a \ar[r,mapsto,"h"]& h_a\ar[r,mapsto,"p_i"] & h_a(i)\\
+		A'\ar[r,"h"] & P\ar[r,"p_i"] & X
+	\end{centikzcd}
+	Therefore \[\forall i\in I \forall a\in A' [h_a( i)=x_i(a)].\]
+	
+	%Since $x_i(a)\in X$,  $\therefore$ we also have $h_a(i)\in X$.\\
+	%Since the above condition holds for all $i\in I$, $\therefore$ the function $h_a$ is uniquely and well defined
+	%as $i\mapsto x_i(a)$, because
+	By definition of $x_i\colon A'\to X_i$, we have
+	\[ \forall a\in A'\forall i\in I[\exists! x_i(a)\in X_i], \]
+	$\therefore \forall a\in A'$,  $h_a$ is uniquely and well defined
+	as $i\mapsto x_i(a)$;\\also, $h_a\in P$ because $\forall i\in I[h_a(i)=x_i(a)\in X_i]$.
+	
+	That is to say,
+	\[ \forall a\in A'[\exists! h_a\in P], \]
+	%Since $h_a\in X^I$ is uniquely defined for each $a\in A'$, proving the uniqueness of $h_a$
+	\[\therefore \exists! h\in \Hom_{\mathbf{Sets}}(A',P),\]
+	such that the diagram is commutative.
+	
+	This is exactly the definition of $I$-ary product. Therefore \[P\cong \prod_{i\in I}X_i.\]
+	
+	\paragraph{16}
+	
+	Let $A$ be \texttt{int} type,  and $B$ be \texttt{char} type,
+	then $A\to B$ is a function type of signature \texttt{char(int)}.
+	The product type $A\times B$ is a struct type \texttt{\{int, char\}}.
+	
+	\red{TODO}
+	
+	\section{Duality}
+	\subsection{The duality principle}
+	\subsection{Coproducts}
+	\paragraph{Example 3.4}
+	%\begin{def*}
+	%	\ref{par:Iary_product}
+	%\end{def*}
+	
+	\subparagraph{Existence of Kleene closure}
+	\label{par:kleene_exist}
+	\begin{prop}\label{prop:cart_is_set}
+		Given a family of sets $(X_i)_{i\in I}$, the Cartesian product $\prod_{i\in I} X_i$ is a set.
+	\end{prop}
+	\begin{proof}
+		See \ref{par:cart_sets}. It is a result of $\mathbf{Sets}$ being locally small (\ref{par:sets_locally_small}).
+	\end{proof}
+	\begin{rem*}
+		However, the product might be empty without assuming axiom of choice.
+	\end{rem*}
+	\begin{prop}\label{prop:disjoint_union_is_set}
+		Given a family of sets $(X_i)_{i\in I}$, the disjoint union $\bigsqcup_{i\in I} X_i$ is a set.
+	\end{prop}
+	\begin{proof}
+		\[\bigsqcup_{i\in I} X_i \define \set{ (x,i)\in (\bigcup_{i\in I}X_i)\times I |x\in X_i,i\in I} \]
+		is a set due to axiom of specification and axiom of union and \ref{prop:cart_is_set}.
+	\end{proof}
+	
+	\begin{prop}
+		\[\bigsqcup_{i\in I} X_i \define \set{ (x,i)\in (\bigcup_{i\in I}X_i)\times I |x\in X_i,i\in I} \]
+		is an $I$-ary coproduct of a family of sets $(X_i)_{i\in I}$.
+	\end{prop}
+	\begin{proof}
+		Denote $C=\bigsqcup_{i\in I} X_i$.
+		We have proved this is a set (\ref{prop:disjoint_union_is_set}).
+		
+		For each $i\in I$,
+		define the inclusion map $\iota_i$ as
+		\begin{eqlong}
+			\iota_i\colon X_i&\to C,\\
+			\iota_i(x_i)&\define (x_i,i).
+		\end{eqlong}
+		%Since
+		$\because \forall i\in I, x_i\in X_i, \therefore \exists! (x_i,i)\in C$.
+		$\therefore \exists! \iota_i\in\Hom_{\mathbf{Sets}}(X_i,C)$.
+		
+		By definition of ordered pair, $\iota_i$ is an injection for all $i\in I$.
+		
+		Given any set $A$, and any family of functions
+		$(\alpha_i\colon X_i\to A)_{i\in I}$,
+		consider the following equivalence for all $i\in I$:
+		\begin{centikzcd}
+			X_i \ar[rr,"\alpha_i"] && A\\
+			x_i\ar[r,mapsto,"\iota_i"]&(x_i,i)\ar[r,mapsto,"\gamma"]&\alpha_i(x_i)\\
+			X_i \ar[r,tail,"\iota_i"]& C\ar[r,"\gamma"]&A\\
+		\end{centikzcd}
+	
+		Since (by definition of $C$ and ordered pair)
+		\[ \Big[ (x_i,i)\in C\iff (x_i\in X_i\land i\in I )\Big] \land \Big[(x_i,i)=(y_j,j)\iff (x_i=y_j\land i=j)\Big], \]
+		the images of $\iota_i$ for all $i\in I$ form a partition of $C$.
+		Hence $\gamma$ is uniquely determined by $\alpha_i$ and $\iota_i$.
+		
+		$\because \forall i\in I\,\forall x_i\in X_i[\exists! \alpha_i(x_i)\in A],
+		\therefore \exists! \gamma \in \Hom_{\mathbf{Sets}}(C,A)$.
+		
+		In conclusion, we can build up a commutative diagram as follows.
+		\begin{centikzcd}
+			(C)_{i\in I}\ar[dashed,r,"\exists!(\gamma)_{i\in I}"]&(A)_{i\in I}\\
+			(X_i)_{i\in I}\ar[u,"(\iota_i)_{i\in I}"]\ar[ur,"(\alpha_i)_{i\in I}"']&
+		\end{centikzcd}
+	\end{proof}
+
+	\begin{prop}\label{prop:UMP_mono_epic}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
+		\[ \big(A,u\colon X\to F(A)\big) ;\]
+		if \[ \exists f\colon X\rightarrowtail F(B) ,\]
+		then $u$ is monic.
+		
+		The dual property claims that
+		given a universal morphism from $F$ to $X$
+		\[ \big(A,u\colon F(A)\to X\big) ;\]
+		if \[ \exists f\colon X\twoheadrightarrow F(B) ,\]
+		then $u$ is epic.
+	\end{prop}
+	\begin{proof}
+		See \ref{par:trig_mono}.
+		
+		If the following diagram commutes, then $i=j$.
+		\begin{centikzcd}
+			&F(A)\ar[r,dashed,"\exists! F(h)"]&F(B)\\
+			Y\ar[r,shift left,"i"]\ar[r,shift right, "j"']&X\ar[u,tail,"u"]\ar[ur,tail,"f"']&
+		\end{centikzcd}
+	\end{proof}
+
+	\begin{cor}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$. Let
+		\[ \big(A,u\colon F(B)\to F(A)\big) \]
+		be a universal morphism from $F(B)$ to $F$, then $u$ is monic.
+		
+		Let
+		\[ \big(A,u\colon F(A)\to F(B)\big) \]
+		be a universal morphism from $F$ to $F(B)$, then $u$ is epic.
+	\end{cor}
+	\begin{proof}
+		$\exists 1_{F(B)}\colon F(B)\to F(B)$ that is both epic and monic.
+		And \ref{prop:UMP_mono_epic}.
+	\end{proof}
+
+	\begin{cor}
+		Let $U\colon \mathbf{Mon}\to \mathbf{Sets}$ be the forgetful functor,
+		then for any universal morphism from a set $X$ to $U$
+		\[ \big(A, i\colon X \to U(A) \big), \]
+		$i$ is monic (injective).
+	\end{cor}
+	\begin{proof}
+		For any set $X$, its power set $\power(X)$ is also a set (axiom of power set),
+		as well as a monoid under intersection (or union or symmetric difference).
+		
+		There is an injection $f\colon X\rightarrowtail\power(X)\colon x\mapsto \set{x}$.\\
+		$i$ is monic followed by \ref{prop:UMP_mono_epic}.
+	\end{proof}
+
+	\begin{prop}
+		The Kleene closure $X^*=\bigsqcup_{i\in \nat}X^i$ for any set $X$
+		is a free monoid over $X$ under \[*\colon \big(\alpha\colon I\to X,I\big) ,\big(\beta\colon J\to X,J\big) \mapsto
+		\big(([\alpha,\beta]\colon I
+		%\sqcup 
+		+
+		J\to X), I
+		+
+		%\sqcup
+		 J\big),\]
+		where $I=\set{1,\dots,i},J=\set{1,\dots,j},I+J=\set{1,\dots,i+j},0\cong\emptyset$.
+	\end{prop}
+	\begin{proof}
+		First, it is a (small) set per \ref{prop:cart_is_set} and \ref{prop:disjoint_union_is_set}.
+		
+		Next we show the existential uniqueness of $*$ by UMP given a coproduct diagram.
+		\begin{centikzcd}
+			&X&\\
+			I\ar[ru,"\alpha",bend left]\ar[r,"\iota_{I,J}"']&I
+			%\sqcup 
+			+
+			J\ar[u,dashed,"{\exists ! [\alpha,\beta]}"']&J\ar[lu,bend right,"\beta"']\ar[l,"\iota_{J,I}"]
+		\end{centikzcd}
+		%Note that $I\sqcup J\in \nat$ because sum of finite numbers is finite.
+		Note that $I+ J\in \nat$ because sum of finite numbers is finite.
+		
+		The identity of the monoid is \[ (\emptyset\to X,\emptyset), \]
+		which must exist because $\emptyset$ is an initial object in $\mathbf{Sets}$.
+		
+		\red{This is identity because $\emptyset+J=J$ and the inclusion map $\iota_{J,\emptyset}=1_{J}$.}
+		
+		$*$ is associative because $+$ is associative (by choosing appropriate inclusion map):
+		
+		\begin{centikzcd}
+			&&I+J+K\ar[dd,bend right,pos=0.3,"{\exists![\alpha,[\beta,\gamma]]}"']
+			\ar[dd,bend left,pos=0.3,"{\exists![[\alpha,\beta],\gamma]}"]&&\\
+			%%%%%%%%
+			I\ar[rru,bend left,blue,"\iota_{I,J+K}"]\ar[r,red,"\iota_{I,J}"]
+			&I+J\ar[ru,red,bend left,pos=0.3,"\iota_{I+J,K}"]
+			&J\ar[l,red,crossing over,"\iota_{J,I}"']\ar[r,blue,crossing over,"\iota_{J,K}"]
+			&J+K\ar[lu,blue,bend right,pos=0.3,"\iota_{J+K,I}"']
+			&K\ar[llu,bend right,red,"\iota_{K,I+J}"']\ar[l,blue,"\iota_{K,J}"'] \\
+			%%%%%%%%
+			&&X\ar[from=u,red!50!blue!100,"\beta"]\ar[from=ul,red,"{\exists![\alpha,\beta]}"']\ar[from=ull,red!70!blue!100,bend right,"\alpha"']\ar[from=ur,blue,"{\exists![\beta,\gamma]}"]\ar[from=urr,blue!70!red!100,bend left,
+			"\gamma"]
+			%
+			&&
+		\end{centikzcd}
+	
+		Therefore $X^*$ is a monoid. Let $U\colon\mathbf{Mon}\to\mathbf{Sets}$ be the forgetful functor.
+		Then \[\big(X^*, u\colon x\mapsto  (1\mapsto x, \set{1})\big)\] 
+		is a universal morphism from $X$ to $U$ (given any monoid $M$ and any function $f\in\Hom_{\mathbf{Sets}}(X,U(M))$):
+		\begin{centikzcd}
+			U(X^*)\ar[dashed,r,"\exists! U(h)"]&U(M)\\
+			X\ar[u,"u"]\ar[ur,"\forall f"']&
+		\end{centikzcd}
+		Because
+		\begin{centikzcd}
+			x\ar[mapsto,r,"u"]&(1\mapsto x,\set{1})\ar[mapsto,r,"U(h)"]&f(x)
+		\end{centikzcd}
+	
+		If $\exists h\in \Hom_{\mathbf{Mon}}(X^*,M)$, then $h$ must be unique, because
+		\[ h(\emptyset\to X,\emptyset) = e \]
+		where $e$ is the identity of $M$,
+		and for any nonempty $I$,
+		\begin{eqlong}
+			 h(i\mapsto x_i,I)
+			 &=h( [1\mapsto x_1,1\mapsto x_2,\dots,1\mapsto x_{\card{I}} ], \underset{\card{I}\text{ times}}
+			{1+\dots+1})\\
+			&=f(x_1)\cdot_{M}f(x_2)\dots f(x_{\card{I}})\\
+		\end{eqlong}
+	
+		Easy to prove $h$ is a monoid homomorphism as well.
+		
+	\end{proof}
+
+	\begin{prop}
+		UMP exists for all sets.
+	\end{prop}
+	\begin{proof}
+		\red{TODO}
+	\end{proof}
+
+	\paragraph{Example 3.5}
+	Given sets $A,B$ and a coproduct diagram $A\overset{i_1}{\rightarrow}A+B\overset{i_2}{\leftarrow}B$,
+	let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ the forgetful functor,
+	$M(C)$ be a free monoid over $C$ for any set $C$,
+	and $\eta_C\colon C\to U\circ M(C)$ be the universal map of $M(C)$.
+	Then the following diagram in $\mathbf{Sets}$ commutes ($UM=U\circ M$) for any monoid $N$.
+	\begin{centikzcd}
+		&U(N)&\\
+		UM(A)\ar[r,dashed,red,"\exists! U(f)"]&UM(A+B)&UM(B)\ar[l,dashed,blue,"\exists! U(g)"']\\
+		A\ar[u,"\eta_A"]\ar[r,"i_1"']&A+B\ar[u,"\eta_{A+B}"']&B\ar[l,"i_2"]\ar[u,"\eta_B"']
+	\end{centikzcd}
+
+	By UMP of free monoid, The \red{red} arrow $U(f)$ is uniquely determined by $\eta_{A+B}\circ i_1$,
+		the \blue{blue} arrow $U(g)$ is uniquely determined by  $\eta_{A+B}\circ i_2$.
+		
+	From the UMP of coproduct, it turns out that $\eta_{A+B}=[U(f)\circ \eta_A,U(g)\circ \eta_B]$.
+	
+	\subsection{Equalizers}
+	\subsection{Coequalizers}
 	\subsection{Exercises}
 \end{document}
