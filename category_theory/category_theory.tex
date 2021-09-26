@@ -229,30 +229,30 @@
 %\titlespacing*{\paragraph}
 %{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
-%\makeatletter
-%\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-%	{3.25ex \@plus1ex \@minus.2ex}%
-%	{-1em}%
-%	{\normalfont\normalsize\bfseries}}
-%\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-%	{3.25ex \@plus1ex \@minus .2ex}%
-%	{-1em}%
-%	{\normalfont\normalsize\bfseries}}
-%%\def\toclevel@subsubsubsection{4}
-%\def\toclevel@paragraph{4}
-%\def\toclevel@paragraph{5}
-%\def\toclevel@definition{6}
-%%\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
-%%\def\l@paragraph{\@dottedtocline{4}{10em}{5em}}
-%%\def\l@subparagraph{\@dottedtocline{5}{14em}{6em}}
-%%\def\l@definition{\@dottedtocline{6}{15em}{7em}}
-%\def\l@paragraph{\@dottedtocline{4}{6em}{4em}}
-%\def\l@subparagraph{\@dottedtocline{5}{8em}{5em}}
-%\def\l@definition{\@dottedtocline{6}{8.5em}{0em}}
-%\makeatother
-%
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{3.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+%\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@definition{6}
+%\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+%\def\l@paragraph{\@dottedtocline{4}{10em}{5em}}
+%\def\l@subparagraph{\@dottedtocline{5}{14em}{6em}}
+%\def\l@definition{\@dottedtocline{6}{15em}{7em}}
+\def\l@paragraph{\@dottedtocline{4}{5em}{4em}}
+\def\l@subparagraph{\@dottedtocline{5}{6em}{5em}}
+\def\l@definition{\@dottedtocline{6}{7em}{0em}}
+\makeatother
+
 %\setcounter{secnumdepth}{6}
-%\setcounter{tocdepth}{6}
+\setcounter{tocdepth}{6}
 
 %https://tex.stackexchange.com/questions/280313/how-to-put-the-list-of-definitions-at-contents-page
 %https://tex.stackexchange.com/questions/51691/creating-list-of-for-newtheoremstyle
@@ -490,7 +490,7 @@
 	\blue{Also see Warning 1.13 that small does not imply concrete and neither is the converse.} 
 		
 	\paragraph{Remark 1.7}
-	\subparagraph{}
+	\subparagraph{Test object}
 	
 	\red{What does this mean}
 	\begin{figure}[H]
@@ -500,7 +500,7 @@
 		\label{fig:2}
 	\end{figure}
 	
-	\subparagraph{}\label{sec:too_many_arrows}
+	\subparagraph{Too many arrows}\label{sec:too_many_arrows}
 	\blue{If the arrows in the category is too large to form a set, then it might not be isomorphic to a small category?}
 	
 	\subsection{Constructions on categories}
@@ -512,11 +512,11 @@
 	\end{centikzcd}
 	\paragraph{4 Slice category}
 	
-	\subparagraph{}
+	\subparagraph{Definition of $\bfC/(-)$}
 	
 	\[ \bfC/(-)\colon\bfC\to\mathbf{Cat}\colon C\to\bfC/C\colon g\to g_*. \]
 	
-	\subparagraph{}
+	\subparagraph{Cat to Sets}
 	
 	\blue{the forgetful functor $U \colon \mathbf{Cat} \to \mathbf{Sets}$
 	that takes a category to its underlying set of objects.}
@@ -529,7 +529,7 @@
 	
 	\red{But is $\bfC/C$ a small category? If and only if $\bfC$ is small?}
 	
-	\subparagraph{principal ideal}
+	\subparagraph{Principal ideal}
 	
 	the slice category P/p is just the \red{``principal ideal'' (what does this mean? what is down arrow?)} $\downarrow (p)$ of elements $q \in P$
 	with $q \le p$.
@@ -628,7 +628,7 @@
 
 	\paragraph{7}
 	
-	\subparagraph{}
+	%\subparagraph{}
 	For any positive integer $n$,
 	\[ F\colon\mathbf{Sets}/n\to \mathbf{Sets}^n, \]
 	\[ (f\colon X\to \set{a_1,\dots,a_n} )\mapsto (f^{-1}(a_1),\dots,f^{-1}(a_n)).  \]
@@ -644,7 +644,7 @@
 		\item \red{It is isomorphism?}
 	\end{enumerate}
 
-	\paragraph{8}
+	\paragraph{8}\label{par:preorder_category}
 	
 	In the preorder category $P(\bfC)$,
 	any information encoded in the arrows is forgotten,
@@ -850,13 +850,46 @@
 	there is uniquely $x=|f|\circ i$ which makes the diagram commute.
 	Different $f$ must correspond to different $x$, otherwise it contradicts the UMP axiom.
 	
+	\paragraph{Universal Property}
 	\subparagraph{Bijection in general}
+	
+	\begin{prop}\label{prop:exist_unique}
+		Given a commutative diagram in category $\bfC$
+		\begin{centikzcd}
+			A\ar[r,"f"]& B\ar[d,"g"]\\
+			&C
+		\end{centikzcd}
+		there \textit{exists} a \textit{unique} commutative diagram in $\bfC$
+		\begin{centikzcd}
+			A\ar[r,"f"]\ar[rd,dashed,"\exists! h"'] & B\ar[d,"g"]\\
+			&C
+		\end{centikzcd}
+		where $h$ is uniquely determined as $g\circ f$.
+	\end{prop}
+	\begin{proof}
+		Given the definition of commutative diagram,
+		if $h$ exist, it must be $g\circ f$ (uniqueness).
+		
+		Given the axiom of category, $g\circ f$ must exist if both $f$ and $g$ exist (existence).
+	\end{proof}
+	\begin{rem*}
+		Therefore, such edge can be arbitrarily added or deleted without loss of generality.
+	\end{rem*}
+	\begin{rem*}
+		%Note that $g$ might not be uniquely determined by $f$ and $h$ unless $f$ is epi.
+		Note that $g$ is uniquely determined by $f$ and $h$ if and only if $f$ is epi.
+		\begin{centikzcd}
+			A\ar[r,two heads,"f"]\ar[rd,"h"'] & B\ar[d,dashed,"\exists g \implies \exists! g"]&&
+			A\ar[r,dashed,"\exists f \implies \exists ! f"]\ar[rd,"h"'] & B\ar[d,tail,"g"]\\
+			&C&&&C
+		\end{centikzcd}
+	\end{rem*}
 	
 	\begin{def*}[universal property]
 		Let $F\colon \bfC\to \bfD$ be a functor between categories $\bfC$ and $\bfD$,
 		and let $X\in\ob(\bfD), A,A'\in\ob(\bfC)$.
 		
-		A \textbf{universal morphism} from $X$ to $F$ is a unique pair $(A,u\colon X\to F(A))$ in $D$
+		A \textbf{universal morphism from $X$ to $F$} is a unique pair $(A,u\colon X\to F(A))$ in $D$
 		such that any morphism of the form $f\colon X\to F(A')$ in $D$, there \textit{exists a unique} morphism
 		$h\colon A\to A'$ in $C$ such that $f=F(h)\circ u$, \ie, the following diagram commutes:
 		\begin{centikzcd}
@@ -864,11 +897,20 @@
 			\bfD & F(\blue{A}) \ar[dashed,r,"\exists F(h)"] & F(A')\\
 			& X \ar[u,red,"u"] \ar[ur,"\forall f"'] &
 		\end{centikzcd}
+	
+		A \textbf{universal morphism from $F$ to $X$} is a unique pair $(A,u\colon  F(A)\to X)$ in $D$
+		such that any morphism of the form $f\colon  F(A')\to X$ in $D$, there \textit{exists a unique} morphism
+		$h\colon A'\to A$ in $C$ such that $f= u\circ F(h)$, \ie, the following diagram commutes:
+		\begin{centikzcd}
+			\bfC & \blue{A} \ar[dashed,from=r,"\exists ! h"'] & A'\\
+			\bfD & F(\blue{A}) \ar[dashed,from=r,"\exists F(h)"'] & F(A')\\
+			& X \ar[from=u,red,"u"'] \ar[from=ur,"\forall f"] &
+		\end{centikzcd}
 	\end{def*}
 
-	\begin{prop}
+	\begin{prop}\label{prop:same_arrows}
 		Given two locally small categories $\bfC$ and $\bfD$,
-		if $(A,u\colon X\to F(A))$ is a universal morphism,
+		if $(A,u\colon X\to F(A))$ is a universal morphism from $X$ to $F$,
 		then $\forall A'\in \ob(\bfC)$ there is a bijection for hom-sets
 		\[ \Hom_\bfC(A,A')\cong \Hom_\bfD(X,F(A')). \]
 	\end{prop}
@@ -880,7 +922,7 @@
 		such that the definition diagram commutes.
 		
 		Conversely, for any $g\in \Hom_\bfC(A,A')$, there exists a unique
-		morphism $ F(g) \circ u $ such that the definition diagram commutes,
+		morphism $ F(g) \circ u $ (\ref{prop:exist_unique}) such that the definition diagram commutes,
 		therefore
 		\[ G'\colon\Hom_\bfC(A,A')\to  \Hom_\bfD(X,F(A')) \colon g\to F(g) \circ u   \]
 		is another mapping.
@@ -894,15 +936,136 @@
 		
 		Different $f$ corresponds to different $h$
 		because the composite $F(g)\circ u$ is uniquely determined by its components $F(g)$ and $u$.
-		And there is no other morphism $X\to F(A')$ that makes the diagram commute.
+		And there is no other morphism $X\to F(A')$ that makes the diagram commute (\ref{prop:exist_unique}).
 	\end{rem*}
+
+	\begin{cor}\label{prop:same_arrows_from_F_to_X}
+		Given two locally small categories $\bfC$ and $\bfD$,
+		if $(A,u\colon F(A)\to X)$ is a universal morphism from $F$ to $X$,
+		then $\forall A'\in \ob(\bfC)$ there is a bijection for hom-sets
+		\[ \Hom_\bfC(A',A)\cong \Hom_\bfD(F(A'),X). \]
+	\end{cor}
 	
+	\subparagraph{Initial and terminal objects are defined by universal property}
+	
+	Given a category $\bfC$, define a category $\bfD$ whose objects are equivalent to objects in $\bfC$.
+	Define $\bfD$ such that
+	there is \textit{exactly one} arrow between any two objects in $\bfD$ (easy to prove $\bfD$ is a valid category,
+	see \ref{par:preorder_category}).
+	Define a functor $F\colon \bfC\to\bfD$ such that for any arrow $f\colon A\to B$ in $\bfC$,
+	the corresponding arrow is \textit{the} arrow $F(f)\colon F(A)\to F(B)$ in $\bfD$ (easy to prove $F$ is a functor if $\bfD$ is a valid category).
+	
+	Then an initial object $I$ of $\bfC$ is defined by
+	a universal morphism from $F(I)$ to $F$: $(I,1_{F(I)}\colon F(I)\to F(I))$.
+	\begin{centikzcd}
+		\bfC&&\blue{I}\ar[r,dashed,"\exists ! h"]&A'\\
+		\bfD&&F(\blue{I})\ar[loop left,red,"1_{F(I)}"]\ar[r,shift left,dashed,"\exists ! F(h)"]\ar[r,shift right,"\forall f"']& F(A')\\
+		%F(I)
+	\end{centikzcd}
+	In the definition (\ref{universal property}), $X = F(I), A = I, u = 1_{F(I)}$.
+	
+	Because for any object $A'$ in $\bfC$, there is \textit{exactly one} arrow $f\colon X=F(I)\to F(A')$ in $\bfD$,
+	so there exists \textit{exactly one} arrow from $A=I$ to any object $A'$ in $\bfC$ (\ref{prop:same_arrows}).
+	
+	%Given a category $\bfC$, an initial object $I$ of $\bfC$ is defined by the 
+	%a universal morphism from $I$ to $1_\bfC$: $(I,1_I\colon I\to 1_\bfC(I))$
+	%where $1_\bfC$ is the identity functor.
+	%\begin{centikzcd}
+	%	I\ar[loop left,"1_I"]\ar[r,dashed,"\exists ! h"]& A'
+	%\end{centikzcd}
+	%In the definition (\ref{universal property}), $\bfD = \bfC, X = I, F = 1_\bfC, A = I, u = 1_I$.
+	
+	A terminal object $T$ of $\bfC$ is defined by a
+	universal morphism from $F$ to $F(T)$: $(T,1_{F(T)}\colon F(T)\to F(T))$
+	\begin{centikzcd}
+		\bfC&&\blue{T}\ar[from=r,dashed,"\exists ! h"']&A'\\
+		\bfD&&F(\blue{T})\ar[loop left,red,"1_{F(T)}"]\ar[from=r,shift right,dashed,"\exists ! F(h)"']
+		\ar[from=r,shift left,"\forall f"]& F(A')\\
+		%F(I)
+	\end{centikzcd}
+	In the definition (\ref{universal property}), $X = F(T), A = T, u = 1_{F(T)}$.
+		
+	Because for any object $A'$ in $\bfC$, there is \textit{exactly one} arrow $f\colon  F(A')\to X=F(T)$ in $\bfD$,
+	so there exists \textit{exactly one} arrow from any object $A'$  to $A=T$ in $\bfC$ (\ref{prop:same_arrows_from_F_to_X}).
 	
 	\subsection{Products}
 	\paragraph{Arrows out of the product}
 	\red{To be sure, they are related to the notion of an
 	``exponential'' $Y^B$, via ``currying'' $\lambda f : A \to Y^B$; we discuss this further in
 	Chapter 6.}
+	\paragraph{Product is defined by universal property}
+	
+	\subparagraph{Cumbersome definition}
+	Given a category $\bfC$, and a product diagram in $\bfC$
+	\begin{centikzcd}
+		A&P\ar[l,"p_1"']\ar[r,"p_2"]&B
+	\end{centikzcd}
+	define a copy $\bfD$ of $\bfC$, with one additional object, denoted $(A, B)$.
+	The only arrow from $(A,B)$ to itself is the identity arrow $1_{(A,B)}$.
+	There is no arrow from $(A,B)$ to other different objects in $\bfD$.
+	For any object $C$ in $\bfC$, and any arrows $f\colon C\to A, g\colon C\to B$ in $\bfC$,
+	define an arrow $(f,g)\colon C\to (A,B)$ in $\bfD$.
+	If, for example, there are $3$ arrows $C\to A$, and $2$ for $C\to B$ in $\bfC$,
+	then there will be $6$ for $C\to (A,B)$ in $\bfD$.
+	
+	We now define the composite to make $\bfD$ a category.
+	For any $h\colon D\to C$ in $\bfC$ and any $(f,g)\colon C\to (A,B)$ in $\bfD$,
+	$(f,g)\circ h\define (f\circ h,g\circ h)$ is an arrow from $D$ to $(A,B)$
+	because both $f\circ h\colon D\to A$ and $g\circ h\colon D\to B$ exist in $\bfC$.
+	\begin{centikzcd}
+		D \ar[r,"h"] \ar[rd,dashed,"{(f\circ h, g\circ h)}"'] & C \ar[d,"{(f,g)}"] \\
+		& (A,B)
+	\end{centikzcd}
+
+	Easy to show this definition satisfies the associativity requirement.
+	
+	Let $F\colon \bfC\to\bfD$ be the trivial functor (since $\bfD$ is just a little bit more than a copy of $\bfC$),
+	then a product $P$ is given by the universal morphism from $F$ to $(A,B)$:
+	\[ (P, (p_1,p_2)\colon P \to (A,B)). \]
+	\begin{centikzcd}
+		P\ar[d,"{(p_1,p_2)}"'] &A'\ar[l,dashed,"\exists! h"']\ar[ld,"{(x_1,x_2)}"] \\
+		(A,B)&
+	\end{centikzcd}
+	In the definition, \ref{universal property},
+	$X=(A,B), u=(p_1,p_2), A= P, F(A)=P, F(A')=A',F(h)=h,f=(x_1,x_2)$.
+	
+	Note that $(A,B)$ is not an object of $\bfC$, so $F(A')=A'\ne(A,B)$, so any arrow $f\colon A'\to (A,B)$ can be expressed as $(x_1,x_2)$.
+	
+	By definition of composite in $\bfD$ and uniqueness of composite (\ref{prop:exist_unique}),
+	we have $(x_1,x_2)=(p_1\circ h,p_2\circ h)$.
+	
+	\subparagraph{Concise definition}\label{par:product}
+	
+	Given a category $\bfC$, define a functor $F\colon \bfC\to \bfC\times\bfC$, where $\bfC\times\bfC$
+	is the \href{https://en.wikipedia.org/wiki/Product_category}{product category}, as
+	\[ F(A) = (A, A), F(f\colon A\to B) = (f,f)\colon (A, A)\to (B, B). \]
+
+	Then a product $P$ is given by the universal morphism from $F$ to $(A,B)$:
+	\[ (P, (p_1,p_2)\colon (P,P) \to (A,B)). \]
+	\begin{centikzcd}
+		(P,P)\ar[d,"{(p_1,p_2)}"'] &(A',A')\ar[l,dashed,"{\exists! (h,h)}"']\ar[ld,"{(x_1,x_2)}"] \\
+		(A,B)&
+	\end{centikzcd}
+	In the definition, \ref{universal property},
+	$\bfD=\bfC\times\bfC, X=(A,B), u=(p_1,p_2), A= P, F(A)=(P,P), F(A')=(A',A'),F(h)=(h,h),f=(x_1,x_2)$.
+	
+	
+	By definition of composite in $\bfD$ and uniqueness of composite (\ref{prop:exist_unique}),
+	we have $(x_1,x_2)=(p_1\circ h,p_2\circ h)$.
+	
+	\paragraph{Coproduct is defined by universal property}
+	Given a category $\bfC$, define a functor $F\colon \bfC\to \bfC\times\bfC$
+	as does \ref{par:product}.
+	
+	Then a coproduct $C$ is given by the universal morphism from $(A,B)$ to $F$:
+	\[ (C, (i_1,i_2)\colon (A,B)\to (C,C) ). \]
+	\begin{centikzcd}
+		(C,C)\ar[from=d,"{(i_1,i_2)}"] &(A',A')\ar[from=l,dashed,"{\exists! (h,h)}"]\ar[from=ld,"{(x_1,x_2)}"'] \\
+		(A,B)&
+	\end{centikzcd}
+	In the definition, \ref{universal property},
+	$\bfD=\bfC\times\bfC, X=(A,B), u=(i_1,i_2), A= C, F(A)=(C,C), F(A')=(A',A'),F(h)=(h,h),f=(x_1,x_2)$.
+	
 	\subsection{Examples of products}
 	\paragraph{3}
 	\red{Check properties}
@@ -919,6 +1082,9 @@
 	\paragraph{Remark 2.18 ``Curry--Howard'' correspondence}
 	
 	\red{Functor from category of proofs to category of types}
+	
+	
+	
 	
 	\subsection{Categories with products}
 	

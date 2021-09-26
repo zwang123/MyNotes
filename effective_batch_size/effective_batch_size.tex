@@ -553,4 +553,59 @@
 			\lim\limits_{m\to0}\EBS(m,n)\to\infty.
 		\end{equation}
 	\end{cor}
+
+	\section{Different levels of permutation}
+	There are different levels of permutation in distributed learning (with $n$ being the number of GPUs)
+	to decrease repetition (and somehow increase ``effective batch size''):
+	\begin{enumerate}
+		\item Naïve sampling (no permutation, no blocks).
+		\item No permutation of data set, but divide the data set into $n$ blocks
+		such that each GPU only samples within its corresponding block.
+		\item Permute the data set only once at the beginning, then divide it into $n$ blocks.
+		\item Permute the data set at the beginning of each epoch, and divide into $n$ blocks.
+		\item Permute every iteration, and divide into $n$ blocks.
+	\end{enumerate}
+
+	In terms of how the program fetches data, there are different patterns, from more repetition to less:
+	\begin{enumerate}
+		\item possibly repeating inputs even in a local batch;
+		\item no repeating input in each local batch;
+		\item no repeating input in each epoch within GPU, but might be repetitive across GPUs,
+		\ie, for each GPU each epoch, there will be $m/n$ unique inputs ($m$ is the size of data set);
+		\item no repetition in a global batch;
+		\item no repetition in a global epoch, \ie, in each epoch, all inputs are guaranteed to
+		sample exactly once.
+	\end{enumerate}
+
+	Note that permutation level 1 + data fetching level 4 is equivalent to permutation level 5 + data fetching level 2.
+	
+	Permutation level 4 + data fetching level 3 is permutation level 1 + data fetching level 5.
+
+	
+	Does the dataloader tend to get repeated samples in distributed learning?
+	
+	\section{Effective batch size in distributed learning}
+	
+	The effective global batch size (EGBS) is the averaged or expected unique samples per global batch.
+	
+	The effective data set size (EDS) is the  averaged or expected unique samples per epoch.
+	
+	We might want low EDS but high EGBS because the weight (parameter) update happens each iteration.
+	The weight update is done by averaging within each \textit{global} batch, \ie,
+	all samples in a \textit{global} batch is contributing to the weight update simultaneously.
+	
+	However, the data in different global batches affect the weight update at different timings.
+	Therefore, it is unnecessary to correlate samples in different iteration. Instead,
+	we might want a low EDS to prevent overfitting (that is to say, we might want to prevent data fetching level 3 or 5).
+	
+	If $n$ samples are randomly chosen from a data set of size $m$, such that all selections
+	are \textit{iid} and each input in the data set has equal probability of being sampled.
+	Then,
+	for data fetching level 1 and permutation level 1, effective global batch size = \[\mathrm{EBS}(m,n\cdot l),\]
+	where $l$ is the local batch size.
+	For data fetching level 1 + $n$-blocking, effective global batch size =  \[\mathrm{EBS}(m/n,l)\cdot n.\]
+	
+	\section{Average degeneracy of bosons}
+	Each boson-state fits infinite amount of bosons, unlike fermions. Therefore,
+	the average degeneracy of $n$ Bosons filling $m$ states is $\EBS(m,n)$ at infinite temperature.
 \end{document}
