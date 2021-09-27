@@ -302,6 +302,10 @@
 \newtheorem{tthm}[exe]{Theorem in Book}
 \captionsetup{width=0.9\textwidth}
 
+\newcommand{\epimono}{{\rightarrowtail\!\!\!\!\!\twoheadrightarrow}}
+\newcommand{\mono}{{\rightarrowtail}}
+\newcommand{\epi}{{\twoheadrightarrow}}
+\newcommand{\iso}{{\xrightarrow{\sim}}}
 
 %%  \usetikzlibrary{shadows}% for shadow
 %%  \tikzstyle{event} = [color=black!40,text=white,text centered,circular drop shadow,font=\large\bfseries,text height=4em,text width=4em]
@@ -717,7 +721,7 @@
 	\paragraph{11}
 	\subparagraph{b}
 	Assume $\forall A\in \mathbf{Sets}\, \exists! i_A\colon A \to |M(A)|$ as a UMP
-	(existence: \ref{par:kleene_exist}, uniqueness: just pick any one for each $A$ and fix it),
+	(existence: \ref{prop:Kleene_is_free}, uniqueness: just pick any one for each $A$ and fix it),
 	then \[ \forall (f\colon A\to B)\, \exists! i_B\circ f\, \exists! M(f) \]
 	(existential uniqueness of $i_B\circ f$ is given by \ref{prop:exist_unique}) such that the following diagram commutes.
 	\begin{centikzcd}
@@ -978,6 +982,176 @@
 		then $\forall A'\in \ob(\bfC)$ there is a bijection for hom-sets
 		\[ \Hom_\bfC(A',A)\cong \Hom_\bfD(F(A'),X). \]
 	\end{cor}
+
+	\subparagraph{Properties of universal morphism}
+	\label{par:universal_morph_prop}
+	
+	See definition here: \ref{universal property}.
+	
+	\begin{prop}\label{prop:UMP_mono_epic}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
+		\[ \big(A,u\colon X\to F(A)\big) ;\]
+		if \[ \exists f\colon X\rightarrowtail F(B) ,\]
+		then $u$ is monic.
+		
+		The dual property claims that
+		given a universal morphism from $F$ to $X$
+		\[ \big(A,u\colon F(A)\to X\big) ;\]
+		if \[ \exists f\colon X\twoheadrightarrow F(B) ,\]
+		then $u$ is epic.
+	\end{prop}
+	\begin{proof}
+		See \ref{par:trig_mono}.
+		
+		If the following diagram commutes, then $i=j$.
+		\begin{centikzcd}
+			&F(A)\ar[r,dashed,"\exists! F(h)"]&F(B)\\
+			Y\ar[r,shift left,"i"]\ar[r,shift right, "j"']&X\ar[u,tail,"u"]\ar[ur,tail,"f"']&
+		\end{centikzcd}
+	\end{proof}
+	\begin{rem*}
+		There exist non-monic universal morphism from $X$ to $F$.
+		Let $A=\set{0}$ be the only object in $\bfC$,
+		$\bfD$ be a subcategory of $\mathbf{Sets}$ with $A$ and $X=\set{-1,1}$ as objects and functions as arrows.
+		Define the functor $F\colon\bfC\to\bfD$ as $F(A)=A\in \bfD$. Then a universal morphism from $X$ to $F$
+		$(A,u\colon X\to A)$ is not monic:
+		\begin{centikzcd}
+			\ar[loop left,"1_X"]\ar[loop,in=150,out=210,looseness=10,"-1_X"]X \ar[r,"\exists ! u"] & A=F(A)\ar[loop right,"\exists! 1_A=F(1_A)"]
+		\end{centikzcd}
+	\end{rem*}
+	
+	\begin{cor}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$. Let
+		\[ \big(A,u\colon F(B)\to F(A)\big) \]
+		be a universal morphism from $F(B)$ to $F$, then $u$ is monic.
+		
+		Let
+		\[ \big(A,u\colon F(A)\to F(B)\big) \]
+		be a universal morphism from $F$ to $F(B)$, then $u$ is epic.
+	\end{cor}
+	\begin{proof}
+		$\exists 1_{F(B)}\colon F(B)\to F(B)$ that is both epic and monic.
+		And \ref{prop:UMP_mono_epic}.
+	\end{proof}
+	
+	\begin{cor}\label{cor:inj_UMP_set_to_U}
+		Let $U\colon \mathbf{Mon}\to \mathbf{Sets}$ be the forgetful functor,
+		then for any universal morphism from a set $X$ to $U$
+		\[ \big(A, i\colon X \to U(A) \big), \]
+		$i$ is monic (injective).
+	\end{cor}
+	\begin{proof}
+		For any set $X$, its power set $\power(X)$ is also a set (axiom of power set),
+		as well as a monoid under intersection (or union or symmetric difference).
+		
+		There is an injection $f\colon X\rightarrowtail\power(X)\colon x\mapsto \set{x}$.\\
+		$i$ is monic followed by \ref{prop:UMP_mono_epic}.
+	\end{proof}
+
+	\begin{prop}\label{prop:UMP_morph2morph}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
+		\[ \big(A,u\colon X\to F(A)\big) \]
+		or
+		a universal morphism from $F$ to $X$
+		\[ \big(A,u\colon F(A)\to X\big) ;\]
+		then \[ \forall f\colon A\to A [F(f)=1_{F(A)}\iff f=1_A].\]
+	\end{prop}
+	\begin{proof}
+		$\Longleftarrow$: required by the definition of functor.
+		
+		$\Longrightarrow$: (wlog, consider universal morphism from $X$ to $F$)
+		\begin{centikzcd}
+			\bfC& A\ar[r,dashed,"\exists! f"] & A\\
+			\bfD& F(A) \ar[r,"F(f)"]& F(A)\\
+			& X\ar[u,"u"]\ar[ur,"u"']&
+		\end{centikzcd}
+		Since $f=1_A$ makes the above diagram commute, based on UMP,
+		\[\forall g \colon A\to A [F(g)=F(f)=1_{F(A)} \implies g=f=1_A].\]
+	\end{proof}
+	\begin{rem*}
+		However, it is possible that \[ \exists f\colon A\to A [ f\ne 1_A].\]
+	\end{rem*}
+
+	\begin{prop}
+		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
+		\[ \big(A,u_A\colon X\to F(A)\big) ;\]
+		then $\exists u_B$ such that \[ \big(B,u_B\colon X\to F(B)\big) \]
+		is a universal morphism from $X$ to $F$ iff
+		%$A\iso B$ 
+		$A\cong B$
+		in $\bfC$.
+		
+		The dual property claims that
+		given a universal morphism from $F$ to $X$
+		\[ \big(A,u_A\colon F(A)\to X\big) ;\]
+		then $\exists u_B$ such that
+		\[ \big(B,u_B\colon  F(B)\to X\big) \]
+		is a universal morphism from $F$ to $X$ iff
+		%$A\iso B$ 
+		$A\cong B$
+		in $\bfC$.
+	\end{prop}
+	\begin{proof}
+		Necessity:
+		UMP determines objects up to isomorphism.
+		\begin{centikzcd}
+			\bfC& &A\ar[rr,shift left,dashed,red,"\exists!f"] \ar[loop left,red!75!blue!100,"\exists! g\circ f"]&&
+			 B\ar[ll,shift left,dashed,blue,"\exists!g"]\ar[loop right,blue!75!red!100,"\exists! f\circ g"]\\
+			%%%%%%%%%%
+			\bfD && F(A)\ar[loop left,red!75!blue!100,"1_{F(A)}"]\ar[rr,shift left,red,"\exists F(f)"]
+			&& F(B)\ar[ll,shift left,blue,"\exists F(g)"]\ar[loop right,blue!75!red!100,"1_{F(B)}"] \\
+			%%%%%%%%%%
+			&&&X\ar[ul,red!75!blue!100,"u_A"]\ar[ur,blue!75!red!100,"u_B"']&
+		\end{centikzcd}
+		Per UMP of $u_A$, $\exists! f$ such that the \red{red} diagram commutes:
+		\[ F(f)\circ u_A=u_B. \]
+		Per UMP of $u_B$, $\exists! g$ such that the \blue{blue} diagram commutes:
+		\[ F(g)\circ u_B=u_A. \]
+		Therefore we have (by plugging in the above equations and applying the axiom of functor):
+		\begin{eqlong}
+			1_{F(A)}\circ u_A &= u_A  = F(g)\circ \big(F(f)\circ u_A\big) = F(g\circ f)\circ u_A,\\
+			1_{F(B)}\circ u_B &= u_B  = F(f)\circ \big(F(g)\circ u_B\big) = F(f\circ g)\circ u_B,\\
+		\end{eqlong}
+		%Since the total diagram commute, we have \[F(g)\circ F(f)=1_{F(A)},F(f)\circ F(g)=1_{F(B)}.\]
+		Per UMP of $u_A$ and $u_B$ (\ref{prop:UMP_morph2morph}), we have
+		\[g\circ f = 1_A, f\circ g=1_B.\]
+	
+		Sufficiency:
+		Given any isomorphism $f\colon A\iso B$ in $\bfC$ (iso is also epic), the following diagram commutes
+		for any object $C$ in $\bfC$ and any arrow $c\colon X\to F(C)$ in $\bfD$.
+		\begin{centikzcd}
+			\bfC& A \ar[two heads,r,"f"']\ar[rr,red,bend left,"\exists! h"] & B \ar[r,dashed,"\exists! g"'] & C\\
+			\\
+			\bfD& F(A)\ar[rr,bend left,red,"F(h)"]\ar[r,"F(f)"]&F(B)\ar[r,dashed,"\exists F(g)"]&F(C)\\
+			&& X\ar[lu,red,"u_A"]\ar[u,"\exists u_B"']\ar[ur,red,"\forall c"']&
+		\end{centikzcd}
+		where $u_B=F(f)\circ u_A$.
+		
+		Per UMP of $u_A$, the red diagram commutes. Since $f$ is epic, $g$ is uniquely determined by $f$ and $h$.
+		Since $f$ is isomorphism, $g$ exists as $h\circ f^{-1}$.
+		Therefore $\exists! g$ such that the diagram commutes, \ie, $(B,u_B)$ is universal morphism.
+	\end{proof}
+	\begin{rem*}
+		There might be different isomorphism between $A$ and $B$, but only one such that the diagram commutes with $u_A$ and $u_B$. 
+		
+		Generally $F(f\circ g)=1_{F(B)}$ does not imply $f\circ g=1_B$.
+		Consider a small category $\bfC$ containing two objects:
+		\[ A=\set{0,1},B=\set{0,1,2}, \]
+		and arrows
+		\[ \begin{aligned}
+			i_A &\colon A\to B\colon i\mapsto i,\\
+			f_1 &\colon B\to A\colon i\mapsto i\bmod 2,\\
+			f_2 &\colon B\to A\colon i\mapsto \min(1,i),\\
+		\end{aligned} \]
+		and identity arrows and composites.
+		Construct a (preorder) category $\bfD$ with functor $F\colon \bfC\to\bfD$ as
+		\begin{centikzcd}
+			F(A)\ar[rr,shift left,"F(i_A)"]&&\ar[ll,shift left,"F(f_1)=F(f_2)"]F(B)\\
+			&\ar[ul,"u_A"]X\ar[ur]&
+		\end{centikzcd}
+		Even though $(A,u_A)$ is a UMP, we still have $F(f_1)F(i_A)=1_{F(B)}$, $f_1i_A\ne 1_B$.
+	\end{rem*}
+	
 	
 	\subparagraph{Initial and terminal objects are defined by universal property}
 	
@@ -1354,7 +1528,7 @@
 	%\begin{def*}
 	%	\ref{par:Iary_product}
 	%\end{def*}
-	
+
 	\subparagraph{Existence of Kleene closure}
 	\label{par:kleene_exist}
 	\begin{prop}\label{prop:cart_is_set}
@@ -1418,57 +1592,8 @@
 		\end{centikzcd}
 	\end{proof}
 
-	\begin{prop}\label{prop:UMP_mono_epic}
-		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
-		\[ \big(A,u\colon X\to F(A)\big) ;\]
-		if \[ \exists f\colon X\rightarrowtail F(B) ,\]
-		then $u$ is monic.
-		
-		The dual property claims that
-		given a universal morphism from $F$ to $X$
-		\[ \big(A,u\colon F(A)\to X\big) ;\]
-		if \[ \exists f\colon X\twoheadrightarrow F(B) ,\]
-		then $u$ is epic.
-	\end{prop}
-	\begin{proof}
-		See \ref{par:trig_mono}.
-		
-		If the following diagram commutes, then $i=j$.
-		\begin{centikzcd}
-			&F(A)\ar[r,dashed,"\exists! F(h)"]&F(B)\\
-			Y\ar[r,shift left,"i"]\ar[r,shift right, "j"']&X\ar[u,tail,"u"]\ar[ur,tail,"f"']&
-		\end{centikzcd}
-	\end{proof}
 
-	\begin{cor}
-		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$. Let
-		\[ \big(A,u\colon F(B)\to F(A)\big) \]
-		be a universal morphism from $F(B)$ to $F$, then $u$ is monic.
-		
-		Let
-		\[ \big(A,u\colon F(A)\to F(B)\big) \]
-		be a universal morphism from $F$ to $F(B)$, then $u$ is epic.
-	\end{cor}
-	\begin{proof}
-		$\exists 1_{F(B)}\colon F(B)\to F(B)$ that is both epic and monic.
-		And \ref{prop:UMP_mono_epic}.
-	\end{proof}
-
-	\begin{cor}
-		Let $U\colon \mathbf{Mon}\to \mathbf{Sets}$ be the forgetful functor,
-		then for any universal morphism from a set $X$ to $U$
-		\[ \big(A, i\colon X \to U(A) \big), \]
-		$i$ is monic (injective).
-	\end{cor}
-	\begin{proof}
-		For any set $X$, its power set $\power(X)$ is also a set (axiom of power set),
-		as well as a monoid under intersection (or union or symmetric difference).
-		
-		There is an injection $f\colon X\rightarrowtail\power(X)\colon x\mapsto \set{x}$.\\
-		$i$ is monic followed by \ref{prop:UMP_mono_epic}.
-	\end{proof}
-
-	\begin{prop}
+	\begin{prop}\label{prop:Kleene_is_free}
 		The Kleene closure $X^*=\bigsqcup_{i\in \nat}X^i$ for any set $X$
 		is a free monoid over $X$ under \[*\colon \big(\alpha\colon I\to X,I\big) ,\big(\beta\colon J\to X,J\big) \mapsto
 		\big(([\alpha,\beta]\colon I
@@ -1483,14 +1608,30 @@
 	\begin{proof}
 		First, it is a (small) set per \ref{prop:cart_is_set} and \ref{prop:disjoint_union_is_set}.
 		
-		Next we show the existential uniqueness of $*$ by UMP given a coproduct diagram.
+		Next, define the coproduct diagram in $\mathbf{Sets}$ as
+		%\[ I \overset{\iota_{I}}{\rightarrow}I+J \overset{\iota_{J,I}}{\leftarrow} J,\]
+		\begin{centikzcd}
+			I\ar[r,tail,"\iota_I"]&I+J&J \ar[l,tail,"\iota_{J,I}"']
+		\end{centikzcd}
+		where $\iota_{I} \colon i \mapsto i,\iota_{J,I}\colon j\mapsto \card{I}+j,
+		\iota_{\emptyset}=\iota_{\emptyset,J}\colon \emptyset\to J,\iota_{J,\emptyset}=1_J$.
+		
+		It is easy to prove this is a coproduct diagram
+		by showing the existential uniqueness of $*$ by UMP.
 		\begin{centikzcd}
 			&X&\\
-			I\ar[ru,"\alpha",bend left]\ar[r,"\iota_{I,J}"']&I
+			I\ar[ru,"\alpha",bend left]\ar[r,"\iota_{I}"']&I
 			%\sqcup 
 			+
 			J\ar[u,dashed,"{\exists ! [\alpha,\beta]}"']&J\ar[lu,bend right,"\beta"']\ar[l,"\iota_{J,I}"]
 		\end{centikzcd}
+		\[
+		[\alpha,\beta](k)=\begin{cases}
+			\alpha(k)&(k\le \card{I})\\
+			\beta(k-\card{I})&(k>\card{I})\\
+		\end{cases}.
+		\]
+	
 		%Note that $I\sqcup J\in \nat$ because sum of finite numbers is finite.
 		Note that $I+ J\in \nat$ because sum of finite numbers is finite.
 		
@@ -1505,9 +1646,9 @@
 			&&I+J+K\ar[dd,bend right,pos=0.3,"{\exists![\alpha,[\beta,\gamma]]}"']
 			\ar[dd,bend left,pos=0.3,"{\exists![[\alpha,\beta],\gamma]}"]&&\\
 			%%%%%%%%
-			I\ar[rru,bend left,blue,"\iota_{I,J+K}"]\ar[r,red,"\iota_{I,J}"]
-			&I+J\ar[ru,red,bend left,pos=0.3,"\iota_{I+J,K}"]
-			&J\ar[l,red,crossing over,"\iota_{J,I}"']\ar[r,blue,crossing over,"\iota_{J,K}"]
+			I\ar[rru,bend left,blue,"\iota_{I}"]\ar[r,red,"\iota_{I}"]
+			&I+J\ar[ru,red,bend left,pos=0.3,"\iota_{I+J}"]
+			&J\ar[l,red,crossing over,"\iota_{J,I}"']\ar[r,blue,crossing over,"\iota_{J}"]
 			&J+K\ar[lu,blue,bend right,pos=0.3,"\iota_{J+K,I}"']
 			&K\ar[llu,bend right,red,"\iota_{K,I+J}"']\ar[l,blue,"\iota_{K,J}"'] \\
 			%%%%%%%%
@@ -1530,44 +1671,127 @@
 		\end{centikzcd}
 	
 		If $\exists h\in \Hom_{\mathbf{Mon}}(X^*,M)$, then $h$ must be unique, because
-		\[ h(\emptyset\to X,\emptyset) = e \]
-		where $e$ is the identity of $M$,
+		\[ h(\emptyset\to X,\emptyset) = e_M, \]
+		where $e_M$ is the identity of $M$,
 		and for any nonempty $I$,
 		\begin{eqlong}
 			 h(i\mapsto x_i,I)
 			 &=h( [1\mapsto x_1,1\mapsto x_2,\dots,1\mapsto x_{\card{I}} ], \underset{\card{I}\text{ times}}
 			{1+\dots+1})\\
-			&=f(x_1)\cdot_{M}f(x_2)\dots f(x_{\card{I}})\\
+			&=f(x_1)*_{M}f(x_2)*_M \dots*_M f(x_{\card{I}}).
 		\end{eqlong}
 	
 		Easy to prove $h$ is a monoid homomorphism as well.
 		
 	\end{proof}
 
-	\begin{prop}
-		UMP exists for all sets.
+	
+	\begin{prop}\label{prop:bijec_induce_monoid}
+		Let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ be the forgetful functor.
+		Given any monoid $M$ and any set $A\cong U(M)$ and a bijection the $f\colon U(M)\iso A$,
+		there exists a unique monoid $B$ such that $U(B)=A$ and $f$ is a monoid isomorphism.
 	\end{prop}
 	\begin{proof}
+		If $f$ is a monoid homomorphism, then $\forall a,b\in A$,
+		\begin{eqlong}
+			a\cdot_B b&= f(f^{-1}(a))\cdot_Bf(f^{-1}(B))\\
+			&=f(f^{-1}(a)\cdot_Mf^{-1}(b))\in B,\\
+		\end{eqlong}
+		which uniquely defines a closed multiplication in $B$.
+		
+		The identity in $B$ is
+		\[ e_B = f(e_M)\in B \]
+		where $e_M$ is the identity in $M$.
+		This uniquely defines an identity element in $B$.
+		
+		For any $a\in B$,
+		\begin{eqlong}
+			e_B\cdot_B a&= f(f^{-1}(e_B)\cdot_M f^{-1}(a) )\\
+			&= f(e_M\cdot_M f^{-1}(a) )\\
+			&= f(f^{-1}(a) )\\
+			&= a.
+		\end{eqlong}
+		Similarly we have $a\cdot_Be_B=a$. Therefore $e_B$ indeed is the identity element.
+		
+		Let $a,b,c\in B$, then
+		\begin{eqlong}
+			(a\cdot_B b)\cdot _B c
+			 &= f\Big(f^{-1}\circ f\big( f^{-1}(a)\cdot_M f^{-1}(b) \big)\cdot_Mf^{-1}(c)
+			 \Big)\\
+			  &= f\Big(\big( f^{-1}(a)\cdot_M f^{-1}(b) \big)\cdot_Mf^{-1}(c)\Big)\\
+			   &= f\Big( f^{-1}(a)\cdot_M\big( f^{-1}(b) \cdot_Mf^{-1}(c)\big)\Big)\\
+			   &= f\Big( f^{-1}(a)\cdot_M f^{-1}\circ f\big(f^{-1}(b) \cdot_Mf^{-1}(c)\big)\Big)\\
+			   &= a\cdot_B(b\cdot_Bc).
+		\end{eqlong}
+	
+		Therefore $B$ is a monoid and $f$ is a monoid homomorphism.
+		Since $f$ is bijective, it is monoid isomorphism.
+	\end{proof}
+
+	\begin{prop}\label{prop:free_monoid_condition}
+		Let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ be the forgetful functor.
+		Given any sets $X$ and $A$, then
+		$u\colon X\to A$ is a universal morphism from $X$ to $U$ iff
+		$A\cong U(X^*)$ (isomorphic to the underlying set of the Kleene closure) and $u$ is injection.
+	\end{prop}
+	\begin{proof}
+		Necessity: $u$ is injection due to \ref{cor:inj_UMP_set_to_U}.
+		Isomorphism is needed since UMP determines an object up to isomorphism.
+		
+		Sufficient condition:
+		since $A\cong U(X^*)$, there exists a monoid isomorphism 
+		$f\colon X^* \iso B$ such that $U(B)=A$ and
+		 $U(f)\colon U(X^*)\epimono A$
+		(\ref{prop:bijec_induce_monoid}).
+		Therefore, the following diagram
+		commutes for any monoid $M$ and any function $g\colon X\to U(M)$
+		(let $i$ be the UMP defining Kleene closure, see \ref{prop:Kleene_is_free}).
+		\begin{centikzcd}
+			U(X^*)\ar[rr,bend left,"\exists! U(h)"]\ar[r,tail,two heads,"U(f)"]&U(B)\ar[r,dashed]&U(M)\\
+			&X\ar[lu,"i"]\ar[u,tail,"u"]\ar[ru,"\forall g"']&
+		\end{centikzcd}
 		\red{TODO}
 	\end{proof}
 
 	\paragraph{Example 3.5}
-	Given sets $A,B$ and a coproduct diagram $A\overset{i_1}{\rightarrow}A+B\overset{i_2}{\leftarrow}B$,
-	let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ the forgetful functor,
-	$M(C)$ be a free monoid over $C$ for any set $C$,
-	and $\eta_C\colon C\to U\circ M(C)$ be the universal map of $M(C)$.
-	Then the following diagram in $\mathbf{Sets}$ commutes ($UM=U\circ M$) for any monoid $N$.
-	\begin{centikzcd}
-		&U(N)&\\
-		UM(A)\ar[r,dashed,red,"\exists! U(f)"]&UM(A+B)&UM(B)\ar[l,dashed,blue,"\exists! U(g)"']\\
-		A\ar[u,"\eta_A"]\ar[r,"i_1"']&A+B\ar[u,"\eta_{A+B}"']&B\ar[l,"i_2"]\ar[u,"\eta_B"']
-	\end{centikzcd}
-
-	By UMP of free monoid, The \red{red} arrow $U(f)$ is uniquely determined by $\eta_{A+B}\circ i_1$,
+	\begin{prop}
+		\[M(A+B)\cong M(A)+M(B). \]
+	\end{prop}
+	\begin{proof}
+		Given sets $A,B$ and a coproduct diagram $A\overset{i_1}{\rightarrow}A+B\overset{i_2}{\leftarrow}B$,
+		let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ the forgetful functor,
+		$M(C)$ be a free monoid over $C$ for any set $C$,
+		and $\eta_C\colon C\to U\circ M(C)$ be the universal map of $M(C)$
+		(existence: \ref{prop:Kleene_is_free}).
+		Then the following diagram in $\mathbf{Sets}$ commutes ($UM=U\circ M$) for any monoid $N$
+		and any monoid homomorphisms $a\colon M(A)\to N, b\colon M(B)\to N$.
+		\begin{centikzcd}
+			&&&U(N)\ar[from=ddl,pos=.8,dashed,"{\exists! [U(a)\circ\eta_A,U(b)\circ\eta_B]}"']&\\
+			UM(A)\ar[rrru,bend left,"U(a)"]\ar[rr,dashed,red,"\exists! U(f)"']
+			&&UM(A+B)\ar[ur,dashed,red!50!blue!100,"\exists!U(h)"]
+			&&UM(B)\ar[ll,crossing over,dashed,blue,"\exists! U(g)"]\ar[lu,bend right,"U(b)"']\\
+			A\ar[u,"\eta_A"]\ar[rr,"i_1"']&&A+B\ar[u,red!50!blue!100,"\eta_{A+B}"]&&B\ar[ll,"i_2"]\ar[u,"\eta_B"']
+		\end{centikzcd}
+		
+		By UMP of free monoid, The \red{red} arrow $U(f)$ is uniquely determined by $\eta_{A+B}\circ i_1$,
 		the \blue{blue} arrow $U(g)$ is uniquely determined by  $\eta_{A+B}\circ i_2$.
 		
-	From the UMP of coproduct, it turns out that $\eta_{A+B}=[U(f)\circ \eta_A,U(g)\circ \eta_B]$.
+		From the UMP of coproduct, it turns out that $\eta_{A+B}=[U(f)\circ \eta_A,U(g)\circ \eta_B]$.
+		
+		From UMP of coproduct, the black arrows determine uniquely $[U(a)\circ\eta_A,U(b)\circ\eta_B]
+		\colon A+B\to U(N)$.
+		
+		From UMP of free monoid, the purple arrow uniquely $h\colon M(A+B)\to N$ such that the diagram commutes.
+		
+		This is exactly the definition of coproduct in $\mathbf{Mon}$,
+		therefore $M(A+B)\cong M(A)+M(B)$.
+	\end{proof}
 	
+	\red{Is this a functor? The foregoing example says that the free monoid functor $M : Sets \to Mon$}
+	
+	\red{t the forgetful
+		functor $U : Mon \to Sets$ is representable and so preserves products.}
+
 	\subsection{Equalizers}
 	\subsection{Coequalizers}
 	\subsection{Exercises}
