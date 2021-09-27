@@ -1072,7 +1072,7 @@
 		However, it is possible that \[ \exists f\colon A\to A [ f\ne 1_A].\]
 	\end{rem*}
 
-	\begin{prop}
+	\begin{prop}\label{prop:UMP_all_iso}
 		Given categories $\bfC,\bfD$, a functor $F\colon \bfC\to \bfD$, and a universal morphism from $X$ to $F$
 		\[ \big(A,u_A\colon X\to F(A)\big) ;\]
 		then $\exists u_B$ such that \[ \big(B,u_B\colon X\to F(B)\big) \]
@@ -1685,10 +1685,11 @@
 		
 	\end{proof}
 
+	\subparagraph{Condition of free monoid mapping}
 	
 	\begin{prop}\label{prop:bijec_induce_monoid}
 		Let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ be the forgetful functor.
-		Given any monoid $M$ and any set $A\cong U(M)$ and a bijection the $f\colon U(M)\iso A$,
+		Given any monoid $M$ and any set $A\cong U(M)$ and a bijection $f\colon U(M)\iso A$,
 		there exists a unique monoid $B$ such that $U(B)=A$ and $f$ is a monoid isomorphism.
 	\end{prop}
 	\begin{proof}
@@ -1730,28 +1731,90 @@
 
 	\begin{prop}\label{prop:free_monoid_condition}
 		Let $U\colon \mathbf{Mon}\to\mathbf{Sets}$ be the forgetful functor.
-		Given any sets $X$ and $A$, then
-		$u\colon X\to A$ is a universal morphism from $X$ to $U$ iff
+		Given any set $A$, any \red{finite} set $X$, and any arrow
+		$u\colon X\to A$; it is a universal morphism from $X$ to $U$ iff
 		$A\cong U(X^*)$ (isomorphic to the underlying set of the Kleene closure) and $u$ is injection.
 	\end{prop}
 	\begin{proof}
 		Necessity: $u$ is injection due to \ref{cor:inj_UMP_set_to_U}.
-		Isomorphism is needed since UMP determines an object up to isomorphism.
+		Isomorphism is needed since UMP determines an object up to isomorphism
+		(\ref{prop:UMP_all_iso}).
 		
 		Sufficient condition:
 		since $A\cong U(X^*)$, there exists a monoid isomorphism 
-		$f\colon X^* \iso B$ such that $U(B)=A$ and
-		 $U(f)\colon U(X^*)\epimono A$
+		$f\colon X^* \iso B$ such that $U(B)=A$
+		% and
+		 %$U(f)\colon U(X^*)\epimono A$
 		(\ref{prop:bijec_induce_monoid}).
-		Therefore, the following diagram
-		commutes for any monoid $M$ and any function $g\colon X\to U(M)$
-		(let $i$ be the UMP defining Kleene closure, see \ref{prop:Kleene_is_free}).
+		%Therefore, the following diagram
+		%commutes for any monoid $M$ and any function $g\colon X\to U(M)$
+		%(
+		Let $i\colon X\to U(X^*)$ be the UMP defining Kleene closure (see \ref{prop:Kleene_is_free}).
+		Since $X^*\cong B$ in $\mathbf{Mon}$, there exists a universal morphism $(B, i_B\colon X\to U(B))$ (\ref{prop:UMP_all_iso})
+		such that the following diagram commutes.
 		\begin{centikzcd}
-			U(X^*)\ar[rr,bend left,"\exists! U(h)"]\ar[r,tail,two heads,"U(f)"]&U(B)\ar[r,dashed]&U(M)\\
-			&X\ar[lu,"i"]\ar[u,tail,"u"]\ar[ru,"\forall g"']&
+			U(X^*)%\ar[rr,bend left,"\exists! U(h)"]
+			\ar[r,
+			%tail,two heads,
+			"U(f)"]&U(B)\ar[r,dashed,"h"]&A\\
+			&X\ar[lu,"i"]\ar[u,tail,"i_B"]\ar[ru,tail,"u"']
+			%\ar[ru,"\forall g"']&
 		\end{centikzcd}
-		\red{TODO}
+		%\red{TODO}
+		Then $i_B$ is injection (\ref{cor:inj_UMP_set_to_U}).
+		Therefore $i$ and $u$ are bijections from $X$ onto their respective images.
+		%Hence $i_B(X)\cong u(X)$.
+		Hence $u\circ i_B^{-1}\colon i_B(X)\iso u(X)$ is uniquely and well defined  in $\mathbf{Sets}$,
+		and so is its inverse $i_B\circ u^{-1}\colon u(X)\iso i_B(X)$.
+		Let \[B'=i_B(X)\setminus u(X), A'=u(X)\setminus i_B(X),\]
+		clearly $A'\cong B'$ (\red{This is not the case if $X$ is an infinite set, consider $\nat$ and $\inte$}).
+		%Let $g\colon i_B(X)\iso u(X)$ be an isomorphism,
+		%Let $g\colon B'\iso A'$ be an isomorphism,
+		%then we can define $h\colon A\to A$ as:
+		%\[
+		%h(a)=\begin{cases}
+		%	a & (a\notin i_B(X)\symdif u(X))\\
+		%	g(a) & (a\in i_B(X)\setminus u(X))\\
+		%	g^{-1}(a) & (a\in u(X)\setminus i_B(X) )
+		%\end{cases}.
+		%\]
+		%Easy to show that $h$ is involution, \ie, $h\circ h=1_A$.
+		Let $g\colon A'\iso B'$ be a bijection in $\mathbf{Sets}$, %an isomorphism,
+		then we can define $h\colon A\to A$  in $\mathbf{Sets}$ as:
+		\[
+		h(a)=\begin{cases}
+			a & (a\notin i_B(X)\cup u(X))\\
+			g(a) & (a\in u(X)\setminus i_B(X))\\
+			u\circ i_B^{-1}(a) & (a\in  i_B(X) )
+		\end{cases}.
+		\]
+		Easy to show that such $h$ makes the above diagram commute,
+		\ie, $h\circ i_B = u$.
+		$h$ is bijection as well, as its inverse is given by
+		\[
+		h^{-1}(a)=\begin{cases}
+			a & (a\notin i_B(X)\cup u(X))\\
+			g^{-1}(a) & (a\in i_B(X)\setminus u(X))\\
+			i_B\circ u^{-1}(a) & (a\in  u(X) )
+		\end{cases}.
+		\]
+		
+		Since $h$ is a bijection, one can define a monoid $C$ such that $U(C)=A$
+		and that $C$ is monoid isomorphic to $B$ (\ref{prop:bijec_induce_monoid}).
+		%We can then define monoid $C$, whose underlying set is $A$,
+		%equipped with multiplication:
+		%\[ a \cdot_C b \define h(a)\cdot_B h(b)\in A=U(C). \]
+		%
+		%The
+		
+		Therefore, $(C,u\colon X\to A=U(C))$ is a universal morphism (\ref{prop:UMP_all_iso}).
 	\end{proof}
+	%\begin{rem*}
+	%	Note that this is generally not true if $X$ is infinite.
+	%\end{rem*}
+	\begin{rem*}
+		\red{It might be true even if $X$ is infinite? But maybe need some special treatment.}
+	\end{rem*}
 
 	\paragraph{Example 3.5}
 	\begin{prop}
