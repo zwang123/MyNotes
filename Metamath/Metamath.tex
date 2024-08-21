@@ -44,11 +44,26 @@
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \newcommand{\rp}{\mathbb{RP}}
 
+% https://stackoverflow.com/questions/3791950/remove-specific-subsection-from-toc-in-latex
+\newcommand{\hiddensection}[1]{
+	\refstepcounter{section}
+	\section*{\arabic{section}\hspace{1em}{#1}}
+}
+\newcommand{\hiddensubsection}[1]{
+	\refstepcounter{subsection}
+	\subsection*{\arabic{section}.\arabic{subsection}\hspace{1em}{#1}}
+}
+\newcommand{\hiddensubsubsection}[1]{
+	\refstepcounter{subsubsection}
+	\subsubsection*{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}\hspace{1em}{#1}}
+}
+
 %   Sets
 \newcommand{\nat}{\mathbb{N}}
 \newcommand{\inte}{\mathbb{Z}}
 \newcommand{\rat}{\mathbb{Q}}
 \newcommand{\re}{\mathbb{R}}
+\newcommand{\xr}{\mathbb{R}^*}
 \newcommand{\renn}{\mathbb{R}_0^+}
 \newcommand{\co}{\mathbb{C}}
 \newcommand{\hil}{\mathbb{H}}
@@ -62,8 +77,98 @@
 \newcommand{\End}{\mathrm{End}}
 \newcommand{\class}{\mathrm{class}}
 \newcommand{\supp}{\,\operatorname{supp}\,}
+\newcommand{\union}[2][]{
+	\ifthenelse { \equal {#1} {} }
+		{ \bigcup{#2} } % union of one class
+		{ {#1}\cup{#2} } % union of two classes
+}
+\newcommand{\unionsym}{\cup}
+\newcommand{\iunion}[2]{\bigcup_{#1}\left({#2}\right)}
+\newcommand{\inters}[2][]{
+	\ifthenelse { \equal {#1} {} }
+	{ \bigcap{#2} } % intersection of one class
+	{ {#1}\cap{#2} } % intersection of two classes
+}
+\newcommand{\interssym}{\cap}
+\newcommand{\iinters}[2]{\bigcap_{#1}\left({#2}\right)}
 
 \newcommand{\ext}[1]{\bigwedge\!^{#1}}
+
+% Real and complex analyses
+\newcommand{\ovol}{\operatorname{vol}^*}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\MblFn}{\operatorname{MblFn}}
+\newcommand{\itgo}{\int_1}
+\newcommand{\itgt}{\int_2}
+\newcommand{\ibl}{L^1}
+\newcommand{\itg}[3]{\int_{#1}\,{#2}\,\mathrm{d}{#3}}
+\newcommand{\zerop}{0_p}
+\newcommand{\ditg}[4]{\itg{[{#1}\to{#2}]}{#3}{#4}}
+\newcommand{\limc}{\lim_{\co}}
+\newcommand{\dv}{\operatorname{D}}
+\newcommand{\dvn}{\dv^n}
+\newcommand{\cpn}{\mathscr{B}\operatorname{C}^n}
+\newcommand{\mDeg}{\operatorname{mDeg}}
+\newcommand{\dego}{\operatorname{deg}_1}
+
+% basic structures
+\newcommand{\Struct}{\,\mathrm{Struct}\,}
+\newcommand{\sSet}{\,\mathrm{sSet}\,}
+\newcommand{\ndx}{\mathrm{ndx}}
+\newcommand{\Slot}{\mathrm{Slot}}
+\newcommand{\Base}{\mathrm{Base}}
+\newcommand{\TopSet}{\mathrm{TopSet}}
+\newcommand{\TopOpen}{\mathrm{TopOpen}}
+\newcommand{\Moore}{\operatorname{Moore}}
+\newcommand{\mrCls}{\operatorname{mrCls}}
+\newcommand{\mrInd}{\operatorname{mrInd}}
+\newcommand{\ACS}{\operatorname{ACS}}
+
+% Category theory
+\newcommand{\Cat}{\operatorname{Cat}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Homf}{\operatorname{Hom}_f}
+\newcommand{\compf}{\operatorname{comp}_f}
+\newcommand{\oppCat}{\operatorname{oppCat}}
+\newcommand{\Mono}{\operatorname{Mono}}
+\newcommand{\Epi}{\operatorname{Epi}}
+\newcommand{\Sect}{\operatorname{Sect}}
+\newcommand{\Inv}{\operatorname{Inv}}
+\newcommand{\Iso}{\operatorname{Iso}}
+\newcommand{\cic}{\simeq_c}
+\newcommand{\ssc}{\subseteq_\mathrm{cat}}
+\newcommand{\resc}{\restriction_\mathrm{cat}}
+\newcommand{\Subcat}{\operatorname{Subcat}}
+\newcommand{\Func}{\operatorname{Func}}
+\newcommand{\idfu}{\operatorname{id}_{func}}
+\newcommand{\cofu}{\circ_{func}}
+\newcommand{\resf}{\restriction_{f}}
+\newcommand{\Full}{\operatorname{Full}}
+\newcommand{\Faith}{\operatorname{Faith}}
+\newcommand{\Nat}{\operatorname{Nat}}
+\newcommand{\FuncCat}{\operatorname{FuncCat}}
+\newcommand{\InitO}{\operatorname{InitO}}
+\newcommand{\TermO}{\operatorname{TermO}}
+\newcommand{\ZeroO}{\operatorname{ZeroO}}
+\newcommand{\doma}{\operatorname{dom}_a}
+\newcommand{\coda}{\operatorname{cod}_a}
+\newcommand{\Arrow}{\operatorname{Arrow}}
+\newcommand{\Homa}{\operatorname{Hom}_a}
+\newcommand{\Ida}{\operatorname{Id}_a}
+\newcommand{\compa}{\operatorname{comp}_a}
+\newcommand{\SetCat}{\operatorname{SetCat}}
+\newcommand{\CatCat}{\operatorname{CatCat}}
+\newcommand{\ExtStrCat}{\operatorname{ExtStrCat}}
+\newcommand{\xpc}{\times_c}
+\newcommand{\fstf}{\fst_F}
+\newcommand{\sndf}{\snd_F}
+\newcommand{\prf}{\langle,\rangle_F}
+\newcommand{\evalF}{\operatorname{eval}_F}
+\newcommand{\curryF}{\operatorname{curry}_F}
+\newcommand{\uncurryF}{\operatorname{uncurry}_F}
+\newcommand{\Delfu}{\Delta_\operatorname{func}}
+\newcommand{\HomF}{\operatorname{Hom}_F}
+\newcommand{\Yon}{\operatorname{Yon}}
 
 
 \newcommand{\id}{\indices}
@@ -109,6 +214,7 @@
 
 \renewcommand{\emptyset}{\varnothing}
 \newcommand{\symdif}{\triangle}
+\newcommand{\dif}{\setminus}
 \newcommand{\provable}{\vdash}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\lra}{\leftrightarrow}
@@ -119,9 +225,26 @@
 \newcommand{\wffphi}{\wff{\varphi}}
 \newcommand{\wffpsi}{\wff{\psi}}
 \newcommand{\wffchi}{\wff{\chi}}
+\newcommand{\sa}{\setvar{a}}
+\newcommand{\sbb}{\setvar{b}}
+\newcommand{\scc}{\setvar{c}}
+\newcommand{\sd}{\setvar{d}}
+\newcommand{\se}{\setvar{e}}
 \newcommand{\sff}{\setvar{f}}
 \newcommand{\sg}{\setvar{g}}
+\newcommand{\sh}{\setvar{h}}
 \newcommand{\si}{\setvar{i}}
+\newcommand{\sj}{\setvar{j}}
+\newcommand{\sk}{\setvar{k}}
+\newcommand{\sll}{\setvar{l}}
+\newcommand{\sm}{\setvar{m}}
+\newcommand{\sn}{\setvar{n}}
+\newcommand{\so}{\setvar{o}}
+\newcommand{\spp}{\setvar{p}}
+\newcommand{\sq}{\setvar{q}}
+\newcommand{\sr}{\setvar{r}}
+\newcommand{\sss}{\setvar{s}}
+\newcommand{\st}{\setvar{t}}
 \newcommand{\su}{\setvar{u}}
 \newcommand{\sv}{\setvar{v}}
 \newcommand{\sw}{\setvar{w}}
@@ -135,16 +258,40 @@
 \newcommand{\clE}{\classvar{E}}
 \newcommand{\clF}{\classvar{F}}
 \newcommand{\clG}{\classvar{G}}
+\newcommand{\clH}{\classvar{H}}
+\newcommand{\clI}{\classvar{I}}
+\newcommand{\clJ}{\classvar{J}}
+\newcommand{\clK}{\classvar{K}}
+\newcommand{\clL}{\classvar{L}}
+\newcommand{\clM}{\classvar{M}}
+\newcommand{\clN}{\classvar{N}}
+\newcommand{\clO}{\classvar{O}}
+\newcommand{\clP}{\classvar{P}}
+\newcommand{\clQ}{\classvar{Q}}
 \newcommand{\clR}{\classvar{R}}
 \newcommand{\clS}{\classvar{S}}
+\newcommand{\clT}{\classvar{T}}
+\newcommand{\clU}{\classvar{U}}
+\newcommand{\clV}{\classvar{V}}
+\newcommand{\clW}{\classvar{W}}
 \newcommand{\clX}{\classvar{X}}
 \newcommand{\clY}{\classvar{Y}}
+\newcommand{\clZ}{\classvar{Z}}
+
+
+\newcommand{\pnf}{\texttt{+}\infty}
+\newcommand{\mnf}{\texttt{-}\infty}
+\newcommand{\ioo}{\,\operatorname{(,)}\,}
+\newcommand{\ioc}{\,\operatorname{(,]}\,}
+\newcommand{\ico}{\,\operatorname{[,)}\,}
+\newcommand{\icc}{\,\operatorname{[,]}\,}
 
 \newcommand{\Or}{{\,\mathrm{Or}\,}}
 \newcommand{\Po}{{\,\mathrm{Po}\,}}
 \newcommand{\Fr}{{\,\mathrm{Fr}\,}}
 \newcommand{\Se}{{\,\mathrm{Se}\,}}
 \newcommand{\We}{{\,\mathrm{We}\,}}
+\newcommand{\Er}{{\,\mathrm{Er}\,}}
 \newcommand{\VV}{\mathrm{V}}
 \newcommand{\relE}{{\,\operatorname{E}\,}}
 \newcommand{\Isom}{{\,\operatorname{Isom}\,}}
@@ -155,7 +302,11 @@
 %\newcommand{\rotF}[2]{\rotatebox[origin=c]{180}{$#1\mathrm{F}$}}
 \newcommand{\unique}{\exists^*}
 
+\newcommand{\cif}[3]{\operatorname{if}\left({#1},{#2},{#3}\right)}
 
+\newcommand{\Top}{\mathrm{Top}}
+
+\newcommand{\dec}{;\!}
 
 \newcommand{\rotiota}[2]{\rotatebox[origin=c]{180}{$#1\boldsymbol{\iota}$}}
 \newcommand{\iiota}{{\mathpalette\rotiota\relax}}
@@ -163,7 +314,31 @@
 
 \newcommand{\Fn}{{\,\operatorname{Fn}\,}}
 \newcommand{\Fun}{{\operatorname{Fun}\,}}
-\newcommand{\at}{`}
+\newcommand{\at}{\,`\,}
+\newcommand{\image}{\,``\,}
+
+\newcommand{\clim}{\,\rightsquigarrow\,}
+\newcommand{\rlim}{\,\rightsquigarrow_r\,}
+\newcommand{\Oone}{O(1)}
+\newcommand{\leOone}{\le\!O(1)}
+
+\newcommand{\Undef}{\mathrm{Undef}}
+
+% Ordinals
+\newcommand{\ordsuf}[1]{{#1}_{\mathrm{o}}}
+\newcommand{\pluso}{\,\ordsuf{+}\,}
+\newcommand{\mulo}{\,\ordsuf{\cdot}\,}
+\newcommand{\expo}{\,\ordsuf{\uparrow}\,}
+\newcommand{\oneo}{\ordsuf{1}}
+\newcommand{\twoo}{\ordsuf{2}}
+\newcommand{\threeo}{\ordsuf{3}}
+\newcommand{\fouro}{\ordsuf{4}}
+
+\newcommand{\wrecs}[3]{\operatorname{wrecs}\left({#1},{#2},{#3}\right)}
+\newcommand{\recs}[1]{\operatorname{recs}\left({#1}\right)}
+\newcommand{\rec}[2]{\operatorname{rec}\left({#1},{#2}\right)}
+\newcommand{\seqom}{\operatorname{seq_\omega}}
+\newcommand{\seq}{\operatorname{seq}}
 
 \newcommand{\mapinto}[3]{{#1}\colon{#2}\xrightarrow[]{\mathmakebox[1.5em]{}}{#3}}
 \newcommand{\injmapinto}[3]{{#1}\colon{#2}\xrightarrow[]{\mathmakebox[1.5em]{\text{1-1}}}{#3}}
@@ -179,8 +354,9 @@
 \newcommand{\On}{{\operatorname{On}\,}}
 \newcommand{\ran}{{\operatorname{ran}\,}}
 \newcommand{\tpos}{\operatorname{tpos}\,}
+\newcommand{\curry}{\operatorname{curry}\,}
+\newcommand{\uncurry}{\operatorname{uncurry}\,}
 \newcommand{\Pred}{{\operatorname{Pred}}}
-\newcommand{\image}{``}
 \makeatletter
 \newlength{\temp@wip@width}
 \newlength{\temp@wip@height}
@@ -206,7 +382,8 @@
 %		}{0.8ex}}%
 %}
 %%\parskip 1ex
-\newcommand{\opair}[2]{\left\langle{#1,#2}\right\rangle}
+\newcommand{\opair}[2]{\left\langle{{#1},{#2}}\right\rangle}
+\newcommand{\otri}[3]{\left\langle{{#1},{#2},{#3}}\right\rangle}
 
 \newcommand{\fst}{\operatorname{1^{st}}}
 \newcommand{\snd}{\operatorname{2^{nd}}}
@@ -214,6 +391,16 @@
 \newcommand{\power}{\mathscr{P}}
 \newcommand{\domain}{\mathcal{D}}
 
+% Surreal Numbers
+\newcommand{\No}{\texttt{No}}
+\newcommand{\bday}{\texttt{bday}}
+\newcommand{\sur}[1]{{#1}_{\operatorname{s}}}
+\newcommand{\slt}{\sur{<}}
+\newcommand{\sle}{\sur{\le}}
+\newcommand{\sslt}{\sur{\ll}}
+\newcommand{\sneg}{\sur{\texttt{-}}}
+\newcommand{\spos}{\sur{\texttt{+}}}
+\newcommand{\scut}{\,\sur{|}\,}
 
 
 \newcommand{\na}{\nabla}
@@ -379,7 +566,7 @@
 	
 	\section{ZF (ZERMELO-FRAENKEL) SET THEORY}
 	\subsection{ZF Set Theory - start with the Axiom of Extensionality}
-	\subsubsection*{2.1.1  Introduce the Axiom of Extensionality}
+	\subsubsection{Introduce the Axiom of Extensionality}
 	\paragraph{axext2}
 	
 	\subparagraph{Theorem 19.36v}
@@ -425,7 +612,7 @@
 	where $\setvar{w}$ is any element of $\setvar{x}\symdif\setvar{y}$ (defined in \href{http://us.metamath.org/mpeuni/mmtheorems38.html#mm3709s}
 	{df-symdif}), the latter of which must be nonempty if $\setvar{x}\ne \setvar{y}$.
 	
-	\subsubsection*{2.1.2  Class abstractions (a.k.a. class builders)}
+	\subsubsection{Class abstractions (a.k.a. class builders)}
 	\paragraph{Theorem dfcleq}
 	The equality of class is only checked by its containing sets:
 	\[\provable \Big(\clA=\clB\lra\forall \sx(\sx\in\clA\lra\sx\in\clB) \Big). \]
@@ -434,7 +621,9 @@
 	\[\provable \Big(\clA\in\clB\lra\exists\sx(\sx=\clA\land\sx\in\clB)\Big). \]
 	This means, if a class is not a set, then it does not belong to any class.
 	
-	\subsubsection*{2.1.5  Restricted quantification}
+	\hiddensubsubsection{Class form not-free predicate}
+	\hiddensubsubsection{Negated equality and membership}
+	\subsubsection{Restricted quantification}
 	It gives the following definitions:
 	\begin{eqlong}
 		&\provable \Big(\forall \sx\in\clA\,\wffphi \lra\forall \sx(\sx\in\clA\ra\wffphi) \Big),\\
@@ -442,19 +631,26 @@
 		&\provable  \set{\sx\in\clA|\wffphi} =\set{\sx|(\sx\in\clA\land\wffphi)}.\\		
 	\end{eqlong}	
 	
-	\subsubsection*{2.1.6  The universal class}
+	\subsubsection{The universal class}
 	$\VV$ is the class (\blue{not set}) of all sets.
-	
-	\subsubsection*{2.1.9  Proper substitution of classes for sets}
+	\hiddensubsubsection{Conditional equality (experimental)}
+	\hiddensubsubsection{Russell's Paradox}
+	\subsubsection{Proper substitution of classes for sets}
 	
 	Similar to 1.5.3  Axiom scheme ax-12 (Substitution).
-	
-	\subsubsection*{2.1.15  ``Weak deduction theorem'' for set theory}
+	\hiddensubsubsection{Proper substitution of classes for sets into classes}
+	\hiddensubsubsection{Define basic set operations and relations}
+	\hiddensubsubsection{Subclasses and subsets}
+	\hiddensubsubsection{The difference, union, and intersection of two classes}
+	\hiddensubsubsection{The empty set}
+	\hiddensubsubsection{The conditional operator for classes}
+	\subsubsection{``Weak deduction theorem'' for set theory}
 	This is similar to 1.2.8, but instead of generating a proposition (well-formed formula),
 	it outputs a class (or set).
 	
 	\subsection{ZF Set Theory - add the Axiom of Replacement}
-	\subsubsection*{2.2.1  Introduce the Axiom of Replacement}
+	\subsubsection{Introduce the Axiom of Replacement}
+	
 	If a map $\wffphi'=\forall\sy\wffphi$ maps every set $\sw$ in $\VV$
 	to at most one set $\sz$ in $\VV$,
 	then there exists the \textbf{image} $\sy$ (as a set) of the map $\wffphi'$ from $\sx$,
@@ -492,7 +688,32 @@
 		``every element in the image has at least a preimage in the domain''.
 	\end{itemize}
 		
-	\subsubsection*{2.2.2  Derive the Axiom of Separation}
+	\subsubsection{Derive the Axiom of Separation}
+	
+	\paragraph{Subclass of a proper class could be a proper class}
+	
+	\href{https://us.metamath.org/mpeuni/topnex.html}{Theorem topnex 21611}
+	\[\provable \Top \not\in \VV\]
+	
+	\href{https://us.metamath.org/mpeuni/ssv.html}{Theorem ssv 3939}
+	\[\provable \Top\subseteq \VV \]
+	\paragraph{Subclass of a set is a set}
+	\label{par:subclass_set}
+	\begin{eqlong}
+		\provable \clA \subseteq \sy
+		&\lra \inters[\clA]{\sy} = \clA\text{ (df-ss)}\\
+		&\lra\forall \sx \big(\sx\in\clA\lra (\sx\in\clA\land\sx\in\sy) \big)\text{ (dfcleq, df-in)}\\
+	\end{eqlong}
+	
+	\begin{eqlong}
+		\provable \exists \sz \forall \sx\big( \sx\in\sz \lra (\sx\in\sy\land\sx\in\clA)\big)\text{ (ax-sep)}\\
+	\end{eqlong}
+	\blue{It is crucial} that $\sy$ is a set here. Otherwise it is not $\provable$.
+	
+	\begin{eqlong}
+		\provable \exists \sz \forall \sx\big( \sx\in\sz \lra \sx\in\clA\big)\implies\provable\exists\sz\big(\sz=\clA\big)\\
+	\end{eqlong}
+		
 	\paragraph{Other sources}
 	\href{https://math.stackexchange.com/questions/680376/proving-separation-from-replacement}{Proving Separation from Replacement}
 	
@@ -539,7 +760,8 @@
 	\blue{The axiom of subset/separation/specification is result of the existence of the image of an identity map (restricted by $\wffphi$).}
 	
 	\subsection{ZF Set Theory - add the Axiom of Power Sets}
-	\subsubsection*{2.3.2  Derive the Axiom of Pairing}
+	\hiddensubsubsection{Introduce the Axiom of Power Sets}
+	\subsubsection{Derive the Axiom of Pairing}
 	\paragraph{zfpair}
 	Prove axiom of pairing form axiom of power set (no axiom of union). 
 	
@@ -548,20 +770,24 @@
 	exists (\href{http://us.metamath.org/mpeuni/mmtheorems47.html}{Theorem pp0ex, 4681}).
 	
 	Then map $\emptyset$ to $\sx$ and $\set{\emptyset}$ to $\sy$. The image set $\set{\sx,\sy}$ is what we need.
-	
-	\subsubsection*{2.3.6  Epsilon and identity relations}
+	\hiddensubsubsection{Ordered pair theorem}
+	\hiddensubsubsection{Ordered-pair class abstractions (cont.)}
+	\hiddensubsubsection{Power class of union and intersection}
+	\subsubsection{The identity relation}
+	$\II$ is the identity function
+	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4842s}{Theorem	dfid4 4850})
+	\[\provable \II=(\sx\in\VV\mapsto\sx) \]
+	\subsubsection{The membership relation (or epsilon relation)}
 	$\relE$ is the membership relationship
 	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4842s}{Theorem	epelg 4845}).
 	\[\provable\Big(\clB\in\VV\ra(\clA\relE\clB\lra\clA\in\clB)\Big)\]
 	
-	$\II$ is the identity function
-	(\href{http://us.metamath.org/mpeuni/mmtheorems49.html#mm4842s}{Theorem	dfid4 4850})
-	\[\provable \II=(\sx\in\VV\mapsto\sx) \]
+
 	
-	\subsubsection*{2.3.7  Partial and complete ordering}
+	\subsubsection{Partial and complete ordering}
 	These are strict partial/complete(total) ordering.
 	
-	\subsubsection*{2.3.8  Founded and well-ordering relations}
+	\subsubsection{Founded and well-ordering relations}
 
 	\paragraph{Set-Like}	
 	``$\clR$ is set-like on $\clA$'' ($\clR\Se\clA$) means,
@@ -591,7 +817,7 @@
 	\[\provable(\relE\Fr\clA\ra\neg\clA\in\clA) \]
 	You can always stop the process of finding a containing element?
 	
-	\subsubsection*{2.3.9  Relations}
+	\subsubsection{Relations}
 	\paragraph{Converse}
 	The converse of a binary relation swaps its arguments, \ie,
 	\[\provable \clA\in\VV \& \provable \clB\in\VV \implies \provable(\clA \converse{\clR} \clB\lra\clB\clR\clA) \]
@@ -612,12 +838,12 @@
 	\[ \provable \clA=\set{\opair{\sw}{\sz}|\forall\sy\wffphi}\& 
 	\provable \forall \sw\unique\sz (\sw\clA\sz)
 	\implies\clA\image\sx\in\VV \]
-	\subsubsection*{2.3.10  The Predecessor Class}
+	\subsubsection{The Predecessor Class}
 	$\Pred(\clR,\clA,\clX)$ is the class of all elements $\sy$ of $\clA$ such that $\sy\clR\clX$
 	(\href{http://us.metamath.org/mpeuni/mmtheorems56.html}{Theorem	elpredg 5502}):
 	\[\provable\Big( \big(\clX\in\clB\land\clY\in\clA\big)\ra\big(\clY\in\Pred(\clR,\clA,\clX)\lra\clY\clR\clX \big)\Big) \]
-	
-	\subsubsection*{2.3.12  Ordinals}
+	\hiddensubsubsection{Well-founded induction}
+	\subsubsection{Ordinals}
 	\paragraph{Ordinal Number}
 	An ordinal number is a \textbf{transitive} class
 	whose nonempty subset must have a least element that belongs to all other elements of the subset.
@@ -673,12 +899,12 @@
 
 	\href{http://us.metamath.org/mpeuni/dfepfr.html}{Theorem dfepfr 4918*}: An alternate way of saying that the epsilon relation is well-founded.
 	\[\provable \Big(\relE\Fr\clA\lra \forall\sx\big((\sx\subseteq\clA\land
-	\sx\ne\emptyset)\ra\exists\sy\in\sx(\sx\cap\sy)=\emptyset\big)\Big) \]
+	\sx\ne\emptyset)\ra\exists\sy\in\sx(\inters[\sx]{\sy})=\emptyset\big)\Big) \]
 	
 	\href{http://us.metamath.org/mpeuni/wefrc.html}{Theorem wefrc 4927}:
 	A nonempty (possibly proper) subclass of a class well-ordered by $\relE$ has a minimal element.
 	\[\provable\Big((\relE\We\clA\land\clB\subseteq\clA\land\clB\ne\emptyset)
-	\ra\exists\sx\in\clB(\clB\cap\sx)=\emptyset\Big) \]
+	\ra\exists\sx\in\clB(\inters[\clB]{\sx})=\emptyset\Big) \]
 	
 	\href{http://us.metamath.org/mpeuni/onelss.html}{Theorem onelss 5573}: An element of an ordinal number is a subset of the number.
 	\[\provable\Big(\clA\in\On\ra(\clB\in\clA\ra\clB\subseteq\clA)\Big) \]
@@ -686,6 +912,16 @@
 	\href{http://us.metamath.org/mpeuni/dford2.html}{Theorem dford2 8275}:
 	Assuming ax-reg 8255, an ordinal is a transitive class on which inclusion satisfies trichotomy.
 	\[\provable\Big(\Ord \clA\lra \big(\Tr \clA\land\forall\sx\in\clA\forall\sy\in\clA(\sx\in\sy\lor\sx=\sy\lor\sy\in\sx)\big)\Big) \]
+	
+	Combining \href{http://us.metamath.org/mpeuni/dford2.html}{Theorem dford2 8275} with \href{https://us.metamath.org/mpeuni/dftr3.html}{Theorem dftr3 5141}, a more explicit definition of ordinal is given.
+	\[\provable \Big(
+	\Ord \clA \lra 
+	\big(
+	\forall \sx\in\clA (\sx \subseteq \clA)
+	\land
+	\forall\sx\in\clA\forall\sy\in\clA(\sx\in\sy\lor\sx=\sy\lor\sy\in\sx)\big)
+	\Big)\]
+	The first half is a restriction on $\clA$ itself while the second half somehow restricts the elements.
 	
 	Theorem	ordirr 5549	Epsilon irreflexivity of ordinals: no ordinal class is a member of itself. Theorem 2.2(i) of [BellMachover] p. 469, generalized to classes. We prove this without invoking the Axiom of Regularity.
 	
@@ -700,7 +936,7 @@
 	\[\provable\Big(\Lim\clA\lra\big(\Ord\clA\land\neg(\clA=\emptyset
 	\lor\exists\sx\in\On\,\clA=\suc\sx)\big)\Big) \]
 
-	\subsubsection*{2.3.13  Definite description binder (inverted iota)}		
+	\subsubsection{ Definite description binder (inverted iota)}		
 	
 	Define ``the unique $\sx$ such that $\wffphi$'',
 	where $\wffphi$ ordinarily contains $\sx$ as a free variable.
@@ -717,7 +953,7 @@
 	that satisfies $\wffphi$.
 	\[\provable\Big( \neg\exists!\sx\wffphi\ra \big((\defdes\sx\wffphi)=\emptyset\big) \Big) \]
 	
-	\subsubsection*{2.3.14  Functions}
+	\subsubsection{Functions}
 	\paragraph{Function}
 	Class $\clF$ is a function if and only it is a relation
 	where there exists at most one right-hand-side value for any left-hand-side value.
@@ -773,22 +1009,32 @@
 	
 	Theorem	fvex 5997	The value of a class exists.
 	\[\provable (\clF\at\clA)\in\VV \]
+	
+	\subparagraph{The value of $\clF$ at a proper class is $\emptyset$}
+	\label{par:func_at_proper_class}
+	\[
+	\provable \clA\notin\VV\implies\provable\clF\at\clA=\emptyset	\]
+	
+	Proof: $\provable\clA\notin\VV\implies\provable\forall\sx\opair{\clA}{\sx}=\emptyset$ (df-op). $\therefore 
+	\provable\emptyset\in\clF \lra \set{\sx|\clA\clF\sx}=\VV \&\provable\emptyset\notin\clF \lra \set{\sx|\clA\clF\sx}=\emptyset$. In either case, $\provable \clF\at\clA=\emptyset$.
+	
+	Also from Theorem	fvprc 5981.
 
 	\paragraph{Isomorphism}
 	Isomorphism is a bijection from $\clA$ onto $\clB$
 	with relation $\clR$ in $\clA$ preserved in $\clB$ as $\clS$ (df-isom).
 
-	\subsubsection*{2.3.15  Cantor's Theorem}
+	\subsubsection{Cantor's Theorem}
 	Theorem	canth 6385	No set is equinumerous to its power set (Cantor's theorem), i.e. no function can map a set onto its power set.
 	
 	Cantor's Theorem. No set is equinumerous to its power set. Specifically, any set has a cardinality (size) strictly less than the cardinality of its power set. For example, the cardinality of real numbers is the same as the cardinality of the power set of integers, so real numbers cannot be put into a one-to-one correspondence with integers.
 	
 	Theorem	ncanth 6386	Cantor's theorem fails for the universal class (which is not a set but a proper class by vprc 4624). Specifically, the identity function maps the universe onto its power class.	
 	
-	\subsubsection*{2.3.16  Restricted iota (description binder)}
+	\subsubsection{Restricted iota (description binder)}
 	Definition	df-riota 6388	Define restricted description binder. In case there is no unique $\sx$ such that $(\sx \in \clA \land \wffphi)$ holds, it evaluates to the empty set. 
 	
-	\subsubsection*{2.3.17  Operations}
+	\subsubsection{Operations}
 	
 	Note that the syntax is simply three class symbols in a row surrounded by parentheses.
 	
@@ -802,28 +1048,30 @@
 
 	Theorem	funoprabg 6533*	``At most one'' is a sufficient condition for an operation class abstraction to be a function.
 	\[\provable\Big( \forall\sx\forall\sy\unique\sz\wffphi\ra \Fun\set{\opair{\opair{x}{y}}{z}|\wffphi}\Big) \]
-	
-	\subsubsection*{2.3.19  Function operation}
+	\hiddensubsubsection{Maps-to notation}
+	\subsubsection{Function operation}
 	Given a binary operation $\clR$, this maps two functions into a single function:
 	\[ \circ_f\clR \]
 	
 	Example:
-	\[\provable \Big( \sx\in(\dom\sff\cap\dom\sg)\ra
+	\[\provable \Big( \sx\in(\inters[\dom\sff]{\dom\sg})\ra
 	 \big((\setvar{f}\circ_f\clR\setvar{g})\at\sx\big) = \big((\sff\at\sx)\clR(\sg\at\sx)\big)\Big) \]
 	 
 	Given a binary relation $\clR$, this is a relation between two functions:
 	\[\provable \Big( (\sff\circ_r\clR\sg)  \lra \forall
-	\sx \in (\dom\sff\cap\dom\sg)\, (\sff\at\sx)\clR(\sg\at\sx) \Big) \]
+	\sx \in (\inters[\dom\sff]{\dom\sg})\, (\sff\at\sx)\clR(\sg\at\sx) \Big) \]
 	
-	\[\provable \Big( (\dom\sff\cap\dom\sg=\emptyset)\ra (\sff\circ_r\clR\sg) \Big) \]
+	\[\provable \Big( (\inters[\dom\sff]{\dom\sg}=\emptyset)\ra (\sff\circ_r\clR\sg) \Big) \]
 	
-	\subsubsection*{2.3.20  Proper subset relation}
+	\subsubsection{Proper subset relation}
 	This is a relation of sets instead of a wff of classes.
 	
 	\subsection{ZF Set Theory - add the Axiom of Union}
-	\subsubsection*{2.4.3  Transfinite induction}
+	\hiddensubsubsection{Introduce the Axiom of Union}
+	\hiddensubsubsection{Ordinals (continued)}
+	\subsubsection{Transfinite induction}
 	
-	\blue{If $\clA \in \On$, then $\in$ means $<$, $\cap$ means $\min$ of containing elements, $\cup$ means $\max$ of containing elements, $\subseteq$ means $\le$.}
+	\blue{If $\clA \in \On$, then $\in$ means $<$, $\interssym$ means $\min$ of containing elements, $\unionsym$ means $\max$ of containing elements, $\subseteq$ means $\le$.}
 	
 	Theorem	tfis 6821*	Transfinite Induction Schema.
 	If all ordinal numbers less than a given ordinal number $\sx$ have a property (induction hypothesis),
@@ -837,13 +1085,16 @@
 		\item and the third is the induction step for limit ordinals.
 	\end{enumerate}
 	\[\begin{aligned}
-		&\provable[\emptyset/\sx]\wffphi \& \provable \Big(\sx\in\On\ra \big(\wffphi\ra([\suc\sx/\sx]\wffphi)\big) \Big)\&
+		&\provable[\emptyset/\sx]\wffphi \\
+		\& &\provable \Big(\sx\in\On\ra \big(\wffphi\ra([\suc\sx/\sx]\wffphi)\big) \Big)\\
+		\& &
 		\provable \Big(\Lim\sy\ra\big((\forall\sx\in\sy\wffphi) \ra[\sy/\sx]\wffphi\big)\Big)\\
-		&\implies
+		\implies&
 		\provable\Big(\sx\in\On\ra\wffphi\Big)
 	\end{aligned} \]
 	
-	\subsubsection*{2.4.4  The natural numbers (\ie. finite ordinals)}
+	\subsubsection{The natural numbers (finite ordinals)}
+	
 	Define the class of natural numbers $\omega$,
 	which are all ordinal numbers that are less than every limit ordinal, \ie, all finite ordinals.
 	(\href{http://us.metamath.org/mpeuni/mmtheorems69.html#mm6832s}{df-om})
@@ -861,20 +1112,21 @@
 		&\implies
 		\provable \Big(\clA\in\omega\ra\wffchi\Big)
 	\end{aligned}
-	 \]
-	 (actually it is $\wffchi(\clA)$)
-	 
-	 Hypothesis: if $\wffpsi(\sy)$ holds for all $\sy$ smaller than $\sx$,
-	 then $\wffphi(\sx)$ is also true.
-	 
-	 Assertion: $\wffchi(\clA)$ is true for all $\clA\in\omega$.
-	 
-	 Note that $\provable([\emptyset/\sx]\wffphi)$ must be true, because $\provable\emptyset\in\omega$
-	 and $\provable(\forall\sy\in\emptyset\wffpsi)$, \ie,
-	 \[\provable\Big(\forall \sy(\sy\notin\emptyset \lor \wffpsi) \Big)\]
-	 are constantly true.
-	 
-	\subsubsection*{2.4.6  Finite induction (for finite ordinals)}
+	\]
+	(actually it is $\wffchi(\clA)$)
+	
+	Hypothesis: if $\wffpsi(\sy)$ holds for all $\sy$ smaller than $\sx$,
+	then $\wffphi(\sx)$ is also true.
+	
+	Assertion: $\wffchi(\clA)$ is true for all $\clA\in\omega$.
+	
+	Note that $\provable([\emptyset/\sx]\wffphi)$ must be true, because $\provable\emptyset\in\omega$
+	and $\provable(\forall\sy\in\emptyset\wffpsi)$, \ie,
+	\[\provable\Big(\forall \sy(\sy\notin\emptyset \lor \wffpsi) \Big)\]
+	are constantly true.
+	
+	\hiddensubsubsection{Peano's postulates}
+	\subsubsection{Finite induction (for finite ordinals)}
 	Theorem	findes 6863:
 	Finite induction (mathematical induction) with explicit substitution.
 	\begin{enumerate}
@@ -885,8 +1137,8 @@
 	\& \provable \Big(\sx\in\omega\ra \big( \wffphi\ra ([\suc\sx/\sx]\wffphi)\big) \Big)
 	\implies \provable \Big(\sx\in\omega\ra\wffphi\Big)
 	 \]
-	 
-	\subsubsection*{2.4.7  First and second members of an ordered pair}
+	\hiddensubsubsection{Relations and functions (cont.)}
+	\subsubsection{First and second members of an ordered pair}
 	\[\fst \snd \]
 	Theorem	1stnpr 6937	Value of the first-member function at non-pairs.
 	\[\provable \Big(\clA \notin (\VV\times\VV)\ra (\fst\at\clA)=\emptyset \Big) \]
@@ -901,21 +1153,1197 @@
 	\[\provable (\snd\at\emptyset)=\emptyset \]
 	
 	Theorem	op1st 6941	Extract the first member of an ordered pair.
-	\[\provable\clA\in\VV\&\provable\clB\in\VV\&\implies \provable(\fst\at\opair{\clA}{\clB})=\clA \]
+	\[\provable\clA\in\VV\&\provable\clB\in\VV\implies \provable(\fst\at\opair{\clA}{\clB})=\clA \]
 	
 	Theorem	op2nd 6942	Extract the second member of an ordered pair.
-	\[\provable\clA\in\VV\&\provable\clB\in\VV\&\implies \provable(\snd\at\opair{\clA}{\clB})=\clB \]
+	\[\provable\clA\in\VV\&\provable\clB\in\VV\implies \provable(\snd\at\opair{\clA}{\clB})=\clB \]
 	
-	\subsubsection*{2.4.8  The support of functions}
+	\subsubsection{The support of functions}
 	\[
 	\provable \Big((\sx\supp\sz)=\set{\si\in\dom\sx|(\sx\image\set{\si})\ne\set{\sz}} \Big)
 	\]
 	The reason why $(\sx\image\set{\si})\ne\set{\sz}$ is used instead of $(\sx\at\si)\ne\sz$ is that $\sx$ is allowed to have multiple
 	mapped values for $\si$.
 	
-	\subsubsection*{2.4.10  Function transposition}
+	\hiddensubsubsection{Special maps-to operations}
+	\subsubsection{Function transposition}
 	Definition	df-tpos 7113*
 	Define the transposition of a function, which is a function $\clG = \tpos \clF$ satisfying $\clG(\sx, \sy) = \clF(\sy, \sx)$.
-	\[\provable \tpos \clF=\Big(\clF\circ\big(\sx\in(	\converse{\dom\clF}\cup\set{\emptyset})\mapsto\cup \converse{\set{\sx}}\big)
+	\[\provable \tpos \clF=\Big(\clF\circ\big(\sx\in(	\union[\converse{\dom\clF}]{\set{\emptyset}})\mapsto\union{ \converse{\set{\sx}}}\big)
 	\Big) \]
+	
+	\subsubsection{Curry and uncurry}
+	\paragraph{Curry}
+	\href{https://us.metamath.org/mpeuni/df-cur.html}{Definition df-cur 7919}
+	\[\provable \curry \clF = \Big(
+	\sx\in\dom\dom\clF \mapsto\set{\opair{\sy}{\sz}|\opair{\sx}{\sy}\clF\sz}
+	\Big)
+	\]
+	For example, $\pluso = \clF$, $\oneo = \sx$, (df-ov 7139)
+	\[\provable\big((\curry\pluso)\at \oneo\big)  =\big( \sy\in\On \mapsto\oneo\pluso \sy \big) \]
+	
+	\paragraph{Uncurry}
+	\href{https://us.metamath.org/mpeuni/df-unc.html}{Definition df-unc 7920} (df-ot 4534)
+	\[\provable
+	\uncurry\clF=\set{\otri{\sx}{\sy}{\sz}|\sy(\clF\at\sx)\sz}
+	\]
+	
+	\paragraph{Inverse relation}
+	\begin{eqlong}
+		\provable\uncurry(\curry\clF)
+		&=\set{\otri{\sx}{\sy}{\sz}|\sy\big((\curry\clF)\at\sx\big)\sz}\\
+		&\text{df-mpt 5112, df-fv 6333}\\
+		&=\set{\otri{\sx}{\sy}{\sz}|\sx\in\dom\dom\clF \land \sy\big(\set{\opair{\sy}{\sz}|\opair{\sx}{\sy}\clF\sz}\big)\sz}\\
+	\end{eqlong}
+	Note that (df-br 5032, df-dm 5530)
+	\begin{eqlong}
+		\provable\set{\opair{\sy}{\sz}|\opair{\sx}{\sy}\clF\sz}\ne\emptyset
+		&\lra \exists\sy\exists\sz \big(\opair{\opair{\sx}{\sy}}{\sz}\in\clF\big)\\
+		&\lra \exists\sy \opair{\sx}{\sy}\in\dom\clF\\
+		&\lra  \sx\in\dom\dom\clF		
+	\end{eqlong}
+	Therefore
+	\begin{eqlong}
+		\provable\uncurry(\curry\clF)
+		&=\set{\otri{\sx}{\sy}{\sz}| \sy\big(\set{\opair{\sy}{\sz}|\opair{\sx}{\sy}\clF\sz}\big)\sz}\\
+		&=\set{\otri{\sx}{\sy}{\sz}| \opair{\sx}{\sy}\clF\sz}\\
+		&=\set{\otri{\sx}{\sy}{\sz}| \otri{\sx}{\sy}{\sz}\in\clF}\\
+		&=\clF
+	\end{eqlong}
+
+	\subsubsection{Undefined values}
+	\href{https://us.metamath.org/mpeuni/df-undef.html}{Definition df-undef 7925}
+	\[\provable \Undef=\Big(\sx\in\VV\mapsto \power\union{\sx} \Big)\]
+	
+	\href{https://us.metamath.org/mpeuni/undefnel.html}{Theorem undefnel 7930}
+	\[\provable
+	\Big(
+	\forall\sx\big(
+	\Undef\at\sx\not\in\sx
+	\big)
+	\Big)
+	\]
+	
+	\href{https://us.metamath.org/mpeuni/undefne0.htmll}{Theorem undefne0 7931}
+	\[\provable
+	\Big(
+	\forall\sx\big(
+	\Undef\at\sx\ne\emptyset
+	\big)
+	\Big)
+	\]
+	
+	\subsubsection{Well-founded recursion}
+	\paragraph{Definition of well-founded recursion}
+	Given an arbitrary function $\clG$, a base class $\clA$, and a well-ordering $\clR$ of $\clA$, a function $\clF$ over $\clA$ can be uniquely defined by well-founded recursion.
+	
+	Well-foundedness of $\clR$ is required for existence of least element for any non-empty subset of $\clA$ (dffr2 5485).
+	Well-orderedness of $\clR$ is for the uniqueness of the above least element (dfwe2 7479).
+	
+	Theorem wfr1 7959, Theorem wfr2 7960, Theorem wfr3 7961.
+	The value of $\clF$ at any $\sx \in \clA$ is $\clG$ recursively applied to all ``previous'' values of $\clF$.
+	\begin{eqlong}
+		&\provable\clR\We\clA\\
+		\& &
+		\provable\clR\Se\clA\\
+		\&	&
+		\provable\clF=\wrecs{\clR}{\clA}{\clG}\\
+		\implies &
+		\provable \clF \Fn \clA \\
+		\&	&
+		\provable \clF = \Big(\sx\in\clA \mapsto \clG\at\big(\clF\restriction\Pred(\clR,\clA,\sx) \big)\Big) \\
+		\&	&
+		\provable \clF \text{ can be uniquely defined by the above two properties} \\
+	\end{eqlong}
+
+	See an example in \ref{par:example_wrecs}.
+
+	\paragraph{Set-like relation}
+	$\clR$ must be set-like on $\clA$ because
+	\begin{eqlong}
+		&\provable\Pred(\clR,\clA,\sx)=\big(\inters[\clA]{(\converse{\clR}\image\set{\sx})}\big) \text{ (df-pred 6117)}\\
+		\implies&\provable\big(\inters[\Pred(\clR,\clA,\sx)]{\clA}\big) = \Pred(\clR,\clA,\sx)
+	\end{eqlong}
+	\begin{eqlong}
+		&\provable \clF \Fn \clA \\
+		\& & \provable \forall \sx\in\clA\Big(\clF\restriction\Pred(\clR,\clA,\sx) \in\VV\Big)\\
+		\implies &\provable\forall \sx\in\clA\Big(\\
+		&\dom\big(\clF\restriction\Pred(\clR,\clA,\sx)\big)
+		=\big(\inters[\Pred(\clR,\clA,\sx)]{\clA}\big)\text{ (df-fn 6328, dmres 5841)}\\
+		 =& \Pred(\clR,\clA,\sx)=\set{\sy\in\clA|\sy\clR\sx}\text{ (dfpred3 6127)}\\
+		 &\in\VV \text{ (dmex 7601)}
+		 \Big)\\
+		\iff &\provable \clR \Se \clA \text{ (df-se 5480)}
+	\end{eqlong}
+	Let $\clB=\clF\restriction\Pred(\clR,\clA,\sx)$. The reason why this needs to be a set is that the function value at any proper class must be the empty set (\ref{par:func_at_proper_class}).
+	
+	\paragraph{Strict partial order}
+	For any $\sz\in\clA$, to evaluate $\clF\at\sz$, one need to evaluate $\clF\at\sy$ for all $\sy\in\clA$ such that $\sy\clR\sz$. Then apply $\clG$ to the evaluation results.
+	
+	To prevent loops in recursion, $\forall \sx\in\clA\big(\sx\notin\Pred(\clR,\clA,\sx)\big)$ is required.
+	From \href{https://us.metamath.org/mpeuni/dfpred3.html}{Theorem dfpred3 6127}, this is equivalent to
+	$\forall \sx\in\clA\big(\neg\sx\clR\sx\big)$.
+	
+	Also, to ensure that no additional evaluation is required, 
+	\[
+	\forall \sz\in\clA\big( \sy\in \Pred(\clR,\clA,\sz)\ra\Pred(\clR,\clA,\sy)\subseteq\Pred(\clR,\clA,\sz)\big)
+	\]
+	is desirable. This is equivalent to
+	\[\forall \sx\in\clA\forall \sy\in\clA\forall \sz\in\clA \big((\sx\clR\sy\land\sy\clR\sz)\ra \sx\clR\sz \big)\]
+	
+	Therefore, no loop and no additional evaluation is equivalent to $\clR\Po\clA$ (\href{https://us.metamath.org/mpeuni/df-po.html}{Definition df-po 5439}).
+	
+	\paragraph{Well-ordered relation}
+	However, to guarantee that the recursion terminates at a single point, a least element must exist uniquely for $\Pred(\clR,\clA,\sx)$. Therefore well-orderedness is required.
+
+	\hiddensubsubsection{Functions on ordinals; strictly monotone ordinal functions}
+	\subsubsection{``Strong'' transfinite recursion}
+	\paragraph{An example: strong transfinite recursion}
+	\label{par:example_wrecs}
+	An example of well-founded recursion ($\wrecs{\clR}{\clA}{\clF}$) from \href{https://us.metamath.org/mpeuni/df-recs.html}{Definition df-recs 7994}
+	defines a function on the class of ordinal numbers, by transfinite recursion given a rule which sets the next value given all values so far.
+	\[\provable\recs{\clF}=\wrecs{\relE}{\On}{\clF}\]
+	Note that $\provable \relE\Se\On$ (\href{https://us.metamath.org/mpeuni/epse.html}{Theorem epse 5503}) and $\provable \relE\We\On$ (\href{https://us.metamath.org/mpeuni/epweon.html}{Theorem epweon 7480}).
+	
+	If 
+	\[\clF=\big(\sx\in\VV\times\VV\mapsto\power\union{(\snd\image\sx)}\big)\]
+	we can try to calculate $\recs{\clF}\at\sz$ where $\sz=\omega\expo\twoo$. First, the least element in $\Pred(\relE,\On,\sz)$ (namely $\sz$) must exist uniquely because $\Pred(\relE,\On,\sz)$ is a nonempty subset of $\On$. We know that the least element is $\emptyset$. We calculate it as
+	\[\recs{\clF}\at\emptyset=\clF\at\big(\recs{\clF}\restriction\emptyset\big)=\clF\at\emptyset=\set{\emptyset}=\oneo
+	\]
+	
+	Then we take the least element for $\Pred(\relE,\On,\sz)\dif\set{\emptyset}$ because we know it is a non-empty subset of $\On$ (since this is a subset of the set $\Pred(\relE,\On,\sz)$, it must also be a set, see \ref{par:subclass_set}). We know the least element is $\oneo$.
+	\[\recs{\clF}\at\oneo =\clF\at\big(\recs{\clF}\restriction\set{\emptyset}\big)
+	=\clF\at\big(\set{\opair{\emptyset}{\oneo}}\big) =\power \oneo
+	 \]
+	 
+	The next least element is $\twoo$
+	\begin{eqlong}
+		\recs{\clF}\at\twoo& =\clF\at\big(\recs{\clF}\restriction\set{\emptyset,\oneo}\big)\\
+		&=\clF\at\big(\set{\opair{\emptyset}{\oneo},\opair{\oneo}{\power\oneo}}\big) \\
+		&=
+		\power\union{\set{\oneo,\power\oneo}}\\
+		&=\power(\union[\oneo]{\power\oneo})\\
+		&=\power\power \oneo
+	\end{eqlong}
+
+	Recursively, we will meet the first limit ordinal $\omega$
+	
+	\begin{eqlong}
+		\recs{\clF}\at \omega&=\clF\at\big(\recs{\clF}\restriction\omega\big)\\
+		&=\clF\at\set{
+			\opair{\emptyset}{\oneo},
+			\opair{\oneo}{\power\oneo},
+			\opair{\twoo}{\power\power\oneo},
+			\dots
+		}\\
+		&=\power\big(\oneo\unionsym(\power\oneo)\unionsym(\power\power\oneo)\unionsym\dots\big)
+	\end{eqlong}
+
+	This is repeated until all elements in $\sz$ are obtained. And finally the function value at $\sz$ could be calculated.
+	
+	\subsubsection{Recursive definition generator}
+	Recursive definition generator $\rec{\clF}{\clI}$ restricts the update rule to use only the previous value, while ``strong'' transfinite recursion $\recs{\clF}$ allows the update rule to use all previous values, which is why the latter is described as ``strong'', although it is actually more primitive.
+	
+	\href{https://us.metamath.org/mpeuni/df-rdg.html}{Definition df-rdg 8032}
+	\[\provable
+	\rec{\clF}{\clI}=\recs{
+	\sg\in\VV\mapsto
+	\cif{\sg=\emptyset}{\clI}
+	{\cif{\Lim\dom\sg}{\union{\ran\sg}}{\clF\at(\sg\at \union{\dom\sg})}}
+	}
+	\]
+	
+	For any set $\sz\in\On$ in the domain of the recursive function, $\sg$ becomes $\rec{\clF}{\clI}
+	\restriction\Pred(\relE,\On,\sz)=\rec{\clF}{\clI}
+	\restriction\sz$ (predon 7489). This is truly a set because $\rec{\clF}{\clI}
+	\restriction\sz$ is a function on set $\sz$.
+	
+	Since $\sg\Fn\sz$, we have $\sg=\emptyset$ iff $\sz=\emptyset$. Therefore (Theorem rdg0 8043)
+	\[\provable
+	\rec{\clF}{\clI}\at\emptyset=\cif{\clI\in\VV}{\clI}{\emptyset}
+	\]
+	
+	If $\sz\ne\emptyset$, we know that $\dom \sg=\sz$. So the next condition is whether $\Lim \sz$. 
+	If this is the true, then the result is the union of those of all smaller values (rdglim).
+	\[\provable\Big(
+	\big(\sz\in\On\land\Lim\sz\big)
+	\ra 
+	\big(\rec{\clF}{\clI}\at\sz\big)=
+	\union{\big(\rec{\clF}{\clI}\image\sz\big)}
+	\Big)\]
+	
+	This special treatment for both $\emptyset$ and limit ordinals is required, because otherwise (\href{https://us.metamath.org/mpeuni/df-lim.html}{Definition df-lim 6165}) (limuni 6220)
+	\[\provable\Lim\sz\ra\sz=\union{\sz}\]
+	and \href{https://us.metamath.org/mpeuni/unizlim.html}{Theorem unizlim 6276}
+	\[\provable\Big(
+	\Ord \sz\ra\big(
+	\sz=\union{\sz}
+	\lra
+	(\sz=\emptyset\lor\Lim\sz)
+	\big)
+	\Big)\]
+	would cause circular definition.
+	
+	\href{https://us.metamath.org/mpeuni/onuniorsuci.html}{Theorem onuniorsuci 7537} (unisuc, onunisuci, ssorduni) states that an ordinal number is either its own union (if zero or a limit ordinal) or the successor of its union. Therefore
+	\[\provable 
+	\big(\sz\in\On\land\sz\ne\emptyset\land\neg\Lim\sz\big)
+	\ra
+	\sz=\suc\union{\sz}
+	\]
+	in which case (rdgsuc 8046)
+	\[
+	\provable\sy\in\On\implies\provable\rec{\clF}{\clI}\at
+	\suc\sy=\clF\at(\rec{\clF}{\clI}\at \sy)
+	\]
+	where $\sy=\union{\sz}$ is the ``previous'' ordinal (onuni 7491).
+	
+	See an example in \ref{par:oadd}.
+	\subsubsection{Finite recursion}
+	\href{https://us.metamath.org/mpeuni/df-seqom.html}{Definition df-seqom 8070}
+	\[\provable
+	\seqom(\clF,\clI)=\Big(
+	\rec{\si\in\omega,\sv\in\VV\mapsto\opair{\suc\si}{(\si\clF\sv)}}{\opair{\emptyset}{(\II\at\clI)}}\image\omega
+	\Big)
+	\]
+	The reason for $\II$ is to make sure $(\II\at\clI)$ is a set. If $\clI$ is a proper class, this becomes empty set.
+	
+	This is a function on $\omega$ (fnseqom 8077)
+	\[\provable\seqom(\clF,\clI)\Fn\omega\]
+	
+	Its initial value is $\clI$ (seqom0g 8078)
+	\[\provable
+	\big(\seqom(\clF,\clI)\at\emptyset\big)=\cif{\clI\in\VV}{\clI}{\emptyset}
+	\]
+	
+	Other values are calculated recursively
+	(seqomsuc 8079)
+	\[
+	\provable
+	\clA\in\omega\ra
+	\Big(\seqom(\clF,\clI)\at(\suc\clA)\Big)=\Big(
+	\clA\clF\big(\seqom(\clF,\clI)\at\clA\big)
+	\Big)
+	\]
+	
+	For example,
+	\[\provable
+	\Big(\seqom(\clF,\clI)\at(\oneo)\Big)=\Big(
+	\emptyset\clF\big(\II\at\clI\big)
+	\Big)
+	\]
+	\[\provable
+	\Big(\seqom(\clF,\clI)\at(\twoo)\Big)=\Big(
+	\oneo\clF\big(\emptyset\clF(\II\at\clI)\big)
+	\Big)
+	\]
+	
+	\subsubsection{Ordinal arithmetic}
+	\paragraph{Ordinal addition}
+	\label{par:oadd}
+	\href{https://us.metamath.org/mpeuni/df-oadd.html}{Definition df-oadd 8092}
+	\[\provable\pluso=
+	\Big(
+	\sx\in\On,\sy\in\On\mapsto
+	\big(
+	\rec{\sz\in\VV\mapsto\suc\sz}{\sx}\at\sy
+	\big)
+	\Big)
+	\]
+	
+	Let's see how $\oneo\pluso(\suc\omega)$ works. From definition
+	\[\provable\oneo\pluso(\suc\omega)=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(\suc\omega)
+	\]
+	
+	From Theorem rdg0 8043, we know that 
+	\[\provable\oneo\pluso\emptyset=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(
+	\emptyset)=\oneo
+	\]
+	
+	Then from rdgsuc 8046 we know that
+	\[\provable\oneo\pluso\oneo=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(
+	\suc\emptyset)=\suc\oneo=\twoo
+	\]
+	\[\provable\oneo\pluso\twoo=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(
+	\suc\oneo)=\suc\twoo=\threeo
+	\]
+	
+	From Theorem rdglim2a 8055, we know that
+	\[
+	\provable \oneo\pluso\omega=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(
+	\omega)=\iunion{\sx\in\omega}{\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at{\sx}}
+	\]
+	
+	Applying previous results we know that
+	\[\provable \oneo\pluso\omega=\union{\set{\oneo,\twoo,\threeo,\dots}}=\omega
+	\]
+	
+	Finally, from rdgsuc 8046 we know that
+	\[\provable\oneo\pluso(
+	\suc\omega)=
+	\rec{\sz\in\VV\mapsto\suc\sz}{\oneo}\at(
+	\suc\omega)=\suc\omega
+	\]
+	
+	\paragraph{Ordinal multiplication}
+	Take $(\suc\omega)\mulo(\suc\suc\omega)$ as an example.
+	\[\provable(\suc\omega)\mulo\emptyset=\emptyset
+	\]
+	\[\provable(\suc\omega)\mulo\oneo=(\suc\omega)\mulo(\suc\emptyset)=\big((\suc\omega)\mulo\emptyset\big)\pluso(\suc\omega)=\suc\omega
+	\]
+	\[\provable(\suc\omega)\mulo\twoo=(\suc\omega)\mulo(\suc\oneo)=\big((\suc\omega)\mulo\oneo\big)\pluso(\suc\omega)=\suc(\omega\pluso\omega)=\suc(\omega\mulo\twoo)
+	\]
+	
+	\[\provable(\suc\omega)\mulo\omega=\iunion{\sx\in\omega}{(\suc\omega)\mulo\sx}=\iunion{\sx\in\omega}{\suc(\omega\mulo\sx)}=\omega\mulo\omega
+	\]
+	
+	The result seems abnormal but should be correct. See \href{https://math.stackexchange.com/questions/1315179/ordinal-arithmetic-omega1-cdot-omega-and-omega-cdot-omega-1}{this}.
+	
+	\[\provable(\suc\omega)\mulo(\suc\omega)=\big((\suc\omega)\mulo\omega\big)\pluso(\suc\omega)=(\omega\mulo\omega)\pluso(\suc\omega)
+	\]\[\provable(\suc\omega)\mulo(\suc\suc\omega)=\big((\suc\omega)\mulo(\suc\omega)\big)\pluso(\suc\omega)=(\omega\mulo\omega)\pluso(\suc(\omega\mulo\twoo))
+	\]
+	
+	\paragraph{Ordinal exponentiation}
+	\href{https://us.metamath.org/mpeuni/df-oexp.html}{Definition df-oexp 8094} defines the ordinal exponentiation.
+	(Contributed by NM, 30-Dec-2004.)
+	\[\provable
+	\expo=\Big(
+	\sx\in\On,\sy\in\On\mapsto\cif{\sx=\emptyset}
+	{\oneo\dif\sy}{\rec{\sz\in\VV\mapsto(\sz\mulo\sx)}{\oneo}\at\sy}
+	\Big)
+	\]
+	\red{Why is $\emptyset$ treated differently???}
+	
+	The special case on $\emptyset$ (oe0m0 8131, oe0m1 8132)
+	\[\provable\big(\emptyset\expo\clA=
+	\cif{\clA=\emptyset}{\oneo}{\emptyset}
+	\big)
+	\]
+	
+	Exponent of 0 (oe0 8133)
+	\[\provable\big(\clA\expo\emptyset=
+	\cif{\clA\in\On}{\oneo}{\emptyset}
+	\big)
+	\]
+	
+	Exponent of 1 (oe1 8156) and 
+	\[\provable\big(\clA\expo\oneo=
+	\cif{\clA\in\On}{\clA}{\emptyset}
+	\big)
+	\]
+	
+	Mantissa of 1 (oe1m 8157)
+	\[\provable\big(\oneo\expo\clA=
+	\cif{\clA\in\On}{\oneo}{\emptyset}
+	\big)
+	\]
+	
+	Example of $(\suc\omega)\expo(\suc\omega)$
+	\[\provable (\suc\omega)\expo\twoo=(\suc\omega)\expo(\suc\oneo)=\big((\suc\omega)\expo(\oneo) \big)\mulo(\suc\omega)=(\omega\expo\twoo)\pluso(\suc\omega)\]
+	\[\begin{aligned}
+		\provable (\suc\omega)\expo\threeo&=(\suc\omega)\expo(\suc\twoo)\\
+		&=\big((\omega\expo\twoo)\pluso(\suc\omega)\big)\mulo(\suc\omega)\\
+		&=(\omega\expo\threeo)\pluso(\omega\expo\twoo)\pluso(\suc\omega)\\
+	\end{aligned}
+	\]
+	\[\begin{aligned}
+		\provable (\suc\omega)\expo\omega&=\iunion{\sx\in\omega}{(\suc\omega)\expo(\sx)}\\
+		&=\oneo\unionsym(\suc\omega)\unionsym\dots\\
+		&=(\omega\expo\omega)\\
+	\end{aligned}
+	\]
+	\[\begin{aligned}
+		\provable (\suc\omega)\expo(\suc\omega)&=(\omega\expo\omega)\mulo(\suc\omega)&=(\omega\expo(\suc\omega))\pluso(\omega\expo\omega)\\
+	\end{aligned}
+	\]
+	
+	\hiddensubsubsection{Natural number arithmetic}
+	\subsubsection{Equivalence relations and classes}
+	Definition df-er 8275
+	\[\provable
+	\clR\Er\clA\lra
+	\Big(\Rel\clR\land\dom\clR=\clA
+	\land
+	\big(\union[\converse{\clR}]{(\clR\circ\clR)}\big)
+	\subseteq\clR
+	\Big)
+	\]
+	
+	$\Rel\clR$, $\clR$ is a relation.
+	
+	$\dom\clR=\clA$ is related to reflexivity.
+	
+	$\converse{\clR}$ is related to symmetry.
+	
+	$(\clR\circ\clR)$ is related to transitivity.
+	
+	\hiddensubsubsection{The mapping operation}
+	\hiddensubsubsection{Infinite Cartesian products}
+	\hiddensubsubsection{Equinumerosity}
+	\hiddensubsubsection{Schroeder-Bernstein Theorem}
+	\hiddensubsubsection{Equinumerosity (cont.)}
+	\hiddensubsubsection{Pigeonhole Principle}
+	\hiddensubsubsection{Finite sets}
+	\hiddensubsubsection{Finitely supported functions}
+	\hiddensubsubsection{Finite intersections}
+	\hiddensubsubsection{Hall's marriage theorem}
+	
+	\subsubsection{Supremum and infimum}
+	\label{sss:sup_inf}
+	\href{https://us.metamath.org/mpeuni/df-sup.html}{Definition df-sup 8908} or \href{https://us.metamath.org/mpeuni/dfsup2.html}{Theorem dfsup2 8910} defines the supremum $\sup(\clA,\clB,\clR)$ of class $\clA$, which is meaningful when $\clR$ is a relation that strictly orders $\clB$ and when the supremum exists.
+	
+	\[\provable
+	\sup(\clA,\clB,\clR)=
+	\union{\Bigg(
+		\clB\dif
+		\bigg(
+		\union[
+			\Big(\converse{\clR}\image\clA\Big)
+		]{
+			\Big(
+				\clR\image\big(\clB\dif(\converse{\clR}\image\clA)\big)
+			\Big)
+		} \bigg)  \Bigg)
+	}
+	\]
+	
+	For example, $\clR$ could be ``less than'' $<_\re$, $\clB$ could be the set of real numbers $\re$, and $\clA$ could be the set of all positive reals whose square is less than 2; in this case the supremum is defined as the square root of 2.
+	
+	Similarly, (df-inf 8909)
+	\[\provable\inf(\clA,\clB,\clR)=\sup(\clA,\clB,\converse{\clR})\]
+	
+	\section{ZFC (ZERMELO-FRAENKEL WITH CHOICE) SET THEORY}
+	
+	The choice function is a subset of a set.
+	However, the choice ``relation'' being a function, \ie, the uniqueness of the returned value cannot be guaranteed without referencing the set (the choice function) itself.
+	
+	Note that in axiom schema of specification, the wff for subset specification must not reference the subset itself.
+	
+	\href{https://www.quora.com/Why-is-the-axiom-of-choice-separate-from-ZF}{Why is the axiom of choice separate from ZF?}
+	
+	\hiddensection{TG (TARSKI-GROTHENDIECK) SET THEORY}
+	\section{REAL AND COMPLEX NUMBERS}
+	\hiddensubsection{Construction and axiomatization of real and complex numbers}
+	\subsection{Derive the basic properties from the field axioms}
+	\hiddensubsubsection{Some deductions from the field axioms for complex numbers}
+	\hiddensubsubsection{Infinity and the extended real number system}
+	\hiddensubsubsection{Restate the ordering postulates with extended real ``less than''}
+	\subsubsection{Ordering on reals}
+	\href{https://us.metamath.org/mpeuni/dedekindle.html}{Theorem dedekindle 10800}
+	\[\provable\Big(\big(\clA\subseteq\re\land\clB\subseteq\re\land\forall\sx\in\clA\forall\sy\in\clB\sx\le\sy\big)\ra\exists\sz\in\re\sx\in\clA\forall\sy\in\clB\big(
+	\sx\le\sz\land\sz\le\sy\big)\Big)\]
+	
+	\hiddensubsubsection{Initial properties of the complex numbers}
+	
+	\subsection{Real and complex numbers - basic operations}
+	\hiddensubsubsection{Addition}
+	\subsubsection{Subtraction}
+	\href{https://us.metamath.org/mpeuni/df-sub.html}{Definition df-sub 10868}
+	Define subtraction. Theorems subcli 10958 and resubcli 10944 prove its closure laws. (Contributed by NM, 26-Nov-1994.)
+	
+	\href{https://us.metamath.org/mpeuni/negeu.html}{Theorem negeu 10872} Existential uniqueness of negatives.
+	
+	\hiddensubsection{Integer sets}
+	\hiddensubsection{Order sets}
+	
+	\subsection{Elementary integer functions}
+	
+	\hiddensubsubsection{The floor and ceiling functions}
+	\hiddensubsubsection{The modulo (remainder) operation}
+	\hiddensubsubsection{Miscellaneous theorems about integers}
+	\hiddensubsubsection{Strong induction over upper sets of integers}
+	\hiddensubsubsection{Finitely supported functions over the nonnegative integers}
+	
+	\subsubsection{The infinite sequence builder ``seq'' - extension}
+	
+	Theorem seq1 13397
+	\[\provable\Big(
+	\clM\in\inte
+	\ra
+	\big(\seq\clM(\clR,\clF)\at\clM\big)=\big(\clF\at\clM\big)
+	\Big)\]
+	
+	Theorem seqp1 13399
+	\[\begin{aligned}
+		\provable\bigg(
+		&\Big(\sm\in\inte\land\sn\in\inte\land\sm\le\sn\Big)
+		\\
+		\ra
+		&\Big(
+		\seq\sm(\clR,\clF)\at(\sn+1)
+		\Big)
+		=
+		\Big(\big(\seq\sm(\clR,\clF)\at\sn\big)
+		\clR
+		\big(\clF\at(\sn+1)\big)\Big)
+		\bigg)
+	\end{aligned}\]
+
+	Therefore, if $\sm\in\inte\land\sn\in\inte\land\sm\le\sn$
+	then \[\big(\seq\sm(\clR,\clF)\at\sn\big)=\big(\clF\at\sm\big)\clR\big(\clF\at(\sm+1)\big)\clR\dots\clR\big(\clF\at\sn\big).\]
+	
+	\hiddensubsection{Words over a set}
+	\hiddensubsection{Reflexive and transitive closures of relations}
+	\hiddensubsection{Elementary real and complex functions}
+	
+	\subsection{Elementary limits and convergence}
+	\subsubsection{Superior limit (lim sup)}
+	
+	\href{https://us.metamath.org/mpeuni/df-limsup.html}{Definition df-limsup 14840} defines the superior limit of an infinite sequence of extended real numbers.
+	
+	$\big(\sk\ico\pnf\big)$ means $[\sk,+\infty)$ in normal textbooks.
+	
+	$\Big(\sx\image\big(\sk\ico\pnf\big)\Big)$ means image of $[\sk,+\infty)$ under relation $\sx$.
+	
+	$\bigg(\inters[\Big(\sx\image\big(\sk\ico\pnf\big)\Big)]{\xr}\bigg)$ means the abovementioned image restricted within the extended reals $[-\infty,+\infty]$.
+	
+	$\sup\Bigg(\bigg(\inters[\Big(\sx\image\big(\sk\ico\pnf\big)\Big)]{\xr}\bigg),\xr,<\Bigg)$ is the supremum of the above restricted image (see \ref{sss:sup_inf} for definition of supremum).
+	
+	The superior limit $(\lim\sup\at\sx)$ is the infimum of the above results for all $\sk\in\re$
+	
+	Expressed as $(\lim\sup\at\sx)=\sz$. In normal mathematical notation, it looks like $\lim\sup_{\sk\to+\infty}\sx(\sk)=\sz$.
+	
+	\subsubsection{Limits}
+	
+	\paragraph{Limit of complex number sequences}
+	\href{https://us.metamath.org/mpeuni/clim.html}{Theorem clim 14863} Function $\clF\colon\inte\to\co$ converging to $\clA$ means that for any real $\sx$, no matter how small, there always exists an integer $\sj$ such that the absolute difference of any later complex number in the sequence and the limit is less than $\sx$.
+	
+	Expressed as $\clF\clim\clA$. In our familiar notations, this means
+	$\lim_{\sj\to+\infty}\clF(\sj)=\clA$
+	
+	\paragraph{Limit of partial functions on the reals}
+	For any function $\sff$ from a subset of $\re$ to $\co$, limit can be defined similarly (df-rlim 14858). $\sff\rlim\sx$ means $\lim_{\sz\to+\infty}\sff(\sz)=\sx$.
+	
+	\paragraph{Boundedness}
+	$\Oone$ is the set of functions from subset of $\re$ to $\co$ such that the \textit{absolute} value is bounded at $+\infty$.
+	
+	$\leOone$ is the set of functions from subset of $\re$ to $\re$ such that the value is \textit{upper} bounded at $+\infty$.
+	
+	\subsubsection{Finite and infinite sums}
+	(df-sum 15055)
+	$\sum_{\sk\in\clA}\clB=\sx$ means, for infinite sum, that
+	\[\sum_{\sk=\sm}^{+\infty}\cif{\sk\in\clA(\sk)}{\clB(\sk)}{0}=\sx\]
+	such that all elements in $\clA$ are integers no less than integer $\sm$. The summation must be performed in order.
+	
+	For finite sum, order-independence is enforced explicitly. This means that all permutations must generate the same sum. Notably, $\clA$ does not need to be a set of integers for finite sum. For example,
+	
+	\[\provable
+	\sum_{\sk\in\set{\opair{1}{2},\opair{0}{3}}}\big((\fst\at\sk)+(\snd\at\sk)\big)=6
+	\]
+	
+	This means that
+	\[
+	\provable \big((1+2)+(0+3)\big)=6\,\&\,\provable \big((0+3)+(1+2)\big)=6
+	\]
+	
+	\hiddensubsubsection{The binomial theorem}
+	\hiddensubsubsection{The inclusion/exclusion principle}
+	\hiddensubsubsection{Infinite sums (cont.)}
+	\hiddensubsubsection{Miscellaneous converging and diverging sequences}
+	\hiddensubsubsection{Arithmetic series}
+	\hiddensubsubsection{Geometric series}
+	\hiddensubsubsection{Ratio test for infinite series convergence}
+	\hiddensubsubsection{Mertens' theorem}
+	
+	\subsubsection{Finite and infinite products}
+	
+	$\prod$ is defined similarly except that in the infinite case, a nonzero tail of the sequence is insisted. This means that for an infinite set $\clA$ of integers no less than integer $\sm$, $\prod_{\sk\in\clA}\clB$ is
+	\[\prod_{\sk=\sm}^{+\infty}\cif{\sk\in\clA}{\clB}{1}\]
+	but an integer $\sn\ge\sm$ must exist such that
+	\[\prod_{\sk=\sn}^{+\infty}\cif{\sk\in\clA}{\clB}{1}\ne 0\]
+	
+	
+	\hiddensection{ELEMENTARY NUMBER THEORY}
+	
+	\section{BASIC STRUCTURES}
+	\subsection{Extensible structures}
+	\subsubsection{Basic definitions}
+	
+	(fun0, df-struct)
+	\[
+	\provable \emptyset\Struct\opair{4}{4}
+	\]
+	\[
+	\provable \set{\emptyset} \Struct\opair{4}{4}
+	\]
+	\[
+	\provable \set{\emptyset,\opair{4}{\emptyset}} \Struct\opair{4}{4}
+	\]
+	\[
+	\provable \set{\emptyset,\opair{2}{\emptyset}} \Struct\opair{2}{3}
+	\]
+	\[
+	\provable \set{\emptyset,\opair{2}{\emptyset},\opair{3}{1}} \Struct\opair{2}{3}
+	\]
+	\[
+	\provable \set{\emptyset,\opair{2}{\emptyset},\opair{1}{\oneo}} \Struct\opair{1}{\dec15}
+	\]
+	
+	(ndxarg)
+	\[\provable \clE = \Slot \clN    \&   \provable \clN \in \nat    \implies   
+	\provable (\clE\at\ndx) = \clN\]
+	
+	(df-base, df-slot)
+	\[\provable
+	\big(\Base\at\set{\emptyset,\opair{2}{\emptyset},\opair{1}{\oneo}}\big)=\oneo\]
+	
+	(basendx)
+	\[\provable(\Base\at\ndx)=1\]
+	
+	Definition df-sets 16502
+	$\sSet$
+	sets a component of an extensible structure. This function is useful for taking an existing structure and ``overriding'' one of its components.
+	
+	Definition df-ress 16503
+	$\restriction_s$
+	restricts the base set within the right operand.
+	
+	\subsubsection{Slot definitions}
+	\[\provable
+	\big(+_g\at\set{\emptyset,\opair{2}{\twoo},\opair{1}{\oneo}}\big)=\twoo\]
+	
+	\subsubsection{Definition of the structure product}
+	
+	\paragraph{Subspace topology}
+	$\restriction_t$: left operand is topology (collection of open sets), right operand is a subset of base set.
+	It returns the subspace topology.
+
+	Given a topological space $\sw=\set{\opair{(\Base\at\ndx)}{\sx},\opair{(\TopSet\at\ndx)}{\sy}}$.
+	Although
+	$(\sw\restriction_s\sz)$ restricts the base set to $\sz$, the topology is not.
+	Therefore, the subspace should be:
+	\[\bigg(\Big(\sv\in\VV\mapsto\big(\sv\sSet\opair{(\TopSet\at\ndx)}{(\TopOpen\at\sv)}\big)\Big)\at(\sw\restriction_s\sz)\bigg)\]
+	
+	\paragraph{Generating topology from basis}
+	A topology is generated from basis by defining open sets as unions of sets in basis.
+	(\href{https://us.metamath.org/mpeuni/tgval3.html}{Theorem tgval3 21609})
+	
+	In Definition df-topgen 16729, $\sy$ is an open set and $(\inters[\sx]{\power\sy})$ contains all open sets in the basis $\sx$ that is a subset of $\sy$. So $\provable\union{(\inters[\sx]{\power\sy})}\subseteq\sy$.
+	
+	\paragraph{Product topology}
+	
+	Definition	df-pt 16730*:
+	$\sff$ is a function whose range is topologies (Note that an element in infinite Cartesian product is defined in df-ixp 8463 as a function from index set to component set). For example, let $\sff$ be a function whose domain is $\re$. Then $\sg$ is also a function on $\re$. The value of $(\sg\at\sy)$ are open sets in component spaces, because $(\sff\at\sy)$ is the collection of all open sets in a component space.
+	However, only finitely many values of $(\sg\at\sy)$ are allowed to be a proper subset of the component space $\union{(\sff\at\sy)}$.
+	$\sx$, an open set in the product space, is the Cartesian product of components of $\sy$, meaning that an open set of the product space is the Cartesian product of open sets of component spaces, in which finitely many sets are not the component space itself.
+	
+	\paragraph{Structure product}
+	
+	Definition df-prds 16733:
+	$\sx$ is the component index;
+	$\sr$ is an indexed series of structures, being a function from an index set $\dom\sr$ to the space of structures $(\converse{\Struct}\image\set{\opair{1}{\dec15}})$;
+	the base set is the Cartesian product of component base sets; addition, multiplication, scalar multiplication are performed component-wise; $\setvar{s}$ is the scalar space, which should be compatible with all component spaces (this could be achieved if the scalar spaces for components are all $\setvar{s}$).
+	
+	The inner product is the summation of all inner products from component spaces (if the scalar space $\setvar{s}$ is a non-commutative monoid, $\dom\sr$ must be some $(\sm\dots\sn)$ to represent orderedness).
+	
+	The topology is the product topology introduced above.
+	
+	The ordering $\mathrm{le}$ is determined by \textbf{all} components, \ie, $\clA$ is less than $\clB$ iff \textbf{all} components of $\clA$ are less than $\clB$. This is different from lexicographic order.
+	
+	The distance is the \textbf{supremum} of all component distances and $0$ on extended reals. This means that the distance in product space is $0$ even if all distances are negative in component spaces. The distance in product space should be $\pnf$ if a distance in one component space is $\pnf$.
+	
+	Hom and comp are also performed somewhat component-wise. Let $\clX$ be the product structure, $\sh=(\Hom\at\clX)$, $\set{\sff,\sg}\subseteq(\Base\at\clX)$, then $(\sff\sh\sg)$ is the Cartesian product of $(\sff_\sx\sh_\sx\sg_\sx)$, meaning $\big(\sz\in(\sff\sh\sg)\big)\lra\forall\sx\in\dom\sr\big(\sz_\sx\in(\sff_\sx\sh_\sx\sg_\sx)\big)$
+	
+	\red{The composition part is wrong?!?!}
+	
+	\[\sd \in \big(\scc\sh(\snd\at\sa)\big)\]
+	should be
+	\[\sd \in \big((\snd\at\sa)\sh\scc\big)\]
+	?
+	
+	\paragraph{Structure power}
+	Definition	df-pws 16735*:	Define a structure power, which is just a structure product where all the factors are the same.
+	
+	\subsubsection{Definition of the structure quotient}
+	
+	\paragraph{Order topology}
+	Definition df-ordt 16786:
+	The order topology is generated from subbasis consisting of open rays and the base set itself.
+	$\mathrm{fi}$ means finite intersection.
+	
+	\paragraph{Extended real number structure}
+	Definition	df-xrs 16787*: This is extended reals equipped with order topology and extended metric. However, the order topology is not induced by the extended metric. All components of this structure agree with complex number field when restricted to reals.
+	
+	\paragraph{Quotient topology}
+	Definition	df-qtop 16792*: Given a function $\sff$ and topology $\sj$ on the domain of $\sff$, $(\sj\,\mathrm{qTop}\,\sff)$ is the finest topology defined on the image of $\sff$ such that $\sff$ is continuous.
+	
+	\paragraph{Image structure}
+	Definition	df-imas 16793*:
+	The base set of the image is the range of the function.
+	Addition and multiplication and scalar multiplication is the image of sum and product.
+	Scalar keeps unchanged. Inner product and ordering is performed for pre-image.
+	Topology is the quotient topology.
+	Distance is the smallest total distance of finite segments connected in the image space.
+	
+	For example, to calculate metric between $\sx,\sy$ in image space, one can construct a connected path in image space like $(\sx, \su, \sv, \sw, \sy)$, and then
+	convert them to domain space (if $\sff$ is not injection, any pre-image is viable) and sum up metrics for each segment in domain space. The infimum of any such finite segments is the metric in image space.
+	
+	\paragraph{Binary product}
+	Definition	df-xps 16795*: First do the Cartesian product, then map the Cartesian product back to an ordered pair.
+	
+	\subsection{Moore spaces}
+	
+	Definition	df-mre 16869*:
+	\[(\Moore\at\sx)\] is all possible Moore collections on $\sx$.
+	
+	All closed sets in topological spaces are Moore collections. Needs proof.
+	
+	\[\set{\sx}\in(\Moore\at\sx)\]
+	
+	\[\set{\emptyset,\sx}\in(\Moore\at\sx)\]
+	
+	The base set can be recovered from set union (\href{https://us.metamath.org/mpeuni/mreuni.html}{Theorem mreuni 16883}), just like topologies.
+	
+	$\union{\ran\Moore}$ is the set containing all possible Moore collections.
+	
+	$\mrCls$ maps a Moore collection $\setvar{c}$ to a function that maps a subset $\sx$ of the base set $\union{\setvar{c}}$ to the smallest closed set in the Moore collection containing the subset (\ie, is a superset of the subset). Such closed set is called the \textit{closure} of $\sx$.
+	
+	An extensive, isotone, and idempotent endofunction on a power set is equivalent to a Moore collection.
+	
+	\[\begin{aligned}
+		%&\provable\clA\in\VV\\
+		%\&\,
+		&\provable\mapinto{\clN}{\power\sz}{\power\sz}\\
+		\&\,&\provable\forall\sx\in\power\sz\big(\sx\subseteq(\clN\at\sx)\big) \\
+		\&\,&\provable\forall\sx\in\power\sz\forall\sy\in\power\sz\big(\sx\subseteq\sy\ra(\clN\at\sx)\subseteq(\clN\at\sy)\big) \\
+		\&\,&\provable\forall\sx\in\power\sz\Big((\clN\at\sx)=\big(\clN\at(\clN\at\sx)\big)\Big) \\
+		\implies&\provable\Big((\converse{\mrCls}\image\set{\clN})\subseteq(\Moore\at\sz)\land(\converse{\mrCls}\image\set{\clN})\approx\oneo\Big)\\
+	\end{aligned}\]
+
+	$\mrInd$ maps a Moore collection $\setvar{c}$ to a collection of independent sets. A subset $\setvar{s}$ of the base set $\union{\setvar{c}}$ is \textit{independent} if no element $\sx$ of the set $\setvar{s}$ is in the closure of the set with the element removed.
+	
+	$\setvar{s}\in(\mrInd\at\setvar{c})$
+	implies
+	$\set{\setvar{t}\in\power\union{\setvar{c}}|\exists\setvar{d}\in\setvar{c}\big(\setvar{t}=(\inters[\setvar{s}]{\setvar{d}})\big)}=\power\setvar{s}$?
+	For any subset of an independent set, there must be a closed set whose intersection with the independent set is exactly the subset?
+	
+	\subsubsection{Moore closures}
+	
+	Theorem	submrc 16911: The subspace topology $(\inters[\clC]{\power\clD})$ (Moore system) on a \textit{closed} subset $\clD$ induces the same closure function $\clG$ as the original closure function $\clF$ acting on subsets $\clU$ of the subspace $\clD$.
+	
+	\subsubsection{Independent sets in a Moore system}
+	
+	Theorem	mrissmrcd 16923:	In a Moore system, if an independent set is between a set and its closure, the two sets are equal (since the two sets must have equal closures by mressmrcd 16910, and so are equal by mrieqv2d 16922.)
+	
+	Theorem	mrissmrid 16924	In a Moore system, subsets of independent sets are independent.
+	
+	Theorem	mreexmrid 16926*	In a Moore system whose closure operator has the exchange property, if a set is independent and an element is not in its closure, then adding the element to the set gives another independent set.
+	
+	\href{https://us.metamath.org/mpeuni/mreexexd.html}{Theorem mreexexd 16931}: Exchange-type theorem.
+		
+	\subsubsection{Algebraic closure systems}
+	
+	Theorem	isacs 16934*	A set is an algebraic closure system iff it is specified by some function of the finite subsets, such that a set is closed iff it does not expand under the operation.
+	
+	Theorem	isacs2 16936*: A Moore system is an algebraic closure system iff the following is true: a set $\setvar{s}$ is closed iff it contains the closures of all finite subsets $\sy$ of the set $\setvar{s}$.
+		
+	Theorem	mreacs 16941: Intersections of ACSs is still an ACS?
+	
+	Theorem	acsfn 16942*: In a conditional point closure condition, the only non-closed sets are those containing $\clT$ but not including $\clK$. The closure of a set is adding $\clK$ if the set contains $\clT$.
+	
+	Theorem	acsfn0 16943*: In a point closure condition, the closure of a set is simply adding the point $\clK$ to the set.
+	
+	\section{BASIC CATEGORY THEORY}
+	\subsection{Categories}
+	\subsubsection{Categories}
+	
+	\paragraph{Definition of categories}
+	Definition	df-cat 16951*.
+	
+	$\scc$ is a (small) category, $\sbb$ is its base set including \textit{objects}, $\sh$ is the Hom operator returning the set of all \textit{morphisms} from left operand to right operand, $\so$ is a ternary operator returning the composition of morphisms.
+	
+	For example, given three objects $\sx,\sy,\sz\in\sbb$, $(\sx\sh\sy)$ is the set, \ie, the \textbf{hom-class}, of all morphisms from $\sx$ to $\sy$. $(\so\at\otri{\sx}{\sy}{\sz})$ is the composition connecting morphisms from $\sx$ to $\sy$ (on the right) and morphisms from $\sy$ to $\sz$ (on the left).
+	
+	$\sx,\sy,\sz,\sw$ are \textit{objects} in base $\sbb$, $\sff,\sg,\sk$ are \textit{morphisms}.
+	
+	The definition claims three conditions on a category $\scc$.
+	
+	\begin{itemize}
+		\item There exists some identity morphism(s) (uniqueness is not required) for each object such that its composition with any morphism is the morphism itself (the left and right unit laws).
+		
+		\item A morphism $\sff$ from $\sx$ to $\sy$ and a morphism $\sg$ from $\sy$ to $\sz$ can be composed into a morphism $\big(\sg\circ_{\sx,\sy,\sz}\sff\big)$ from $\sx$ to $\sz$ (where $\circ_{\sx,\sy,\sz}$ is $(\so\at\otri{\sx}{\sy}{\sz})$).
+		
+		\item The composition is associative.
+	\end{itemize}
+
+	\blue{Since proper classes are not included into any classes, this definition does not include any large categories.}
+	
+	See \href{https://groups.google.com/g/metamath/c/Vtz3CKGmXnI/m/Fxq3j1I_EQAJ}{this} for the discussion on large categories.
+	
+	\paragraph{Identity morphism}
+	
+	$\big((\Id\at\scc)\at\sx\big)$ is the identity morphism on object $\sx$ in (small) category $\scc$.
+	It can be proven unique if it exists.
+	
+	Because if there are two identity morphisms $\sff,\sg$ for an object $\sx$, then $\sg=\sff\circ_{\sx,\sx,\sx}\sg=\sff$ by definition.
+	
+	\paragraph{Hom, comp}
+	
+	$\Homf$ and $\compf$ are the same as Hom and comp except that the former ones guarantee to return a function.
+	
+	\paragraph{Properties}
+	
+	Theorem	0catg 16971: Any structure with an empty set of objects is a category.
+	
+	Theorem	0cat 16972:	The empty set is a category, the \textit{empty category}.
+	
+	\subsubsection{Opposite category}
+	
+	The opposite category or dual category of a given category is formed by reversing the morphisms (\href{https://us.metamath.org/mpeuni/df-oppc.html}{Definition	df-oppc 16960}), \ie, interchanging the source and target of each morphism (Theorem	oppchom 16963, Theorem	oppcco 16965).
+	
+	The double opposite category has the same objects (Theorem	2oppcbas 16971), the same morphisms (Theorem	2oppchomf 16972), and the same composition (Theorem	2oppccomf 16973) as the original category.
+
+	\subsubsection{Monomorphisms and epimorphisms}
+	
+	Definition	df-mon 16978*
+	\[\big(\sx(\Mono\at\scc)\sy\big)\]  is the set of all monomorphisms from $\sx$ to $\sy$ in category $\scc$.
+	
+	Definition	df-epi 16979: epimorphism is defined using opposite category.
+	
+	Theorem	oppcmon 16986	A monomorphism in the opposite category is an epimorphism.
+	
+	Theorem	oppcepi 16987	An epimorphism in the opposite category is a monomorphism.
+	
+	\subsubsection{Sections, inverses, isomorphisms}
+	
+	(Definition	df-sect 16995*,
+	Theorem	issect 17001,
+	Theorem	issect2 17002)
+	\[\Big(\sff\big(\sx(\Sect\at\scc)\sy\big)\sg
+	\lra
+	\sg\circ\sff=(\clI\at\sx)\Big)\]
+	for objects $\sx,\sy$ and morphism $\sff$ from $\sx$ to $\sy$ and morphism $\sg$ from $\sy$ to $\sx$ in category $\scc$, and $\clI=(\Id\at\scc)$, $\circ=\big((\compf\at\scc)\at\otri{\sx}{\sy}{\sx}\big)$.
+	
+	Definition	df-inv 16996*:
+	$\sg$ is an inverse of $\sff$, iff $\sg$ is a section of $\sff$ and $\sff$ is a section of $\sg$.
+	\[\Big(\sff\big(\sx(\Inv\at\scc)\sy\big)\sg\lra\sg\big(\sy(\Inv\at\scc)\sx\big)\sff\Big)\]
+	given well-defined variables (Theorem	invsym 17010).
+	
+	Definition	df-iso 16997*
+	$\big(\sx(\Iso\at\scc)\sy\big)$ is the set of isomorphisms (whose inverse exists) from object $\sx$ to object $\sy$ in category $\scc$.
+	
+	If $\clG$ is an inverse to $\clF$, then $\clF$ (Theorem	inviso1 17014) and $\clG$ (Theorem	inviso2 17015) are isomorphisms.
+	
+	Theorem	invf1o 17017	The inverse relation is a bijection from isomorphisms to isomorphisms.
+	
+	Theorem	invinv 17018	The inverse of the inverse of an isomorphism is itself.
+	
+	Theorem	invco 17019	The composition of two isomorphisms is an isomorphism, and the inverse is the composition of the individual inverses.
+	
+	\subsubsection{Isomorphic objects}
+	
+	Two objects are isomorphic iff there are isomorphisms between them. (Theorem	brcic 17046)
+	\[
+	\Big(\clX(\cic\at\clC)\clY\lra\big(\clX(\Iso\at\clC)\clY\big)\Big)
+	\]
+	
+	Theorem	cicer 17054	Isomorphism is an equivalence relation on objects of a category.
+	
+	\subsubsection{Subcategories}
+	The definition of $\ssc$ is given by Definition	df-ssc 17058* and described by \href{https://us.metamath.org/mpeuni/isssc.html}{Theorem isssc 17068}.
+	
+	Definition	df-resc 17059*: Base set and hom-set is restricted by $\resc$ but ``comp'' is not.
+	
+	Definition	df-subc 17060*: $(\Subcat\at\scc)$ is the set of all possible hom-sets of subcategories of a category $\scc$. The base set of the subcategory, determined as $\dom\dom\sh$, is a subset of the original category, where $\sh$ is hom-set of a subcategory.
+	
+	\subsubsection{Functors}
+	
+	Definition	df-func 17106*:
+	$\sff(\st\Func\su)\sg$ where $\st,\su$ are categories, $\sff$ is a mapping of base sets from $\st$ to $\su$,
+	and $\sg$ is a mapping taking a object pair $\sz$ in $\st$ to a function from the hom-set in $\st$ for the object pair to the hom-set in $\su$ for the corresponding object pair in $\su$, such that identity morphisms and composition are retained.
+	
+	Definition	df-idfu 17107*, Theorem	idfucl 17129: The identity functor is a functor.
+	\[ \big(\scc\in\Cat\ra (\idfu\at\scc)\in(\scc\Func\scc)\big) \]
+	
+	Definition	df-resf 17109*: $(\sff\resf\sh)$ is a restricted functor of $\sff$ on hom-sets $\sh$. A functor is an element of $(\st\Func\su)$ where $\st,\su$ are categories.
+	
+	\subsubsection{Full \& faithful functors}
+	
+	A full functor is a functor in which all the morphism maps are surjections.
+	
+	A faithful functor is a functor in which all the morphism maps are injections.
+	
+	\subsubsection{Natural transformations and the functor category}
+	
+	$\big(\sff(\st\Nat\su)\sg\big)$ is the set of all natural transformations from functor $\sff$ to functor $\sg$, where the functors are from category $\st$ to category $\su$. A natural transformation is a function taking an object in source category $\st$ to a morphism in target category $\su$, such that some diagram commutes.
+	
+	Theorem	fuccat 17218: The functor category is a category.
+	\[(\scc\FuncCat\sd)\in\Cat\]
+	for categories $\scc$ and $\sd$.
+	
+	\subsubsection{Initial, terminal and zero objects of a category}
+	
+	$\TermO=\InitO\circ\oppCat$ ???
+	
+	\hiddensubsection{Arrows (disjointified hom-sets)}
+	
+	\subsection{Examples of categories}
+	\subsubsection{The category of sets}
+	
+	Theorem	setccat 17323
+	\[(\SetCat\at\su)\in\Cat\]
+	The category of set (whose base is restricted to $\su$) is a (small) category.
+	
+	\subsubsection{The category of categories}
+	
+	Theorem	catccat 17342: The category of categories is a (``$\su$-large'') category.
+	\[(\CatCat\at\su)\in\Cat\]
+	for a set $\su$ of categories.
+	
+	\hiddensubsubsection{The category of extensible structures}
+	
+	\hiddensection{BASIC ORDER THEORY}
+	\hiddensection{BASIC ALGEBRAIC STRUCTURES}
+	\hiddensection{BASIC LINEAR ALGEBRA}
+	
+	\section{BASIC TOPOLOGY}
+	\hiddensubsection{Topology}
+	
+	\subsection{Filters and filter bases}
+	\subsubsection{Filter bases}
+	
+	\href{https://us.metamath.org/mpeuni/df-fbas.html}{Definition df-fbas 20075}
+	
+	Theorem	fbasssin 22448*	A filter base contains subsets of its pairwise intersections.
+	Let $\sx\in(\operatorname{fBas}\at\sw)$ for an non-empty set $\sw$. $\sx$ contains subsets of $\sw$. If $\sy\in\sx$, $\sz\in\sx$, then $\sy\subseteq\sw,\sz\subseteq\sw$ and there exists a $\sv\subseteq\inters[\sy]{\sz}$ such that $\sv\in\sx$.
+	
+	However, since $\emptyset \notin\ \sx$, so $\inters[\sy]{\sz}\ne\emptyset$.
+	
+	\subsubsection{Filters}
+	
+	Definition	df-fil 22458*
+	
+	Theorem	isfil2 22468*
+	
+	A filter $\sff\in(\operatorname{Fil}\at\sx)$ on set $\sx$ is a collection of subsets of $\sx$ containing $\sx$ but not $\emptyset$ and closed under superset and intersection.
+	
+	Theorem	infil 22475	The intersection of two filters is a filter. 
+	
+	Theorem	snfil 22476	A singleton is a filter. 
+	
+	Theorem	filconn 22495	A filter gives rise to a connected topology by adding the empty set.
+	
+	
+	\section{BASIC REAL AND COMPLEX ANALYSIS}
+	\subsection{Continuity}
+	\subsubsection{Intermediate value theorem}
+	Theorem	pmltpc 24061*	Any function on the reals is either increasing, decreasing, or has a triple of points in a vee formation.
+	
+	Theorem	ivth 24065*	The intermediate value theorem, increasing case. This is Metamath 100 proof \#79.
+	
+	\subsection{Integrals}
+	\subsubsection{Lebesgue measure}
+	
+	\paragraph{Outer Lebesgue measure}
+	Definition	df-ovol 24075*: Define the outer Lebesgue measure $(\ovol\at\sx)$ for $\sx\subseteq\re$, as infimum over $\sy$'s, where $\sy\in\xr$ is $\sum_{\si=1}^{\infty}|\sa_\si-\sbb_\si|$
+	given an countable sequence of $\opair{\sa_\si}{\sbb_\si}$ of pairs of reals such that $\sa_\si\le\sbb_\si$ and the intervals $(\sa_\si,\sbb_\si)$ cover $\sx$.
+	
+	Theorem	ovolf 24093: $\ovol$ is a function taking a subset of $\re$ to a non-negative extended real number.
+	
+	Theorem	ovollb2 24100: The outer volume is a lower bound on the sum of all closed intervals covering the original set.
+	
+	Theorem	ovolctb2 24103:	The outer volume of a countable set is 0.
+	
+	Theorem	ovolun 24110	The Lebesgue outer measure function is finitely sub-additive.
+
+	
+	Theorem	ovolshft 24122*	The Lebesgue outer measure function is shift-invariant.
+	
+	Theorem	ovolsca 24126*	The Lebesgue outer measure function respects scaling of sets by positive reals.
+	
+	Theorem	ovolicc 24134	The (outer) measure of a closed interval is the length.
+	
+	
+	\paragraph{Lebesgue measure}
+	Definition	df-vol 24076*: given an arbitrary set $\sy$ with finite outer volume, a measurable set $\sx$ must satisfy
+	\[ (\ovol\at\sy) =\Big( \big(\ovol\at(\inters[\sy]{\sx})\big) +\big(\ovol\at({\sy}\dif{\sx})\big)\Big) \]
+	
+	
+	Theorem	volf 24140: the Lebesgue measure function takes a measurable set to a non-negative extended real number.
+	
+	Theorem	cmmbl 24145	The complement of a measurable set is measurable.
+	
+	Theorem	nulmbl2 24147*	A set of outer measure zero is measurable.
+	
+	Theorem	inmbl 24153	An intersection of measurable sets is measurable.
+	
+	Theorem	finiunmbl 24155*	A finite union of measurable sets is measurable.
+	
+	The set of measurable sets, $\dom\vol$, is an \href{https://en.wikipedia.org/wiki/Field_of_sets}{algebra} over $\re$.
+	
+	Theorem	volun 24156	The Lebesgue measure function is finitely additive.
+	
+	Theorem	uniioombl 24200*	A disjoint union of open intervals is measurable.
+	
+	Theorem	uniiccmbl 24201*	An almost-disjoint union of closed intervals is measurable.
+	
+	Theorem	opnmbl 24213	All open sets are measurable.
+	
+	Theorem	subopnmbl 24215	Sets which are open in a measurable subspace are measurable.
+	
+	\paragraph{Assuming the axiom of countable choice}
+	
+	Theorem ovoliun 24116
+	Description: The Lebesgue outer measure function is countably sub-additive, assuming The axiom of countable choice (CC).
+	
+	Assuming axiom of countable choice, the Lebesgue measure function is countably additive (Theorem voliun 24165) and The measurable sets are closed under countable union (Theorem	iunmbl 24164).
+	
+	$\vol$ is a \href{https://en.wikipedia.org/wiki/Measure_(mathematics)#Definition}{measure}.
+	
+	\href{https://math.stackexchange.com/questions/719454/is-countable-ac-necessary-for-a-useful-theory-of-lebesgue-measure}{Is (countable) AC necessary for a useful theory of Lebesgue measure?}
+	
+	\href{https://en.wikipedia.org/wiki/Vitali_set}{Vitali set} is an elementary example of a set of real numbers that is not Lebesgue measurable.
+	
+	Theorem vitali 24225
+	Description: If the reals can be well-ordered, then there are non-measurable sets.
+	
+	\subsubsection{Lebesgue integration}
+	\paragraph{Lesbesgue integral}
+	
+	Definition	df-mbf 24230*:
+	Define the class $\MblFn$ of measurable functions on (a subset of) the reals $\re$. A real function is measurable if the preimage of every open interval is a measurable set (see ismbl 24137) and a complex function is measurable if the real and imaginary parts of the function is measurable.
+	
+	Definition	df-itg1 24231*	Define the Lebesgue integral $(\itgo\at\sff)$ for a simple function $\sff$. A simple function is a finite linear combination of indicator functions for finitely measurable sets.
+	
+	Definition	df-itg2 24232*	Define the Lebesgue integral $(\itgt\at\sff)$ for a function $\sff$ from $\re$ to non-negative extended reals $[0,\pnf]$. A nonnegative function's integral is the supremum of the integrals of all simple functions that are less than or equal to the input function. Note that zero function is such a simple function.
+	
+	Definition	df-ibl 24233*	Define the class $\ibl$ of integrable functions on the reals. A function is integrable if it is measurable and the integrals of the pieces of the function are all finite.
+	
+	Theorem	mbfimaicc 24242	The preimage of any closed interval under a measurable function is measurable.
+	
+	Theorem	mbfeqa 24254*	If two functions are equal almost everywhere, then one is measurable iff the other is.
+	
+	Theorem	mbfres 24255	The restriction of a measurable function is measurable.
+	
+	Theorem mbfres2 24257
+	Description: Measurability of a piecewise function: if $\clF$ is measurable on subsets $\clB$ and $\clC$ of its domain, and these pieces make up all of the domain, then $\clF$ is measurable on the whole domain. 
+	
+	Theorem	mbfmulc2re 24259	Multiplication by a constant preserves measurability.
+	
+	Theorem	mbfmax 24260*	The maximum of two functions is measurable.
+	
+	\href{https://us.metamath.org/mpeuni/cnmbf.html}{Theorem cnmbf 24271}
+	Description: A continuous function on a measurable set is measurable.
+	
+	Theorem	mbfi1flim 24334*	Any real measurable function has a sequence of simple functions that (pointwise) converges to it.
+	
+	\subparagraph{With axiom of countable choice}
+	
+	Theorem mbfimaopn 24268
+	Description: The preimage of any open set (in the complex topology) under a measurable function is measurable.
+	
+	Theorem cncombf 24270
+	Description: The composition of a continuous function with a measurable function is measurable.
+	
+	Theorem mbfaddlem 24272
+	Description: The sum of two measurable functions is measurable.
+	
+	Theorem mbfmul 24338
+	Description: The product of two measurable functions is measurable.
+	
+	\setcounter{section}{19}
+	\section{SUPPLEMENTARY MATERIAL (USERS' MATHBOXES)}
+	\setcounter{subsection}{8}
+	\subsection{Mathbox for Scott Fenton}
+	\setcounter{subsubsection}{20}
+	\subsubsection{Surreal Numbers}
+	\paragraph{Introduction}
+	A surreal number can be viewed as a binary classification of all ordinals less than a specific ordinal set (Definition df-no 33333) into $\sneg$ ($\oneo$ in MetaMath) and $\spos$ ($\twoo$ in MetaMath).
+	The latter ordinal set is the birthday of the surreal number (Definition df-bday 33335).
+	The ordering is defined lexicographically, where $\sneg$ is less than unclassified, and the latter is less than $\spos$ (Definition df-slt 33334).
+	
+	\blue{The proper class $\No$ of all surreal numbers is the biggest \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered field}, in that every ordered field is a subfield of $\No$.} (\href{https://en.wikipedia.org/wiki/Surreal_number#Arithmetic_closure}{Ref})
+	
+	\paragraph{Examples}
+	The only surreal number whose birthday is $\emptyset$ is the empty set itself, labeled as $\sur{0}$.
+	There are two surreal numbers whose birthday is $\oneo$:
+	\[
+	\begin{aligned}
+		\provable \sur{1} &=\set{\opair{\emptyset}{\spos}}\\
+		\provable \sur{(\texttt{-}1)} &=\set{\opair{\emptyset}{\sneg}}\\
+	\end{aligned}
+	\]
+	
+	Four surreal numbers whose birthday is $\twoo$:
+	\[
+	\begin{aligned}
+		\provable \sur{2} &=\set{\opair{\emptyset}{\spos},\opair{\oneo}{\spos}}\\
+		\provable \sur{\left(\frac{1}{2}\right)} &=\set{\opair{\emptyset}{\spos},\opair{\oneo}{\sneg}}\\
+		\provable \sur{\left(\texttt{-}\frac{1}{2}\right)} &=\set{\opair{\emptyset}{\sneg},\opair{\oneo}{\spos}}\\
+		\provable \sur{(\texttt{-}2)} &=\set{\opair{\emptyset}{\sneg},\opair{\oneo}{\sneg}}\\
+	\end{aligned}
+	\]
+	
+	In general, there are $(\twoo\expo\sx)$ surreal numbers whose birthday is a finite ordinal $\sx$.
+	
+	\paragraph{Surreal numbers with finite birthday}
+	
+	\red{This paragraph needs confirmation.}
+	
+	The ring of dyadic rationals (rational numbers whose denominators are powers of 2) is isomorphic to the ring of surreal numbers with finite birthday. (This is the set of all representable computer floating point numbers.) 
+	
+	Such surreal number can be viewed as a finite (ordered) sequence of ``signs'' ($\sneg$'s and $\spos$'s). 
+	The length of the sequence is the birthday.
+	The corresponding dyadic rational is the summation of all ``signs''.
+
+	The first ``sign'' in the sequence dictates the sign of the dyadic rational. All ``signs'' until the first inconsistent ``sign'' worth $1$ or $-1$. Starting from the first inconsistent ``sign'', each ``sign'' worth half of the previous ``sign''.
+	
+	For example, the sequence $(\spos, \spos, \sneg, \spos)$ is $1+1-\frac{1}{2}+\frac{1}{4}=\frac{7}{4}$. The sequence $(\sneg, \sneg, \sneg, \spos, \spos, \sneg,\spos)$ is $-1-1-1+\frac{1}{2}+\frac{1}{4}-\frac{1}{8}+\frac{1}{16}$.
+	
+	\paragraph{Birthday of dyadic rationals}
+	
+	The birthday of a dyadic rational $\pm\sx\frac{\sz}{2^\sy}$, where $\sz$ is a non-negative odd integer less than $2^\sy$,
+	is $(\sx+\cif{\sy=0}{0}{\sy+1})$.
+	
+	Alternatively, a non-zero dyadic rational $\pm\sx\frac{\sw}{2^\sy}$, where $\sw$ is a positive odd integer no greater than $2^\sy$,
+	is $(\sx+\sy+1)$.
+	
+	\red{This paragraph needs confirmation.}
+		
+	\paragraph{Surreal numbers whose birthday is $\le\omega$}
+	All other real numbers can be represented as a surreal number whose birthday is $\omega$, \ie, an infinite sequence of ``signs''.
+	
+	However, the converse is false. For example, $\sur{\omega}=\omega\times\set{\spos}$ (the infinite sequence of all $\spos$'s) is a surreal number greater than all real numbers (similar to $\pnf$). $\sur{\epsilon}=\big(\sx\in\omega\mapsto\cif{\sx=\emptyset}{\spos}{\sneg}\big)$, \ie, the infinite sequence of all $\sneg$'s except the first one, is the infinitesimal surreal number greater than zero but less than any positive real numbers.
+	
+	In fact, any surreal number with $\le\omega$ birthday must correspond to exactly one of the followings
+	\begin{itemize}
+		\item A real number in $\re$,
+		\item An infinity $\pm\sur{\omega}$,
+		\item An infinitesimal neighbor $\sy\pm\sur{\epsilon}$ of a dyadic fraction $\sy$.
+	\end{itemize}
+
+	However, there is a bijection from $\re$ onto the set of surreal numbers with $\le\omega$ birthday, if the ordering is ignored.
+	
+	\href{https://en.wikipedia.org/wiki/Surreal_number#Contents_of_S%CF%89}{Reference}
+	
+	\hiddensubsubsection{Surreal Numbers: Ordering}
+	\hiddensubsubsection{Surreal Numbers: Birthday Function}
+	\hiddensubsubsection{Surreal Numbers: Density}
+	\hiddensubsubsection{Surreal Numbers: Full-Eta Property}
+	\hiddensubsubsection{Surreal numbers - ordering theorems}
+	\hiddensubsubsection{Surreal numbers - birthday theorems}
+	
+	\subsubsection{Surreal numbers: Conway cuts}
+	
+	The \href{https://en.wikipedia.org/wiki/Surreal_number#Description}{Wikipedia description} is using Conway cuts.
+	
+	\red{Contents in this subsubsection needs confirmation.}
+	
+	If both sides are finite sets of dyadic rationals. It is equivalent to just taking the largest element on the left hand side and the smallest element on the right hand side. An empty set on the right hand side is equivalent to $\pnf$ and an empty set on the left hand side can be regarded as $\mnf$.
+	The result is the dyadic rational with smallest denominator between the two numbers. If multiple integers are available, always return the one closest to zero.
+	
+	\[\No 
+	\slt \sneg \spos  \bday \sur{0}\sle\sur{1} \sslt \]
+	
+	\subsubsection{Surreal numbers - zero and one}
+	(df-0s 33499, df-1s 33500)
+	\[\provable\sur{0}=\big(\emptyset\scut\emptyset\big)\]
+	\[\provable\sur{1}=\big(\set{\sur{0}}\scut\emptyset\big)\]
+	\[\provable\sur{2}=\big(\set{\sur{1}}\scut\emptyset\big)\]
+
+
 \end{document}
